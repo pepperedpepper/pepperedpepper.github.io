@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='데이터 링크 계층의 역할과 이더넷 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다. 충돌(collision) 컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다. 충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 CSMA/CD 라고 한다. 하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다. MAC 주소의 구조 MAC(Medium Access Control) 주소 랜 카드에 부여된 48bit의 숫자로 물리 주소라고도 부르며, 전 세계에서 유일한 번호이다.'>
+<title>[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/network-04/'>
+
+<link rel="stylesheet" href="/scss/style.min.5be32ca3f6e1a997c75795c4359147cc6d4fbd34948c0acd51e31d237033978a.css"><meta property='og:title' content='[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기'>
+<meta property='og:description' content='데이터 링크 계층의 역할과 이더넷 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다. 충돌(collision) 컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다. 충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 CSMA/CD 라고 한다. 하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다. MAC 주소의 구조 MAC(Medium Access Control) 주소 랜 카드에 부여된 48bit의 숫자로 물리 주소라고도 부르며, 전 세계에서 유일한 번호이다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/network-04/'>
+<meta property='og:site_name' content='pepperedpepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-24T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-24T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기">
+<meta name="twitter:description" content="데이터 링크 계층의 역할과 이더넷 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다. 충돌(collision) 컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다. 충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 CSMA/CD 라고 한다. 하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다. MAC 주소의 구조 MAC(Medium Access Control) 주소 랜 카드에 부여된 48bit의 숫자로 물리 주소라고도 부르며, 전 세계에서 유일한 번호이다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">pepperedpepper</a></h1>
+            <h2 class="site-description">Always hungry to keep learning.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>My Projects</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#데이터-링크-계층의-역할과-이더넷">데이터 링크 계층의 역할과 이더넷</a></li>
+    <li><a href="#mac-주소의-구조">MAC 주소의 구조</a></li>
+    <li><a href="#스위치의-구조">스위치의 구조</a></li>
+    <li><a href="#데이터가-케이블에서-충돌하지-않는-구조">데이터가 케이블에서 충돌하지 않는 구조</a></li>
+    <li><a href="#이더넷의-종류와-특징">이더넷의 종류와 특징</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/network/" >
+                Network
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/network-04/">[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 24, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p><br /><br /></p>
+<h2 id="데이터-링크-계층의-역할과-이더넷">데이터 링크 계층의 역할과 이더넷</h2>
+<ul>
+<li><strong>이더넷(Ethernet)</strong>
+<ul>
+<li>같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다.</li>
+<li>데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다.</li>
+</ul>
+</li>
+<li><strong>충돌(collision)</strong>
+<ul>
+<li>컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다.</li>
+<li>충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 <strong>CSMA/CD</strong> 라고 한다.
+<ul>
+<li>하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="mac-주소의-구조">MAC 주소의 구조</h2>
+<ul>
+<li><strong>MAC(Medium Access Control) 주소</strong>
+<ul>
+<li>랜 카드에 부여된 48bit의 숫자로 물리 주소라고도 부르며, 전 세계에서 유일한 번호이다.</li>
+<li>앞쪽 24bit는 랜 카드를 만든 제조사의 번호고, 뒤쪽 24bit는 제조사가 랜 카드에 붙인 일렬번호이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>이더넷 헤더(Ethernet Header)</strong> 의 구성(총 14 bytes)
+<ul>
+<li>목적지의 MAC 주소(6 bytes)</li>
+<li>출발지의 MAC 주소(6 bytes)</li>
+<li>유형(2 bytes)
+<ul>
+<li>이더넷으로 전송되는 상위 계층 프로토콜 종류를 식별하는 16진수 번호이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>트레일러(Trailer)</strong>
+<ul>
+<li>FCS(Frame Check Sequence)라고도 하며, 데이터 전송 도중에 오류가 발생하는지 확인하는 용도로 사용한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>데이터 링크 계층에서는 <strong>이더넷 헤더</strong>와 <strong>트레일러</strong>을 붙여서 물리 계층으로 보내는 캡슐화가 일어난다.
+<ul>
+<li>이 두 가지가 추가된 데이터를 <strong>프레임</strong>이라고 한다.</li>
+<li>그러면 물리 계층에서 이 프레임 비트열을 전기 신호로 변환해서 네트워크를 통해 전송한다.</li>
+<li>목적지의 MAC 주소가 자신의 MAC 주소와 다르면 데이터를 파기한다.</li>
+<li>만약에 동시에 컴퓨터 1, 2가 동일한 목적지인 컴퓨터 3으로 데이터를 전송하면 충돌을 방지하기 위해서 CSMA/CD 방식을 사용한다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="스위치의-구조">스위치의 구조</h2>
+<p><img src="/post/network/images/04-01-switch.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="스위치"
+	
+	
+></p>
+<ul>
+<li><span style='background-color: #c293d8'><strong>스위치(switch)</strong></span>
+<ul>
+<li>허브와 마찬가지로 여러 기기를 하나로 연결하는 장치이다. 다른 점은 원하는 목적지에만 신호를 보낸다는 것이다.</li>
+<li>내부에 <strong>MAC 주소 테이블</strong>을 가지고 있어서, 포트 번호와 거기에 연결되어 있는 컴퓨터의 MAC 주소가 등록되어 있다.</li>
+<li>처음에는 아무것도 등록되어 있지 않지만, 프레임이 전송되면 등록된다. (MAC 주소 학습 기능)</li>
+<li>처음에는 아무것도 등록되어 있지 않아서, 컴퓨터 1에서 컴퓨터 3으로 데이터를 전송해도 모든 컴퓨터 1~5에 데이터가 전송된다. 이것을 <strong>플러딩(flooding)</strong> 이라고 한다.</li>
+<li>이 후 등록되면 목적지인 컴퓨터 3에만 데이터가 전송된다. 이처럼 MAC 주소를 기준으로 목적지를 선택하는 것을 <strong>MAC 주소 필터링</strong>이라고 한다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="데이터가-케이블에서-충돌하지-않는-구조">데이터가 케이블에서 충돌하지 않는 구조</h2>
+<ul>
+<li><strong>반이중 통식 방식</strong>
+<ul>
+<li>데이터 송신과 수신을 번갈아가면서 통신하는 방식</li>
+<li>동시에 데이터를 전송하면 충돌이 발생한다.</li>
+<li>허브</li>
+</ul>
+</li>
+<li><strong>전이중 통식 방식</strong>
+<ul>
+<li>데이터 송수신을 동시에 통신하는 방식</li>
+<li>동시에 데이터를 전송해도 충돌이 발생하지 않는다.</li>
+<li>스위치</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>충돌 도메인(collision domain)</strong>
+<ul>
+<li>충돌이 발생할 때 그 영향이 미치는 범위이다.</li>
+<li>허브는 접속되어 있는 모든 컴퓨터가 충돌 도메인이 된다.</li>
+<li>스위치는 충돌 도메인이 좁으므로 네트워크가 지연되지 않는다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>ARP(Address Resolution Protocol)</strong>
+<ul>
+<li>네트워크 계층과 데이터 링크 계층 주소 사이의 변환을 담당하는 프로토콜이다.</li>
+<li>목적지 컴퓨터의 <strong>IP주소를 이용해서 MAC 주소를 찾는다.</strong></li>
+<li>출발지 컴퓨터가 목적지 컴퓨터의 MAC 주소를 모르면, 네트워크에 브로드캐스트 하고(ARP 요청)</li>
+<li>지정된 IP주소를 갖은 컴퓨터는 MAC 주소를 응답으로 보낸다.(ARP 응답)</li>
+<li>출발지 컴퓨터는 얻은 MAC 주소와 IP 주소의 매핑 정보를 메모리에 보관한다. (ARP 테이블)</li>
+<li>일정 시간이 지나면 ARP 캐시를 삭제하고 다시 ARP 요청을 한다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="이더넷의-종류와-특징">이더넷의 종류와 특징</h2>
+<ul>
+<li>이더넷 규격 예시: <code>10BASE5</code>, <code>10BASE-T</code>
+<ul>
+<li><code>10</code>은 Mbps 단위인 통신 속도이다.</li>
+<li><code>BASE</code>는 BASEBAND라는 전송 방식을 나타낸다.</li>
+<li><code>5</code>는 동축케이블의 경우 케이블의 최대 길이를 나타낸 것이며, <code>_T</code>는 UTP 케이블의 경우 그 종류를 나타낸다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/network/">Network</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/network-09/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 9. 무선 랜 이해하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-08/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 8. 네트워크의 전체 흐름 살펴보기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-07/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 7. 응용 계층 : 애플리케이션에 데이터 전송하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-06/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-05/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 5. 네트워크 계층 : 목적지에 데이터 전달하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 pepperedpepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

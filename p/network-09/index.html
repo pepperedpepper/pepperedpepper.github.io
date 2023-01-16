@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='무선 랜의 구조 무선 랜이란?
+랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다. 유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다. 해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다. 무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)
+WAP는 무선 공유기에 내장되어 있다. 무선 클라이언트(컴퓨터, 스마트폰)
+컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다. 통신 방식 인트라스트럭처(infrastructure) 방식 WAP를 통해 통신하는 방식 일반적으로 이 방식을 사용한다.'>
+<title>[Network] Chapter 9. 무선 랜 이해하기</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/network-09/'>
+
+<link rel="stylesheet" href="/scss/style.min.5be32ca3f6e1a997c75795c4359147cc6d4fbd34948c0acd51e31d237033978a.css"><meta property='og:title' content='[Network] Chapter 9. 무선 랜 이해하기'>
+<meta property='og:description' content='무선 랜의 구조 무선 랜이란?
+랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다. 유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다. 해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다. 무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)
+WAP는 무선 공유기에 내장되어 있다. 무선 클라이언트(컴퓨터, 스마트폰)
+컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다. 통신 방식 인트라스트럭처(infrastructure) 방식 WAP를 통해 통신하는 방식 일반적으로 이 방식을 사용한다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/network-09/'>
+<meta property='og:site_name' content='pepperedpepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-26T02:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-26T02:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Network] Chapter 9. 무선 랜 이해하기">
+<meta name="twitter:description" content="무선 랜의 구조 무선 랜이란?
+랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다. 유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다. 해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다. 무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)
+WAP는 무선 공유기에 내장되어 있다. 무선 클라이언트(컴퓨터, 스마트폰)
+컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다. 통신 방식 인트라스트럭처(infrastructure) 방식 WAP를 통해 통신하는 방식 일반적으로 이 방식을 사용한다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">pepperedpepper</a></h1>
+            <h2 class="site-description">Always hungry to keep learning.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>My Projects</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#무선-랜의-구조">무선 랜의 구조</a></li>
+    <li><a href="#ssid의-구조">SSID의 구조</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/network/" >
+                Network
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/network-09/">[Network] Chapter 9. 무선 랜 이해하기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 26, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p><br /><br /></p>
+<h2 id="무선-랜의-구조">무선 랜의 구조</h2>
+<ul>
+<li>
+<p>무선 랜이란?</p>
+<ul>
+<li>랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다.</li>
+<li>유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다.</li>
+<li>해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다.</li>
+</ul>
+</li>
+<li>
+<p><strong>무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)</strong></p>
+<ul>
+<li>WAP는 무선 공유기에 내장되어 있다.</li>
+</ul>
+</li>
+<li>
+<p><strong>무선 클라이언트(컴퓨터, 스마트폰)</strong></p>
+<ul>
+<li>컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>통신 방식
+<ul>
+<li><strong>인트라스트럭처(infrastructure) 방식</strong>
+<ul>
+<li>WAP를 통해 통신하는 방식</li>
+<li>일반적으로 이 방식을 사용한다.</li>
+</ul>
+</li>
+<li><strong>애드혹(Ad Hoc) 방식</strong>
+<ul>
+<li>무선 클라이언트끼리 직접 통신하는 방식</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>무선 랜 규격 <code>IEEE802.11</code>
+<ul>
+<li>미국 기술 표준화 단체인 IEEE(Institute of Electrical and Electronics Engineers)에서 승인한 무선 랜의 표준화 기술이다.</li>
+<li><a class="link" href="https://ko.wikipedia.org/wiki/IEEE_802.11"  target="_blank" rel="noopener"
+    >다양한 규격이 존재한다.</a></li>
+<li>예를 들어, 무선 공유기가 <code>IEEE802.11ac</code>를 지원하더라도 무선 클라이언트가 그 규격을 지원하지 않으면 사용할 수 없다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="ssid의-구조">SSID의 구조</h2>
+<p><img src="/post/network/images/09-01-wap.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="WAP와 무선 클라이언트의 연결"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>비콘(beacon)</strong></p>
+<ul>
+<li>WAP가 주기적으로 보내는, 자기를 알리는 신호이다.</li>
+<li>해당 네트워크에 있는 무선 클라이언트는 이 신호를 잡아서 연결한다.</li>
+</ul>
+</li>
+<li>
+<p><strong>SSID(Service Set IDentifier)</strong></p>
+<ul>
+<li>WAP의 고유 이름이다.</li>
+<li>하나의 무선 랜을 다른 무선 랜으로부터 구분해 준다. 특정 무선 랜에 접속하려는 모든 AP 나 무선 장치들은 반드시 동일한 SSID 를 사용해야만 한다. </li>
+</ul>
+</li>
+<li>
+<p>네트워크 이름, 인증, 암호화, 암호화 키를 설정해서 WAP와 무선 클라이언트가 연결한다.</p>
+</li>
+</ul>
+<br />
+<ul>
+<li>
+<p>WAP를 여러대 설지하면 <strong>채널</strong>이 필요하다.</p>
+<ul>
+<li>무선 랜은 여러 기기를 동시에 연결할 수 있도록 <strong>주파수 대역을 분리</strong>하는데 이것을 채널이라고 한다.</li>
+<li>WAP는 최적의 채널을 찾아서 자동으로 설정한다.</li>
+</ul>
+</li>
+<li>
+<p>전파가 겹치는 무선 랜이 같은 채널이면 주파수가 겹쳐서 전파 간섭이 생긴다.</p>
+</li>
+<li>
+<p>다른 채널을 사용하더라도 해당 무선 랜이 같은 주파수를 사용하면 전파 간섭이 생긴다.</p>
+<ul>
+<li>예를 들면, <code>IEEE802.11b</code>와 <code>IEEE802.11g</code>는 채널이 <code>1ch</code>, <code>2ch</code>로 서로 달라도 같은 주파수 대역인 2.4GHz를 사용해서 간섭이 생긴다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/network/">Network</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/network-08/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 8. 네트워크의 전체 흐름 살펴보기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-07/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 7. 응용 계층 : 애플리케이션에 데이터 전송하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-06/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-05/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 5. 네트워크 계층 : 목적지에 데이터 전달하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-04/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 pepperedpepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

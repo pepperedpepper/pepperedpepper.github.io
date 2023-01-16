@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='OSI 모델과 TCP/IP 모델 프로토콜(protocol)이란? 네트워크에서 문제없이 통신하기 위해 지켜야하는 규칙이다. OSI(Open System Interconnection) 모델이란? ISO(International Organization for Standardization; 국제표준화기구)에서 제정한 것이다. 네트워크에서 데이터를 주고받기 위한 표준 규격이다. 각 계층은 독립적이라서 데이터가 전달되는 동안에 다른 계층의 영향을 받지 않는다. 데이터를 전송하는 쪽(송신 측)은 상위 계층에서 하위 계층으로 데이터를 전달하고, 데이터를 받는 쪽(수신 측)은 하위 계층에서 상위 계층으로 각 계층을 통해 전달된 데이터를 받게 된다. TCP/IP 모델이란? OSI 모델의 7계층을 4계층으로 표현한 것으로, 현재 사용되고 있는 모델이다.'>
+<title>[Network] Chapter 2. 네트워크의 기본 규칙</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/network-02/'>
+
+<link rel="stylesheet" href="/scss/style.min.5be32ca3f6e1a997c75795c4359147cc6d4fbd34948c0acd51e31d237033978a.css"><meta property='og:title' content='[Network] Chapter 2. 네트워크의 기본 규칙'>
+<meta property='og:description' content='OSI 모델과 TCP/IP 모델 프로토콜(protocol)이란? 네트워크에서 문제없이 통신하기 위해 지켜야하는 규칙이다. OSI(Open System Interconnection) 모델이란? ISO(International Organization for Standardization; 국제표준화기구)에서 제정한 것이다. 네트워크에서 데이터를 주고받기 위한 표준 규격이다. 각 계층은 독립적이라서 데이터가 전달되는 동안에 다른 계층의 영향을 받지 않는다. 데이터를 전송하는 쪽(송신 측)은 상위 계층에서 하위 계층으로 데이터를 전달하고, 데이터를 받는 쪽(수신 측)은 하위 계층에서 상위 계층으로 각 계층을 통해 전달된 데이터를 받게 된다. TCP/IP 모델이란? OSI 모델의 7계층을 4계층으로 표현한 것으로, 현재 사용되고 있는 모델이다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/network-02/'>
+<meta property='og:site_name' content='pepperedpepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-23T02:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-23T02:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Network] Chapter 2. 네트워크의 기본 규칙">
+<meta name="twitter:description" content="OSI 모델과 TCP/IP 모델 프로토콜(protocol)이란? 네트워크에서 문제없이 통신하기 위해 지켜야하는 규칙이다. OSI(Open System Interconnection) 모델이란? ISO(International Organization for Standardization; 국제표준화기구)에서 제정한 것이다. 네트워크에서 데이터를 주고받기 위한 표준 규격이다. 각 계층은 독립적이라서 데이터가 전달되는 동안에 다른 계층의 영향을 받지 않는다. 데이터를 전송하는 쪽(송신 측)은 상위 계층에서 하위 계층으로 데이터를 전달하고, 데이터를 받는 쪽(수신 측)은 하위 계층에서 상위 계층으로 각 계층을 통해 전달된 데이터를 받게 된다. TCP/IP 모델이란? OSI 모델의 7계층을 4계층으로 표현한 것으로, 현재 사용되고 있는 모델이다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">pepperedpepper</a></h1>
+            <h2 class="site-description">Always hungry to keep learning.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>My Projects</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#osi-모델과-tcpip-모델">OSI 모델과 TCP/IP 모델</a></li>
+    <li><a href="#캡슐화와-역캡슐화">캡슐화와 역캡슐화</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/network/" >
+                Network
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/network-02/">[Network] Chapter 2. 네트워크의 기본 규칙</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 23, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p><br /><br /></p>
+<h2 id="osi-모델과-tcpip-모델">OSI 모델과 TCP/IP 모델</h2>
+<ul>
+<li><strong>프로토콜(protocol)이란?</strong>
+<ul>
+<li>네트워크에서 문제없이 통신하기 위해 지켜야하는 규칙이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<p><img src="/post/network/images/02-01-osi.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="OSI 모델"
+	
+	
+></p>
+<ul>
+<li><strong>OSI(Open System Interconnection) 모델이란?</strong>
+<ul>
+<li>ISO(International Organization for Standardization; 국제표준화기구)에서 제정한 것이다.</li>
+<li>네트워크에서 데이터를 주고받기 위한 표준 규격이다.</li>
+<li>각 계층은 독립적이라서 데이터가 전달되는 동안에 다른 계층의 영향을 받지 않는다.</li>
+<li>데이터를 전송하는 쪽(송신 측)은 상위 계층에서 하위 계층으로 데이터를 전달하고, 데이터를 받는 쪽(수신 측)은 하위 계층에서 상위 계층으로 각 계층을 통해 전달된 데이터를 받게 된다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<p><img src="/post/network/images/02-02-osiTcp.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="OSI 모델과 TCP/IP 모델"
+	
+	
+></p>
+<ul>
+<li><strong>TCP/IP 모델이란?</strong>
+<ul>
+<li>OSI 모델의 7계층을 4계층으로 표현한 것으로, 현재 사용되고 있는 모델이다.</li>
+<li>OSI가 이론적 표준이라면 TCP/IP는 실무적 표준이라고 할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="캡슐화와-역캡슐화">캡슐화와 역캡슐화</h2>
+<ul>
+<li>
+<p><strong>헤더란?</strong></p>
+<ul>
+<li>데이터를 보내려면 데이터 앞부분에 전송하는 데 필요한 정보를 붙여서 다음 계층으로 보내야 한다. 이 정보를 헤더라고 한다.</li>
+<li>헤더에는 데이터를 전달받을 상대방에 대한 정보도 포함되어 있다.</li>
+</ul>
+</li>
+<li>
+<p><strong>캡슐화란?</strong></p>
+<ul>
+<li>데이터를 보내는 쪽에서 헤더를 붙여 나가는 것을 캡슐화라고 한다.</li>
+</ul>
+</li>
+<li>
+<p><strong>역캡슐화란?</strong></p>
+<ul>
+<li>데이터를 받는 쪽에서 헤더를 하나씩 제거해 나가는 것을 역캡슐화라고 한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>캡슐화와 역캡슐화 흐름의 전체 구성
+<ul>
+<li>세션 계층, 표현 계층은 응용 계층에 포함되어 생각할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/post/network/images/02-03-osiEncapsulation.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="캡슐화와 역캡슐화"
+	
+	
+></p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">계층</th>
+<th style="text-align:right">데이터 송신 측</th>
+<th style="text-align:right">데이터 수신 측</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">응용 계층</td>
+<td style="text-align:right">데이터</td>
+<td style="text-align:right">데이터</td>
+</tr>
+<tr>
+<td style="text-align:center">전송 계층</td>
+<td style="text-align:right">헤더 → 데이터</td>
+<td style="text-align:right">헤더 ← 데이터</td>
+</tr>
+<tr>
+<td style="text-align:center">네트워크 계층</td>
+<td style="text-align:right">헤더 → 혜더-데이터</td>
+<td style="text-align:right">헤더 ← 혜더-데이터</td>
+</tr>
+<tr>
+<td style="text-align:center">데이터 링크 계층</td>
+<td style="text-align:right">헤더 → 헤더-헤더-데이터 ← 트레일러</td>
+<td style="text-align:right">헤더 ← 헤더-헤더-데이터 → 트레일러</td>
+</tr>
+<tr>
+<td style="text-align:center">물리 계층</td>
+<td style="text-align:right">전기 신호로 전송된다</td>
+<td style="text-align:right">도착한다</td>
+</tr>
+</tbody>
+</table></div>
+<br />
+<ul>
+<li><strong>VPN(Virtual Private Network; 가상 사설망)이란?</strong>
+<ul>
+<li>회사 등에서 내용을 바깥 사람에게 드러내지 않고 통신할 목적으로 쓰이는 사설 통신망이다.</li>
+<li>거점 간을 연결하여 통신하거나, 외부에서 인터넷으로 사내에 접속할 때 쓰인다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/network/">Network</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/network-09/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 9. 무선 랜 이해하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-08/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 8. 네트워크의 전체 흐름 살펴보기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-07/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 7. 응용 계층 : 애플리케이션에 데이터 전송하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-06/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/network-05/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Network] Chapter 5. 네트워크 계층 : 목적지에 데이터 전달하기</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 pepperedpepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

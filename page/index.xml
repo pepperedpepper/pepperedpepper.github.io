@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Pages on pepperedpepper</title>
+        <link>https://pepperedpepper.github.io/page/</link>
+        <description>Recent content in Pages on pepperedpepper</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Wed, 02 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://pepperedpepper.github.io/page/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Archives</title>
+        <link>https://pepperedpepper.github.io/archives/</link>
+        <pubDate>Wed, 02 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>My Projects</title>
+        <link>https://pepperedpepper.github.io/about/</link>
+        <pubDate>Wed, 02 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/about/</guid>
+        <description>&lt;br /&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;fantasy-land&#34;&gt;Fantasy Land&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;움직이는 자이로스윙 머신 위에서 제한 시간 안에 스킬을 이용해 몬스터들을 처치해야 합니다. &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍&lt;/th&gt;
+&lt;th&gt;기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;40h (2021.4Q)&lt;/td&gt;
+&lt;td&gt;Unity 3D, C#&lt;/td&gt;
+&lt;td&gt;Android&lt;/td&gt;
+&lt;td&gt;1명 (본인)&lt;/td&gt;
+&lt;td&gt;1명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/amzeWNZxyxw&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;br /&gt;
+&lt;!--&lt;details&gt;--&gt;
+&lt;!--&lt;summary&gt; Previous Projects . . . &lt;/summary&gt;--&gt;
+&lt;!--&lt;div markdown=&#34;1&#34;&gt;--&gt;
+&lt;br /&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;dragon-nest&#34;&gt;Dragon Nest&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;아레나에 출몰한 드래곤과 맞서 싸워서 이겨야합니다.  &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍 및 기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;80h (2021. 4Q)&lt;/td&gt;
+&lt;td&gt;Unreal 4 3D, C++&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;td&gt;1명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/dcFLSekzJWg&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;drink-stadium&#34;&gt;Drink Stadium&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;움직이는 자이로스윙 머신 위에서 제한 시간 안에 스킬을 이용해 몬스터들을 처치해야 합니다. &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍&lt;/th&gt;
+&lt;th&gt;기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;300h (2021. 3Q)&lt;/td&gt;
+&lt;td&gt;Unity 3D, C#&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;td&gt;3명&lt;/td&gt;
+&lt;td&gt;4명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/rk63gd4CGwc&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;bubble-bobble&#34;&gt;Bubble Bobble&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;버블보블&amp;gt;을 모작하였습니다. &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍 및 기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;80h (2021. 3Q)&lt;/td&gt;
+&lt;td&gt;WinAPI, C++&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;td&gt;1명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/vzk4j18VeTM&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;!--&lt;/div&gt;--&gt;
+&lt;!--&lt;/details&gt;--&gt;
+</description>
+        </item>
+        <item>
+        <title>Search</title>
+        <link>https://pepperedpepper.github.io/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/search/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

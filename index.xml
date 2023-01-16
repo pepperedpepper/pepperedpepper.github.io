@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>pepperedpepper</title>
+        <link>https://pepperedpepper.github.io/</link>
+        <description>Recent content on pepperedpepper</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Wed, 02 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://pepperedpepper.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Archives</title>
+        <link>https://pepperedpepper.github.io/archives/</link>
+        <pubDate>Wed, 02 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/archives/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>My Projects</title>
+        <link>https://pepperedpepper.github.io/about/</link>
+        <pubDate>Wed, 02 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/about/</guid>
+        <description>&lt;br /&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;fantasy-land&#34;&gt;Fantasy Land&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;움직이는 자이로스윙 머신 위에서 제한 시간 안에 스킬을 이용해 몬스터들을 처치해야 합니다. &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍&lt;/th&gt;
+&lt;th&gt;기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;40h (2021.4Q)&lt;/td&gt;
+&lt;td&gt;Unity 3D, C#&lt;/td&gt;
+&lt;td&gt;Android&lt;/td&gt;
+&lt;td&gt;1명 (본인)&lt;/td&gt;
+&lt;td&gt;1명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/amzeWNZxyxw&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;br /&gt;
+&lt;!--&lt;details&gt;--&gt;
+&lt;!--&lt;summary&gt; Previous Projects . . . &lt;/summary&gt;--&gt;
+&lt;!--&lt;div markdown=&#34;1&#34;&gt;--&gt;
+&lt;br /&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;dragon-nest&#34;&gt;Dragon Nest&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;아레나에 출몰한 드래곤과 맞서 싸워서 이겨야합니다.  &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍 및 기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;80h (2021. 4Q)&lt;/td&gt;
+&lt;td&gt;Unreal 4 3D, C++&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;td&gt;1명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/dcFLSekzJWg&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;drink-stadium&#34;&gt;Drink Stadium&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;움직이는 자이로스윙 머신 위에서 제한 시간 안에 스킬을 이용해 몬스터들을 처치해야 합니다. &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍&lt;/th&gt;
+&lt;th&gt;기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;300h (2021. 3Q)&lt;/td&gt;
+&lt;td&gt;Unity 3D, C#&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;td&gt;3명&lt;/td&gt;
+&lt;td&gt;4명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/rk63gd4CGwc&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;center&gt;&lt;font size = &#34;5&#34;&gt;
+&lt;h2 id=&#34;bubble-bobble&#34;&gt;Bubble Bobble&lt;/h2&gt;
+&lt;p&gt;&lt;/font&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;버블보블&amp;gt;을 모작하였습니다. &lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;개발 기간&lt;/th&gt;
+&lt;th&gt;사용 엔진 및 언어&lt;/th&gt;
+&lt;th&gt;플랫폼&lt;/th&gt;
+&lt;th&gt;프로그래밍 및 기획&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;80h (2021. 3Q)&lt;/td&gt;
+&lt;td&gt;WinAPI, C++&lt;/td&gt;
+&lt;td&gt;Windows&lt;/td&gt;
+&lt;td&gt;1명&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;video-wrapper&#34;&gt;
+    &lt;iframe loading=&#34;lazy&#34; 
+            src=&#34;https://www.youtube.com/embed/vzk4j18VeTM&#34; 
+            allowfullscreen 
+            title=&#34;YouTube Video&#34;
+    &gt;
+    &lt;/iframe&gt;
+&lt;/div&gt;
+
+&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;!--&lt;/div&gt;--&gt;
+&lt;!--&lt;/details&gt;--&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 9. 무선 랜 이해하기</title>
+        <link>https://pepperedpepper.github.io/p/network-09/</link>
+        <pubDate>Sat, 26 Feb 2022 02:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-09/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;무선-랜의-구조&#34;&gt;무선 랜의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;무선 랜이란?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다.&lt;/li&gt;
+&lt;li&gt;유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다.&lt;/li&gt;
+&lt;li&gt;해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WAP는 무선 공유기에 내장되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;무선 클라이언트(컴퓨터, 스마트폰)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;통신 방식
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;인트라스트럭처(infrastructure) 방식&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;WAP를 통해 통신하는 방식&lt;/li&gt;
+&lt;li&gt;일반적으로 이 방식을 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;애드혹(Ad Hoc) 방식&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;무선 클라이언트끼리 직접 통신하는 방식&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;무선 랜 규격 &lt;code&gt;IEEE802.11&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;미국 기술 표준화 단체인 IEEE(Institute of Electrical and Electronics Engineers)에서 승인한 무선 랜의 표준화 기술이다.&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ko.wikipedia.org/wiki/IEEE_802.11&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;다양한 규격이 존재한다.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;예를 들어, 무선 공유기가 &lt;code&gt;IEEE802.11ac&lt;/code&gt;를 지원하더라도 무선 클라이언트가 그 규격을 지원하지 않으면 사용할 수 없다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ssid의-구조&#34;&gt;SSID의 구조&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/09-01-wap.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;WAP와 무선 클라이언트의 연결&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;비콘(beacon)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WAP가 주기적으로 보내는, 자기를 알리는 신호이다.&lt;/li&gt;
+&lt;li&gt;해당 네트워크에 있는 무선 클라이언트는 이 신호를 잡아서 연결한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SSID(Service Set IDentifier)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;WAP의 고유 이름이다.&lt;/li&gt;
+&lt;li&gt;하나의 무선 랜을 다른 무선 랜으로부터 구분해 준다. 특정 무선 랜에 접속하려는 모든 AP 나 무선 장치들은 반드시 동일한 SSID 를 사용해야만 한다. &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 이름, 인증, 암호화, 암호화 키를 설정해서 WAP와 무선 클라이언트가 연결한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;WAP를 여러대 설지하면 &lt;strong&gt;채널&lt;/strong&gt;이 필요하다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;무선 랜은 여러 기기를 동시에 연결할 수 있도록 &lt;strong&gt;주파수 대역을 분리&lt;/strong&gt;하는데 이것을 채널이라고 한다.&lt;/li&gt;
+&lt;li&gt;WAP는 최적의 채널을 찾아서 자동으로 설정한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;전파가 겹치는 무선 랜이 같은 채널이면 주파수가 겹쳐서 전파 간섭이 생긴다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;다른 채널을 사용하더라도 해당 무선 랜이 같은 주파수를 사용하면 전파 간섭이 생긴다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;예를 들면, &lt;code&gt;IEEE802.11b&lt;/code&gt;와 &lt;code&gt;IEEE802.11g&lt;/code&gt;는 채널이 &lt;code&gt;1ch&lt;/code&gt;, &lt;code&gt;2ch&lt;/code&gt;로 서로 달라도 같은 주파수 대역인 2.4GHz를 사용해서 간섭이 생긴다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 8. 네트워크의 전체 흐름 살펴보기</title>
+        <link>https://pepperedpepper.github.io/p/network-08/</link>
+        <pubDate>Sat, 26 Feb 2022 01:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-08/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;랜-카드에서의-데이터-전달과-처리&#34;&gt;랜 카드에서의 데이터 전달과 처리&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;OSI 모델과 하는 일&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;계층&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;물리 계층&lt;/td&gt;
+&lt;td&gt;데이터를 전기 신호로 변환한다&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;데이터 링크 계층&lt;/td&gt;
+&lt;td&gt;LAN에서 데이터를 송수신한다&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;네트워크 계층&lt;/td&gt;
+&lt;td&gt;다른 네트워크에 있는 목적지에 데이터를 전달한다&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;전송 계층&lt;/td&gt;
+&lt;td&gt;목적지에 데이터를 정확하게 전달한다&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;응용 계층&lt;/td&gt;
+&lt;td&gt;애플리케이션 등에서 사용하는 데이터를 송수신하는데 필요하다&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;살펴볼 네트워크의 구성
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;192.168.1.10&lt;/code&gt; 컴퓨터 → 스위치A&lt;/li&gt;
+&lt;li&gt;→ 라우터A &lt;code&gt;172.16.0.1&lt;/code&gt; → &lt;code&gt;172.16.0.2&lt;/code&gt; 라우터B&lt;/li&gt;
+&lt;li&gt;→ 스위치B → 웹 서버 &lt;code&gt;192.168.10.5&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;응용 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;3-way handshake가 완료되어 연결이 확립되었다고 가정한다.&lt;/li&gt;
+&lt;li&gt;컴퓨터에서 웹 브라우저를 이용해서 웹 서버의 웹 사이트에 접속하기 위해 요청을 보낸다.&lt;/li&gt;
+&lt;li&gt;웹 서버에 있는 html 데이터를 얻어야 하므로 &lt;code&gt;GET /index.html HTTP/1.1 ~1&lt;/code&gt;과 같은 HTTP 메시지를 보낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;전송 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TCP 헤더가 붙는다. 이것이 붙은 데이터를 세그먼트라고 한다.&lt;/li&gt;
+&lt;li&gt;여기에는 출발지 포트 번호와 목적지 포트 번호가 들어 있다.&lt;/li&gt;
+&lt;li&gt;출발지 포트 번호(웹 브라우저)는 잘 알려진 포트가 아닌 포트(1025번 이상) 중에서 무작위로 선택된다.&lt;/li&gt;
+&lt;li&gt;목적지 포트번호는 HTTP이므로 80번 포트가 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IP 헤더가 붙는다. 이것이 붙은 데이터를 IP 패킷이라고 한다.&lt;/li&gt;
+&lt;li&gt;여기에는 출발지 IP 주소와 목적지 IP 주소가 붙는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 링크 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이더넷 헤더가 붙는다. 이것이 붙은 데이터를 이더넷 프레임이라고 한다.&lt;/li&gt;
+&lt;li&gt;여기에는 출발지 MAC 주소와 목적지 MAC 주소가 붙는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;물리 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;전기신호로 변환하여 네트워크로 전송한다.&lt;/li&gt;
+&lt;li&gt;전기신호로 변환하는 장비는 랜 카드이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;스위치와-라우터에서의-데이터-전달과-처리&#34;&gt;스위치와 라우터에서의 데이터 전달과 처리&lt;/h2&gt;
+&lt;h3 id=&#34;스위치&#34;&gt;스위치&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;물리 계층 → 데이터 링크 계층 → 물리 계층
+&lt;ul&gt;
+&lt;li&gt;컴퓨터의 데이터가 전기 신호로 변환되어 전달된다.&lt;/li&gt;
+&lt;li&gt;데이터를 전기 신호로 변환하여 전송한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;라우터&#34;&gt;라우터&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;물리 계층 → 데이터 링크 계층 → 네트워크 계층 → 데이터 링크 계층 → 물리 계층
+&lt;ul&gt;
+&lt;li&gt;전기 신호가 전달된다.&lt;/li&gt;
+&lt;li&gt;데이터 링크 계층에서 목적지 MAC 주소와 자신의 MAC 주소를 비교한다. 주소가 같으면 이더넷 헤더와 트레일러를 분리하는 역캡슐화를 수행한다.&lt;/li&gt;
+&lt;li&gt;네트워크 계층에서 라우팅 데이블과 목적지 IP주소를 비교한다.&lt;/li&gt;
+&lt;li&gt;라우팅을 한다. 현재 출발지 IP 주소(&lt;code&gt;192.168.1.10&lt;/code&gt;)를 라우터의 외부 IP 주소(&lt;code&gt;172.16.0.1&lt;/code&gt;)로 변경한다.&lt;/li&gt;
+&lt;li&gt;그런 다음 데이터 링크 계층에서 라우터B로 보내기 위해서 이더넷 헤더와 트레일러를 붙인다.&lt;/li&gt;
+&lt;li&gt;물리 계층에서 데이터를 전기 신호로 변환하고 네트워크로 전달한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;(같은 과정 생략&amp;hellip;)&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;웹-서버에서의-데이터-전달과-처리&#34;&gt;웹 서버에서의 데이터 전달과 처리&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;물리 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;스위치B로부터 전기 신호로 변환된 데이터가 전달된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;데이터 링크 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;목적지 MAC 주소와 자신의 MAC 주소를 비교한다. 주소가 같으면 이더넷 헤더와 트레일러를 분리하고 네트워크 계층에 전달한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;목적지 IP 주소와 자신의 IP 주소를 비교한다. 주소가 같으면 IP 헤더를 분리하고 전송 계층에 전달한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;전송 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;목적지 포트 번호를 확인해서 어떤 애플리케이션으로 전달해야 되는지 판단하고, TCP 헤더를 분리해서 응용 계층에 전달한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;응용 계층&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;웹 서버의 응용 계층에 &lt;code&gt;GET /index.html HTTP/1.1 ~1&lt;/code&gt; HTTP 메시지가 전달된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 7. 응용 계층 : 애플리케이션에 데이터 전송하기</title>
+        <link>https://pepperedpepper.github.io/p/network-07/</link>
+        <pubDate>Fri, 25 Feb 2022 02:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-07/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;응용-계층의-역할&#34;&gt;응용 계층의 역할&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;응용 계층은 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;애플리케이션과 데이터를 주고받기 위해&lt;/strong&gt;&lt;/span&gt; 필요하다.
+&lt;ul&gt;
+&lt;li&gt;클라이언트의 요청을 서버에 전달하기 위해서 서버가 이해할 수 있는 데이터로 변환한 후 전송 계층으로 전달한다.&lt;/li&gt;
+&lt;li&gt;클라이언트 측 애플리케이션이 서버 측 애플리케이션과 서로 통신하려면 응용 계층의 프로토콜이 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;프로토콜&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;HTTP&lt;/td&gt;
+&lt;td&gt;웹 사이트 접속&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DNS&lt;/td&gt;
+&lt;td&gt;이름 해석&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;FTP&lt;/td&gt;
+&lt;td&gt;파일 전송&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SMTP&lt;/td&gt;
+&lt;td&gt;파일 수신&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;POP3&lt;/td&gt;
+&lt;td&gt;메일 수신&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;웹-서버의-구조웹-사이트-접속&#34;&gt;웹 서버의 구조(웹 사이트 접속)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTML(HyperText Markup Language)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;웹 페이지에서 문장 구조나 문자를 꾸미는 태그를 사용하여 작성하는 마크업 언어이다.&lt;/li&gt;
+&lt;li&gt;HTML로 작성하면 웹 브라우저로 볼 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;HTTP(HyperText Transfer Protocol)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;클라이언트(웹 브라우저)는 웹 사이트를 보기 위해서 서버(웹 서버 프로그램)의 80번 포트를 사용해서 HTTP 통신을 한다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTTP/1.0&lt;/code&gt;에서는 HTTP 요청을 보내고 HTTP 응답을 받은 후에는 연결을 끊는 작업을 반복했다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTTP/1.1&lt;/code&gt;에서는 &lt;strong&gt;keepalive&lt;/strong&gt; 라는 기능이 추가되서 연결을 한 번 수립하면 데이터 교확을 마칠 때까지 유지하였다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;HTTP/2.0&lt;/code&gt;에서는 요청과 응답을 순서대로 응답하지 않아도 되어서 콘텐츠를 빠르게 표시할 수 있게되었다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;dns-서버의-구조이름-해석&#34;&gt;DNS 서버의 구조(이름 해석)&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DNS(Domain Name System)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;사람이 읽을 수 있는 도메인 이름을 IP 주소로 변환해준다. 이것을 이름 해석(name resolution)이라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/07-01-dns.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;DNS&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS 서버는 전 세계에 흩어져 있고 모두 계층적으로 연결되어 있다.
+&lt;ul&gt;
+&lt;li&gt;그래서 어떤 DNS 서버가 해당 도메인의 IP 주소를 모르면 다음 DNS 서버에 요청한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;메일-서버의-구조smtp와-pop3&#34;&gt;메일 서버의 구조(SMTP와 POP3)&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/07-02-smtpPop3.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;SMTP와 POP3&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SMTP(Simple Mail Transfer Protocol)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이메일을 전송할 때 사용하는 프로토콜이다.&lt;/li&gt;
+&lt;li&gt;클라이언트가 작성한 메일을 서버로 전송할 때나, 서버 간 메일을 전송할 때 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;POP3(Post Office Protocol 3)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이메일을 수신할 때 사용하는 프로토콜이다.&lt;/li&gt;
+&lt;li&gt;이메일 서버에 도착한 메일을 메일 박스(메일 서버에 있는, 메일을 보관하는 곳)에서 클라이언트로 가져올 때 사용한다. 사용자 인증이 필요하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ping(Packet INternet Groper) 명령&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;ICMP(Internet Control Message Protocol)라는 프로토콜을 사용해서, 목적지에 ICMP 패킷을 보내고, 패킷에 대한 응답이 제대로 오는지 확인한다.&lt;/li&gt;
+&lt;li&gt;대상 컴퓨터 동작 여부 혹은 네트워크 상태를 파악할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ping 목적지 IP 주소 혹은 목적지 도메인 이름
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기</title>
+        <link>https://pepperedpepper.github.io/p/network-06/</link>
+        <pubDate>Fri, 25 Feb 2022 01:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-06/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;전송-계층의-역할&#34;&gt;전송 계층의 역할&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;전송 계층에서는 목적지에 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;신뢰할 수 있는&lt;/strong&gt;&lt;/span&gt; 데이터를 전달하기위해 오류를 점검한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;연결형 통신&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;신뢰할 수 있고 정확한 데이터를 전달하는 통신이다.&lt;/li&gt;
+&lt;li&gt;상대편과 확인해 가면서 통신한다.&lt;/li&gt;
+&lt;li&gt;TCP(Transmission Control Protocol)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;비연결형 통신&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;효율적으로 데이터를 전달하는 통신이다.&lt;/li&gt;
+&lt;li&gt;상대편을 확인하지 않고 일방적으로 데이터를 전송한다.&lt;/li&gt;
+&lt;li&gt;예를 들면, 동영상을 볼 때 비연결형 통신을 사용한다.&lt;/li&gt;
+&lt;li&gt;UDP(User Datagram Protocol)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;tcp의-구조&#34;&gt;TCP의 구조&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/06-01-tcpHeader.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TCP 헤더&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;전송 계층에서는 캡슐화할 때 &lt;strong&gt;TCP 헤더&lt;/strong&gt;를 붙인다.
+&lt;ul&gt;
+&lt;li&gt;TCP 헤더가 추가되어 만들어진 것을 &lt;strong&gt;세그먼트(segment)&lt;/strong&gt; 라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/06-02-3wayHandshake.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;3-way handshake&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;3-way handshake&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터를 전송하려면 먼저 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;연결(connection)&lt;/strong&gt;&lt;/span&gt; 이라는 가장의 독점 통신로를 확보해야한다.&lt;/li&gt;
+&lt;li&gt;연결을 확립하기 위해서 패킷 요청을 세 번 교환하는 것을 3-way handshake라고 한다.&lt;/li&gt;
+&lt;li&gt;연결요청 &lt;code&gt;SYN&lt;/code&gt;과 확인응답 &lt;code&gt;ACK&lt;/code&gt;를 사용해서 연결은 확립한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/06-03-fin.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;연결을 끊을 때&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;연결을 끊을 때
+&lt;ul&gt;
+&lt;li&gt;연결종류 &lt;code&gt;FIN&lt;/code&gt;과 확인응답 &lt;code&gt;ACK&lt;/code&gt;를 사용해서 연결을 끊는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;일렬번호와-확인응답-번호의-구조&#34;&gt;일렬번호와 확인응답 번호의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;3-way handshake로 연결을 끝마친 후에는 일렬번호와 확인응답 번호를 사용해서 데이터를 주고받는다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(TCP 헤더에서) &lt;strong&gt;일렬번호(sequence number)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;송신 측에서, 보내는 데이터가 몇 번째 데이터인지 알려주는 역할을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;(TCP 헤더에서) &lt;strong&gt;확인응답 번호(acknowledgement number)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;수신 측에서, 다음으로 받고 싶은 데이터가 몇 번째 데이터인지 알려주는 역할을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;재전송 제어&lt;/strong&gt;&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터가 항상 올바르게 전달되는 것은 아니므로, 일렬번호와 확인응답 번호를 사용해서 데이터가 손상되거나 유실된 경우에 데이터를 재전송하게 되어있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;매번 확인응답을 기다리는 대신에 &lt;strong&gt;세그먼트를 연속해서 보내고&lt;/strong&gt; 난 다음에 확인응답을 반환하면 효율이 높아지겠다.
+&lt;ul&gt;
+&lt;li&gt;상대방의 세그먼트가 쌓일 수 있게 하기 위한 &lt;strong&gt;버퍼(buffer)&lt;/strong&gt; 가 존재한다.&lt;/li&gt;
+&lt;li&gt;이 버퍼가 넘쳐버리면 &lt;strong&gt;오버플로(overflow)&lt;/strong&gt; 가 발생하므로, 3-way handshake를 할 때 서로의 버퍼 한계 크기(TCP 헤더에서 &lt;strong&gt;window size&lt;/strong&gt;)를 주고 받는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;포트-번호의-구조&#34;&gt;포트 번호의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;전송 계층에서는 또한 전송된 데이터를 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;어떤 애플리케이션에 전송해야&lt;/strong&gt;&lt;/span&gt; 하는지도 알려준다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;목적지가 어떤 애플리케이션인지 구분하기 위해서는 (TCP 헤더에서) &lt;strong&gt;출발지 포트 번호(source port number)&lt;/strong&gt; 와 &lt;strong&gt;목적지 포트 번호(destination port number)&lt;/strong&gt; 가 필요하다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;0~1023번 포트
+&lt;ul&gt;
+&lt;li&gt;주요 프로토콜이 사용하도록 예약된 잘 알려진 포트(well-known prots)이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;1024번 포트
+&lt;ul&gt;
+&lt;li&gt;예약되어 있지만 사용되지 않는 포트&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;1025번 이상 포트
+&lt;ul&gt;
+&lt;li&gt;랜덤 포트라고 해서 클라이언트 측으로 가는 송신 포트로 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;애플리케이션별 포트 번호&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;애플리케이션&lt;/th&gt;
+&lt;th&gt;포트 번호&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;SSH&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SMTP&lt;/td&gt;
+&lt;td&gt;25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DNS&lt;/td&gt;
+&lt;td&gt;53&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HTTP&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;POP3&lt;/td&gt;
+&lt;td&gt;110&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HTTPS&lt;/td&gt;
+&lt;td&gt;443&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;udp의-구조&#34;&gt;UDP의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;TCP와 달리, UDP는 효율성을 중요하게 생각하는 비연결형 통신이라서 TCP처럼 확인작업을 일일이 하지 않는다.&lt;/li&gt;
+&lt;li&gt;또한 UDP를 사용하면 LAN에 있는 컴퓨터나 네트워크 장비에 데이터를 일괄로 보내는 &lt;strong&gt;브로드캐스트(broadcast)&lt;/strong&gt; 를 할 수 있다. 
+&lt;br /&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/06-04-udpHeader.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;UDP 헤더&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;UDP 헤더&lt;/strong&gt;가 붙은 데이터를 &lt;strong&gt;UDP 데이터그램&lt;/strong&gt;이라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 5. 네트워크 계층 : 목적지에 데이터 전달하기</title>
+        <link>https://pepperedpepper.github.io/p/network-05/</link>
+        <pubDate>Thu, 24 Feb 2022 02:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-05/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;네트워크-계층의-역할&#34;&gt;네트워크 계층의 역할&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 링크 계층에서는 이더넷 규칙을 기반으로 헤서 같은 네트워크에 있는 컴퓨터로 데이터를 전송할 수 있다면,&lt;/li&gt;
+&lt;li&gt;네트워크 계층에서는 &lt;span style=&#39;background-color: #c293d8&#39;&gt;서로 다른 네트워크에&lt;/span&gt; 있는 목적지로 데이터를 전송할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;라우터(Router)&lt;/strong&gt;&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 &lt;strong&gt;어떤 경로로 가는 것이 좋은지(라우팅; routing)&lt;/strong&gt; 를 알려주는 기능을 한다.&lt;/li&gt;
+&lt;li&gt;라우팅 테이블(routing table)이 있어서 경로 정보를 등록하고 관리한다.&lt;/li&gt;
+&lt;li&gt;가정이나 소규모 기업 용도로 만든 라우터를 인터넷 공유기라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;목적지의 주소를 아는 방법? &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;IP(Internet Protocol) 주소&lt;/strong&gt;&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;LAN에서는 MAC 주소만으로 통신할 수 있지만, 다른 네트워크에는 데이터를 보낼 수 없다.&lt;/li&gt;
+&lt;li&gt;그래서 IP가 필요하다. IP는 어떤 네트워크의 어떤 컴퓨터인지를 구분할 수 있도록 하는 주소이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/05-01-ipHeader.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IP 헤더&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 계층에서는 캡슐화할 때 &lt;strong&gt;IP 헤더&lt;/strong&gt;를 붙인다.
+&lt;ul&gt;
+&lt;li&gt;IP 헤더가 추가되어 만들어진 것을 &lt;strong&gt;IP 패킷&lt;/strong&gt;이라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ip-주소의-구조&#34;&gt;IP 주소의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;IP 주소는 인터넷 서비스 제공자(ISP)에게 받을 수 있다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;IPv4&lt;/strong&gt;는 32bit로, &lt;strong&gt;IPv6&lt;/strong&gt;는 64bit로 주소를 표현한다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IP 주소는 공인 IP 주소와 사설 IP 주소가 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ISP가 제공하는 &lt;strong&gt;공인 IP 주소는 라우더에만 할당&lt;/strong&gt;하고, LAN 안의 컴퓨터들에게는 LAN의 네트워크 관리자가 자유롭게 사설 IP 주소를 할당하거나, 라우터의 DHCP(Dynamic Host Configuration Protocol)기능을 사용하여 주소를 자동으로 할당한다.&lt;/li&gt;
+&lt;li&gt;이렇게 공인 IP 주소를 절약할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IP 주소는 네트워크 ID와 호스트 ID로 나뉘어져 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;네트워크 ID&lt;/strong&gt;는 어떤 네트워크인지를 나타내고, &lt;strong&gt;호스트 ID&lt;/strong&gt;는 해당 네트워크의 어떤 컴퓨터인지를 나타낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;ip-주소의-클래스-구조&#34;&gt;IP 주소의 클래스 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;IP 주소의 네트워크 ID의 크기는 클래스에 따라 달라진다.
+&lt;ul&gt;
+&lt;li&gt;일반 네트워크에서는 A~C 클래스까지 사용할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;클래스 이름&lt;/th&gt;
+&lt;th&gt;내용&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;A 클래스&lt;/td&gt;
+&lt;td&gt;대규모 네트워크 주소&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B 클래스&lt;/td&gt;
+&lt;td&gt;중형 네트워크 주소&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;C 클래스&lt;/td&gt;
+&lt;td&gt;소규모 네트워크 주소&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;D 클래스&lt;/td&gt;
+&lt;td&gt;멀티캐스트(multicast) 주소&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;E 클래스&lt;/td&gt;
+&lt;td&gt;연구 및 특수용도 주소&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;각 클래스의 주소 범위
+&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/05-02-ipClass.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;클래스 주소 범위&#34;
+	
+	
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;네트워크-주소와-브로드캐스트-주소의-구조&#34;&gt;네트워크 주소와 브로드캐스트 주소의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 주소와 브로드캐스트 주소는 특별한 주소로 컴퓨터나 라우터가 자신의 IP로 사용하면 안 되는 주소이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;네트워크 주소&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;호스트 ID가 &lt;code&gt;0&lt;/code&gt;인 주소이다.&lt;/li&gt;
+&lt;li&gt;네트워크 전체를 대표하는 주소이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;브로드캐스트 주소&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;호스트 ID가 &lt;code&gt;255&lt;/code&gt;인 주소이다.&lt;/li&gt;
+&lt;li&gt;네트워크에 있는 컴퓨터나 장비 모두에게 한 번에 데이터를 전송하는 데 사용되는 전용 IP 주소이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;서브넷의-구조&#34;&gt;서브넷의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;서브넷팅(subneting)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;대규모 네트워크를 작은 네트워크로 분할하는 것이다.&lt;/li&gt;
+&lt;li&gt;분할된 네트워크를 &lt;strong&gt;서브넷(subnet)&lt;/strong&gt; 이라고 한다.&lt;/li&gt;
+&lt;li&gt;원래 호스트 ID로 사용하던 비트를 서브넷 ID로 바꾼다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;서브넷 마스크(subnet mask)&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 ID와 호스트 ID를 식별하기 위한 값이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;프리픽스(prefix) 표기법으로 나타낼 수도 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;서브넷 마스크를 &lt;code&gt;/비트수&lt;/code&gt;로 나타낸 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;클래스명&lt;/th&gt;
+&lt;th&gt;서브넷 마스크&lt;/th&gt;
+&lt;th&gt;프리픽스 표기법&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;A 클래스&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;255.0.0.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/8&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B 클래스&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;255.255.0.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/16&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;C 클래스&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;255.255.255.0&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;/24&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/05-03-subnetting.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;서브넷팅&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;위와 같은 경우 서브넷 마스크는 &lt;code&gt;255.255.252.0&lt;/code&gt;이고, 프리픽스 표기법으로 하면 &lt;code&gt;/22&lt;/code&gt;이겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;라우터의-구조&#34;&gt;라우터의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;라우터는 스위치, 허브와 달리 &lt;strong&gt;네트워크를 분리&lt;/strong&gt;할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;그렇다면 분리된 네트워크 끼리는 어떻게 데이터를 전송할 수 있을까?
+&lt;ul&gt;
+&lt;li&gt;라우터의 IP 주소인 &lt;strong&gt;기본 게이터웨이(default gateway)&lt;/strong&gt; 를 설정한다. 이렇게 네트워크의 출입구를 지정하고 라우터로 일단 데이터를 전송한다.&lt;/li&gt;
+&lt;li&gt;그러면 라우터가 라우팅을 한다. 즉, 현재 네트워크에서 다른 네트워크로 가는 최적의 경로를 찾아서 데이터를 전송한다.&lt;/li&gt;
+&lt;li&gt;경로 정보는 라우팅 테이블에 저장되어 있는데, 여기에 저장된 경로를 바탕으로 라우팅을 한다.&lt;/li&gt;
+&lt;li&gt;라우터 간에 경로 정보를 교환하기 위한 프로토콜을 라우팅 프로토콜이라고 하며, 여기에는 RIP, OSPF, BGP 등이 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;정적 라우팅&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;관리자가 미리 라우팅 테이블에 경로를 수동으로 추가하는 방법이다.&lt;/li&gt;
+&lt;li&gt;소규모 네트워크에서 사용된다.&lt;/li&gt;
+&lt;li&gt;라우팅 정보가 교환되지 않아 대역폭에 대한 부담이 적고, 보안 유지에 좋다.&lt;/li&gt;
+&lt;li&gt;하지만, 동적으로 변영되지 않으므로, 장애가 발생하면 다른 경로로 우회할 수 없어서 관리자가 설정을 하나하나 변경해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;동적 라우팅&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 변경을 자동으로 감지하여 라우팅 테이블을 업데이트하거나, 네트워크 장애가 발생했을 때 라우터끼지 정보를 교환해서 최적의 경로로 전환한다.&lt;/li&gt;
+&lt;li&gt;대규모 네트워크에서 사용된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기</title>
+        <link>https://pepperedpepper.github.io/p/network-04/</link>
+        <pubDate>Thu, 24 Feb 2022 01:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-04/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;데이터-링크-계층의-역할과-이더넷&#34;&gt;데이터 링크 계층의 역할과 이더넷&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;이더넷(Ethernet)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다.&lt;/li&gt;
+&lt;li&gt;데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;충돌(collision)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다.&lt;/li&gt;
+&lt;li&gt;충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 &lt;strong&gt;CSMA/CD&lt;/strong&gt; 라고 한다.
+&lt;ul&gt;
+&lt;li&gt;하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;mac-주소의-구조&#34;&gt;MAC 주소의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;MAC(Medium Access Control) 주소&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;랜 카드에 부여된 48bit의 숫자로 물리 주소라고도 부르며, 전 세계에서 유일한 번호이다.&lt;/li&gt;
+&lt;li&gt;앞쪽 24bit는 랜 카드를 만든 제조사의 번호고, 뒤쪽 24bit는 제조사가 랜 카드에 붙인 일렬번호이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;이더넷 헤더(Ethernet Header)&lt;/strong&gt; 의 구성(총 14 bytes)
+&lt;ul&gt;
+&lt;li&gt;목적지의 MAC 주소(6 bytes)&lt;/li&gt;
+&lt;li&gt;출발지의 MAC 주소(6 bytes)&lt;/li&gt;
+&lt;li&gt;유형(2 bytes)
+&lt;ul&gt;
+&lt;li&gt;이더넷으로 전송되는 상위 계층 프로토콜 종류를 식별하는 16진수 번호이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;트레일러(Trailer)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;FCS(Frame Check Sequence)라고도 하며, 데이터 전송 도중에 오류가 발생하는지 확인하는 용도로 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 링크 계층에서는 &lt;strong&gt;이더넷 헤더&lt;/strong&gt;와 &lt;strong&gt;트레일러&lt;/strong&gt;을 붙여서 물리 계층으로 보내는 캡슐화가 일어난다.
+&lt;ul&gt;
+&lt;li&gt;이 두 가지가 추가된 데이터를 &lt;strong&gt;프레임&lt;/strong&gt;이라고 한다.&lt;/li&gt;
+&lt;li&gt;그러면 물리 계층에서 이 프레임 비트열을 전기 신호로 변환해서 네트워크를 통해 전송한다.&lt;/li&gt;
+&lt;li&gt;목적지의 MAC 주소가 자신의 MAC 주소와 다르면 데이터를 파기한다.&lt;/li&gt;
+&lt;li&gt;만약에 동시에 컴퓨터 1, 2가 동일한 목적지인 컴퓨터 3으로 데이터를 전송하면 충돌을 방지하기 위해서 CSMA/CD 방식을 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;스위치의-구조&#34;&gt;스위치의 구조&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/04-01-switch.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;스위치&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;스위치(switch)&lt;/strong&gt;&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;허브와 마찬가지로 여러 기기를 하나로 연결하는 장치이다. 다른 점은 원하는 목적지에만 신호를 보낸다는 것이다.&lt;/li&gt;
+&lt;li&gt;내부에 &lt;strong&gt;MAC 주소 테이블&lt;/strong&gt;을 가지고 있어서, 포트 번호와 거기에 연결되어 있는 컴퓨터의 MAC 주소가 등록되어 있다.&lt;/li&gt;
+&lt;li&gt;처음에는 아무것도 등록되어 있지 않지만, 프레임이 전송되면 등록된다. (MAC 주소 학습 기능)&lt;/li&gt;
+&lt;li&gt;처음에는 아무것도 등록되어 있지 않아서, 컴퓨터 1에서 컴퓨터 3으로 데이터를 전송해도 모든 컴퓨터 1~5에 데이터가 전송된다. 이것을 &lt;strong&gt;플러딩(flooding)&lt;/strong&gt; 이라고 한다.&lt;/li&gt;
+&lt;li&gt;이 후 등록되면 목적지인 컴퓨터 3에만 데이터가 전송된다. 이처럼 MAC 주소를 기준으로 목적지를 선택하는 것을 &lt;strong&gt;MAC 주소 필터링&lt;/strong&gt;이라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;데이터가-케이블에서-충돌하지-않는-구조&#34;&gt;데이터가 케이블에서 충돌하지 않는 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;반이중 통식 방식&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 송신과 수신을 번갈아가면서 통신하는 방식&lt;/li&gt;
+&lt;li&gt;동시에 데이터를 전송하면 충돌이 발생한다.&lt;/li&gt;
+&lt;li&gt;허브&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;전이중 통식 방식&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터 송수신을 동시에 통신하는 방식&lt;/li&gt;
+&lt;li&gt;동시에 데이터를 전송해도 충돌이 발생하지 않는다.&lt;/li&gt;
+&lt;li&gt;스위치&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;충돌 도메인(collision domain)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;충돌이 발생할 때 그 영향이 미치는 범위이다.&lt;/li&gt;
+&lt;li&gt;허브는 접속되어 있는 모든 컴퓨터가 충돌 도메인이 된다.&lt;/li&gt;
+&lt;li&gt;스위치는 충돌 도메인이 좁으므로 네트워크가 지연되지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ARP(Address Resolution Protocol)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크 계층과 데이터 링크 계층 주소 사이의 변환을 담당하는 프로토콜이다.&lt;/li&gt;
+&lt;li&gt;목적지 컴퓨터의 &lt;strong&gt;IP주소를 이용해서 MAC 주소를 찾는다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;출발지 컴퓨터가 목적지 컴퓨터의 MAC 주소를 모르면, 네트워크에 브로드캐스트 하고(ARP 요청)&lt;/li&gt;
+&lt;li&gt;지정된 IP주소를 갖은 컴퓨터는 MAC 주소를 응답으로 보낸다.(ARP 응답)&lt;/li&gt;
+&lt;li&gt;출발지 컴퓨터는 얻은 MAC 주소와 IP 주소의 매핑 정보를 메모리에 보관한다. (ARP 테이블)&lt;/li&gt;
+&lt;li&gt;일정 시간이 지나면 ARP 캐시를 삭제하고 다시 ARP 요청을 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;이더넷의-종류와-특징&#34;&gt;이더넷의 종류와 특징&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;이더넷 규격 예시: &lt;code&gt;10BASE5&lt;/code&gt;, &lt;code&gt;10BASE-T&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;10&lt;/code&gt;은 Mbps 단위인 통신 속도이다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;BASE&lt;/code&gt;는 BASEBAND라는 전송 방식을 나타낸다.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;5&lt;/code&gt;는 동축케이블의 경우 케이블의 최대 길이를 나타낸 것이며, &lt;code&gt;_T&lt;/code&gt;는 UTP 케이블의 경우 그 종류를 나타낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 3. 물리 계층 : 데이터를 전기 신호로 변환하기</title>
+        <link>https://pepperedpepper.github.io/p/network-03/</link>
+        <pubDate>Wed, 23 Feb 2022 03:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-03/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;물리-계층의-역할과-랜-카드의-구조&#34;&gt;물리 계층의 역할과 랜 카드의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;물리 계층&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;0과 1로 이루어진 비트열을 전기 신호로 바꾼다.&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;전기 신호는 아날로그 신호(전화회선이나 라디오 방송에 사용)와 디지털 신호가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;랜 카드&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;0과 1을 전기 신호로 바꾸는 장치&lt;/strong&gt;를 랜 카드라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;케이블의-종류와-구조&#34;&gt;케이블의 종류와 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;전송 매체란?
+&lt;ul&gt;
+&lt;li&gt;데이터가 흐르는 물리적인 선로이다.&lt;/li&gt;
+&lt;li&gt;(1) 유선
+&lt;ul&gt;
+&lt;li&gt;트위스트 페어 케이블&lt;/li&gt;
+&lt;li&gt;광케이블&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(2) 무선
+&lt;ul&gt;
+&lt;li&gt;라디오파&lt;/li&gt;
+&lt;li&gt;마이크로파&lt;/li&gt;
+&lt;li&gt;적외선&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;트위스트 페어 케이블(twisted pair cable)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;일반적으로 &lt;strong&gt;랜 케이블(LAN cable)&lt;/strong&gt; 이라고 한다.&lt;/li&gt;
+&lt;li&gt;양쪽 끝에는 &lt;strong&gt;RJ-45&lt;/strong&gt;라고 부르는 커넥터가 붙어 있다.&lt;/li&gt;
+&lt;li&gt;(1) &lt;strong&gt;UTP 케이블&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;구리 선 여덟 개를 두 개씩 꼬아 만든 네 쌍의 전선&lt;/li&gt;
+&lt;li&gt;실드(shield; 금속 호일이나 금속 매듭 같은 것)로 보호 되어 있지 않다. 그래서 노이즈의 영향을 받기 쉽다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(2) &lt;strong&gt;STP 케이블&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;두 개씩 꼬아 만든 선을 실드로 보호한 케이블이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;랜 케이블의 종류
+&lt;ul&gt;
+&lt;li&gt;모두 1번, 2번, 3번, 6번만을 사용한다.&lt;/li&gt;
+&lt;li&gt;(1) &lt;strong&gt;다이렉트 케이블(direct cable)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;구리 선 여덟 개를 같은 순서로 커넥터에 연결한 케이블이다.&lt;/li&gt;
+&lt;li&gt;컴퓨터와 스위치를 연결할 때 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(2) &lt;strong&gt;크로스 케이블(cross cable)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;1번과 2번을 3번과 6번에 연결한 케이블이다.&lt;/li&gt;
+&lt;li&gt;컴퓨터 간에 직접 랜 케이블로 연결할 때 사용한다.
+&lt;ul&gt;
+&lt;li&gt;양쪽 컴퓨터 모두 1번, 2번을 사용하므로, 충돌이 나지 않게 교차시킨 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;리피터와-허브의-구조&#34;&gt;리피터와 허브의 구조&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/03-01-repeater.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;리피터&#34;
+	
+	
+&gt;
+&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/03-02-hub.jpeg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;허브&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;리피터(repeater)&lt;/strong&gt;&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;전기 신호를 &lt;strong&gt;정형(일그러진 전기 신호를 복원)하고 증폭하는&lt;/strong&gt; 기능을 가진 네트워크 중계 장비이다.&lt;/li&gt;
+&lt;li&gt;요즘은 사용하지 않는다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;허브(hub)&lt;/strong&gt;&lt;/span&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;가까운 거리의 장비들을 케이블을 사용해서 연결하여 LAN을 구성하는 장치&lt;/strong&gt;이다.&lt;/li&gt;
+&lt;li&gt;포트를 여러 개 가지고 있어서, 컴퓨터를 여러 대 연결할 수 있다.&lt;/li&gt;
+&lt;li&gt;리피터와 마찬가지로, 전기 신호를 정형하고 증폭하는 기능을 한다.&lt;/li&gt;
+&lt;li&gt;스스로 판단하지 않고, 전기 신호를 모든 포트로 보내기 때문에 &lt;strong&gt;더미 허브(dummy hub)&lt;/strong&gt; 라고 불리기도 한다. 이 대책으로 나온 것이 스위치(switch)이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 2. 네트워크의 기본 규칙</title>
+        <link>https://pepperedpepper.github.io/p/network-02/</link>
+        <pubDate>Wed, 23 Feb 2022 02:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-02/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;osi-모델과-tcpip-모델&#34;&gt;OSI 모델과 TCP/IP 모델&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;프로토콜(protocol)이란?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;네트워크에서 문제없이 통신하기 위해 지켜야하는 규칙이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/02-01-osi.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;OSI 모델&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;OSI(Open System Interconnection) 모델이란?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;ISO(International Organization for Standardization; 국제표준화기구)에서 제정한 것이다.&lt;/li&gt;
+&lt;li&gt;네트워크에서 데이터를 주고받기 위한 표준 규격이다.&lt;/li&gt;
+&lt;li&gt;각 계층은 독립적이라서 데이터가 전달되는 동안에 다른 계층의 영향을 받지 않는다.&lt;/li&gt;
+&lt;li&gt;데이터를 전송하는 쪽(송신 측)은 상위 계층에서 하위 계층으로 데이터를 전달하고, 데이터를 받는 쪽(수신 측)은 하위 계층에서 상위 계층으로 각 계층을 통해 전달된 데이터를 받게 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/02-02-osiTcp.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;OSI 모델과 TCP/IP 모델&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;TCP/IP 모델이란?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;OSI 모델의 7계층을 4계층으로 표현한 것으로, 현재 사용되고 있는 모델이다.&lt;/li&gt;
+&lt;li&gt;OSI가 이론적 표준이라면 TCP/IP는 실무적 표준이라고 할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;캡슐화와-역캡슐화&#34;&gt;캡슐화와 역캡슐화&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;헤더란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터를 보내려면 데이터 앞부분에 전송하는 데 필요한 정보를 붙여서 다음 계층으로 보내야 한다. 이 정보를 헤더라고 한다.&lt;/li&gt;
+&lt;li&gt;헤더에는 데이터를 전달받을 상대방에 대한 정보도 포함되어 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;캡슐화란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터를 보내는 쪽에서 헤더를 붙여 나가는 것을 캡슐화라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;역캡슐화란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;데이터를 받는 쪽에서 헤더를 하나씩 제거해 나가는 것을 역캡슐화라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;캡슐화와 역캡슐화 흐름의 전체 구성
+&lt;ul&gt;
+&lt;li&gt;세션 계층, 표현 계층은 응용 계층에 포함되어 생각할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/02-03-osiEncapsulation.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;캡슐화와 역캡슐화&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:center&#34;&gt;계층&lt;/th&gt;
+&lt;th style=&#34;text-align:right&#34;&gt;데이터 송신 측&lt;/th&gt;
+&lt;th style=&#34;text-align:right&#34;&gt;데이터 수신 측&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;응용 계층&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;데이터&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;데이터&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;전송 계층&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;헤더 → 데이터&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;헤더 ← 데이터&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;네트워크 계층&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;헤더 → 혜더-데이터&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;헤더 ← 혜더-데이터&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;데이터 링크 계층&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;헤더 → 헤더-헤더-데이터 ← 트레일러&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;헤더 ← 헤더-헤더-데이터 → 트레일러&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:center&#34;&gt;물리 계층&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;전기 신호로 전송된다&lt;/td&gt;
+&lt;td style=&#34;text-align:right&#34;&gt;도착한다&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;VPN(Virtual Private Network; 가상 사설망)이란?&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;회사 등에서 내용을 바깥 사람에게 드러내지 않고 통신할 목적으로 쓰이는 사설 통신망이다.&lt;/li&gt;
+&lt;li&gt;거점 간을 연결하여 통신하거나, 외부에서 인터넷으로 사내에 접속할 때 쓰인다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>[Network] Chapter 1. 네트워크 기초 지식</title>
+        <link>https://pepperedpepper.github.io/p/network-01/</link>
+        <pubDate>Wed, 23 Feb 2022 01:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/network-01/</guid>
+        <description>&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;네트워크의-구조&#34;&gt;네트워크의 구조&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;네트워크란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;컴퓨터 간 연결으로 서로 데이터(정보)를 주고 받을 수 있는 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;인터넷이란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;전 세계의 큰 네트워크부터 작은 네트워크까지를 연결하는 거대한 네트워크이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;패킷(packet)이란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;컴퓨터 간에 데이터를 주고받을 때, 네트워크를 통해 전송되는 데이터의 작은 조각이다.&lt;/li&gt;
+&lt;li&gt;큰 데이터를 보내면 네트워크의 대역폭을 너무 많이 차지해서 다른 패킷의 흐름을 막을 위험이 있기 때문에 작게 나눠서 보낸다.&lt;/li&gt;
+&lt;li&gt;여러 조각으로 나뉜 패킷은 순서 없이 제각각 도착한다. 그래서 원래 순서를 알기 위해 번호를 붙여서 보낸다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;정보의-양을-나타내는-단위&#34;&gt;정보의 양을 나타내는 단위&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;디지털 데이터란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0과 1의 집합이다.&lt;/li&gt;
+&lt;li&gt;비트(bit)가 최소 단위이며, 비트가 여덟 개 모이면 바이트(byte)이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;문자 코드(character code)란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0과 1만으로 문자를 표현할 수 있도록, 숫자와 문자의 대응표를 만들어 둔 것이다.&lt;/li&gt;
+&lt;li&gt;대표적으로 ASCII 코드가 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크에 데이터를 전송할 때는 비트 정보를 &lt;strong&gt;전기 신호&lt;/strong&gt;로 변환해서 전송된다.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;lan과-wan&#34;&gt;LAN과 WAN&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;네트워크는 접속할 수 있는 범위에 따라 크게 두 가지 종류로 나눌 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(1) &lt;strong&gt;LAN&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;건물 안이나 특정 지역을 범위로 하는 네트워크이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;(2) &lt;strong&gt;WAN&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;지리적으로 넓은 범위에 구축된 네트워크이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;인터넷 서비스 제공자(ISP)&lt;/strong&gt; 가 제공하는 서비스를 사용하여 구축된 네트워크를 말한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;인터넷 서비스 제공자(ISP)란?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;인터넷 상용 서비스 사업을 하고 있는 KT, SKT, U+같은 사업자를 말한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;집에서의-lan&#34;&gt;집에서의 LAN&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;집에서 인터넷을 쓰려면 인터넷 서비스 제공자와 인터넷 회선을 결정해야 한다.&lt;/li&gt;
+&lt;li&gt;인터넷 서비스 제공자와 네트워크를 연결하기 위해서는 &lt;strong&gt;인터넷 공유기&lt;/strong&gt;가 필요하다.&lt;/li&gt;
+&lt;li&gt;인터넷 공유기를 중심으로 내부 인터넷망을 구성하고 다양한 기기를 유선 혹은 무선으로 연결할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;회사에서의-lan&#34;&gt;회사에서의 LAN&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;집과 다른 점은 &lt;strong&gt;DMZ(Demilitarized Zone)&lt;/strong&gt; 라는 네트워크 영역이 있다는 것이다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;이것은 외부에 공개하기 위한 네트워크이다.&lt;/li&gt;
+&lt;li&gt;서버를 공개하는데 주로 웹 서버, 메일 서버, DNS 서버를 공개한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;서버를 운영하는 방법&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(1) 서버를 사내에 설치한다. → &lt;strong&gt;온프레미스(on-premise)&lt;/strong&gt; 라고 한다.&lt;/li&gt;
+&lt;li&gt;(2) 데이터 센터에 서버를 둔다. → &lt;strong&gt;온프레미스(on-premise)&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;(3) 클라우드에 서버를 둔다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Search</title>
+        <link>https://pepperedpepper.github.io/search/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/search/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
