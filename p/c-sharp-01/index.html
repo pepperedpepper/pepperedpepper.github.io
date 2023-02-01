@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='C# 컴파일 과정 C# 코드를 빌드하면 CIL 이라는 중간 코드(Intermediate Language; 어셈블리 코드의 일종) 를 만들어 낸다. 프로그램 실행시 런타임에 CLR이 이 IL 코드를 읽어서 JIT 컴파일(Just In Time Compile; 적시 컴파일) 방식을 이용해서 Native 코드로 변경한다. JIT 컴파일이란, 매번 실행될 때마다 실시간으로 컴파일을 해서 실행한다는 의미이다. 장점 IL 방식의 가장 큰 장점은 실행 머신 환경 (32/64 bit, x86/AMD 등)에 관계없이 .Net Framework가 설치된 어떤 환경에서도 동일 코드를 실행할 수 있다는 것이다.'>
+<title>[C#] 컴파일 과정</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/c-sharp-01/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[C#] 컴파일 과정'>
+<meta property='og:description' content='C# 컴파일 과정 C# 코드를 빌드하면 CIL 이라는 중간 코드(Intermediate Language; 어셈블리 코드의 일종) 를 만들어 낸다. 프로그램 실행시 런타임에 CLR이 이 IL 코드를 읽어서 JIT 컴파일(Just In Time Compile; 적시 컴파일) 방식을 이용해서 Native 코드로 변경한다. JIT 컴파일이란, 매번 실행될 때마다 실시간으로 컴파일을 해서 실행한다는 의미이다. 장점 IL 방식의 가장 큰 장점은 실행 머신 환경 (32/64 bit, x86/AMD 등)에 관계없이 .Net Framework가 설치된 어떤 환경에서도 동일 코드를 실행할 수 있다는 것이다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/c-sharp-01/'>
+<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C-Sharp' /><meta property='article:published_time' content='2022-04-19T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-19T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[C#] 컴파일 과정">
+<meta name="twitter:description" content="C# 컴파일 과정 C# 코드를 빌드하면 CIL 이라는 중간 코드(Intermediate Language; 어셈블리 코드의 일종) 를 만들어 낸다. 프로그램 실행시 런타임에 CLR이 이 IL 코드를 읽어서 JIT 컴파일(Just In Time Compile; 적시 컴파일) 방식을 이용해서 Native 코드로 변경한다. JIT 컴파일이란, 매번 실행될 때마다 실시간으로 컴파일을 해서 실행한다는 의미이다. 장점 IL 방식의 가장 큰 장점은 실행 머신 환경 (32/64 bit, x86/AMD 등)에 관계없이 .Net Framework가 설치된 어떤 환경에서도 동일 코드를 실행할 수 있다는 것이다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GHXK2NBM48', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#c-컴파일-과정">C# 컴파일 과정</a></li>
+    <li><a href="#net-assembly">.NET Assembly</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/c-sharp/" >
+                C-Sharp
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/c-sharp-01/">[C#] 컴파일 과정</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 19, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p><br /><br /></p>
+<h2 id="c-컴파일-과정">C# 컴파일 과정</h2>
+<p><img src="/post/csharp/images/01-01-clr.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="CLR"
+	
+	
+></p>
+<ul>
+<li>C# 코드를 빌드하면 <strong>CIL 이라는 중간 코드(Intermediate Language; 어셈블리 코드의 일종)</strong> 를 만들어 낸다.</li>
+<li>프로그램 실행시 런타임에 <strong>CLR</strong>이 이 IL 코드를 읽어서 <strong>JIT 컴파일(Just In Time Compile; 적시 컴파일) 방식</strong>을 이용해서 Native 코드로 변경한다.</li>
+<li>JIT 컴파일이란, 매번 실행될 때마다 실시간으로 컴파일을 해서 실행한다는 의미이다.</li>
+</ul>
+<br />
+<ul>
+<li>장점
+<ul>
+<li>IL 방식의 가장 큰 장점은 <strong>실행 머신 환경 (32/64 bit, x86/AMD 등)에 관계없이</strong> .Net Framework가 설치된 어떤 환경에서도 동일 코드를 실행할 수 있다는 것이다.</li>
+</ul>
+</li>
+<li>단점
+<ul>
+<li>IL 방식의 단점은 실행시 어쨌든 IL 코드를 컴파일해야 한다는 것인데, 이는 속도를 저하시키는 원인이 된다.</li>
+<li>.NET에서는 이러한 속도 저하를 최대한 줄이기 위해 프로그램 실행시 전체 IL 코드를 컴파일하는 것이 아니라 호출되는 메서드 단위로 컴파일을 진행한다. 즉 실행 중 어떤 메서드가 호출되면 <strong>그 메서드만 JIT 컴파일러가 Native로 변경하는 것이다.</strong> 따라서 만약 프로그램 실행 전 과정에서 어떤 메서드가 한번도 호출되지 않는다면 그 메서드는 Native 코드로 변경되지 않는다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>이 외에도 CLR은…
+<ul>
+<li>프로그램의 예외가 발생했을 때 이것을 처리하도록 도와준다.</li>
+<li>언어 간의 상속을 지원한다.</li>
+<li>COM과의 상호 운영성을 지원한다.</li>
+<li>자동 메모리 관리 기능인 가비지 컬렉션(Garbage Collection)을 제공한다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="net-assembly">.NET Assembly</h2>
+<ul>
+<li>어셈블리란 버전 관리되고 배포되는 프로그램의 단위이다.</li>
+<li>실행 파일(<em>.exe</em>) 또는 동적 연결 라이브러리(<em>.dll</em>) 파일의 형태를 가진다.</li>
+<li>응용 프로그램 하나에서만 사용하는 전용 어셈블리와, 여러 프로그램에서 공유하는 공유 어셈블리가 있다.</li>
+</ul>
+<br />
+<p><img src="/post/csharp/images/01-02-assembly.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt=".NET Assembly"
+	
+	
+></p>
+<ul>
+<li>.NET 플랫폼에서는 한 덩어리의 실행 파일을 여러 개의 어셈블리 파일로 나눌 수 있다. 따라서 바이너리 파일이 하나인 어셈블리(단일 파일 어셈블리)가 될 수도 있고, 여러 바이너리 파일이 모여서 다중 파일 어셈블리가 될 수도 있다.</li>
+</ul>
+<br />
+<p><img src="/post/csharp/images/01-03-dotnetAssembly.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt=".NET Assembly"
+	
+	
+></p>
+<ul>
+<li>다중 파일 어셈블리에서, 컴파일 완료된 바이너리 파일의 각각을 모듈이라고 한다.
+<ul>
+<li>이때 어셈블리에 관한 정보를 가지고 있는 Manifest를 가진 모듈을 주모듈, 아닌 경우를 부모듈이라고 한다.</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>구성요소</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Manifest</strong></td>
+<td>어셈블리의 버전 요구 사항과 보안 ID를 지정하는 데 필요한 모든 메타데이터와 어셈블리의 범위를 정의한다. 리소스나 다른 모듈에 대한 참조를 확인하는 데 필요한 모든 메타데이터를 포함한다. 즉, 어셈블리 내의 모든 모듈의 참조 정보를 갖는 메타데이터이다.</td>
+</tr>
+<tr>
+<td><strong>Type Metadata</strong></td>
+<td>어셈블리 내에서 사용되는 모든 타입에 대한 구체적인 정보를 가지고 있다. <br /> 이것 덕분에 리플렉션(객체의 클래스 타입, 메서드, 프로퍼티 등의 메타 정보를 런타임 중에 알아내는 기능)이 가능하다</td>
+</tr>
+<tr>
+<td><strong>CIL Code</strong></td>
+<td>공통 언어 기반과 닷넷 프레임워크에서 인간이 이해할 수 있는 가장 낮은 수준의 프로그래밍 언어이다. 객체 지향 어셈블리어이며, 완전한 스택기반이다. CLR이 런타임에 이 코드를 Native 코드로 변경한다.</td>
+</tr>
+</tbody>
+</table></div>
+<p><br /><br /></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a class="link" href="https://docs.microsoft.com/ko-kr/dotnet/standard/assembly/"  target="_blank" rel="noopener"
+    >https://docs.microsoft.com/ko-kr/dotnet/standard/assembly/</a></li>
+<li><a class="link" href="https://blog.shovelman.dev/634"  target="_blank" rel="noopener"
+    >https://blog.shovelman.dev/634</a></li>
+<li><a class="link" href="https://rito15.github.io/posts/cs-dotnet-compile/"  target="_blank" rel="noopener"
+    >https://rito15.github.io/posts/cs-dotnet-compile/</a></li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/c-sharp/">C-Sharp</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/c-sharp-05/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[C#] 가비지 컬렉션</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-sharp-04/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[C#] 컬렉션</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-sharp-03/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[C#] virtual 메서드</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/c-sharp-02/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[C#] 객체와 메모리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/this-is-c-sharp-19/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[This is C#] Chapter 19. 스레드와 태스크</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

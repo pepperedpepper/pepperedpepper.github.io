@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='전송 계층의 역할 전송 계층에서는 목적지에 신뢰할 수 있는 데이터를 전달하기위해 오류를 점검한다. 연결형 통신 신뢰할 수 있고 정확한 데이터를 전달하는 통신이다. 상대편과 확인해 가면서 통신한다. TCP(Transmission Control Protocol) 비연결형 통신 효율적으로 데이터를 전달하는 통신이다. 상대편을 확인하지 않고 일방적으로 데이터를 전송한다. 예를 들면, 동영상을 볼 때 비연결형 통신을 사용한다. UDP(User Datagram Protocol) TCP의 구조 전송 계층에서는 캡슐화할 때 TCP 헤더를 붙인다. TCP 헤더가 추가되어 만들어진 것을 세그먼트(segment) 라고 한다. 3-way handshake 데이터를 전송하려면 먼저 연결(connection) 이라는 가장의 독점 통신로를 확보해야한다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
+전송 계층의 역할 전송 계층에서는 목적지에 신뢰할 수 있는 데이터를 전달하기위해 오류를 점검한다. 연결형 통신 신뢰할 수 있고 정확한 데이터를 전달하는 통신이다. 상대편과 확인해 가면서 통신한다. TCP(Transmission Control Protocol) 비연결형 통신 효율적으로 데이터를 전달하는 통신이다. 상대편을 확인하지 않고 일방적으로 데이터를 전송한다. 예를 들면, 동영상을 볼 때 비연결형 통신을 사용한다. UDP(User Datagram Protocol) TCP의 구조 전송 계층에서는 캡슐화할 때 TCP 헤더를 붙인다. TCP 헤더가 추가되어 만들어진 것을 세그먼트(segment) 라고 한다.'>
 <title>[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/network-06/'>
 
-<link rel="stylesheet" href="/scss/style.min.5be32ca3f6e1a997c75795c4359147cc6d4fbd34948c0acd51e31d237033978a.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
-     crossorigin="anonymous"></script><meta property='og:title' content='[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기'>
-<meta property='og:description' content='전송 계층의 역할 전송 계층에서는 목적지에 신뢰할 수 있는 데이터를 전달하기위해 오류를 점검한다. 연결형 통신 신뢰할 수 있고 정확한 데이터를 전달하는 통신이다. 상대편과 확인해 가면서 통신한다. TCP(Transmission Control Protocol) 비연결형 통신 효율적으로 데이터를 전달하는 통신이다. 상대편을 확인하지 않고 일방적으로 데이터를 전송한다. 예를 들면, 동영상을 볼 때 비연결형 통신을 사용한다. UDP(User Datagram Protocol) TCP의 구조 전송 계층에서는 캡슐화할 때 TCP 헤더를 붙인다. TCP 헤더가 추가되어 만들어진 것을 세그먼트(segment) 라고 한다. 3-way handshake 데이터를 전송하려면 먼저 연결(connection) 이라는 가장의 독점 통신로를 확보해야한다.'>
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기'>
+<meta property='og:description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
+전송 계층의 역할 전송 계층에서는 목적지에 신뢰할 수 있는 데이터를 전달하기위해 오류를 점검한다. 연결형 통신 신뢰할 수 있고 정확한 데이터를 전달하는 통신이다. 상대편과 확인해 가면서 통신한다. TCP(Transmission Control Protocol) 비연결형 통신 효율적으로 데이터를 전달하는 통신이다. 상대편을 확인하지 않고 일방적으로 데이터를 전송한다. 예를 들면, 동영상을 볼 때 비연결형 통신을 사용한다. UDP(User Datagram Protocol) TCP의 구조 전송 계층에서는 캡슐화할 때 TCP 헤더를 붙인다. TCP 헤더가 추가되어 만들어진 것을 세그먼트(segment) 라고 한다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/network-06/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-25T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-25T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Network] Chapter 6. 전송 계층 : 신뢰할 수 있는 데이터 전송하기">
-<meta name="twitter:description" content="전송 계층의 역할 전송 계층에서는 목적지에 신뢰할 수 있는 데이터를 전달하기위해 오류를 점검한다. 연결형 통신 신뢰할 수 있고 정확한 데이터를 전달하는 통신이다. 상대편과 확인해 가면서 통신한다. TCP(Transmission Control Protocol) 비연결형 통신 효율적으로 데이터를 전달하는 통신이다. 상대편을 확인하지 않고 일방적으로 데이터를 전송한다. 예를 들면, 동영상을 볼 때 비연결형 통신을 사용한다. UDP(User Datagram Protocol) TCP의 구조 전송 계층에서는 캡슐화할 때 TCP 헤더를 붙인다. TCP 헤더가 추가되어 만들어진 것을 세그먼트(segment) 라고 한다. 3-way handshake 데이터를 전송하려면 먼저 연결(connection) 이라는 가장의 독점 통신로를 확보해야한다.">
+<meta name="twitter:description" content="모두의 네트워크 책을 읽고 공부한 노트입니다.
+전송 계층의 역할 전송 계층에서는 목적지에 신뢰할 수 있는 데이터를 전달하기위해 오류를 점검한다. 연결형 통신 신뢰할 수 있고 정확한 데이터를 전달하는 통신이다. 상대편과 확인해 가면서 통신한다. TCP(Transmission Control Protocol) 비연결형 통신 효율적으로 데이터를 전달하는 통신이다. 상대편을 확인하지 않고 일방적으로 데이터를 전송한다. 예를 들면, 동영상을 볼 때 비연결형 통신을 사용한다. UDP(User Datagram Protocol) TCP의 구조 전송 계층에서는 캡슐화할 때 TCP 헤더를 붙인다. TCP 헤더가 추가되어 만들어진 것을 세그먼트(segment) 라고 한다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
@@ -100,28 +104,29 @@ if (!doNotTrack) {
                     </a>
                 </li>
             
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
 </svg>
 
 
 
-                
-                <span>Archives</span>
-            </a>
-        </li>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
         
         
         <li >
@@ -139,6 +144,132 @@ if (!doNotTrack) {
 
                 
                 <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
             </a>
         </li>
         
@@ -256,11 +387,15 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <hr>
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/61794014"  target="_blank" rel="noopener"
+    >모두의 네트워크</a> 책을 읽고 공부한 노트입니다.</p>
+</div>
+<hr>
 <p><br /><br /></p>
 <h2 id="전송-계층의-역할">전송 계층의 역할</h2>
 <ul>
-<li>전송 계층에서는 목적지에 <span style='background-color: #c293d8'><strong>신뢰할 수 있는</strong></span> 데이터를 전달하기위해 오류를 점검한다.</li>
+<li>전송 계층에서는 목적지에 <mark style="background-color: lightblue"><strong>신뢰할 수 있는</strong></mark> 데이터를 전달하기위해 오류를 점검한다.</li>
 </ul>
 <br />
 <ul>
@@ -313,7 +448,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>3-way handshake</strong>
 <ul>
-<li>데이터를 전송하려면 먼저 <span style='background-color: #c293d8'><strong>연결(connection)</strong></span> 이라는 가장의 독점 통신로를 확보해야한다.</li>
+<li>데이터를 전송하려면 먼저 <mark style="background-color: lightblue"><strong>연결(connection)</strong></mark> 이라는 가장의 독점 통신로를 확보해야한다.</li>
 <li>연결을 확립하기 위해서 패킷 요청을 세 번 교환하는 것을 3-way handshake라고 한다.</li>
 <li>연결요청 <code>SYN</code>과 확인응답 <code>ACK</code>를 사용해서 연결은 확립한다.</li>
 </ul>
@@ -358,7 +493,7 @@ if (!doNotTrack) {
 </ul>
 <br />
 <ul>
-<li><span style='background-color: #c293d8'><strong>재전송 제어</strong></span>
+<li><mark style="background-color: lightblue"><strong>재전송 제어</strong></mark>
 <ul>
 <li>데이터가 항상 올바르게 전달되는 것은 아니므로, 일렬번호와 확인응답 번호를 사용해서 데이터가 손상되거나 유실된 경우에 데이터를 재전송하게 되어있다.</li>
 </ul>
@@ -377,7 +512,7 @@ if (!doNotTrack) {
 <h2 id="포트-번호의-구조">포트 번호의 구조</h2>
 <ul>
 <li>
-<p>전송 계층에서는 또한 전송된 데이터를 <span style='background-color: #c293d8'><strong>어떤 애플리케이션에 전송해야</strong></span> 하는지도 알려준다.</p>
+<p>전송 계층에서는 또한 전송된 데이터를 <mark style="background-color: lightblue"><strong>어떤 애플리케이션에 전송해야</strong></mark> 하는지도 알려준다.</p>
 </li>
 <li>
 <p>목적지가 어떤 애플리케이션인지 구분하기 위해서는 (TCP 헤더에서) <strong>출발지 포트 번호(source port number)</strong> 와 <strong>목적지 포트 번호(destination port number)</strong> 가 필요하다.</p>
@@ -443,7 +578,7 @@ if (!doNotTrack) {
 <h2 id="udp의-구조">UDP의 구조</h2>
 <ul>
 <li>TCP와 달리, UDP는 효율성을 중요하게 생각하는 비연결형 통신이라서 TCP처럼 확인작업을 일일이 하지 않는다.</li>
-<li>또한 UDP를 사용하면 LAN에 있는 컴퓨터나 네트워크 장비에 데이터를 일괄로 보내는 <strong>브로드캐스트(broadcast)</strong> 를 할 수 있다. 
+<li>또한 UDP를 사용하면 LAN에 있는 컴퓨터나 네트워크 장비에 데이터를 일괄로 보내는 <strong>브로드캐스트(broadcast)</strong> 를 할 수 있다.
 <br /></li>
 </ul>
 <p><img src="/post/network/images/06-04-udpHeader.jpeg"
@@ -582,6 +717,54 @@ if (!doNotTrack) {
      
     
         
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
     
 
     <footer class="site-footer">

@@ -12,7 +12,11 @@
         <pubDate>Sat, 26 Feb 2022 02:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-09/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;무선-랜의-구조&#34;&gt;무선 랜의 구조&lt;/h2&gt;
 &lt;ul&gt;
@@ -125,7 +129,11 @@
         <pubDate>Sat, 26 Feb 2022 01:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-08/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;랜-카드에서의-데이터-전달과-처리&#34;&gt;랜 카드에서의 데이터 전달과 처리&lt;/h2&gt;
 &lt;ul&gt;
@@ -280,11 +288,15 @@
         <pubDate>Fri, 25 Feb 2022 02:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-07/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;응용-계층의-역할&#34;&gt;응용 계층의 역할&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;응용 계층은 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;애플리케이션과 데이터를 주고받기 위해&lt;/strong&gt;&lt;/span&gt; 필요하다.
+&lt;li&gt;응용 계층은 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;애플리케이션과 데이터를 주고받기 위해&lt;/strong&gt;&lt;/mark&gt; 필요하다.
 &lt;ul&gt;
 &lt;li&gt;클라이언트의 요청을 서버에 전달하기 위해서 서버가 이해할 수 있는 데이터로 변환한 후 전송 계층으로 전달한다.&lt;/li&gt;
 &lt;li&gt;클라이언트 측 애플리케이션이 서버 측 애플리케이션과 서로 통신하려면 응용 계층의 프로토콜이 필요하다.&lt;/li&gt;
@@ -423,11 +435,15 @@
         <pubDate>Fri, 25 Feb 2022 01:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-06/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;전송-계층의-역할&#34;&gt;전송 계층의 역할&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;전송 계층에서는 목적지에 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;신뢰할 수 있는&lt;/strong&gt;&lt;/span&gt; 데이터를 전달하기위해 오류를 점검한다.&lt;/li&gt;
+&lt;li&gt;전송 계층에서는 목적지에 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;신뢰할 수 있는&lt;/strong&gt;&lt;/mark&gt; 데이터를 전달하기위해 오류를 점검한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
@@ -480,7 +496,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;3-way handshake&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;데이터를 전송하려면 먼저 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;연결(connection)&lt;/strong&gt;&lt;/span&gt; 이라는 가장의 독점 통신로를 확보해야한다.&lt;/li&gt;
+&lt;li&gt;데이터를 전송하려면 먼저 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;연결(connection)&lt;/strong&gt;&lt;/mark&gt; 이라는 가장의 독점 통신로를 확보해야한다.&lt;/li&gt;
 &lt;li&gt;연결을 확립하기 위해서 패킷 요청을 세 번 교환하는 것을 3-way handshake라고 한다.&lt;/li&gt;
 &lt;li&gt;연결요청 &lt;code&gt;SYN&lt;/code&gt;과 확인응답 &lt;code&gt;ACK&lt;/code&gt;를 사용해서 연결은 확립한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -525,7 +541,7 @@
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;재전송 제어&lt;/strong&gt;&lt;/span&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;재전송 제어&lt;/strong&gt;&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;데이터가 항상 올바르게 전달되는 것은 아니므로, 일렬번호와 확인응답 번호를 사용해서 데이터가 손상되거나 유실된 경우에 데이터를 재전송하게 되어있다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -544,7 +560,7 @@
 &lt;h2 id=&#34;포트-번호의-구조&#34;&gt;포트 번호의 구조&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;전송 계층에서는 또한 전송된 데이터를 &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;어떤 애플리케이션에 전송해야&lt;/strong&gt;&lt;/span&gt; 하는지도 알려준다.&lt;/p&gt;
+&lt;p&gt;전송 계층에서는 또한 전송된 데이터를 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;어떤 애플리케이션에 전송해야&lt;/strong&gt;&lt;/mark&gt; 하는지도 알려준다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;목적지가 어떤 애플리케이션인지 구분하기 위해서는 (TCP 헤더에서) &lt;strong&gt;출발지 포트 번호(source port number)&lt;/strong&gt; 와 &lt;strong&gt;목적지 포트 번호(destination port number)&lt;/strong&gt; 가 필요하다.&lt;/p&gt;
@@ -610,7 +626,7 @@
 &lt;h2 id=&#34;udp의-구조&#34;&gt;UDP의 구조&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;TCP와 달리, UDP는 효율성을 중요하게 생각하는 비연결형 통신이라서 TCP처럼 확인작업을 일일이 하지 않는다.&lt;/li&gt;
-&lt;li&gt;또한 UDP를 사용하면 LAN에 있는 컴퓨터나 네트워크 장비에 데이터를 일괄로 보내는 &lt;strong&gt;브로드캐스트(broadcast)&lt;/strong&gt; 를 할 수 있다. 
+&lt;li&gt;또한 UDP를 사용하면 LAN에 있는 컴퓨터나 네트워크 장비에 데이터를 일괄로 보내는 &lt;strong&gt;브로드캐스트(broadcast)&lt;/strong&gt; 를 할 수 있다.
 &lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/06-04-udpHeader.jpeg&#34;
@@ -634,16 +650,20 @@
         <pubDate>Thu, 24 Feb 2022 02:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-05/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;네트워크-계층의-역할&#34;&gt;네트워크 계층의 역할&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;데이터 링크 계층에서는 이더넷 규칙을 기반으로 헤서 같은 네트워크에 있는 컴퓨터로 데이터를 전송할 수 있다면,&lt;/li&gt;
-&lt;li&gt;네트워크 계층에서는 &lt;span style=&#39;background-color: #c293d8&#39;&gt;서로 다른 네트워크에&lt;/span&gt; 있는 목적지로 데이터를 전송할 수 있다.&lt;/li&gt;
+&lt;li&gt;네트워크 계층에서는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;서로 다른 네트워크에&lt;/mark&gt; 있는 목적지로 데이터를 전송할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;라우터(Router)&lt;/strong&gt;&lt;/span&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;라우터(Router)&lt;/strong&gt;&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 &lt;strong&gt;어떤 경로로 가는 것이 좋은지(라우팅; routing)&lt;/strong&gt; 를 알려주는 기능을 한다.&lt;/li&gt;
 &lt;li&gt;라우팅 테이블(routing table)이 있어서 경로 정보를 등록하고 관리한다.&lt;/li&gt;
@@ -653,7 +673,7 @@
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;목적지의 주소를 아는 방법? &lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;IP(Internet Protocol) 주소&lt;/strong&gt;&lt;/span&gt;
+&lt;li&gt;목적지의 주소를 아는 방법? &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;IP(Internet Protocol) 주소&lt;/strong&gt;&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;LAN에서는 MAC 주소만으로 통신할 수 있지만, 다른 네트워크에는 데이터를 보낼 수 없다.&lt;/li&gt;
 &lt;li&gt;그래서 IP가 필요하다. IP는 어떤 네트워크의 어떤 컴퓨터인지를 구분할 수 있도록 하는 주소이다.&lt;/li&gt;
@@ -880,7 +900,11 @@
         <pubDate>Thu, 24 Feb 2022 01:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-04/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;데이터-링크-계층의-역할과-이더넷&#34;&gt;데이터 링크 계층의 역할과 이더넷&lt;/h2&gt;
 &lt;ul&gt;
@@ -954,7 +978,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;스위치(switch)&lt;/strong&gt;&lt;/span&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;스위치(switch)&lt;/strong&gt;&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;허브와 마찬가지로 여러 기기를 하나로 연결하는 장치이다. 다른 점은 원하는 목적지에만 신호를 보낸다는 것이다.&lt;/li&gt;
 &lt;li&gt;내부에 &lt;strong&gt;MAC 주소 테이블&lt;/strong&gt;을 가지고 있어서, 포트 번호와 거기에 연결되어 있는 컴퓨터의 MAC 주소가 등록되어 있다.&lt;/li&gt;
@@ -1025,14 +1049,18 @@
         <pubDate>Wed, 23 Feb 2022 03:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-03/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;물리-계층의-역할과-랜-카드의-구조&#34;&gt;물리 계층의 역할과 랜 카드의 구조&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;물리 계층&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;0과 1로 이루어진 비트열을 전기 신호로 바꾼다.&lt;/span&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;0과 1로 이루어진 비트열을 전기 신호로 바꾼다.&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;전기 신호는 아날로그 신호(전화회선이나 라디오 방송에 사용)와 디지털 신호가 있다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1040,7 +1068,7 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;랜 카드&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;랜 카드&lt;/strong&gt;&lt;/mark&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;0과 1을 전기 신호로 바꾸는 장치&lt;/strong&gt;를 랜 카드라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1135,13 +1163,13 @@
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;리피터(repeater)&lt;/strong&gt;&lt;/span&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;리피터(repeater)&lt;/strong&gt;&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;전기 신호를 &lt;strong&gt;정형(일그러진 전기 신호를 복원)하고 증폭하는&lt;/strong&gt; 기능을 가진 네트워크 중계 장비이다.&lt;/li&gt;
 &lt;li&gt;요즘은 사용하지 않는다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;span style=&#39;background-color: #c293d8&#39;&gt;&lt;strong&gt;허브(hub)&lt;/strong&gt;&lt;/span&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;허브(hub)&lt;/strong&gt;&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;가까운 거리의 장비들을 케이블을 사용해서 연결하여 LAN을 구성하는 장치&lt;/strong&gt;이다.&lt;/li&gt;
 &lt;li&gt;포트를 여러 개 가지고 있어서, 컴퓨터를 여러 대 연결할 수 있다.&lt;/li&gt;
@@ -1159,7 +1187,11 @@
         <pubDate>Wed, 23 Feb 2022 02:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-02/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;osi-모델과-tcpip-모델&#34;&gt;OSI 모델과 TCP/IP 모델&lt;/h2&gt;
 &lt;ul&gt;
@@ -1304,7 +1336,11 @@
         <pubDate>Wed, 23 Feb 2022 01:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/p/network-01/</guid>
-        <description>&lt;hr&gt;
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/61794014&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;모두의 네트워크&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;네트워크의-구조&#34;&gt;네트워크의 구조&lt;/h2&gt;
 &lt;ul&gt;

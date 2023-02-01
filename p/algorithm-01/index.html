@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='배열 해시 테이블 키(key) 를 값(value) 에 대응시킨 자료구조로써 매우 빠르게 데이터를 저장, 삭제, 검색할 수 있다. 각각의 key에 해시 함수(hash function) 를 적용해서 고유한 값을 얻고, 그 값을 이용해서 value를 저장, 삭제, 검색한다. 대표적인 해시 함수들 $k$ : 키 $n$ : 테이블 크기 $A$ : $0$ ~ $1$ 사이의 실수 해시 함수명 고유한 값을 얻는 법 Division Method $h(k) = k \mod n$ Multiplication Method $h(k) = (kA \mod 1) × m$ Digit Folding key 문자열을 ASCII 코드로 바꾸고 값을 합한 것 Univeral Hashing 해시 함수를 무작위로 선택하는 것 충돌이란?'>
+<title>[Algorithm] 자료구조 - 배열, 문자열, 연결리스트, 스택, 큐</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/algorithm-01/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[Algorithm] 자료구조 - 배열, 문자열, 연결리스트, 스택, 큐'>
+<meta property='og:description' content='배열 해시 테이블 키(key) 를 값(value) 에 대응시킨 자료구조로써 매우 빠르게 데이터를 저장, 삭제, 검색할 수 있다. 각각의 key에 해시 함수(hash function) 를 적용해서 고유한 값을 얻고, 그 값을 이용해서 value를 저장, 삭제, 검색한다. 대표적인 해시 함수들 $k$ : 키 $n$ : 테이블 크기 $A$ : $0$ ~ $1$ 사이의 실수 해시 함수명 고유한 값을 얻는 법 Division Method $h(k) = k \mod n$ Multiplication Method $h(k) = (kA \mod 1) × m$ Digit Folding key 문자열을 ASCII 코드로 바꾸고 값을 합한 것 Univeral Hashing 해시 함수를 무작위로 선택하는 것 충돌이란?'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/algorithm-01/'>
+<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Algorithm' /><meta property='article:published_time' content='2022-11-05T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-11-05T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Algorithm] 자료구조 - 배열, 문자열, 연결리스트, 스택, 큐">
+<meta name="twitter:description" content="배열 해시 테이블 키(key) 를 값(value) 에 대응시킨 자료구조로써 매우 빠르게 데이터를 저장, 삭제, 검색할 수 있다. 각각의 key에 해시 함수(hash function) 를 적용해서 고유한 값을 얻고, 그 값을 이용해서 value를 저장, 삭제, 검색한다. 대표적인 해시 함수들 $k$ : 키 $n$ : 테이블 크기 $A$ : $0$ ~ $1$ 사이의 실수 해시 함수명 고유한 값을 얻는 법 Division Method $h(k) = k \mod n$ Multiplication Method $h(k) = (kA \mod 1) × m$ Digit Folding key 문자열을 ASCII 코드로 바꾸고 값을 합한 것 Univeral Hashing 해시 함수를 무작위로 선택하는 것 충돌이란?">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GHXK2NBM48', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#배열">배열</a>
+      <ul>
+        <li><a href="#해시-테이블">해시 테이블</a></li>
+        <li><a href="#가변-크기-배열">가변 크기 배열</a></li>
+      </ul>
+    </li>
+    <li><a href="#문자열">문자열</a>
+      <ul>
+        <li><a href="#c의-stringbuilder">C#의 StringBuilder</a></li>
+      </ul>
+    </li>
+    <li><a href="#연결리스트">연결리스트</a></li>
+    <li><a href="#스택과-큐">스택과 큐</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/algorithm/" >
+                Algorithm
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/algorithm-01/">[Algorithm] 자료구조 - 배열, 문자열, 연결리스트, 스택, 큐</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 05, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p><br /><br /></p>
+<h2 id="배열">배열</h2>
+<h3 id="해시-테이블">해시 테이블</h3>
+<ul>
+<li><strong>키(key)</strong> 를 <strong>값(value)</strong> 에 대응시킨 자료구조로써 매우 빠르게 데이터를 저장, 삭제, 검색할 수 있다.</li>
+<li>각각의 key에 <strong>해시 함수(hash function)</strong> 를 적용해서 고유한 값을 얻고, 그 값을 이용해서 value를 저장, 삭제, 검색한다.</li>
+</ul>
+<br />
+<ul>
+<li>대표적인 해시 함수들
+<ul>
+<li>$k$ : 키</li>
+<li>$n$ : 테이블 크기</li>
+<li>$A$ : $0$ ~ $1$ 사이의 실수</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>해시 함수명</th>
+<th>고유한 값을 얻는 법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Division Method</strong></td>
+<td>$h(k) = k \mod n$</td>
+</tr>
+<tr>
+<td><strong>Multiplication Method</strong></td>
+<td>$h(k) = (kA \mod 1) × m$</td>
+</tr>
+<tr>
+<td><strong>Digit Folding</strong></td>
+<td>key 문자열을 ASCII 코드로 바꾸고 값을 합한 것</td>
+</tr>
+<tr>
+<td><strong>Univeral Hashing</strong></td>
+<td>해시 함수를 무작위로 선택하는 것</td>
+</tr>
+</tbody>
+</table></div>
+<br />
+<ul>
+<li><strong>충돌</strong>이란?
+<ul>
+<li>각기 다른 key의 해시값이 똑같을 때를 말한다.</li>
+</ul>
+</li>
+<li>충돌을 해결할 수 있는 방법들&hellip;</li>
+<li><strong>[ 분리 연결법(Separate Chaining) ]</strong>
+<ul>
+<li>동일한 버킷의 데이터에 대해 자료구조를 활용해 추가 메모리를 사용하여 다음 데이터의 주소를 저장한다.</li>
+<li><strong>(1) 연결 리스트(linked list)를 이용한 체이닝(chaining)</strong>
+<ul>
+<li>최악의 경우 원소를 찾는데, $O(n)$ 시간이 걸린다.</li>
+</ul>
+</li>
+<li><strong>(2) 균형 이진 탐색 트리(balanced binary search tree)를 이용한 체이닝</strong>
+<ul>
+<li>최악의 경우 원소를 찾는데, $O(\log n)$ 시간이 걸린다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>[ 개방 주소법(Open Addressing) ]</strong>
+<ul>
+<li>비어있는 해시 테이블의 공간을 활용하는 방법이다.</li>
+<li><strong>(1) 선형 탐색(Linear Probing)</strong>
+<ul>
+<li>고정폭 만큼씩 이동한다.</li>
+</ul>
+</li>
+<li><strong>(2) 2차 탐색(Quadratic Probing)</strong>
+<ul>
+<li>폭을 제곱으로 늘리며 이동한다. $1^2$ &gt; $2^2$ &gt; $3^2$</li>
+</ul>
+</li>
+<li><strong>(3) 2중 해시(Double Hashing Probing)</strong>
+<ul>
+<li>해시된 값을 한번 더 해싱하여 해시의 규칙성을 없애버리는 방식이다.</li>
+</ul>
+</li>
+<li>단점
+<ul>
+<li>해시 테이블에 담을 수 있는 전체 데이터가 배열의 크기에 제한된다.</li>
+<li>클러스터링(clustering) 문제
+<ul>
+<li>예를 들어 배열의 크기가 100일 때 20~29가 채워져있다면, 다음 수가 인덱스 30으로 갈 확률이 10%나 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>각 언어별 해시 자료구조</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>자료구조</th>
+<th>구현</th>
+<th>정렬</th>
+<th>연속할당</th>
+<th>랜덤접근</th>
+<th>검색/삽입/삭제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C++ <code>map</code></td>
+<td>레드블랙트리</td>
+<td>O</td>
+<td>X</td>
+<td>Via Key</td>
+<td>$O(\log n)$</td>
+</tr>
+<tr>
+<td>C++ <code>unordered_map</code></td>
+<td>해시 테이블</td>
+<td>X</td>
+<td>O</td>
+<td>Via Key</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>C# <code>SortedDictionary</code></td>
+<td>이진탐색트리</td>
+<td>O</td>
+<td>X</td>
+<td>Via Key</td>
+<td>$O(\log n)$</td>
+</tr>
+<tr>
+<td>C# <code>Dictionary</code></td>
+<td>해시 테이블</td>
+<td>X</td>
+<td>O</td>
+<td>Via Key</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table></div>
+<p><br /><br /></p>
+<h3 id="가변-크기-배열">가변 크기 배열</h3>
+<ul>
+<li>할당된 capacity를 넘어서면 <strong>자동으로 2배의 크기를 재할당</strong>한다.</li>
+</ul>
+<br />
+<ul>
+<li>
+<p>C++ <code>vector</code></p>
+<ul>
+<li>멤버 중에 <code>size()</code>는 담긴 데이터의 개수이고, <code>capacity()</code>는 할당된 공간의 개수이다.</li>
+<li><code>resize()</code>는 인자값만큼의 <code>size()</code>로 만든다. 늘릴때는 <code>0</code>으로 채운다. 줄일 때는 원소를 없앤다.</li>
+<li><code>reserve()</code>는 <code>size()</code>는 변하지 않고, <code>capacity()</code>만 인자값만큼 늘린다. 늘리기만 된다.</li>
+</ul>
+</li>
+<li>
+<p>C# <code>List</code></p>
+<ul>
+<li>기존에 배치된 메모리 위치와 크기를 유지한 상태에서 추가적으로 부족한 메모리를 할당받아서 연결하겠지?</li>
+<li>아니다. 해당 크기의 <strong>2배의 메모리 공간을 새로 찾아서 할당</strong>하는 방식이다.</li>
+<li>따라서 이전 공간은 가비지를 발생시킨다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="문자열">문자열</h2>
+<h3 id="c의-stringbuilder">C#의 StringBuilder</h3>
+<ul>
+<li>
+<p>C#의 <code>string</code>은 <strong>불변(Immutable) 객체</strong>이다.</p>
+<ul>
+<li>따라서 새로운 문자열으로 변경, 추가하면 기존 값이 대체되는 것이 아니라, <strong>해당 크기의 다른 공간을 새로 할당</strong>한다.</li>
+<li>이것은 이전 공간의 가비지를 발생시킨다.</li>
+</ul>
+</li>
+<li>
+<p>이에 반해 <strong>가변(Mutable) 객체</strong>인 <code>StringBuilder</code>는</p>
+<ul>
+<li>새로운 문자열으로 변경, 추가하면 <strong>기존 메모리 공간에 값을 변경, 추가</strong>한다.</li>
+<li>따라서 변경이 일어나는 문자열은 <code>StringBuilder</code>를 사용해야 좋겠다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="연결리스트">연결리스트</h2>
+<ul>
+<li>연결리스트의 특징
+<ul>
+<li><strong>랜덤접근이 불가능</strong>하다.
+<ul>
+<li>따라서 특정 인덱스를 상수 시간에 접근할 수 없다. $K$번째 원소를 찾고 있다면, 처음부터 $K$번 루프를 돌아야 한다.</li>
+</ul>
+</li>
+<li><strong>순차접근이 일반 배열보다 느리다.</strong>
+<ul>
+<li>메모리에 순차적으로 원소가 저장되는 배열과 다르게, 연결리스트는 불연속적으로 저장된다.</li>
+<li>따라서 (참조 지역성의 원리에 따라서) 캐시에 원소들이 함께 올라가지 않기 때문에 접근이 느릴 수밖에 없다.</li>
+</ul>
+</li>
+<li>원소를 <strong>추가, 삭제하는 것이 상수 시간에 가능</strong>하다.
+<ul>
+<li>가변 배열처럼 달리 추가, 삭제 후 나머지 원소를 뒤로 밀거나, 앞으로 옮기는 작업이 필요없다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>각 언어별 연결리스트 자료구조</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>자료구조</th>
+<th>구현</th>
+<th>정렬</th>
+<th>연속할당</th>
+<th>랜덤접근</th>
+<th>검색</th>
+<th>삽입/삭제</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C++ <code>list</code></td>
+<td>이중 연결리스트</td>
+<td>User</td>
+<td>X</td>
+<td>X</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>C# <code>LinkedList</code></td>
+<td>이중 연결리스트</td>
+<td>User</td>
+<td>X</td>
+<td>X</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table></div>
+<br />
+<ul>
+<li><strong>Runner 기법</strong>
+<ul>
+<li>연결리스트를 순회할 때 <strong>2개의 포인터</strong>를 동시에 사용하는 기법이다.</li>
+<li>빠른 Runner : 2칸씩 건너뛴다.</li>
+<li>느린 Runner : 1칸씩 건너뛴다.</li>
+<li>빠른 런너가 연결 리스트의 끝에 도달하면, 느린 런너는 연결 리스트의 <strong>중간 지점</strong>을 가리키게 된다.</li>
+<li>여기서부터 값을 비교하거나 뒤집기를 시도하는 등 여러모로 활용할 수 있겠다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="스택과-큐">스택과 큐</h2>
+<ul>
+<li>스택과 큐 비교</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>자료구조</th>
+<th>특징</th>
+<th>정렬</th>
+<th>연속할당</th>
+<th>랜덤접근</th>
+<th>검색</th>
+<th>삽입/삭제</th>
+<th>언어 지원</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>스택</td>
+<td>LIFO</td>
+<td>X</td>
+<td>O</td>
+<td>Only Top</td>
+<td>Top: $O(1)$</td>
+<td>$O(1)$</td>
+<td>C++ <code>stack</code> <br />C# <code>Stack</code></td>
+</tr>
+<tr>
+<td>큐</td>
+<td>FIFO</td>
+<td>X</td>
+<td>O</td>
+<td>Only Front</td>
+<td>Front: $O(1)$</td>
+<td>$O(1)$</td>
+<td>C++ <code>queue</code> <br />C# <code>Queue</code></td>
+</tr>
+</tbody>
+</table></div>
+<br />
+<ul>
+<li><strong>스택</strong>
+<ul>
+<li><strong>DFS(Depth-first search)</strong> 에서 사용한다.</li>
+<li><strong>재귀적(Recursive)</strong> 함수를 호출할 때 사용한다.</li>
+<li>연결리스트로 구현할 수도 있다.</li>
+</ul>
+</li>
+<li><strong>큐</strong>
+<ul>
+<li><strong>BFS(Breadth-first search)</strong> 에서 사용한다.</li>
+<li>컴퓨터 버퍼에서 주로 사용한다. 여러개가 입력이 되었으나 처리를 하지 못할 때, 버퍼(큐)를 만들어 대기 시킨다.</li>
+<li>연결리스트로 구현할 수도 있다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a class="link" href="http://www.yes24.com/Product/Goods/44305533"  target="_blank" rel="noopener"
+    >코딩 인터뷰 완전 분석</a></li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/algorithm/">Algorithm</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/algorithm-06/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 유용한 수학</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-05/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 정렬, 탐색 알고리즘</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-04/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 수학적 개념과 알고리즘</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-03/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 자료구조 - 그래프</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-02/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 자료구조 - 트리</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

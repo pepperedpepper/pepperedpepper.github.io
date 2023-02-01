@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='비트 조작 비트 조작 트릭 0s는 모든 비트가 0인 값이며, 1s는 모든 비트가 1인 값이다. 1 2 3 x ^ 0s = x x &amp;amp; 0s = 0 x | 0s = x x ^ 1s = ~x x &amp;amp; 1s = x x | 1s = 1s x ^ x = 0 x &amp;amp; x = x x | x = x 음수를 나타내기 위한 2의 보수법 보수(Complementary Number) 란?'>
+<title>[Algorithm] 수학적 개념과 알고리즘</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/algorithm-04/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[Algorithm] 수학적 개념과 알고리즘'>
+<meta property='og:description' content='비트 조작 비트 조작 트릭 0s는 모든 비트가 0인 값이며, 1s는 모든 비트가 1인 값이다. 1 2 3 x ^ 0s = x x &amp;amp; 0s = 0 x | 0s = x x ^ 1s = ~x x &amp;amp; 1s = x x | 1s = 1s x ^ x = 0 x &amp;amp; x = x x | x = x 음수를 나타내기 위한 2의 보수법 보수(Complementary Number) 란?'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/algorithm-04/'>
+<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Algorithm' /><meta property='article:published_time' content='2022-11-12T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-11-12T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Algorithm] 수학적 개념과 알고리즘">
+<meta name="twitter:description" content="비트 조작 비트 조작 트릭 0s는 모든 비트가 0인 값이며, 1s는 모든 비트가 1인 값이다. 1 2 3 x ^ 0s = x x &amp;amp; 0s = 0 x | 0s = x x ^ 1s = ~x x &amp;amp; 1s = x x | 1s = 1s x ^ x = 0 x &amp;amp; x = x x | x = x 음수를 나타내기 위한 2의 보수법 보수(Complementary Number) 란?">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GHXK2NBM48', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#비트-조작">비트 조작</a>
+      <ul>
+        <li><a href="#비트-조작-트릭">비트 조작 트릭</a></li>
+        <li><a href="#음수를-나타내기-위한-2의-보수법">음수를 나타내기 위한 2의 보수법</a></li>
+        <li><a href="#논리-우측-시프트와-산술-우측-시프트">논리 우측 시프트와 산술 우측 시프트</a></li>
+        <li><a href="#기본-비트-조작-예시">기본 비트 조작 예시</a></li>
+      </ul>
+    </li>
+    <li><a href="#수학-및-논리-퍼즐">수학 및 논리 퍼즐</a>
+      <ul>
+        <li><a href="#소수">소수</a></li>
+        <li><a href="#확률">확률</a></li>
+      </ul>
+    </li>
+    <li><a href="#재귀와-동적-프로그래밍">재귀와 동적 프로그래밍</a>
+      <ul>
+        <li><a href="#재귀적-해법">재귀적 해법</a></li>
+        <li><a href="#동적-프로그래밍">동적 프로그래밍</a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/algorithm/" >
+                Algorithm
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/algorithm-04/">[Algorithm] 수학적 개념과 알고리즘</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 12, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    9 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<p><br /><br /></p>
+<h2 id="비트-조작">비트 조작</h2>
+<h3 id="비트-조작-트릭">비트 조작 트릭</h3>
+<ul>
+<li><code>0s</code>는 모든 비트가 <code>0</code>인 값이며, <code>1s</code>는 모든 비트가 <code>1</code>인 값이다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">x ^ 0s = x    x &amp; 0s = 0    x | 0s = x
+</span></span><span class="line"><span class="cl">x ^ 1s = ~x   x &amp; 1s = x    x | 1s = 1s
+</span></span><span class="line"><span class="cl">x ^ x  = 0    x &amp; x  = x    x | x  = x
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br /><br /></p>
+<h3 id="음수를-나타내기-위한-2의-보수법">음수를 나타내기 위한 2의 보수법</h3>
+<ul>
+<li>
+<p><strong>보수(Complementary Number)</strong> 란?</p>
+<ul>
+<li>보충을 해주는 수이다.</li>
+</ul>
+</li>
+<li>
+<p><strong>$R$진수에서, $N$에 대한 $R-1$의 보수</strong>란?</p>
+<ul>
+<li>$N$이 $R$진수에서 <strong>해당 자릿수의 최대값</strong>이 되기 위해 얼마를 보충해 주어야 하는 가이다.</li>
+</ul>
+</li>
+<li>
+<p><strong>$R$진수에서, $N$에 대한 $R$의 보수</strong>란?</p>
+<ul>
+<li>$N$이 $R$진수에서 <strong>자릿수를 한 자리 높이기 위헤</strong> 얼마를 보충해 주어야 하는 가이다.</li>
+<li>이것은 <strong>$R-1$의 보수 $+ 1$</strong> 과 같다.</li>
+</ul>
+</li>
+<li>
+<p>예시</p>
+<ul>
+<li>$10$진수에서, $33$에 대한 $9$의 보수는?
+<ul>
+<li>$99 - 33 = 66$이다.</li>
+</ul>
+</li>
+<li>$10$진수에서, $33$에 대한 $10$의 보수는?
+<ul>
+<li>$100 - 33 = 67$이다.</li>
+</ul>
+</li>
+<li>$2$진수에서, <code>1010</code>에 대한 $1$의 보수는?
+<ul>
+<li><code>1111 - 1010 = 0101</code>이다.</li>
+<li>이것은 <code>0</code>과 <code>1</code>의 반전이다.</li>
+</ul>
+</li>
+<li>$2$진수에서, <code>1010</code>에 대한 $2$의 보수는?
+<ul>
+<li><code>10000 - 1010 = 0110</code>이다.</li>
+<li>이것은 $1$의 보수 $+ 1$이다.</li>
+<li>즉, <code>0</code>과 <code>1</code>을 반전 시키고 $1$을 더하면 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>
+<p>컴퓨터에서 음수 양수를 구별 하기위해 <strong>최상위 비트(MSB; Most significant bit)</strong> 를 부호비트로 사용한다.</p>
+<ul>
+<li>$1$은 <code>0001</code>이므로 $-1$는 <code>1001</code>가 되겠다.</li>
+<li>그 둘을 빼면?
+<ul>
+<li>$0$이어야 하는데 <code>1010</code>이 나오는 문제가 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>그러면 $1$의 보수법을 사용해서 음수를 표현하면 어떨까?</p>
+<ul>
+<li><code>0</code>과 <code>1</code>를 반전시켜서 음수를 표현하면 되겠다.</li>
+<li>$1$인 <code>0001</code>과 $-1$인 <code>1110</code>을 더하면?
+<ul>
+<li><code>1111</code>이 나온다.</li>
+<li>$1$의 보수는 $+0$인 <code>0000</code>과 $-0$인 <code>1111</code>의 두 가지 $0$이 존재한다는 문제점이 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>그래서 $2$의 보수법을 사용해서 음수를 표현한다.</p>
+<ul>
+<li><code>0</code>과 <code>1</code>을 바꾼다음 $1$을 더해서 음수를 표현하면 되겠다.</li>
+<li>$1$인 <code>0001</code>과 $-1$인 <code>1111</code>을 더하면?
+<ul>
+<li><code>10000</code>이 나온다.</li>
+</ul>
+</li>
+<li>여기서 MSB가 <code>1</code>이지만, 범위를 벗어났기 때문에 결과적으로 $0$인 <code>0000</code>이 된다.</li>
+</ul>
+</li>
+<li>
+<p>결과적으로, 음수를 나타내려면, <code>0</code>과 <code>1</code>을 반전시켜서 $1$을 더한 수에다가 MSB에 <code>1</code>을 붙이면 되겠다.</p>
+</li>
+</ul>
+<p><img src="/post/algorithm/images/02-01-twoComplement.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="1의 보수와 2의 보수"
+	
+	
+></p>
+<p><br /><br /></p>
+<h3 id="논리-우측-시프트와-산술-우측-시프트">논리 우측 시프트와 산술 우측 시프트</h3>
+<p><img src="/post/algorithm/images/02-02-rightShift.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="우측 시프트의 종류"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>논리 우측 시프트(Logical right shift)</strong></p>
+<ul>
+<li>비트를 오른쪽으로 옮긴 후, MSB에 <code>0</code>을 넣는다.</li>
+<li><code>&gt;&gt;&gt;</code> 연산과 같다.</li>
+</ul>
+</li>
+<li>
+<p><strong>산술 우측 시프트(Arithmetic right shift)</strong></p>
+<ul>
+<li>비트를 오른쪽으로 옮기지만, MSB 비트는 변하지 않는다.</li>
+<li><code>&gt;&gt;</code> 연산과 같다.</li>
+<li>이것은 대략 값을 $2$로 나눈 것과 같은 결과이다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h3 id="기본-비트-조작-예시">기본 비트 조작 예시</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;bitset&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">bitSize</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Printer</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">mask</span><span class="p">,</span> <span class="kt">int</span> <span class="n">result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\t</span><span class="s">원래 숫자 : </span><span class="se">\t</span><span class="s">&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">bitset</span><span class="o">&lt;</span><span class="n">bitSize</span><span class="o">&gt;</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\t</span><span class="s">마스크    : </span><span class="se">\t</span><span class="s">&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">bitset</span><span class="o">&lt;</span><span class="n">bitSize</span><span class="o">&gt;</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\t</span><span class="s">결과 숫자 : </span><span class="se">\t</span><span class="s">&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">bitset</span><span class="o">&lt;</span><span class="n">bitSize</span><span class="o">&gt;</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">IsBitOne</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 번째 자리 수가 1인가? : &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Printer</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">(</span><span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">SetBitOne</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 번째 자리 수를 1로 만들기 : &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Printer</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">num</span> <span class="o">|</span> <span class="n">mask</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">num</span> <span class="o">|</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">SetBitZero</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 번째 자리 수를 0으로 만들기 : &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Printer</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">SetBitZeroAfterIndex</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 번째 자리 이후(i 자리 제외)를 모두 0으로 만들기 : &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Printer</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">SetBitZeroBeforeIndex</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="p">((</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 번째 자리 이전(i 자리 제외)을 모두 0으로 만들기 : &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Printer</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">UpdateBit</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">setOne</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="p">((</span><span class="n">setOne</span><span class="p">)</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">mask</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">remove</span> <span class="o">=</span> <span class="n">num</span> <span class="o">&amp;</span> <span class="n">mask</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; 번째 자리 비트를 &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">setOne</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;으로 만들기 : &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Printer</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">remove</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;</span><span class="se">\t</span><span class="s">숫자 입력 : </span><span class="se">\t</span><span class="s">&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">bitset</span><span class="o">&lt;</span><span class="n">bitSize</span><span class="o">&gt;</span><span class="p">(</span><span class="n">remove</span> <span class="o">|</span> <span class="n">value</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">remove</span> <span class="o">|</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> 
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mi">7</span><span class="p">;</span> <span class="c1">// 숫자       : 1 1 1 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>   <span class="c1">// 몇 번째 자리 : 2 1 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">  <span class="n">IsBitOne</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SetBitOne</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SetBitZero</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SetBitZeroAfterIndex</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SetBitZeroBeforeIndex</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">UpdateBit</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">UpdateBit</span><span class="p">(</span><span class="n">num</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1 번째 자리 수가 1인가? : 
+</span></span><span class="line"><span class="cl">    원래 숫자 :     0111
+</span></span><span class="line"><span class="cl">    마스크    :     0010
+</span></span><span class="line"><span class="cl">    결과 숫자 :     0010
+</span></span><span class="line"><span class="cl">1 번째 자리 수를 1로 만들기 : 
+</span></span><span class="line"><span class="cl">    원래 숫자 :     0111
+</span></span><span class="line"><span class="cl">    마스크    :     0010
+</span></span><span class="line"><span class="cl">    결과 숫자 :     0111
+</span></span><span class="line"><span class="cl">1 번째 자리 수를 0으로 만들기 : 
+</span></span><span class="line"><span class="cl">    원래 숫자 :     0111
+</span></span><span class="line"><span class="cl">    마스크    :     1101
+</span></span><span class="line"><span class="cl">    결과 숫자 :     0101
+</span></span><span class="line"><span class="cl">1 번째 자리 이후(i 자리 제외)를 모두 0으로 만들기 : 
+</span></span><span class="line"><span class="cl">    원래 숫자 :     0111
+</span></span><span class="line"><span class="cl">    마스크    :     0011
+</span></span><span class="line"><span class="cl">    결과 숫자 :     0011
+</span></span><span class="line"><span class="cl">1 번째 자리 이전(i 자리 제외)을 모두 0으로 만들기 : 
+</span></span><span class="line"><span class="cl">    원래 숫자 :     0111
+</span></span><span class="line"><span class="cl">    마스크    :     1110
+</span></span><span class="line"><span class="cl">    결과 숫자 :     0110
+</span></span><span class="line"><span class="cl">1 번째 자리 비트를 0으로 만들기 : 
+</span></span><span class="line"><span class="cl">    원래 숫자 :     0111
+</span></span><span class="line"><span class="cl">    마스크    :     1101
+</span></span><span class="line"><span class="cl">    결과 숫자 :     0101
+</span></span><span class="line"><span class="cl">    숫자 입력 :     0101
+</span></span><span class="line"><span class="cl">1 번째 자리 비트를 1으로 만들기 : 
+</span></span><span class="line"><span class="cl">    원래 숫자 :     0111
+</span></span><span class="line"><span class="cl">    마스크    :     1101
+</span></span><span class="line"><span class="cl">    결과 숫자 :     0101
+</span></span><span class="line"><span class="cl">    숫자 입력 :     0111
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br /><br /></p>
+<h2 id="수학-및-논리-퍼즐">수학 및 논리 퍼즐</h2>
+<h3 id="소수">소수</h3>
+<ul>
+<li><strong>모든 자연수는 소수의 곱으로 나타낼 수 있다</strong>는 법칙이 있다.
+<ul>
+<li>따라서 $x/y$로 나눌 수 있으려면,</li>
+<li>$x$에 대한 소수의 곱 $\supset$ $y$에 대한 소수의 곱이 되어야 한다.</li>
+<li>$x = 2^{a_0} \times 3^{a_1} \times 5^{a_2} \times 7^{a_3} &hellip;$</li>
+<li>$y = 2^{b_0} \times 3^{b_1} \times 5^{b_2} \times 7^{b_3}&hellip;$</li>
+<li>$a_i \geq b_i$</li>
+</ul>
+</li>
+<li>그렇다면 $x$와 $y$의 <strong>최대공약수(Greatest common divisor)</strong> 는?
+<ul>
+<li>$gcd(x, y) = 2^{min(a_0, b_0)} \times 3^{min(a_1, b_1)} \times 5^{min(a_2, b_2)}$</li>
+</ul>
+</li>
+<li>그렇다면 $x$와 $y$의 <strong>최소공배수(Least Common multiple)</strong> 는?
+<ul>
+<li>$lcm(x, y) = 2^{max(a_0, b_0)} \times 3^{max(a_1, b_1)} \times 5^{max(a_2, b_2)}$</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>어떤 수가 소수인지 판별하는 법</strong>
+<ul>
+<li>어떤 수가 소수이려면, $1$과 자기자신 말고는 약수가 없어야 한다.</li>
+<li>소수가 아닌 경우, 가운데 위치한 약수를 중심으로 대칭적으로 약수가 형성된다.</li>
+<li>예를 들어, $16$의 경우 약수가 $1$, $2$, $4$, $8$, $16$ 이므로 $4$를 중심으로 대칭적으로 약수가 형성됨을 알 수 있다.</li>
+<li>따라서 <strong>어떤 수의 제곱근까지만 약수인지 판별</strong>하면 된다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">IsPrimeNumber</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">num</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="c1">// num의 제곱근까지만 검사한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">%</span> <span class="n">i</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// 나누어 떨어지면 소수가 아니다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li><strong>$1$부터 $N$까지의 모든 소수를 찾는 법 : 에라토스테네스의 체(Sieve of Eratosthenes)</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">GetPrimeNumbers</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span> <span class="n">isPrime</span><span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">num</span><span class="p">);</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="c1">// num의 제곱근까지만 검사한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">isPrime</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span> <span class="c1">// 아직 처리하지 않은 가장 작은 수를 선택한다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">mul</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">mul</span> <span class="o">&lt;=</span> <span class="n">num</span><span class="p">)</span> <span class="c1">// 그 수의 배수를 모두 제거한다 (그 수는 제거하면 안 됨)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">isPrime</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">mul</span><span class="p">]</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">mul</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">isPrime</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br /><br /></p>
+<h3 id="확률">확률</h3>
+<p><img src="/post/algorithm/images/02-03-conditional.jpeg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="조건부 확률"
+	
+	
+></p>
+<ul>
+<li><strong>조건부 확률</strong>
+<ul>
+<li>$P(A | B)$는 $B$ 사건이 발생했을 때, $A$가 일어날 확률이다.</li>
+<li>즉, $B$를 사건 전체로 보고 $B$ 중에서 $A$인 부분이다.</li>
+<li>이것을 사건 $B$에 대한 $A$의 조건부 확률이라고 한다.</li>
+<li>$$ P(A | B) = \frac{ P(A \cap B) }{ P(B) } $$</li>
+<li>$$ P(A \cap B) = P(A | B) P(B) $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>교집합의 확률</strong>
+<ul>
+<li>$1$부터 $10$까지의 수 중에서 하나를 뽑을 때, 짝수<strong>이면서</strong> $5$ 이하의 수를 뽑을 확률은 어떻게 될까?</li>
+<li>$$ P(짝수 \cap 5이하) = P(짝수 | 5이하) P(5이하) $$</li>
+<li>$$ P(짝수 \cap 5이하) = \frac{2}{5} * \frac{1}{2} = \frac{1}{5}$$</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>베이즈 정리(Bayes&rsquo; Theorem)</strong>
+<ul>
+<li>조건부 확률을 다음과 같이 정리할 수 있겠다.</li>
+<li>$$ P(A \cap B) = P(A | B) P(B) = P(B | A) P(A) $$</li>
+<li>$$ P(A | B) = \frac{ P(B \cap A)P(A) }{ P(B) } $$</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<ul>
+<li><strong>합집합의 확률</strong>
+<ul>
+<li>$A$ 사건 혹은 $B$ 사건이 벌어질 확률은?</li>
+<li>$$ P(A \cup B) = P(A) + P(B) - P(A \cap B) $$</li>
+<li>$1$부터 $10$까지의 수 중에서 하나를 뽑을 때, 짝수<strong>이거나</strong> $5$ 이하의 수를 뽑을 확률은 어떻게 될까?</li>
+<li>$$ P(짝수 \cup 5이하) = P(짝수) + P(5이하) - P(짝수 \cap 5이하)$$</li>
+<li>$$ P(짝수 \cup 5이하) = \frac{1}{2} + \frac{1}{2} - \frac{1}{5} = \frac{4}{5}$$</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<ul>
+<li><strong>독립 사건(independent event)</strong>
+<ul>
+<li>$A$와 $B$가 서로 아무런 영향을 미치지 않는 사건을 말한다.</li>
+<li>$ P(A \cap B) = 0 $, $ A \cup B = U $</li>
+<li>예를 들면, $A$ 라는 사람이 공부를 하는 것과 $B$ 라는 사람이 음식을 먹는 것은 독립적인 사건이다. 서로에게 아무런 영향이 없다.</li>
+<li>따라서 다음과 같은 공식이 성립한다.</li>
+<li>$$ P(A | B) = P(A | B^c) = P(A) $$</li>
+<li>이것을 조건부 확률 공식에 대입하면 다음과 같다.</li>
+<li>$$ P(A \cap B) = P(A) P(B) $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>상호 배타적 사건(mutually exclusive event)</strong>
+<ul>
+<li>어떤 한 사건이 일어나면 다른 사건은 일어날 수 없는 경우이다.</li>
+<li>$ P(A \cap B) = 0 $, $ (A, B) \subset C $</li>
+<li>$A$와 $B$는 $C$라는 집단 안에 소속되어 있지만 서로 공통적인 부분은 없다는 뜻이다.</li>
+<li>예를 들면, 남성과 여성은 상호배타적이다. 남성과 여성은 둘 다 &lsquo;인간&rsquo;이라는 카테고리에 포함되지만 서로 다르기 때문이다.</li>
+<li>$P(A \cap B) = 0$이므로 다음과 같다.</li>
+<li>$$ P(A \cup B) = P(A) + P(B) $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>독립 사건과 상호 배타적 사건은 <strong>서로 다른 개념</strong>이며, 독립 사건이면서 상호 배타적 사건인 경우는 존재하지 않는다.</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="재귀와-동적-프로그래밍">재귀와 동적 프로그래밍</h2>
+<h3 id="재귀적-해법">재귀적 해법</h3>
+<ul>
+<li>해당 문제가 재귀 문제인지 아는 방법?
+<ul>
+<li>해당 문제를 작은 크기의 <strong>부분문제(Subproblem)</strong> 로 만들 수 있는지 본다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>(1) 하향식 접근법(Top-down approach)</strong>
+<ul>
+<li>문제를 어떻게 하면 부분문제로 나눌 수 있는지 생각해본다. 부분문제끼리 겹치지 않아야 한다.</li>
+</ul>
+</li>
+<li><strong>(2) 상향식 접근법(Bottom-up approach)</strong>
+<ul>
+<li>간단한 것부터 풀이를 시작해서, 이전에 풀었던 사례를 확장하여 다음 풀이를 찾는다.</li>
+<li>예를 들면, 원소 하나를 갖는 리스트에서 시작하여, 두 개, 세 개 늘려가며 풀이법을 찾는다.</li>
+</ul>
+</li>
+<li><strong>(3) 반반 접근법(Half-and-half approach)</strong>
+<ul>
+<li>데이터를 절반으로 나누는 방법이다.</li>
+<li>예를 들면, 이진 탐색이나 병합 정렬이 있겠다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>재귀적 해법 vs. 순환적 해법</strong>
+<ul>
+<li>재귀 호출이 한 번 발생할 때마다 스택에 새로운 층(layer)을 추가해야 하므로, <strong>공간 효율성이 나빠질 수 있다.</strong></li>
+<li>모든 <strong>재귀적(recursive)</strong> 알고리즘은 <strong>순환적(iterative)</strong> 으로 구현이 가능하다.</li>
+<li>하지만 때로 순환적 알고리즘은 코드가 복잡해지므로, 잘 절충해서 선택해야겠다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h3 id="동적-프로그래밍">동적 프로그래밍</h3>
+<ul>
+<li>동적 프로그래밍이란?
+<ul>
+<li><strong>부분문제</strong>를 찾아서, <strong>재귀나 반복문</strong>을 사용해서 푸는데, <strong>현재 결과를 캐시에 저장</strong>해서 연산 속도를 비약적으로 높인다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<p><img src="/post/algorithm/images/02-04-fibo.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="피보나치 수의 재귀 트리"
+	
+	
+></p>
+<ul>
+<li>예를 들면, 바로 앞 두 항의 합을 구하는 <strong>피보나치 수(Fibonacci number)</strong> 가 있다.
+<ul>
+<li>간단하게 구현한 아래 코드의 경우 재귀 트리를 참고하면, 계속 2개의 자식으로 분기되므로 $O(2^n)$의 시간복잡도가 걸린다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">GetFibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">GetFibonacci</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">GetFibonacci</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li><strong>(1) 하향식 동적 프로그래밍(메모이제이션)</strong>
+<ul>
+<li>재귀 트리를 살펴보면, 중복되는 노드들이 있다.</li>
+<li>이 값들을 저장했다가 사용하면 시간복잡도를 $O(n)$으로 만들 수 있겠다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">GetFibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">d</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">x</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">];</span> <span class="c1">// 이미 계산한 적 있는 문제라면 그대로 반환
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">GetFibonacci</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">GetFibonacci</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">2</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li><strong>(2) 상향식 동적 프로그래밍</strong>
+<ul>
+<li>초기 사례인 <code>fib(0)</code>과 <code>fib(1)</code>을 구하고 이것을 이용해 <code>fib(2)</code>를 계산하며 점점 올라가는 방식이다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">GetFibonacci</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">d</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">x</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">d</span><span class="p">[</span><span class="n">x</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br /><br /></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a class="link" href="http://www.yes24.com/Product/Goods/44305533"  target="_blank" rel="noopener"
+    >코딩 인터뷰 완전 분석</a></li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/algorithm/">Algorithm</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/algorithm-06/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 유용한 수학</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-05/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 정렬, 탐색 알고리즘</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-03/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 자료구조 - 그래프</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-02/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 자료구조 - 트리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/algorithm-01/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Algorithm] 자료구조 - 배열, 문자열, 연결리스트, 스택, 큐</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
+CPU 버스트: 사용자 프로그램이 CPU를 직접 가지고 빠른 명령을 수행하는 단계 I/O 버스트: I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행하는 비교적 느린 단계 CPU 바운드 프로세스: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.'>
+<title>[OS] Chapter 6. CPU 스케줄링</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/os-it-principles-06/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[OS] Chapter 6. CPU 스케줄링'>
+<meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
+CPU 버스트: 사용자 프로그램이 CPU를 직접 가지고 빠른 명령을 수행하는 단계 I/O 버스트: I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행하는 비교적 느린 단계 CPU 바운드 프로세스: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-06/'>
+<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-06-16T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-06-16T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[OS] Chapter 6. CPU 스케줄링">
+<meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
+CPU 버스트: 사용자 프로그램이 CPU를 직접 가지고 빠른 명령을 수행하는 단계 I/O 버스트: I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행하는 비교적 느린 단계 CPU 바운드 프로세스: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GHXK2NBM48', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#cpu-스케줄러">CPU 스케줄러</a></li>
+    <li><a href="#디스패처">디스패처</a></li>
+    <li><a href="#스케줄링의-성능-평가">스케줄링의 성능 평가</a></li>
+    <li><a href="#스케줄링-알고리즘">스케줄링 알고리즘</a>
+      <ul>
+        <li><a href="#선입선출first-come-first-served-fcfs-스케줄링">선입선출(First-Come First-Served; FCFS) 스케줄링</a></li>
+        <li><a href="#최단작업-우선shortest-job-first-sjf-스케줄링">최단작업 우선(Shortest-Job First; SJF) 스케줄링</a></li>
+        <li><a href="#우선순위priority-스케줄링">우선순위(priority) 스케줄링</a></li>
+        <li><a href="#라운드-로빈round-robin-스케줄링">라운드 로빈(Round Robin) 스케줄링</a></li>
+        <li><a href="#다단계-큐muti-level-queue">다단계 큐(muti-level queue)</a></li>
+        <li><a href="#다단계-피드백-큐multi-level-feedback-queue">다단계 피드백 큐(multi-level feedback queue)</a></li>
+        <li><a href="#다중처리기multi-processor-system-스케줄링">다중처리기(multi-processor system) 스케줄링</a></li>
+        <li><a href="#실시간-스케줄링">실시간 스케줄링</a></li>
+        <li><a href="#스레드-스케줄링">스레드 스케줄링</a></li>
+      </ul>
+    </li>
+    <li><a href="#스케줄링-알고리즘의-평가">스케줄링 알고리즘의 평가</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/os/" >
+                OS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/os-it-principles-06/">[OS] Chapter 6. CPU 스케줄링</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 16, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/90124877"  target="_blank" rel="noopener"
+    >운영체제와 정보기술의 원리</a> 강의을 듣고 공부한 노트입니다.</p>
+</div>
+<hr>
+<p><br /><br /></p>
+<ul>
+<li>프로그램 실행과 관련된 기계어 명령들
+<ul>
+<li>CPU 내에서 수행되는 명령: Add 명령</li>
+<li>메모리 접근을 수행하는 명령: Load, Store 명령</li>
+<li>메모리를 접근하는 명령</li>
+<li>입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>
+<p>사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.</p>
+<ul>
+<li><mark style="background-color: lightblue"><strong>CPU 버스트</strong></mark>: 사용자 프로그램이 <strong>CPU를 직접 가지고 빠른 명령을 수행</strong>하는 단계</li>
+<li><mark style="background-color: lightblue"><strong>I/O 버스트</strong></mark>: <strong>I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행</strong>하는 비교적 느린 단계</li>
+<li><strong>CPU 바운드 프로세스</strong>: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.
+<ul>
+<li>→ 대화형 프로그램(interactive program)</li>
+</ul>
+</li>
+<li><strong>I/O 바운드 프로세스</strong>: I/O 요청이 빈번해서 CPU 버스트가 짧게 나타나는 프로세스이다.
+<ul>
+<li>→ 계산 위주의 프로그램</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>동일한 시스템 내부에서 <strong>CPU 바운드 프로세스와 I/O 바운드 프로세스가 함께 섞여서 실행되기 때문에</strong> CPU 스케줄링이 필요하다.</p>
+<ul>
+<li>대부분의 프로세스는 짧은 CPU 바운드를 가진다. 따라서 I/O 바운드 프로세스의 우선순위를 높여주면, 대화형 프로세스의 빠른 응답성 제공과 I/O 장치의 이용률을 높일 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="cpu-스케줄러">CPU 스케줄러</h2>
+<ul>
+<li><strong>CPU 스케줄러(scheduler)</strong>
+<ul>
+<li>준비 상태에 있는 프로세스들 중에서  <mark style="background-color: lightblue"><strong>어떤 프로세스에게 CPU를 할당할지</strong></mark> 결정하는 운영체제의 코드이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>CPU 스케줄러가 호출되는 경우
+<ul>
+<li>(1) <strong>Running → Blocked</strong> : I/O 요청하는 시스템 콜</li>
+<li>(2) <strong>Running → Ready</strong> : 타이머 인터럽트</li>
+<li>(3) <strong>Blocked → Ready</strong> : I/O 완료로 인터럽트 (우선순위가 높아서 바로 CPU를 얻는 경우)</li>
+<li>(4) <strong>Terminate</strong></li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>비선점형(nonpreemptive) 방식</strong>
+<ul>
+<li>프로세스가 CPU를 스스로 반납하기 전까지는 빼앗기지 않는다.</li>
+<li>(1), (4)</li>
+</ul>
+</li>
+<li><strong>선점형(preemptive) 방식</strong>
+<ul>
+<li>프로세스에게 할당된 CPU를 강제로 빼앗을 수 있다.</li>
+<li>(2), (3)</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="디스패처">디스패처</h2>
+<ul>
+<li><strong>디스패처(dispatcher)</strong>
+<ul>
+<li>CPU 스케줄러가 어떤 프로세스에게 CPU를 할당할지 결정하고 나면, 실제로  <mark style="background-color: lightblue"><strong>CPU를 이양하기 위해 환경설정</strong></mark>을 하는 운영체제의 코드를 말한다.</li>
+<li>현재 수행 중이던 프로세스의 문맥(context)을 PCB에 저장하고, 새롭게 선택된 프로세스의 문맥을 PCB로부터 복원한다. 그리고 시스템 상태를 사용자 모드로 전환해서 사용자 프로그램에게 CPU의 제어권을 넘긴다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>디스패치 지연시간(dispatch latency)</strong>
+<ul>
+<li>디스패쳐가 하나의 프로세스를 정지시키고 다른 프로세스에게 CPU를 전달하기까지 걸리는 시간을 말한다.</li>
+<li>이것은 대부분 <strong>문맥교환의 오버헤드</strong>에 해당한다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="스케줄링의-성능-평가">스케줄링의 성능 평가</h2>
+<ul>
+<li>시스템 관점
+<ul>
+<li>(1) <strong>CPU 이용률(CPU utilization)</strong>
+<ul>
+<li>전체 시간에서 CPU가 일을 한 시간의 비율</li>
+</ul>
+</li>
+<li>(2) <strong>처리량(throughput)</strong>
+<ul>
+<li>주어진 시간 동안 프로세스 몇 개를 끝마쳤는지(CPU 버스트를 완료한 프로세스의 개수)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>사용자 관점
+<ul>
+<li>(3) <strong>소요 시간(turnaround time)</strong>
+<ul>
+<li>프로세스가 CPU를 요청한 시점 ~ CPU 버스트를 완료하는데까지 걸린 시간</li>
+</ul>
+</li>
+<li>(4) <strong>대기 시간(waiting time)</strong>
+<ul>
+<li>CPU 버스트 기간 중 프로세스가 준비 큐에서 CPU를 얻기 위해 기다린 시간의 합</li>
+<li>시분할 시스템에서는 타이머 인터럽트를 사용하므로, 한 번의 CPU 버스트 중에도 준비 큐에서 기다린 시간이 여러번 발생할 수 있다.</li>
+</ul>
+</li>
+<li>(5) <strong>응답 시간(response time)</strong>
+<ul>
+<li>프로세스가 준비 큐에 들어온 후 ~ 첫 번째 CPU를 획득하기까지 기다린 시간</li>
+<li>타이머 인터럽트가 빈번히 발생할 수록 처음 CPU를 획득하기까지 걸리는 시간은 줄어들겠다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="스케줄링-알고리즘">스케줄링 알고리즘</h2>
+<br />
+<h3 id="선입선출first-come-first-served-fcfs-스케줄링">선입선출(First-Come First-Served; FCFS) 스케줄링</h3>
+<ul>
+<li>준비 큐에 도착한 시간 순서대로( <mark style="background-color: lightblue"><strong>CPU를 먼저 요청한 프로세스에게</strong></mark>) CPU를 할당하는 방식이다.</li>
+</ul>
+<br />
+<ul>
+<li>단점
+<ul>
+<li><strong>콘보이 현상(Convoy effect)</strong>
+<ul>
+<li>CPU 버스트가 긴 작업이 먼저 들어오면, CPU를 잠깐만 사용하면 준비 큐를 떠나 I/O작업을 수행할 수 있는 다수의 프로세스들이 계속 기다려야 하는 상황이 생긴다.</li>
+<li>먼저 도착한 프로세스의 CPU 버스트 기간에 따라 평균 대기시간이 크게 달라진다.</li>
+<li>평균 대기시간(waiting time)이 길어진다.</li>
+<li>I/O 장치의 이용률이 하락한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">프로세스</th>
+<th style="text-align:center">CPU 버스트 시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$P_1$</td>
+<td style="text-align:center">$12$</td>
+</tr>
+<tr>
+<td style="text-align:center">$P_2$</td>
+<td style="text-align:center">$3$</td>
+</tr>
+<tr>
+<td style="text-align:center">$P_3$</td>
+<td style="text-align:center">$3$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>대기 시간: $P_1 = 0$, $P_2 = 12$, $P_3 = 15$</li>
+<li>평균 대기 시간: $(0 + 12 + 15) / 3 = 9$</li>
+</ul>
+<br />
+<h3 id="최단작업-우선shortest-job-first-sjf-스케줄링">최단작업 우선(Shortest-Job First; SJF) 스케줄링</h3>
+<ul>
+<li><mark style="background-color: lightblue"><strong>CPU 버스트가 가장 짧은 프로세스에게</strong></mark> 제일 먼저 CPU를 할당하는 방식이다.</li>
+<li><strong>선점형(Shortest Remaining Time First; SRTF)</strong> 과 비선점형 방식으로 구현할 수 있다.
+<ul>
+<li>선점형의 경우, 어떤 프로세스가 CPU를 할당받고 수행 중이더라도, CPU 버스트 시간이 더 짧은 프로세스가 도착하면 빼앗기는 방식이다.</li>
+<li>프로세스들이 준비 큐에 도착하는 시간이 불규칙한 환경에서는 선점형 방식이 평균 대기시간을 최소화하는 최적의 알고리즘이 된다.</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th style="text-align:center">프로세스</th>
+<th style="text-align:center">도착 시간</th>
+<th style="text-align:center">CPU 버스트 시간</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$P_1$</td>
+<td style="text-align:center">$0$</td>
+<td style="text-align:center">$14$</td>
+</tr>
+<tr>
+<td style="text-align:center">$P_2$</td>
+<td style="text-align:center">$4$</td>
+<td style="text-align:center">$8$</td>
+</tr>
+<tr>
+<td style="text-align:center">$P_3$</td>
+<td style="text-align:center">$8$</td>
+<td style="text-align:center">$2$</td>
+</tr>
+<tr>
+<td style="text-align:center">$P_4$</td>
+<td style="text-align:center">$10$</td>
+<td style="text-align:center">$8$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>비선점형 방식 평균 대기시간: $(0 + 12 + 6 + 14) / 4 = 8$</li>
+<li>선점형 방식 평균 대기시간: $(18 + 2 + 0 + 4) / 4 = 6$</li>
+</ul>
+<br />
+<ul>
+<li>장점
+<ul>
+<li><strong>평균 대기시간을 가장 짧게</strong> 하는 최적 알고리즘(optimal algorithm)이다.</li>
+</ul>
+</li>
+<li>단점
+<ul>
+<li><strong>기아 현상(starvation)</strong> 이 발생한다.
+<ul>
+<li>CPU 버스트가 짧은 프로세스가 계속 도착하면 CPU 버스트가 긴 프로세스는 영원히 CPU를 할당받지 못하는 것이다.</li>
+</ul>
+</li>
+<li>CPU 버스트 시간을 미리 예측할 수 없다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>CPU 버스트 시간 예측 방법
+<ul>
+<li>과거의 CPU 버스트 시간을 통해 계산된다. 더 오래된 과거일 수록 그 영향력이 적어지도록 반영한다.</li>
+<li>$$ T_n+1 = \alpha t_n + (1 - \alpha)T_n$$</li>
+<li>$t_n$은 $n$번째 실제 CPU 버스트 시간이고, $T_n$은 $n$번째 CPU 버스트의 예측시간이다.</li>
+<li>$\alpha$는 $0 ~ 1$ 사이의 상수로 위의 두 요소를 어느 정도씩 반영할지 조절하는 매개변수이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="우선순위priority-스케줄링">우선순위(priority) 스케줄링</h3>
+<ul>
+<li><mark style="background-color: lightblue"><strong>우선순위가 가장 높은 프로세스에게</strong></mark> 제일 먼저 CPU를 할당하는 방식이다.</li>
+<li>우선순위 값(priority number)은 그 값이 작을수록 우선순위가 높다.</li>
+<li>SJF 스케줄링은 우선순위 스케줄링의 일종이라고 볼 수 있다.</li>
+<li>선점형과 비선점형 방식으로 구현할 수 있다.</li>
+</ul>
+<br />
+<ul>
+<li>단점
+<ul>
+<li>기아 현상이 발생할 수 있다.</li>
+<li>해결 방안: <strong>노화(aging) 기법</strong>
+<ul>
+<li>기다리는 시간이 길어지면 우선순위를 조금씩 높여서 언젠가는 가장 높은 우선순위가 되어 CPU를 할당받을 수 있게 해주는 방법이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="라운드-로빈round-robin-스케줄링">라운드 로빈(Round Robin) 스케줄링</h3>
+<ul>
+<li>각 프로세스가 한 번에 CPU를 연속적으로 사용할 수 있는 최대시간( <mark style="background-color: lightblue"><strong>할당시간; timequantum</strong></mark>)을 주는 방식이다.
+<ul>
+<li>할당 시간이 너무 길면, FCFS와 같은 결과를 나타내며,</li>
+<li>할당 시간이 너무 짧으면, 프로세스가 빈번하게 교체되어 문맥교환의 오버헤드가 커진다.</li>
+<li>일반적으로 $10$ ~ $100 ms$(밀리초) 정도로 설정한다.</li>
+<li>타이머 인터럽트를 사용해서 CPU를 회수한다.</li>
+<li>SJF보다 평균 대기 시간은 길지만, 응답시간은 더 짧다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>장점
+<ul>
+<li>CPU 버스트 시간이 짧은 프로세스가 빨리 CPU를 얻을 수 있도록 하는 동시에, CPU 버스트 시간이 긴 프로세스가 불이익을 당하지 않도록한다. (공정하다)</li>
+<li>대화형 프로세스의 빠른 응답시간을 보장한다.
+<ul>
+<li>$n$개의 프로세스가 준비 큐에 있고 할당 시간이 $q$라고 하면, 모든 프로세스는 $(n-1)q$시간 이내에 적어도 한 번은 CPU를 할당 받는다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="다단계-큐muti-level-queue">다단계 큐(muti-level queue)</h3>
+<ul>
+<li>
+<p><mark style="background-color: lightblue"><strong>준비 큐를 여러 개</strong></mark>로 분할해서 관리하는 방식이다.</p>
+</li>
+<li>
+<p>일반적으로, 전위 큐(foreground queue)와 후위 큐(background queue)로 분할하여 운영한다.</p>
+<ul>
+<li>전위 큐: 대화형 작업을 담는다. 라운드 로빈 스케줄링을 사용한다.</li>
+<li>후위 큐: 계산 위주의 작업을 담는다. FCFS 스케줄링을 사용한다.</li>
+</ul>
+</li>
+<li>
+<p>어느 큐에게 먼저 CPU를 할당할 것인가?</p>
+<ul>
+<li><strong>고정 우선순위 방식(fixed priority scheduling)</strong>
+<ul>
+<li>큐에 고정적인 우선순위를 적용한다. 항상 전위 큐에 있는 프로세스에게 CPU가 먼저 할당된다.</li>
+</ul>
+</li>
+<li><strong>타임 슬라이스(time slice) 방식</strong>
+<ul>
+<li>각 큐에 CPU 시간을 적절한 비율로 할당한다. 예를 들면 전위 큐는 80%, 후위 큐는 20%이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="다단계-피드백-큐multi-level-feedback-queue">다단계 피드백 큐(multi-level feedback queue)</h3>
+<ul>
+<li>준비 큐를 여러 개로 둔다는 점은 다단계 큐와 동일하나, 프로세스가  <mark style="background-color: lightblue"><strong>하나의 큐에서 다른 큐로 이동 가능하다</strong></mark>는 점이 다르다.
+<ul>
+<li>대표적인 방식은, 라운드 로빈을 사용하면서 할당시간이 5, 10인 준비 큐가 있고, 그다음에 FCFS 준비 큐가 있는 것이다.</li>
+<li>프로세스의 CPU 작업시간을 다단계로 분류함으로써, 작업시간이 짧은 프로세스일 수록 더 빠른 서비스가 가능해지며, 작업시간이 긴 프로세스에 대해서는 문맥교환 없이 CPU 작업에만 열중할 수 있는 FCFS 방식을 채택할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>정의 요소들
+<ul>
+<li>큐의 수</li>
+<li>각 큐의 스케줄링 알고리즘</li>
+<li>프로세스를 상위 큐로 승격시키는 기준</li>
+<li>프로세스를 하위큐로 강등시키는 기준</li>
+<li>프로세스가 도착했을 때 들어갈 큐를 결정하는 기준</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="다중처리기multi-processor-system-스케줄링">다중처리기(multi-processor system) 스케줄링</h3>
+<ul>
+<li><mark style="background-color: lightblue"><strong>CPU가 여러 개</strong></mark>인 시스템인 다중처리기 시스템에서 사용하는 스케줄링이다.</li>
+</ul>
+<br />
+<ul>
+<li>Homogeneous processor인 경우
+<ul>
+<li>큐에 한줄로 세워서 각 프로세서가 알아서 꺼내가게 한다.</li>
+</ul>
+</li>
+<li>특정 CPU에서 수행되어야 하는 프로세스가 있는 경우
+<ul>
+<li>각 CPU별로 줄 세우기를 할 수 있겠다.</li>
+<li>하지만 그렇게 되면 특정 CPU에 작업이 편중되는 현상이 발생할 수 있다.</li>
+<li>그래서 각 CPU별로 부하가 적절히 분산되도록 하는 <strong>부하균형(load balancing)</strong> 메커니즘을 필요로 한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>대칭형 다중처리(symmetric multi-processing; SMP)
+<ul>
+<li>각 CPU가 알아서 스케줄링을 결정하는 방식이다.</li>
+</ul>
+</li>
+<li>비대칭형 다중처리(asymmetric multi-processing)
+<ul>
+<li>하나의 CPU가 다른 모든 CPU의 스케줄링 및 데이터 접근을 책임지고, 나머지 CPU는 거기에 따라 움직이는 방식이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="실시간-스케줄링">실시간 스케줄링</h3>
+<ul>
+<li>작업의 <strong>데드라인</strong>이 정해져 있어서 그 안에 반드시 처리해야하는 실시간 시스템(real-time system)에 사용하는 방식이다.
+<ul>
+<li>경성 실시간 시스템(hard real-time system): 데드라인 안에 반드시 끝내야 하는 시스템</li>
+<li>연성 실시간 시스템(soft real-time system): 데드라인을 지키지 못했다고 해서 위험한 상황이 발생하는 건 아닌 시스템</li>
+</ul>
+</li>
+<li><strong>EDF(Earlist Deadline First) 스케줄링</strong>을 주로 사용한다.
+<ul>
+<li><mark style="background-color: lightblue"><strong>데드라인이 얼마 남지 않은 요청을 먼저 처리</strong></mark>하는 것이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="스레드-스케줄링">스레드 스케줄링</h3>
+<ul>
+<li><strong>Global scheduling</strong>
+<ul>
+<li><strong>Kernel level thread</strong>의 경우</li>
+<li>일반적인 프로세스와 마찬가지로 커널의  <mark style="background-color: lightblue"><strong>단기 스케줄러</strong></mark>가 어떤 스레드를 스케줄링할지 결정한다.</li>
+</ul>
+</li>
+<li><strong>Local scheduling</strong>
+<ul>
+<li><strong>User level thread</strong>의 경우</li>
+<li>사용자 수준의  <mark style="background-color: lightblue"><strong>스레드 라이브러리</strong></mark>에 의해 어떤 스레드를 스케줄링할지 결정한다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="스케줄링-알고리즘의-평가">스케줄링 알고리즘의 평가</h2>
+<ul>
+<li>(1) 큐잉모델(queueing model)
+<ul>
+<li>이론가들이 수행하는 방식이다.</li>
+<li>확률 분포로 주어지는 도착률(arrival rate)과 처리율(service rate)을 가지고 수학적 계산을 통해 각종 성능지표를 확인한다.</li>
+</ul>
+</li>
+<li>(2) 시뮬레이션(simulation)
+<ul>
+<li>구현가들이 수행하는 방식이다.</li>
+<li>실제로 코드를 수정해서 커널을 컴파일한 후 수행시켜보고 실행시간을 측정한다.</li>
+</ul>
+</li>
+<li>(3) 구현 및 실측(implementation &amp; measurement)
+<ul>
+<li>가상으로 CPU 스케줄링 프로그램(모의 프로그램)을 작성해서 어떤 결과가 나오는지 확인하는 방식이다.</li>
+<li>입력값은 가상일 수도 있고, 실제 시스템에서 추출한 입력값(트레이스; trace)일 수도 있다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/os/">OS</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-12/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 12. 디스크 관리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-11/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 11. 파일 시스템</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-10/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 10. 가상 메모리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-09/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 9. 메모리 관리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-08/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 8. 데드락</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

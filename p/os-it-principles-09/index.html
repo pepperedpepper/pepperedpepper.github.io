@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 논리적 주소를 물리적 주소로 연결시켜주는 것이다. Symbolic address → Logical address →(이 시점이 언제인가?) Physical address 여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다.'>
+<title>[OS] Chapter 9. 메모리 관리</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/os-it-principles-09/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[OS] Chapter 9. 메모리 관리'>
+<meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 논리적 주소를 물리적 주소로 연결시켜주는 것이다. Symbolic address → Logical address →(이 시점이 언제인가?) Physical address 여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-09/'>
+<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-07-06T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-07-06T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[OS] Chapter 9. 메모리 관리">
+<meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 논리적 주소를 물리적 주소로 연결시켜주는 것이다. Symbolic address → Logical address →(이 시점이 언제인가?) Physical address 여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GHXK2NBM48', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#주소-바인딩">주소 바인딩</a>
+      <ul>
+        <li><a href="#주소-바인딩의-종류">주소 바인딩의 종류</a></li>
+        <li><a href="#mmu">MMU</a></li>
+      </ul>
+    </li>
+    <li><a href="#메모리-관리와-관련된-용어">메모리 관리와 관련된 용어</a>
+      <ul>
+        <li><a href="#동적로딩dynamic-loading">동적로딩(Dynamic loading)</a></li>
+        <li><a href="#중첩overlays">중첩(Overlays)</a></li>
+        <li><a href="#동적연결dynamic-linking">동적연결(Dynamic linking)</a></li>
+        <li><a href="#스와핑swapping">스와핑(Swapping)</a></li>
+      </ul>
+    </li>
+    <li><a href="#물리적-메모리의-할당-방식">물리적 메모리의 할당 방식</a></li>
+    <li><a href="#연속할당contiguous-allocation-방식">연속할당(Contiguous allocation) 방식</a>
+      <ul>
+        <li><a href="#1-고정-분할fixed-partition-allocation-방식">(1) 고정 분할(Fixed partition allocation) 방식</a></li>
+        <li><a href="#2-가변-분할variable-partition-allocation-방식">(2) 가변 분할(Variable partition allocation) 방식</a></li>
+      </ul>
+    </li>
+    <li><a href="#불연속할당noncontiguous-allocation-방식">불연속할당(Noncontiguous allocation) 방식</a>
+      <ul>
+        <li><a href="#1-페이징paging-기법">(1) 페이징(Paging) 기법</a>
+          <ul>
+            <li><a href="#주소-변환-기법">주소 변환 기법</a></li>
+            <li><a href="#페이지-테이블의-구현">페이지 테이블의 구현</a></li>
+            <li><a href="#계층적-페이징">계층적 페이징</a></li>
+            <li><a href="#공유-페이지">공유 페이지</a></li>
+            <li><a href="#메모리-보호">메모리 보호</a></li>
+            <li><a href="#역페이지-테이블">역페이지 테이블</a></li>
+          </ul>
+        </li>
+        <li><a href="#2-세그먼테이션segmentation">(2) 세그먼테이션(Segmentation)</a>
+          <ul>
+            <li><a href="#주소-변환-기법-1">주소 변환 기법</a></li>
+            <li><a href="#공유-보호-할당">공유, 보호, 할당</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-페이지드-세그먼테이션paged-segmentation">(3) 페이지드 세그먼테이션(Paged segmentation)</a>
+          <ul>
+            <li><a href="#주소-변환-기법-2">주소 변환 기법</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/os/" >
+                OS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/os-it-principles-09/">[OS] Chapter 9. 메모리 관리</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 06, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    10 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/90124877"  target="_blank" rel="noopener"
+    >운영체제와 정보기술의 원리</a> 강의을 듣고 공부한 노트입니다.</p>
+</div>
+<hr>
+<p><br /><br /></p>
+<h2 id="주소-바인딩">주소 바인딩</h2>
+<ul>
+<li><strong>논리적 주소(Logical address) = Virtual address</strong>
+<ul>
+<li>프로세스마다 독립적으로 가지는 주소 공간이다.</li>
+<li>각 프로세스마다 0번지부터 시작한다.</li>
+<li>CPU가 보는 주소는 이 논리적 주소이다.</li>
+</ul>
+</li>
+<li><strong>물리적 주소(Physical address)</strong>
+<ul>
+<li>메모리에 실제로 올라가는 위치이다.</li>
+<li>낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. <br />
+<img src="/post/os/images/09-01-physicalMemory.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="메모리 영역"
+	
+	
+></li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>주소 바인딩</strong>
+<ul>
+<li>논리적 주소를 물리적 주소로 연결시켜주는 것이다.</li>
+<li><strong>Symbolic address → Logical address →<mark style="background-color: lightblue">(이 시점이 언제인가?)</mark> Physical address</strong></li>
+<li>여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다. 이것이 컴파일이 되면 숫자로 된 Logical address로 바뀌겠다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="주소-바인딩의-종류">주소 바인딩의 종류</h3>
+<p><img src="/post/os/images/09-02-binding.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="주소 바인딩의 종류 예시"
+	
+	
+></p>
+<ul>
+<li><strong>컴파일 타임 바인딩(compile time binding)</strong>
+<ul>
+<li>물리적 메모리의 주소가 컴파일 시에 결정된다.</li>
+<li>컴파일러가 <strong>절대 코드(absolute code)</strong> 를 생성하는 방식이다.</li>
+</ul>
+</li>
+<li><strong>로드 타임 바인딩(load time bining)</strong>
+<ul>
+<li>물리적 메모리의 주소가 프로그램의 실행이 시작될 때 결정된다.</li>
+<li>컴파일러가 <strong>재배치 가능 코드(relocatable code)</strong> 를 생성한 경우 가능하다.</li>
+</ul>
+</li>
+<li><strong>런타임 바인딩(runtime binding = executione time binding)</strong>
+<ul>
+<li>프로그램을 시작한 후에도 물리적 메모리의 주소를 변경할 수 있는 방식이다.</li>
+<li>CPU가 주소를 참조할 때마다 <strong>주소 매핑 테이블(address mapping table)</strong> 을 이용해서 바인딩을 점검한다.</li>
+<li>하드웨어적 지원이 필요하다.
+<ul>
+<li><strong>기준 레지스터(base register), 한계 레지스터(limit register), MMU(Memory Management Unit)</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="mmu">MMU</h3>
+<p><img src="/post/os/images/09-03-mmu.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="MMU 예시"
+	
+	
+></p>
+<ul>
+<li>
+<p><strong>메모리 관리 유닛 (Memory Management Unit; MMU)</strong></p>
+<ul>
+<li>논리적 주소를 물리적 주소로 바인딩 해주는 하드웨어 장치이다.</li>
+<li>CPU가 사용자 프로세스의 논리적 주소를 참조하려고 할 때, <mark style="background-color: lightblue"><strong>그 주소값에 기준 레지스터(base register)의 값을 더해서</strong></mark> 물리적 주소값을 얻어낸다.</li>
+<li>그래서 사용자 프로세스는 논리적 주소만 다루고, 실제 물리적 주소를 다루지 못하면 알 필요가 없다.</li>
+</ul>
+</li>
+<li>
+<p><strong>기준 레지스터 = 재배치 레지스터 (base register = relocation register)</strong></p>
+<ul>
+<li>해당 프로세스의 물리적 메모리 시작 주소를 가지고 있다.</li>
+<li>따라서 논리적 주소는 일종의 오프셋(offset) 개념으로 생각할 수 있다.</li>
+</ul>
+</li>
+<li>
+<p><strong>한계 레지스터 (limit register)</strong></p>
+<ul>
+<li>논리적 주소값에 기준 레지스터 값을 더한 결과가 해당 프로세스의 주소 공간을 벗어나는 경우를 방지하기 위해서, 해당 프로세스의 논리적 주소의 최댓값(프로세스의 크기)을 가지고 있다.</li>
+<li>만약 주소 공간을 벗어나는 경우에는 트랩을 발생시켜 해당 프로세스를 강제종료시킨다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="메모리-관리와-관련된-용어">메모리 관리와 관련된 용어</h2>
+<br />
+<h3 id="동적로딩dynamic-loading">동적로딩(Dynamic loading)</h3>
+<ul>
+<li>의미
+<ul>
+<li>프로세스 주소 공간 전체를 메모리에 올리는 것이 아니라 해당 부분이 불릴 때, 그 <mark style="background-color: lightblue"><strong>일부분만을 메모리에 적재하는 방식</strong></mark>이다.</li>
+</ul>
+</li>
+<li>목적
+<ul>
+<li>여러 프로그램이 메모리에 올라가는 다중 프로그래밍 방식에서 더 많은 프로세스를 동시에 올려놓기 위함이다.</li>
+<li>사용되지도 않는 많은 양의 코드가 메모리에 올라가는 것을 막아서 <strong>메모리를 효율적</strong>으로 쓸 수 있게 한다.</li>
+</ul>
+</li>
+<li>사용 방법
+<ul>
+<li>운영체제의 특별한 지원 없이, 프로그램 자체에서 구현이 가능하다.</li>
+<li>운영체제가 라이브러리를 통해 지원할 수도 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="중첩overlays">중첩(Overlays)</h3>
+<ul>
+<li>의미
+<ul>
+<li>동적로딩과 같다. 하지만 역사적인 목적이 다르다.</li>
+</ul>
+</li>
+<li>목적
+<ul>
+<li>단일 프로세스만을 메모리에 올려놓는 환경에서 메모리 용량보다 큰 프로세스를 실행하기 위한 어쩔 수 없는 선택이었다.</li>
+</ul>
+</li>
+<li>사용 방법
+<ul>
+<li>프로그래머가 수작업으로 구현해서 수작업 중첩(Manual Overlays)이라고도 불렸다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="동적연결dynamic-linking">동적연결(Dynamic linking)</h3>
+<ul>
+<li><strong>연결(linking)</strong>
+<ul>
+<li>소스 코드를 컴파일해서 생성된 <strong>목적 파일(object file)과, 이미 컴파일 된 라이브러리 파일(library file)들을 묶어서 하나의 실행 파일을 생성하는 과정</strong>을 말한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>의미
+<ul>
+<li><strong>연결을 실행 시간까지 미루는 기법</strong>이다.</li>
+<li>라이브러리 호출 부분에 <strong>스텁(stub)</strong> 이라는 작은 코드를 두고, 프로그램이 실행되고 <mark style="background-color: lightblue"><strong>라이브러리 함수를 호출하면, 그 때가 되어서야 라이브러리에 대한 연결</strong></mark>이 이루어진다.</li>
+<li>라이브러리가 메모리에 있으면 불러오고, 없으면 디스크에서 읽어온다.</li>
+</ul>
+</li>
+<li>목적
+<ul>
+<li><strong>정적연결(Static linking)</strong>
+<ul>
+<li>라이브러리가 프로그램의 실행 파일에 포함된다. (예: <code>printf</code> 함수의 라이브러리 코드)</li>
+<li>따라서 실행 파일이 커진다.</li>
+<li>동일한 라이브러리를 각각의 프로세스가 메모리에 올려서 메모리의 낭비가 있다.</li>
+</ul>
+</li>
+<li>동적연결의 경우 공통으로 사용하는 라이브러리를 한 번만 적재하므로 <strong>메모리 효율성</strong>을 높일 수 있다.</li>
+</ul>
+</li>
+<li>사용 방법
+<ul>
+<li>운영체제의 도움이 필요하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="스와핑swapping">스와핑(Swapping)</h3>
+<ul>
+<li>의미
+<ul>
+<li><mark style="background-color: lightblue"><strong>프로세스의 주소 공간 전체를 메모리에서 디스크에 있는 스왑 영역(swap area)으로 쫒아내는 것</strong></mark>이다.</li>
+<li>스왑 영역은 <strong>백킹 스토어(backing store)</strong> 라고도 부르며, 디스크 안에 파일 시스템과는 별도로 존재하는 일정 영역을 말한다.</li>
+<li>이것은 프로세스가 종료되어서가 아니라, 특정 이유로 수행 중인 프로세스의 주소 공간을 일시적으로 메모리에서 디스크로 내려놓는 것을 의미한다.</li>
+<li>중기 스케줄러에 의해 스왑 아웃될 프로세스가 선정된다.</li>
+</ul>
+</li>
+<li>목적
+<ul>
+<li><strong>메모리에 존재하는 프로세스의 수</strong>를 조절하기 위함이다.</li>
+</ul>
+</li>
+<li>바인딩과 연관해서 생각해보면&hellip;
+<ul>
+<li>컴파일, 로드 타임 바인딩 방식
+<ul>
+<li>돌아올 때는 <strong>원래 있던 메모리 위치</strong>로 스왑 인해야한다.</li>
+</ul>
+</li>
+<li>런타임 바인딩 방식
+<ul>
+<li>빈 메모리 <strong>아무 곳에나</strong> 프로세스를 올릴 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="물리적-메모리의-할당-방식">물리적 메모리의 할당 방식</h2>
+<ul>
+<li>물리적 메모리의 낮은 주소 영역에는 운영 체제가 올라가고, 인터럽트 벡터, 운영체제 커널이 여기 위치한다.</li>
+<li>물리적 메모리의 높은 주소 영역에는 여러가지 사용자 프로세스들이 올라간다.</li>
+<li>여기서는 <strong>사용자 프로세스 영역의 관리 방법</strong>에 대해 살펴본다.</li>
+</ul>
+<br />
+<h2 id="연속할당contiguous-allocation-방식">연속할당(Contiguous allocation) 방식</h2>
+<ul>
+<li>각각의 프로세스를 물리적 메모리의 <strong>연속적인 공간에</strong> 올리는 방식이다.</li>
+<li>물리적 메모리를 다수의 분할로 나누어서 하나의 분할에 하나의 프로세스가 적재되도록 한다.</li>
+</ul>
+<p><img src="/post/os/images/09-04-contiguousAllocation.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="연속할당 방식"
+	
+	
+></p>
+<br />
+<h3 id="1-고정-분할fixed-partition-allocation-방식">(1) 고정 분할(Fixed partition allocation) 방식</h3>
+<ul>
+<li>물리적 메모리를 <mark style="background-color: lightblue"><strong>주어진 개수만큼 영구적인 분할로 미리 나누어두는</strong></mark> 방식이다.</li>
+<li>분할의 크기는 모두 동일하게 할 수도 있고, 서로 다르게 할 수도 있다.</li>
+<li><strong>하나의 분할에는 하나의 프로그램만을 적재</strong>할 수 있다.</li>
+</ul>
+<br />
+<ul>
+<li>단점
+<ul>
+<li>동시에 메모리에 올릴 수 있는 프로그램 수가 고정되어 있으므로 유통성이 떨어진다.</li>
+<li>외부 단편화와 내부 단편화가 발생할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>외부 단편화(external fragmentation)</strong>
+<ul>
+<li>해당 분할이 비어 있지만 프로그램의 크기가 더 커서 할당할 수 없어 낭비되는 공간이 생긴 것이다.</li>
+</ul>
+</li>
+<li><strong>내부 단편화(internal fragmentation)</strong>
+<ul>
+<li>할당된 분할이 프로그램 크기에 비해 더 커서 낭비되는 공간이 생긴 것이다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h3 id="2-가변-분할variable-partition-allocation-방식">(2) 가변 분할(Variable partition allocation) 방식</h3>
+<ul>
+<li>물리적 메모리를 미리 나누어 두지 않고, <mark style="background-color: lightblue"><strong>프로그램 크기에 따라서 동적으로 분할의 크기, 개수가 변하는</strong></mark> 방식이다.</li>
+</ul>
+<br />
+<ul>
+<li><strong>동적 메모리 할당 문제(dynamic storage-allocation problem)</strong>
+<ul>
+<li>주소 공간의 크기가 $n$인 프로세스를 메모리에 올릴 때, 물리적 메모리 내 가용 공간(hole) 중에 <strong>어떤 위치에 올릴 것인가?</strong></li>
+<li>방법1. <strong>최초적합(first-fit)</strong>
+<ul>
+<li>크기가 $n$이상인 가용 공간 중, 가장 먼저 찾아지는 곳에 프로세스를 할당한다.</li>
+</ul>
+</li>
+<li>방법2. <strong>최적적합(best-fit)</strong>
+<ul>
+<li>크기가 $n$이상인 가용 공간 중, 가장 작은 곳에 프로세스를 할당한다.</li>
+<li>많은 수의 작은 가용 공간들이 생성되겠다.</li>
+</ul>
+</li>
+<li>방법3. <strong>최악적합(worts-fit)</strong>
+<ul>
+<li>가용 공간 중에서 크기가 가장 큰 곳에 프로세스를 할당한다.</li>
+<li>상대적으로 큰 가용 공간들이 생성되겠다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>단점
+<ul>
+<li>외부 단편화가 발생할 수 있다.</li>
+</ul>
+</li>
+<li>해결 방법: <strong>컴팩션(compaction)</strong>
+<ul>
+<li>사용 중인 메모리 영역을 한쪽으로 몰고, 가용 공간을 다른 한쪽으로 몰아서, 하나의 큰 가용 공간을 만드는 방법이다.</li>
+<li>비용이 매우 많이 드는 작업이다.</li>
+<li>물리적 메모리 위치를 옮겨야 하므로, 런타임 바인딩 방식에서만 사용 가능하다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="불연속할당noncontiguous-allocation-방식">불연속할당(Noncontiguous allocation) 방식</h2>
+<ul>
+<li>하나의 프로세스를 물리적 메모리의 여러 영역에 <strong>분산해서</strong> 적재하는 방식이다.</li>
+</ul>
+<br />
+<h3 id="1-페이징paging-기법">(1) 페이징(Paging) 기법</h3>
+<ul>
+<li>각 프로세스의 주소 공간을 <mark style="background-color: lightblue"><strong>동일한 크기의 페이지로 자르고</strong></mark>, 물리적 메모리도 프레임(frame)으로 잘라서 적재시키는 방식이다.</li>
+<li>논리적 메모리 주소를 가진 페이지를 물리적 메모리의 몇 번째 프레임에 있는지로 변환하기 위한 <strong>페이지 테이블(page table)</strong> 이 필요하다.
+<ul>
+<li>따라서 <strong>페이지의 개수만큼의 entry</strong>(항목; 페이지 테이블의 레코드)가 필요하다.</li>
+<li>각 프로세스 마다 페이지 테이블이 존재한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="주소-변환-기법">주소 변환 기법</h4>
+<p><img src="/post/os/images/09-05-paging.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="페이징"
+	
+	
+></p>
+<ul>
+<li>논리적인 페이지 번호 <code>p</code>로 페이지 테이블에 접근한다. 거기에서 물리적인 프레임 번호 <code>f</code>를 얻는다.</li>
+<li>프레임 내에서의 위치(오프셋 <code>d</code>)는 프레임 내에서의 주소로 그대로 사용된다. <code>f</code> + <code>d</code>로 물리적 메모리에 접근한다.</li>
+</ul>
+<br />
+<h4 id="페이지-테이블의-구현">페이지 테이블의 구현</h4>
+<ul>
+<li>현재 CPU에서 실행 중인 프로세스의 페이지 테이블에 접근하기 위해 운영체제는 2개의 레지스터를 사용한다.
+<ul>
+<li><strong>페이지 테이블 기준 레지스터(page-table base register; PTBR)</strong>
+<ul>
+<li>페이지 테이블은 메인 메모리에 상주하는데, PTBR은 이 물리적 메모리에서 페이지 테이블이 존재하는 시작 위치를 가리킨다.</li>
+</ul>
+</li>
+<li><strong>페이지 테이블 길이 레지스터(page-table length register; PTLR)</strong>
+<ul>
+<li>페이지 테이블의 크기를 보관한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>모든 메모리 접근 연산에는 2번의 메모리 접근이 필요하다.
+<ul>
+<li>페이지 테이블 접근 1번, 실제 데이터 접근 1번.</li>
+</ul>
+</li>
+<li>따라서 메모리 접근 속도 향상을 위해, <strong>TLB(Translation Look-aside Buffer; 고속의 주소 변환용 하드웨어 캐시 메모리)</strong> 를 사용하기도 한다.
+<ul>
+<li>이것은 빈번히 참조되는 페이지에 대한 주소 변환 정보를 가지고 있다. 페이지 테이블을 참조하기 전에 이 캐시를 먼저 살펴보고 없으면 페이지 테이블을 참조한다.</li>
+<li>페이지 테이블 처럼 모든 주소를 가지고 있는 게 아니라서, 저장되어 있는 순서에 따라 페이지 번호 <code>p</code>를 알 수 없다. 따라서 페이지 번호 <code>p</code>가 함께 프레임 번호 <code>f</code>가 쌍으로 저장되어 있다.</li>
+<li>각 프로세스마다 주소 변환 정보가 다르기 때문에 페이지 테이블이 따로 존재하고, TLB도 마찬가지이다. 그래서 <strong>문맥교환 시에 TLB의 entry는 비워진다.</strong></li>
+<li>TLB의 모든 entry를 다 찾아보는 오버헤드를 줄이기 위해서 일반적으로 병렬탐색(parallel search)이 가능한 <strong>연관 레지스터(associative register)</strong> 를 사용한다. 병렬탐색이란 TLB 내의 모든 entry를 동시에 탐색할 수 있는 기능을 말한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>메모리 접근 시간(Effective Access Time; EAT)</strong>
+<ul>
+<li>$ EAT = (1 + \epsilon)\alpha + (2 + \epsilon)(1 - \alpha)$</li>
+<li>$ EAT = 2 + \epsilon - \alpha $</li>
+<li>$1$ : 메모리 접근 시간</li>
+<li>$\epsilon$ : 연관 레지스터에 접근하는 시간</li>
+<li>$\alpha$ : 요청된 페이지에 대한 주소 변환 정보가 연관 레지스터에 존재할 확률 (Hit ratio)</li>
+<li>$ (1 + \epsilon)\alpha $ : hit. TLB에 존재하는 경우</li>
+<li>$ (2 + \epsilon)(1 - \alpha) $ : miss. TLB에 존재하지 않는 경우</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="계층적-페이징">계층적 페이징</h4>
+<p><img src="/post/os/images/09-06-twoLevelPaging.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="2단계 페이징"
+	
+	
+></p>
+<ul>
+<li>
+<p>컴퓨터가 $32bit$ 주소 체계를 사용한다면, $2^{32}byte(4GB)$의 주소 공간을 갖는 프로그램을 지원할 수 있다.</p>
+<ul>
+<li>페이지 하나의 크기가 $4KB$라고 한다면, $4GB / 4KB = 1M$ 개의 페이지 테이블 entry가 필요하다.</li>
+<li>페이지 테이블 안에 한 entry의 크기가 $4byte$ 정도인데 그러면 총 $4byte \times 1M = 4MB$라는 공간이 필요하다. 프로세스 마다 $4MB$의 페이지 테이블을 모두 메모리에 집어 넣으면 공간 낭비가 심할 것이다.</li>
+<li>실제로 프로그램이 사용하는 부분은 메모리의 지극히 일부분이므로, 2단계 페이징(two-level paging) 기법을 사용해서 메모리의 낭비를 줄인다.</li>
+</ul>
+</li>
+<li>
+<p><strong>2단계 페이징(two-level paging)</strong></p>
+<ul>
+<li><strong>외부 페이지 테이블(outer page table)</strong> 과 <strong>내부 페이지 테이블(inner page table)</strong> 의 두 단계를 걸쳐 주소를 변환한다.</li>
+<li>사용되지 않는 주소 공간에 대해서는 <strong>외부 페이지 테이블의 entry를 <code>NULL</code>로 설정해서 내부 페이지 테이블을 생성하지 않는 것</strong>이다.</li>
+</ul>
+</li>
+<li>
+<p>외부 페이지 테이블 번호 <code>P1</code>과 내부 페이지 테이블 번호 <code>P2</code>, 프레임 내에서의 오프셋 <code>d</code>로 주소를 변환한다.</p>
+<ul>
+<li>페이지 하나의 크기가 $4KB(2^{12}byte)$이므로, 그 내부에서 오프셋을 결정하기 위해서 <code>d</code>는 $12bit$이어야 한다.</li>
+<li>내부 페이지 테이블은 페이지화되어서 페이지 하나의 크기인 $4KB$의 공간을 차지한다. 여기서 각 entry는 $4byte$이므로 entry의 총 수는 $4KB / 4byte = 1K$ 개이다. 이것은 $2^{10}$개 이므로, 내부 페이지 테이블의 <code>P2</code>는 $10bit$가 된다.</li>
+<li>그리고 전체 주소 크기 $32it$에서 $12bit$, $10bit$를 뺀 $10bit$가 <code>P1</code>의 크기가 된다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="공유-페이지">공유 페이지</h4>
+<ul>
+<li><strong>공유 코드(shared code) = 재진입 가능 코드(re-entrant code) = 순수 코드(pure code)</strong>
+<ul>
+<li>여러 프로세스에서 공통으로 사용될 수 있도록 작성된 코드이다.</li>
+<li><strong>읽기 전용(read-only)</strong> 의 특징을 가지고 있다.</li>
+</ul>
+</li>
+<li><strong>공유 페이지(shread page)</strong>
+<ul>
+<li>공유 코드를 담고 있는 페이지이다.</li>
+<li>여러 프로세스에 의해 공유되므로, 물리적 메모리에 하나만 적재되어 사용된다.
+<ul>
+<li>예를 들어, 문서 편집기 프로그램을 공유 페이지를 사용해서 작성한 경우, 이 프로세스를 여러 개 수행시키더라도 공유 코드를 담은 페이지는 메모리에 하나만 올라가고 여러 프로세스가 코드를 공유해서 사용하게 된다.</li>
+</ul>
+</li>
+<li>이것을 사용하는 모든 프로세스의 <strong>논리적 주소 공간에서 동일한 페이지 번호</strong>를 갖고 있어야만 한다. 물리적 주소가 같은 것은 당연하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>사유 페이지(private page)</strong>
+<ul>
+<li>공유 페이지와 반대로, 프로세스들이 독자적으로 사용하는 페이지이다.</li>
+<li>사유 페이지는 해당 프로세스의 논리적 주소 공간 중 어떠한 위치에 있어도 무방하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="메모리-보호">메모리 보호</h4>
+<ul>
+<li>페이지 테이블의 각 entry에는 주소 변환 정보뿐만 아니라 메모리 보호를 위한 비트를 두고 있다.
+<ul>
+<li><strong>보호비트(protection bit)</strong>
+<ul>
+<li>각 페이지에 대한 접근 권한을 담고 있다.</li>
+<li>한 프로세스의 주소 공간은 다른 프로세스에 의해 접근될 수 없으므로 &lsquo;누구&rsquo;에 해당하는 접근 권한을 설정할 필요는 없다. 각 페이지에 <strong>&lsquo;어떠한&rsquo; 접근</strong>을 허용하는지의 정보가 저장된다.</li>
+</ul>
+</li>
+<li><strong>유효-무효 비트(valid-invalid bit)</strong>
+<ul>
+<li>valid는 해당 주소의 메모리에 그 페이지가 존재함을 뜻한다. 유효한 내용이 있으므로 접근을 허용한다.</li>
+<li>invalid는 해당 주소의 메모리에 유효한 내용이 없음을 뜻한다. 유효한 내용이 없으므로 접근을 불허한다.
+<ul>
+<li>프로세스가 그 주소 부분을 사용하지 않고 있거나, 해당 페이지가 메모리에 올라와 있지 않고 백킹스토어에 존재하는 경우이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="역페이지-테이블">역페이지 테이블</h4>
+<ul>
+<li>페이지 테이블로 인한 공간의 낭비
+<ul>
+<li>모든 프로세스 별로 그 논리적 주소에 대응하는 모든 페이지에 대해 페이지 테이블 entry가 존재한다.</li>
+<li>entry는 그 페이지가 물리적 메모리에 있든 없든간에 존재한다.</li>
+<li>그래서 대안으로 역페이지 테이블이 등장했다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<p><img src="/post/os/images/09-07-invertedPageTable.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="역페이지 테이블"
+	
+	
+></p>
+<ul>
+<li><strong>역페이지 테이블(Inverted page table)</strong>
+<ul>
+<li>논리적 주소에 대해 페이지 테이블을 만드는 것이 아니라, 물리적 주소에 대해 페이지 테이블을 만드는 것이다.</li>
+<li>그래서 물리적 주소의 페이지 프레임 하나당 페이지 테이블의 entry 하나를 둔다. 즉, <strong>시스템 전체(system-wide)에 페이지 테이블을 하나만 두는 방법</strong>이다.</li>
+<li>entry에는 <code>프로세스의 id</code>와 논리적 페이지 번호(<code>p</code>)가 들어있다.</li>
+<li>단점
+<ul>
+<li>페이지가 물리적 메모리에 존재하는지 여부를 판단하기 위해 페이지 테이블 전체를 탐색해야 한다.</li>
+</ul>
+</li>
+<li>조치
+<ul>
+<li>연관 레지스터를 사용해서 페이지 테이블 전체 entry를 병렬탐색 할 수 있게 한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h3 id="2-세그먼테이션segmentation">(2) 세그먼테이션(Segmentation)</h3>
+<ul>
+<li>프로그램의 주소 공간을 코드, 데이터, 스택 등 <mark style="background-color: lightblue"><strong>의미 있는 단위인 세그먼트로 나누어서</strong></mark> 세그먼트 단위로 적재하는 방식이다.
+<ul>
+<li>논리적 단위(logical unit)로 나누었기 때문에 그 크기가 균일하지 않다.</li>
+<li>세그먼트를 함수 단위로 정의할 수도 있다. (<code>main()</code>, <code>function</code>, <code>global variables</code>, <code>stack</code>, <code>symbol table</code>, <code>arrays</code>)</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="주소-변환-기법-1">주소 변환 기법</h4>
+<p><img src="/post/os/images/09-08-segmentTable.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="세그먼트 테이블"
+	
+	
+></p>
+<ul>
+<li>논리적인 세그먼트 번호 <code>s</code>는 해당 논리적 주소가 프로세스 주소 공간 내에서 몇 번째 세그먼트인지를 알려준다. 이것을 사용해서 세그먼트 테이블에 접근한다.</li>
+<li>물리적 메모리의 세그먼트 내에서의 위치(오프셋 <code>d</code>)는 그대로 사용된다. <code>base</code> + <code>d</code> 로 물리적 메모리에 접근한다.</li>
+<li>세그먼트 테이블의 각 entry는 기준점 <code>base</code>와 한계점 <code>limit</code>를 가지고 있다.
+<ul>
+<li><code>base</code>는 물리적 메모리에서 그 세그먼트의 시작 위치를 나타낸다.</li>
+<li><code>limit</code>은 그 세그먼트의 길이를 나타낸다.
+<ul>
+<li>페이징에서는 이것이 필요 없었다. 길이가 모두 일정하기 때문이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>세그먼트 테이블 기준 레지스터(Segment-Table Base Register; STBR)</strong>
+<ul>
+<li>물리적 메모리에서 세그먼트 테이블이 존재하는 시작 위치를 가리킨다.</li>
+</ul>
+</li>
+<li><strong>세그먼트 테이블 길이 레지스터(Segment-Table Length Register; STLR)</strong>
+<ul>
+<li>프로세스의 주소 공간이 총 몇 개의 세그먼트로 구성되는지, 즉 세그먼트의 개수를 나타낸다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>세그먼테이션 기법에서는 논리적 주소를 물리적 주소로 변환하기 전에 두 가지 사항을 먼저 확인한다.
+<ul>
+<li>(1) 요청된 세그먼트 번호 <code>s</code>가 STLR에 저장된 세그먼트 길이 값보다 작은 값인가?</li>
+<li>(2) 오프셋 값 <code>d</code>가 세그먼트의 길이 <code>limit</code>보다 작은 값인가?</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="공유-보호-할당">공유, 보호, 할당</h4>
+<ul>
+<li>공유, 보호
+<ul>
+<li>공유 세그먼트(shared segment) 개념을 지원한다.</li>
+<li>세그먼테이션 기법에서도 페이징 기법과 마찬가지로 entry에 보호비트와 유효-무효 비트를 둔다.</li>
+<li>페이징에 비해 공유와 보안 측면에서 효과적이다.
+<ul>
+<li>페이지는 동일 크기로 무조건 자르기 때문에 한 페이지에 읽기 전용 접근 권한을 주더라도 코드영역과 데이터영역이 같이 들어가 있을 수 있다.</li>
+<li>하지만 세그먼트는 의미적인 단위로 나뉘므로, 공유나 보안 처럼 <strong>의미적인 단위에 대해 수행하는 업무에서는 훨씬 효과적</strong>이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>햘당
+<ul>
+<li>최초적합(first-fit), 최적적합(best-fit) 방식을 사용해서 세그먼트를 가용 공간에 할당할 수 있다.</li>
+<li>세그먼트의 크기가 모두 균일하지 않으므로 <strong>외부 조각이 발생</strong>한다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h3 id="3-페이지드-세그먼테이션paged-segmentation">(3) 페이지드 세그먼테이션(Paged segmentation)</h3>
+<ul>
+<li>페이징 기법과 세그먼테이션 기법의 장점만을 취하는 주소 변환 기법이다.</li>
+<li>프로그램의 주소 공간을 의미 단위인 세그먼트로 나누되, <mark style="background-color: lightblue"><strong>세그먼트를 임의의 길이가 아닌 동일한 크기의 페이지들의 집합으로 구성</strong></mark>하는 방식이다.</li>
+<li>따라서 하나의 세그먼트는 페이지 크기의 배수가 된다. 그리고 물리적 메모리에 적재하는 단위는 페이지 단위로 한다.
+<ul>
+<li>외부조각의 문제점을 해결하며, 의미 단위로 프로세스 간의 공유나 접근권한 보호가 이루어지도록 해서 각각의 단점을 보완한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h4 id="주소-변환-기법-2">주소 변환 기법</h4>
+<p><img src="/post/os/images/09-09-pagedSegmentTable.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="페이지드 세그먼테이션 테이블"
+	
+	
+></p>
+<ul>
+<li>외부의 세그먼트 테이블과 내부의 페이지 테이블, 이렇게 두 단계의 테이블을 이용한다.</li>
+<li>세그먼트 번호 <code>s</code>로 세그먼트 테이블에 접근해서, 세그먼트 길이 <code>segment-length</code>와 페이지 테이블의 시작 주소 <code>page-table base</code>를 얻는다.</li>
+<li>오프셋 값 <code>d</code>가 세그먼트 길이값 <code>segment-length</code>보다 작은지 검사한다.</li>
+<li>오프셋 값 <code>d</code>를 상위(<code>p</code>), 하위(<code>d'</code>) 비트로 나눈다. 상위 비트로 페이지 테이블에 접근(<code>page-table base</code> + <code>p</code>)하고, 하위 비트로 물리적 메모리의 페이지 내 변위(<code>f</code> + <code>d'</code>)로 사용한다.</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/os/">OS</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-12/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 12. 디스크 관리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-11/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 11. 파일 시스템</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-10/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 10. 가상 메모리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-08/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 8. 데드락</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-07/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 7. 프로세스 동기화</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

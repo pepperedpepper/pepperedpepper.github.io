@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+데드락 교착상태(deadlock) 둘 이상의 프로세스가 서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태이다. 여기서 자원이란 하드웨어, 소프트웨어 등을 포함하는 개념이다. (예: I/O device, CPU cycle, memory space, semaphore 등) 프로세스가 자원을 사용하는 절차: Request → Allocate → Use → Release 데드락 발생의 4가지 조건 조건 설명 상호 배제 (Mutual exclusion) 매 순간 하나의 프로세스만 자원을 획득할 수 있다. 보유 대기 (Hold and wait) 자원을 가진 프로세스가 다른 자원을 기다릴 때, 보유 자원을 놓지 않고 계속 가지고 있다.'>
+<title>[OS] Chapter 8. 데드락</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/os-it-principles-08/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[OS] Chapter 8. 데드락'>
+<meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+데드락 교착상태(deadlock) 둘 이상의 프로세스가 서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태이다. 여기서 자원이란 하드웨어, 소프트웨어 등을 포함하는 개념이다. (예: I/O device, CPU cycle, memory space, semaphore 등) 프로세스가 자원을 사용하는 절차: Request → Allocate → Use → Release 데드락 발생의 4가지 조건 조건 설명 상호 배제 (Mutual exclusion) 매 순간 하나의 프로세스만 자원을 획득할 수 있다. 보유 대기 (Hold and wait) 자원을 가진 프로세스가 다른 자원을 기다릴 때, 보유 자원을 놓지 않고 계속 가지고 있다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-08/'>
+<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-06-30T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-06-30T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[OS] Chapter 8. 데드락">
+<meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
+데드락 교착상태(deadlock) 둘 이상의 프로세스가 서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태이다. 여기서 자원이란 하드웨어, 소프트웨어 등을 포함하는 개념이다. (예: I/O device, CPU cycle, memory space, semaphore 등) 프로세스가 자원을 사용하는 절차: Request → Allocate → Use → Release 데드락 발생의 4가지 조건 조건 설명 상호 배제 (Mutual exclusion) 매 순간 하나의 프로세스만 자원을 획득할 수 있다. 보유 대기 (Hold and wait) 자원을 가진 프로세스가 다른 자원을 기다릴 때, 보유 자원을 놓지 않고 계속 가지고 있다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-GHXK2NBM48', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#데드락">데드락</a></li>
+    <li><a href="#데드락-발생의-4가지-조건">데드락 발생의 4가지 조건</a></li>
+    <li><a href="#데드락-해결-방법">데드락 해결 방법</a>
+      <ul>
+        <li><a href="#데드락-예방-deadlock-prevention">데드락 예방 (Deadlock Prevention)</a></li>
+        <li><a href="#데드락-회피-deadlock-avoidance">데드락 회피 (Deadlock Avoidance)</a></li>
+        <li><a href="#데드락-탐지-및-회복-deadlock-detection-and-recovery">데드락 탐지 및 회복 (Deadlock Detection and Recovery)</a></li>
+        <li><a href="#데드락-무시-deadlock-ignorance">데드락 무시 (Deadlock Ignorance)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/os/" >
+                OS
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/os-it-principles-08/">[OS] Chapter 8. 데드락</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 30, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/90124877"  target="_blank" rel="noopener"
+    >운영체제와 정보기술의 원리</a> 강의을 듣고 공부한 노트입니다.</p>
+</div>
+<hr>
+<p><br /><br /></p>
+<h2 id="데드락">데드락</h2>
+<ul>
+<li><strong>교착상태(deadlock)</strong>
+<ul>
+<li>둘 이상의 프로세스가 <strong>서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태</strong>이다.</li>
+<li>여기서 자원이란 하드웨어, 소프트웨어 등을 포함하는 개념이다. (예: I/O device, CPU cycle, memory space, semaphore 등)</li>
+<li>프로세스가 자원을 사용하는 절차: Request → Allocate → Use → Release</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="데드락-발생의-4가지-조건">데드락 발생의 4가지 조건</h2>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>상호 배제 <br /> (Mutual exclusion)</strong></td>
+<td>매 순간 하나의 프로세스만 자원을 획득할 수 있다.</td>
+</tr>
+<tr>
+<td><strong>보유 대기 <br /> (Hold and wait)</strong></td>
+<td>자원을 가진 프로세스가 다른 자원을 기다릴 때, <br /> 보유 자원을 놓지 않고 계속 가지고 있다.</td>
+</tr>
+<tr>
+<td><strong>비선점 <br /> (No preemption)</strong></td>
+<td>프로세스의 자원을 강제로 빼앗을 수 없다.</td>
+</tr>
+<tr>
+<td><strong>순환 대기 <br /> (Circular wait)</strong></td>
+<td>자원을 기다리는 프로세스 간에 사이클이 형성되어 있다.</td>
+</tr>
+</tbody>
+</table></div>
+<p><br /><br /></p>
+<h2 id="데드락-해결-방법">데드락 해결 방법</h2>
+<br />
+<h3 id="데드락-예방-deadlock-prevention">데드락 예방 (Deadlock Prevention)</h3>
+<ul>
+<li>
+<p>자원 할당 시 <strong>데드락 발생의 4가지 <mark style="background-color: lightblue">조건 중 어느 하나가 만족되지 않도록</mark> 하는 것</strong>이다.</p>
+</li>
+<li>
+<p>만족되지 않도록 배제 할 수 있는 조건 살펴보기</p>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>상호 배제 <br /> (Mutual exclusion)</strong></td>
+<td>공유하면 안 되는 자원은 이 조건을 반드시 성립해야 해서 <strong>배제 불가능</strong>.</td>
+</tr>
+<tr>
+<td><strong>보유 대기 <br /> (Hold and wait)</strong></td>
+<td>자원을 <strong>요청할 때 자원을 가지지 않도록</strong> 하면 된다. <br /> 방법1. 프로세스 시작 시 모든 필요한 자원을 할당받게 한다. <br /> 방법2. 자원이 필요한 경우 보유 자원을 모두 놓고 다시 요청한다.</td>
+</tr>
+<tr>
+<td><strong>비선점 <br /> (No preemption)</strong></td>
+<td>다른 자원을 요청할 때 자원을 보유한 자원을 빼앗을 수 있도록 한다. (<strong>선점</strong>) <br /> 상태를 쉽게 저장하고 복구할 수 있는 자원에서 주로 사용한다. (CPU, memory)</td>
+</tr>
+<tr>
+<td><strong>순환 대기 <br /> (Circular wait)</strong></td>
+<td>모든 자원 유형에 할당 순서를 정해서 <strong>정해진 순서대로만 자원을 할당한다.</strong> <br /> 예를 들어, 1번, 3번 자원을 획득해야지만 5번 자원을 획득할 수 있는 것이다.  <br /> 자원 A(순서 3)을 보유 중인데 자원 B(순서 1)을 할당받으려면 우선 자원 A를 해제해야한다.  <br /> 하지만, 자원에 대한 이용률(Utilization)이 낮아지고, Throughput 감소, Starvation이 발생할 수 있다.</td>
+</tr>
+</tbody>
+</table></div>
+<p><br /><br /></p>
+<h3 id="데드락-회피-deadlock-avoidance">데드락 회피 (Deadlock Avoidance)</h3>
+<ul>
+<li>자원 요청에 대한 부가적인 정보를 이용해서 자원 할당을 하면 <mark style="background-color: lightblue"><strong>데드락의 가능성이 없는지를 동적으로 검사해서 안전한 경우에만 자원을 할당</strong></mark>하는 것이다.
+<ul>
+<li>가장 단순하고 일반적인 모델은, 프로세스들이 시작될 때, <strong>평생 필요로 하는 자원별 최대 사용량을 미리 선언</strong>하도록 하는 것이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<p><img src="/post/os/images/08-01-safeUnsafe.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="safe, unsaafe, deadlock"
+	
+	
+></p>
+<ul>
+<li><strong>safe state</strong>
+<ul>
+<li>데드락이 없는 안전한 상태이다.</li>
+</ul>
+</li>
+<li><strong>safe sequence</strong>
+<ul>
+<li>특정한 순서로 자원의 할당, 실행, 종료 등의 작업을 할 때 데드락이 발생하지 않는 순서를 찾을 수 있다면, 그것을 안전 순서라고 부른다.</li>
+</ul>
+</li>
+<li><strong>unsafe state</strong>
+<ul>
+<li>데드락이 있을 가능성이 있는 상태이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>2가지 회피 알고리즘
+<ul>
+<li>자원의 인스턴스가 1개일 때
+<ul>
+<li>(1) <strong>자원 할당 그래프 알고리즘(Resource Allocation Grapeh algorithm)</strong> 사용</li>
+</ul>
+</li>
+<li>자원의 인스턴스가 여러개 일 때
+<ul>
+<li>(2) <strong>은행원 알고리즘(Banker&rsquo;s algorithm)</strong> 사용</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>(1) <mark style="background-color: lightblue"><strong>자원 할당 그래프 알고리즘</strong></mark></li>
+</ul>
+<p><img src="/post/os/images/08-02-resourceAllocGraph.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="자원 할당 그래프"
+	
+	
+></p>
+<ul>
+<li>$P_2$가 $R_2$자원을 할당받으면 사이클이 생기므로, $P_1$이 먼저 할당받는다.</li>
+</ul>
+<br />
+<ul>
+<li>(2) <mark style="background-color: lightblue"><strong>은행원 알고리즘</strong></mark>
+<ul>
+<li>가정
+<ul>
+<li>모든 프로세스는 <strong>자원의 최대 사용량</strong>을 미리 명시한다.</li>
+<li>그리고 자원을 최대 사용량만큼 할당 받은 프로세스는 작업이 끝나면 자원을 반납한다.</li>
+</ul>
+</li>
+<li>방법
+<ul>
+<li><strong>현재 가용 자원(Available)</strong> 과 각 프로세스들이 <strong>작업을 완료하기 위해 필요한 자원(Need)</strong> 을 비교하여, <strong>당장 작업을 마칠 수있는 프로세스부터 자원을 할당</strong>하여, 프로세스가 작업을 완료하고 <strong>반환하는 자원을 다른 프로세스에게 다시 할당</strong>하는 것이다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>프로세스명</th>
+<th>Max</th>
+<th>Allocation</th>
+<th>Need</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P0</td>
+<td>10</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr>
+<td>P1</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>9</td>
+<td>2</td>
+<td>7</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>여기서 총 자원의 양이 12라고 한다면, 현재 Allocation은 9이므로, Available은 3이다.
+<ul>
+<li>이 때, Need가 Available을 넘지 않는 P1이 2만큼 할당 받을 수 있겠다.</li>
+<li>P1의 작업이 끝나고, 자원이 해제되어서 Available이 5가 되면, P0이 할당 받을 수 있다.</li>
+<li>P0의 작업이 끝나고, 자원이 해제되어서 Available이 10이 되면, P2가 할당 받을 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h3 id="데드락-탐지-및-회복-deadlock-detection-and-recovery">데드락 탐지 및 회복 (Deadlock Detection and Recovery)</h3>
+<ul>
+<li>데드락 발생은 허용하되, 그에 대한 detection 루틴을 두어 데드락 발생 시 recover하는 것이다.</li>
+</ul>
+<br />
+<ul>
+<li>2가지 탐지 및 회복 알고리즘
+<ul>
+<li>자원의 인스턴스가 1개일 때
+<ul>
+<li>(1) 자원 할당 그래프의 변형인 <strong>대기 그래프(Wait-for graph)</strong> 사용</li>
+</ul>
+</li>
+<li>자원의 인스턴스가 여러개 일 때
+<ul>
+<li>(2) 은행원 알고리즘과 유사한 방법 사용</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>(1) <mark style="background-color: lightblue"><strong>대기 그래프(Wait-for graph)</strong></mark></li>
+</ul>
+<p><img src="/post/os/images/08-03-waitForGraph.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="대기 그래프"
+	
+	
+></p>
+<ul>
+<li>자원 타입의 노드를 제거하고 프로세스만으로 노드를 구성해서 사이클이 존재하는지 조사한다. ($n^2$)</li>
+</ul>
+<br />
+<ul>
+<li>
+<p>(2) <strong>은행원 알고리즘과 유사한 방법</strong></p>
+</li>
+<li>
+<p>은행원 알고리즘과 다른 것</p>
+<ul>
+<li>각 프로세스가 <strong>실제로 요청한 자원(Request)</strong> 개수를 사용한다. 이것은 추가적으로 요청할 수 있는 것(Need)과 다르다.</li>
+<li><strong>현재</strong> 상태가 안전 상태(safe state)인지 확인하고, 불안정 상태(unsafe state)라면 데드락이라고 판단한 후 recovery 한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>Recovery
+<ul>
+<li>방법 1. <strong>Process Termination</strong>
+<ul>
+<li>데드락과 연루된 프로세스를 모두 <strong>종료시킨다.</strong></li>
+<li>혹은 데드락과 연루된 프로세스를 하나씩 종료시킨다.</li>
+</ul>
+</li>
+<li>방법 2. <strong>Resource Preemption</strong>
+<ul>
+<li>비용을 최소화하는 프로세스 <strong>희생양을 하나 찾아서, 자원을 뺏는다.</strong> (safe state로 rollback해서 프로세스를 다시 시작한다. )</li>
+<li>동일한 프로세스가 희생양이 되는 starvation 문제가 발생할 수 있다. 따라서 rollback 횟수도 고려해서 선정해야 한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h3 id="데드락-무시-deadlock-ignorance">데드락 무시 (Deadlock Ignorance)</h3>
+<ul>
+<li>데드락을 시스템이 책임지지 않는 것이다. 데드락이 일어나지 않는다고 생각하고 <mark style="background-color: lightblue"><strong>아무런 조취도 취하지 않는다.</strong></mark></li>
+<li>만약 데드락이 발생하면, 시스템이 비정상적으로 작동한다는 것을 사람이 느끼고 직접 프로세스를 죽이도록 한다.</li>
+<li>UNIX, Windows 등의 대부분의 운영체제가 채택한 방법이다.</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/os/">OS</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-12/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 12. 디스크 관리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-11/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 11. 파일 시스템</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-10/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 10. 가상 메모리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-09/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 9. 메모리 관리</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/os-it-principles-07/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[OS] Chapter 7. 프로세스 동기화</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

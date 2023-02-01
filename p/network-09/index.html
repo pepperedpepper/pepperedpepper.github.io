@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='무선 랜의 구조 무선 랜이란?
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
+무선 랜의 구조 무선 랜이란?
 랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다. 유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다. 해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다. 무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)
 WAP는 무선 공유기에 내장되어 있다. 무선 클라이언트(컴퓨터, 스마트폰)
-컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다. 통신 방식 인트라스트럭처(infrastructure) 방식 WAP를 통해 통신하는 방식 일반적으로 이 방식을 사용한다.'>
+컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다.'>
 <title>[Network] Chapter 9. 무선 랜 이해하기</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/network-09/'>
 
-<link rel="stylesheet" href="/scss/style.min.5be32ca3f6e1a997c75795c4359147cc6d4fbd34948c0acd51e31d237033978a.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
-     crossorigin="anonymous"></script><meta property='og:title' content='[Network] Chapter 9. 무선 랜 이해하기'>
-<meta property='og:description' content='무선 랜의 구조 무선 랜이란?
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script>
+<meta property='og:title' content='[Network] Chapter 9. 무선 랜 이해하기'>
+<meta property='og:description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
+무선 랜의 구조 무선 랜이란?
 랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다. 유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다. 해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다. 무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)
 WAP는 무선 공유기에 내장되어 있다. 무선 클라이언트(컴퓨터, 스마트폰)
-컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다. 통신 방식 인트라스트럭처(infrastructure) 방식 WAP를 통해 통신하는 방식 일반적으로 이 방식을 사용한다.'>
+컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/network-09/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-26T02:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-26T02:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Network] Chapter 9. 무선 랜 이해하기">
-<meta name="twitter:description" content="무선 랜의 구조 무선 랜이란?
+<meta name="twitter:description" content="모두의 네트워크 책을 읽고 공부한 노트입니다.
+무선 랜의 구조 무선 랜이란?
 랜 케이블을 사용하지 않고 전파를 이용해서 컴퓨터를 무선으로 연결하는 방식이다. 유선보다 속도가 불안정하고 전파가 약하면 연결이 잘 안 될 수 있다. 해킹될 위험이 높으므로 반드시 암호화나 인증 설정을 해두어야 한다. 무선 액세스 포인트(Wireless Access Point; WAP; 무선 공유기; 무선 AP)
 WAP는 무선 공유기에 내장되어 있다. 무선 클라이언트(컴퓨터, 스마트폰)
-컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다. 통신 방식 인트라스트럭처(infrastructure) 방식 WAP를 통해 통신하는 방식 일반적으로 이 방식을 사용한다.">
+컴퓨터가 WAP과 통신하려면 무선 랜 칩과 무선 랜 어댑터(USB 메모리 방식 or 컴퓨터 카드 방식)가 필요하다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHXK2NBM48"></script>
@@ -109,28 +113,29 @@ if (!doNotTrack) {
                     </a>
                 </li>
             
-        </ol><ol class="menu" id="main-menu">
-        
-        
-        
-        <li >
-            <a href='/archives/' >
-                
-                
-                
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <rect x="3" y="4" width="18" height="4" rx="2" />
-  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
-  <line x1="10" y1="12" x2="14" y2="12" />
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
 </svg>
 
 
 
-                
-                <span>Archives</span>
-            </a>
-        </li>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
         
         
         <li >
@@ -148,6 +153,132 @@ if (!doNotTrack) {
 
                 
                 <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
             </a>
         </li>
         
@@ -262,7 +393,11 @@ if (!doNotTrack) {
     <section class="article-content">
     
     
-    <hr>
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/61794014"  target="_blank" rel="noopener"
+    >모두의 네트워크</a> 책을 읽고 공부한 노트입니다.</p>
+</div>
+<hr>
 <p><br /><br /></p>
 <h2 id="무선-랜의-구조">무선 랜의 구조</h2>
 <ul>
@@ -490,6 +625,54 @@ if (!doNotTrack) {
      
     
         
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
     
 
     <footer class="site-footer">
