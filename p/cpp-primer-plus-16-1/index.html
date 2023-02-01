@@ -8,8 +8,7 @@ string 클래스 string 헤더파일을 통해 지원된다. C 스타일은 stri
 <link rel='canonical' href='https://pepperedpepper.github.io/p/cpp-primer-plus-16-1/'>
 
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
-     crossorigin="anonymous"></script>
-<meta property='og:title' content='[C&#43;&#43; Primer Plus] Chapter 16. (1) string 클래스, 스마트 포인터 템플릿 클래스'>
+     crossorigin="anonymous"></script><meta property='og:title' content='[C&#43;&#43; Primer Plus] Chapter 16. (1) string 클래스, 스마트 포인터 템플릿 클래스'>
 <meta property='og:description' content='C&#43;&#43; 기초 플러스 책을 읽고 공부한 노트입니다.
 string 클래스 string 헤더파일을 통해 지원된다. C 스타일은 string.h와 cstring이다. string은 실제로는 템플릿 특수화 basic_string&amp;lt;char&amp;gt;에 대한 typedef이다. 1 2 3 4 5 6 7 8 9 10 11 12 // string 클래스는 템플릿 클래스에 기초한다. template&amp;lt;class charT, class traits = char_traits&amp;lt;charT&amp;gt;, class Allocator = allocator&amp;lt;charT&amp;gt;&amp;gt; class basic_string { // char 뿐만 아니라 다른형에 기초하는 문자열도 사용할 수 있게 허용한다. typedef basic_string&amp;lt;char&amp;gt; string; typedef basic_string&amp;lt;wchar_t&amp;gt; wstring; typedef basic_string&amp;lt;char16_t&amp;gt; u16string; // C&#43;&#43;11 typedef basic_string&amp;lt;char32_t&amp;gt; u32string; // C&#43;&#43;11 // .'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/cpp-primer-plus-16-1/'>

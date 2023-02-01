@@ -9,8 +9,7 @@ Item 32: public 상속 모형은 반드시 &amp;ldquo;is-a&amp;quot;를 따르�
 <link rel='canonical' href='https://pepperedpepper.github.io/p/effective-cpp-06/'>
 
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
-     crossorigin="anonymous"></script>
-<meta property='og:title' content='[Effective C&#43;&#43;] Chapter 6. 상속, 그리고 객체 지향 설계'>
+     crossorigin="anonymous"></script><meta property='og:title' content='[Effective C&#43;&#43;] Chapter 6. 상속, 그리고 객체 지향 설계'>
 <meta property='og:description' content='이펙티브 C&#43;&#43; 책을 읽고 공부한 노트입니다.
 Item 32: public 상속 모형은 반드시 &amp;ldquo;is-a&amp;quot;를 따르도록 하자 반드시 기억하자! public 상속은 &amp;ldquo;is-a&amp;quot;를 의미한다!
 이것은 기본 클래스는 더 일반적인 개념을 나타내며 파생 클래스는 더 특수한 개념을 나타낸다는 의미이다. public 상속은 Base 클래스가 가진 모든 것들이 파생 클래스 객체에도 그대로 적용된다고 단정하는 상속이다. Item 33: 상속된 이름을 숨기는 일은 피하자 이름을 숨긴다는 것은 유효범위(scope) 와 관계가 있다. 1 2 3 4 5 6 7 8 9 10 int x; // 전역 변수 void someFunc() { double x; // 지역 변수 // someFunc의 유효범위 안쪽에 있으므로 // int x를 가린다 std::cout &amp;lt;&amp;lt; x; } 파생 클래스의 이름은 기본 클래스의 이름을 가린다.'>

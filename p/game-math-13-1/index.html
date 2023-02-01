@@ -9,8 +9,7 @@ Chapter 8에서 살펴본 것처럼, 주어진 세 점으로 두 벡터를 생�
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-13-1/'>
 
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
-     crossorigin="anonymous"></script>
-<meta property='og:title' content='[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (1)'>
+     crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (1)'>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
 절두체 컬링 절두체 컬링(Frustum culling) 절두체를 구성하는 6개의 평면에 대해 각각 평면의 방정식을 세우고, 그것을 활용해서 게임 오브젝트가 평면의 바깥에 있는지 확인한다. 바깥에 있다면, 그리지 않는다. 평면의 방정식 절두체를 구성하는 평면의 방정식
 Chapter 8에서 살펴본 것처럼, 주어진 세 점으로 두 벡터를 생성해서 평면 상의 모든 점을 생성할 수 있다. 하지만 3차원 공간의 평면은 앞면과 뒷면이 존재하기 때문에 이를 구분할 수 있어야 하겠다. 따라서 평면이 바라보는 방향을 알려주는 법선 벡터와 평면 상에 위치한 한 점을 제공하는 방법을 사용한다.'>
@@ -443,7 +442,7 @@ $$ = ax + by + cz - (ax_0 + by_0 + cz_0) = 0 $$</li>
 <ul>
 <li><strong>평면의 방정식(The equation of plane)</strong>
 <ul>
-<li><mark style="background-color: lightblue">$$ ax + by + cz + d = 0 $$</mark></li>
+<li><mark style="background-color: lightblue">$ ax + by + cz + d = 0 $</mark></li>
 </ul>
 </li>
 </ul>
@@ -538,12 +537,12 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 </li>
 <li>따라서 법선 벡터 $(a, b, c)$와 $d$를 사용해 주어진 점 $P = (x_1, y_1, z_1)$이 <strong>평면의 바깥쪽에 있는지 판단</strong>하는 수식은 다음과 같다.
 <ul>
-<li><mark style="background-color: lightblue">$$(a, b, c) \cdot (x_1, y_1, z_1) + d &gt; 0 $$</mark></li>
+<li><mark style="background-color: lightblue"> $(a, b, c) \cdot (x_1, y_1, z_1) + d &gt; 0 $ </mark></li>
 </ul>
 </li>
 <li>그리고 <strong>평면에서 해당 점까지의 최단 거리</strong>는 다음과 같다.
 <ul>
-<li><mark style="background-color: lightblue">$$distance = |(a, b, c) \cdot (x_1, y_1, z_1) + d | $$</mark></li>
+<li><mark style="background-color: lightblue"> $distance = |(a, b, c) \cdot (x_1, y_1, z_1) + d | $ </mark></li>
 </ul>
 </li>
 </ul>

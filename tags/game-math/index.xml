@@ -1881,7 +1881,7 @@ $$ = ax + by + cz - (ax_0 + by_0 + cz_0) = 0 $$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;평면의 방정식(The equation of plane)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;$$ ax + by + cz + d = 0 $$&lt;/mark&gt;&lt;/li&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;$ ax + by + cz + d = 0 $&lt;/mark&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1976,12 +1976,12 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ &lt;br /&gt;
 &lt;/li&gt;
 &lt;li&gt;따라서 법선 벡터 $(a, b, c)$와 $d$를 사용해 주어진 점 $P = (x_1, y_1, z_1)$이 &lt;strong&gt;평면의 바깥쪽에 있는지 판단&lt;/strong&gt;하는 수식은 다음과 같다.
 &lt;ul&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;$$(a, b, c) \cdot (x_1, y_1, z_1) + d &amp;gt; 0 $$&lt;/mark&gt;&lt;/li&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt; $(a, b, c) \cdot (x_1, y_1, z_1) + d &amp;gt; 0 $ &lt;/mark&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;그리고 &lt;strong&gt;평면에서 해당 점까지의 최단 거리&lt;/strong&gt;는 다음과 같다.
 &lt;ul&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;$$distance = |(a, b, c) \cdot (x_1, y_1, z_1) + d | $$&lt;/mark&gt;&lt;/li&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt; $distance = |(a, b, c) \cdot (x_1, y_1, z_1) + d | $ &lt;/mark&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2518,7 +2518,7 @@ $$ (P_{row4} - P_{row3} \cdot \vec{v}) \geq 0 $$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;화각이 커질 수록 초점 거리는 가까워지고, 화각이 작아질 수록 초점 거리는 멀어지겠다.&lt;/li&gt;
 &lt;li&gt;$$\tan(\frac{\theta}{2}) = \frac{1}{d}$$ &lt;br /&gt;&lt;br&gt;
-&lt;mark style=&#34;background-color: lightblue&#34;&gt;$$ d = \frac{1}{\tan(\frac{\theta}{2})} $$ &lt;/mark&gt; &lt;br /&gt;&lt;br&gt;
+&lt;mark style=&#34;background-color: lightblue&#34;&gt;$ d = \frac{1}{\tan(\frac{\theta}{2})} $ &lt;/mark&gt; &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/12-02-d.jpg&#34;
 	
 	
