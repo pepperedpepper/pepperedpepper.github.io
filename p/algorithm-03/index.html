@@ -391,7 +391,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    13 minute read
+                    12 minute read
                 </time>
             </div>
         
@@ -1174,32 +1174,6 @@ if (!doNotTrack) {
 </span><span class="lnt">195
 </span><span class="lnt">196
 </span><span class="lnt">197
-</span><span class="lnt">198
-</span><span class="lnt">199
-</span><span class="lnt">200
-</span><span class="lnt">201
-</span><span class="lnt">202
-</span><span class="lnt">203
-</span><span class="lnt">204
-</span><span class="lnt">205
-</span><span class="lnt">206
-</span><span class="lnt">207
-</span><span class="lnt">208
-</span><span class="lnt">209
-</span><span class="lnt">210
-</span><span class="lnt">211
-</span><span class="lnt">212
-</span><span class="lnt">213
-</span><span class="lnt">214
-</span><span class="lnt">215
-</span><span class="lnt">216
-</span><span class="lnt">217
-</span><span class="lnt">218
-</span><span class="lnt">219
-</span><span class="lnt">220
-</span><span class="lnt">221
-</span><span class="lnt">222
-</span><span class="lnt">223
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
@@ -1238,11 +1212,6 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">        <span class="n">f</span> <span class="o">=</span> <span class="n">INF</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="n">prev</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">Print</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%2d+%2d=%2d(%d, %d) &#34;</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">prev</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">prev</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">
@@ -1253,31 +1222,6 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span> <span class="n">D_DIAGONAL</span> <span class="o">=</span> <span class="mi">14</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span> <span class="n">DIR_LENGTH</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">Pos</span> <span class="n">DIR</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}};</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="n">NodeData</span> <span class="o">**</span> <span class="n">table</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getG</span><span class="p">(</span><span class="n">Pos</span> <span class="n">pos</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">g</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getH</span><span class="p">(</span><span class="n">Pos</span> <span class="n">pos</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">h</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getF</span><span class="p">(</span><span class="n">Pos</span> <span class="n">pos</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">table</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">setTable</span><span class="p">(</span><span class="n">Pos</span> <span class="n">pos</span><span class="p">,</span> <span class="kt">int</span> <span class="n">g</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">prev</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">table</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">g</span> <span class="o">=</span> <span class="n">g</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">table</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">h</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">table</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">g</span> <span class="o">+</span> <span class="n">h</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">table</span><span class="p">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nf">getDistance</span><span class="p">(</span><span class="n">Pos</span> <span class="n">from</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">to</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
@@ -1293,22 +1237,19 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">aStar</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">map</span><span class="p">,</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">start</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">des</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 테이블 초기화
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">table</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NodeData</span><span class="o">*</span><span class="p">[</span><span class="n">row</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">NodeData</span><span class="o">&gt;&gt;</span> <span class="n">data</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">NodeData</span><span class="o">&gt;</span><span class="p">(</span><span class="n">col</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">row</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="n">NodeData</span><span class="p">[</span><span class="n">col</span><span class="p">]();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 시작노드에서 시작노드까지의 거리 0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 시작노드에서 목적지노드까지의 거리 H
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">g</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">h</span> <span class="o">=</span> <span class="n">getDistance</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">h</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">g</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">prev</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="n">priority_queue</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">pq</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 시작노드에서 시작노드까지의 거리 0
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 시작노드에서 목적지노드까지의 거리 H
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">setTable</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">getDistance</span><span class="p">(</span><span class="n">des</span><span class="p">,</span> <span class="n">start</span><span class="p">),</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">});</span>
-</span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// { 우선순위의 기준이 되는 F값 , xy좌표 }
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span> <span class="o">-</span><span class="n">getF</span><span class="p">(</span><span class="n">start</span><span class="p">),</span> <span class="n">start</span> <span class="p">});</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span> <span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span><span class="p">,</span> <span class="n">start</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">                    
 </span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">pq</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
@@ -1321,7 +1262,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">                
 </span></span><span class="line"><span class="cl">            <span class="c1">// 기존의 F값보다 &lt; 현재 노드의 F값이 더 크면 (더 좋은(짧은) 거리값이 아니면)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="c1">// 필요 없다
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">getF</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">curF</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">cur</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">cur</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span> <span class="o">&lt;</span> <span class="n">curF</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">DIR_LENGTH</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">{</span>
@@ -1333,19 +1274,25 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">                
 </span></span><span class="line"><span class="cl">                <span class="c1">// 노드 next의 G값 = 이전노드 cur의 G값 + 이전노드와 next의 거리
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="c1">// 노드 next의 F값 = G값 + 목적지노드와 next의 거리(H)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kt">int</span> <span class="n">nextG</span> <span class="o">=</span> <span class="n">getG</span><span class="p">(</span><span class="n">cur</span><span class="p">)</span> <span class="o">+</span> <span class="n">getDistance</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">next</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nextH</span> <span class="o">=</span> <span class="n">getDistance</span><span class="p">(</span><span class="n">des</span><span class="p">,</span> <span class="n">next</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="kt">int</span> <span class="n">nextG</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">cur</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">cur</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">g</span> <span class="o">+</span> <span class="n">getDistance</span><span class="p">(</span><span class="n">cur</span><span class="p">,</span> <span class="n">next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nextH</span> <span class="o">=</span> <span class="n">getDistance</span><span class="p">(</span><span class="n">next</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">                <span class="kt">int</span> <span class="n">nextF</span> <span class="o">=</span> <span class="n">nextG</span> <span class="o">+</span> <span class="n">nextH</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">getF</span><span class="p">(</span><span class="n">next</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">nextF</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">next</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">next</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span> <span class="o">&lt;</span> <span class="n">nextF</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">                
-</span></span><span class="line"><span class="cl">                <span class="n">setTable</span><span class="p">(</span><span class="n">next</span><span class="p">,</span> <span class="n">nextG</span><span class="p">,</span> <span class="n">nextH</span><span class="p">,</span> <span class="n">cur</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span> <span class="o">-</span><span class="n">getF</span><span class="p">(</span><span class="n">next</span><span class="p">),</span> <span class="n">next</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">                <span class="n">data</span><span class="p">[</span><span class="n">next</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">next</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">g</span> <span class="o">=</span> <span class="n">nextG</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">data</span><span class="p">[</span><span class="n">next</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">next</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">h</span> <span class="o">=</span> <span class="n">nextH</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">data</span><span class="p">[</span><span class="n">next</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">next</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span> <span class="o">=</span> <span class="n">nextG</span> <span class="o">+</span> <span class="n">nextH</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">data</span><span class="p">[</span><span class="n">next</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">next</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">prev</span> <span class="o">=</span> <span class="n">cur</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">pq</span><span class="p">.</span><span class="n">push</span><span class="p">({</span> <span class="o">-</span><span class="n">data</span><span class="p">[</span><span class="n">next</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">next</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">f</span><span class="p">,</span> <span class="n">next</span> <span class="p">});</span>
 </span></span><span class="line"><span class="cl">            <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">printTable</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">printPath</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">printTable</span><span class="p">(</span><span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">start</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">des</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">printTable</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">NodeData</span><span class="o">&gt;&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">start</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">des</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;시작 노드 : {%d, %d}, 목적지 노드 : {%d, %d}</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">,</span> <span class="n">des</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">des</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">printf</span><span class="p">(</span><span class="s">&#34;형식 : G + H = F (이전노드x, 이전노드y)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
@@ -1354,7 +1301,12 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">col</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">g</span> <span class="o">!=</span> <span class="n">INF</span><span class="p">)</span> <span class="n">table</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">Print</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">g</span> <span class="o">!=</span> <span class="n">INF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">printf</span><span class="p">(</span><span class="s">&#34;%2d+%2d=%2d(%d, %d) &#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">g</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">h</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">f</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">prev</span><span class="p">.</span><span class="n">x</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">].</span><span class="n">prev</span><span class="p">.</span><span class="n">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
 </span></span><span class="line"><span class="cl">                <span class="k">else</span>
 </span></span><span class="line"><span class="cl">                <span class="p">{</span>
 </span></span><span class="line"><span class="cl">                    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
@@ -1365,23 +1317,23 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">printPath</span><span class="p">(</span><span class="n">Pos</span> <span class="n">start</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">des</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">printPath</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">NodeData</span><span class="o">&gt;&gt;&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">start</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">des</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 경로 출력을 위해 목적지부터 되돌아가며 path에 경로 넣기
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">vector</span><span class="o">&lt;</span><span class="n">Pos</span><span class="o">&gt;</span> <span class="n">path</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="n">path</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">des</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Pos</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">des</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">des</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Pos</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">des</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">des</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">prev</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
 </span></span><span class="line"><span class="cl">            <span class="n">path</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">cur</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">cur</span><span class="p">.</span><span class="n">x</span> <span class="o">==</span> <span class="n">start</span><span class="p">.</span><span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">cur</span><span class="p">.</span><span class="n">y</span> <span class="o">==</span> <span class="n">start</span><span class="p">.</span><span class="n">y</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">                
-</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">table</span><span class="p">[</span><span class="n">cur</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">cur</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cur</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">cur</span><span class="p">.</span><span class="n">x</span><span class="p">][</span><span class="n">cur</span><span class="p">.</span><span class="n">y</span><span class="p">].</span><span class="n">prev</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;path : &#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;이동경로 : &#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">path</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
@@ -1398,8 +1350,6 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="n">AStar</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">map</span><span class="p">,</span> <span class="kt">int</span> <span class="n">row</span><span class="p">,</span> <span class="kt">int</span> <span class="n">col</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">start</span><span class="p">,</span> <span class="n">Pos</span> <span class="n">des</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">aStar</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">printTable</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">printPath</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
@@ -1421,9 +1371,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">    <span class="n">Pos</span> <span class="n">start</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Pos</span> <span class="n">des</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span> <span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">AStar</span> <span class="o">*</span> <span class="n">astar</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AStar</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">delete</span> <span class="n">astar</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">AStar</span> <span class="n">astar</span><span class="p">(</span><span class="n">map</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">des</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>

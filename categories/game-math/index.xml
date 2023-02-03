@@ -373,7 +373,7 @@
 &lt;/ul&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;따라서, 임의의 복소수 $(a, b)$에 &lt;strong&gt;단위 복소수를 곱하면&lt;/strong&gt; &lt;mark style=&#34;background-color: lightblue&#34;&gt;반시게 방향&lt;/mark&gt;으로 회전이 발생하는데, &lt;strong&gt;단위 복소수의 켤레 복소수를 곱하면&lt;/strong&gt; &lt;mark style=&#34;background-color: lightblue&#34;&gt;시계 방향&lt;/mark&gt;의 회전이 발생한다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;따라서, 임의의 복소수 $(a, b)$에 &lt;strong&gt;단위 복소수를 곱하면&lt;/strong&gt; &lt;mark style=&#34;background-color: lightblue&#34;&gt;반시계 방향&lt;/mark&gt;으로 회전이 발생하는데, &lt;strong&gt;단위 복소수의 켤레 복소수를 곱하면&lt;/strong&gt; &lt;mark style=&#34;background-color: lightblue&#34;&gt;시계 방향&lt;/mark&gt;의 회전이 발생한다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/14-07-timesConjugate.jpg&#34;
 	
 	
@@ -400,7 +400,7 @@
 &lt;ul&gt;
 &lt;li&gt;복소수를 수의 관점이 아닌 변환에 관점에서 보자.
 &lt;ul&gt;
-&lt;li&gt;2차원 복소펼면 상의 복소수를 2차원 행렬에 대응할 수 있다.&lt;/li&gt;
+&lt;li&gt;2차원 복소평면 상의 복소수를 2차원 행렬에 대응할 수 있다.&lt;/li&gt;
 &lt;li&gt;단위 복소수가 2차원의 회전 변환행렬과 같다고 해보자.&lt;/li&gt;
 &lt;li&gt;$$ \cos\theta + i\sin\theta = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta \end{bmatrix} $$&lt;/li&gt;
 &lt;li&gt;회전 변환행렬을 분리해 정리하면 다음과 같다.&lt;/li&gt;
@@ -6687,7 +6687,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;삼각형을 중심으로 물체에 관련된 정보를 기록한 데이터이다.&lt;/li&gt;
 &lt;li&gt;메시는 다수의 삼각형으로 구성되고, 삼각형은 세 개의 점으로 구성되므로, 메시는 결국 다수의 점으로 구성된다고 볼 수 있다.&lt;/li&gt;
-&lt;li&gt;메시는 삼각형으로 물체의 외형을 표현하므로 삼각형의 위치정보를 가지고 있어야 한다. 이에 추가로 위치 뿐만 아니라 색상, 방향과 같은 부가 정보도 함께 제공한다. 이렇게 &lt;mark style=&#34;background-color: lightblue&#34;&gt;$위치 정보와 부가 정보를 묶은 특별한 점&lt;/mark&gt;을 &lt;strong&gt;정점(Vertex)&lt;/strong&gt; 이라고 한다.&lt;/li&gt;
+&lt;li&gt;메시는 삼각형으로 물체의 외형을 표현하므로 삼각형의 위치정보를 가지고 있어야 한다. 이에 추가로 위치 뿐만 아니라 색상, 방향과 같은 부가 정보도 함께 제공한다. 이렇게 &lt;mark style=&#34;background-color: lightblue&#34;&gt;위치 정보와 부가 정보를 묶은 특별한 점&lt;/mark&gt;을 &lt;strong&gt;정점(Vertex)&lt;/strong&gt; 이라고 한다.&lt;/li&gt;
 &lt;li&gt;즉, 메시는 정점들이 모인 데이터라고 할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -7819,7 +7819,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;li&gt;(2) 캐릭터 시선 벡터의 크기를 $1$로 정규화시킨 단위 벡터 $\hat{f}$을 구한다.&lt;/li&gt;
 &lt;li&gt;(3) 캐릭터에서 목표물로 향하는 벡터를 정규화시킨 단위 벡터 $\hat{v}$을 구한다.&lt;/li&gt;
 &lt;li&gt;(4) 그 두 벡터의 내적 결과는 $\hat{f} \cdot \hat{v} = \cos\alpha$가 된다. 이것을 앞서 계산해 두었던 $\cos\frac{\beta}{2}$와 비교한다.&lt;/li&gt;
-&lt;li&gt;이 때 $\hat{f} \cdot \hat{v}$가 $\cos\frac{\beta}{2}$보다 크다면 사잇각이 시야보다 작다는 것을 의미하므로 물체가 시야 영역에 들어왔음을 의미한다.&lt;/li&gt;
+&lt;li&gt;이 때 $\hat{f} \cdot \hat{v}$가 $\cos\frac{\beta}{2}$보다 작다면 사잇각이 시야보다 작다는 것을 의미하므로 물체가 시야 영역에 들어왔음을 의미한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
