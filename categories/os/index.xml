@@ -28,7 +28,9 @@
 		alt=&#34;디스크의 구조&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://yusang.tistory.com/19&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;논리블록(logical block)&lt;/strong&gt;
 &lt;ul&gt;
@@ -195,7 +197,9 @@
 		alt=&#34;파일 시스템과 스왑 영역&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://jhi93.github.io/category/os/2019-12-29-operatingsystem-11/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;스왑 영역&lt;/strong&gt;
 &lt;ul&gt;
@@ -737,7 +741,9 @@
 		alt=&#34;페이지 부재 처리&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://thevaishnud.wordpress.com/2020/05/11/virtual-memory/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;(1) CPU가 무효 페이지에 접근하면, (2) 주소 변환을 담당하는 하드웨어인 &lt;strong&gt;MMU가 페이지 부재트랩(page fault trap)을 발생&lt;/strong&gt;시칸다.&lt;/li&gt;
 &lt;li&gt;CPU의 제어권이 &lt;strong&gt;커널 모드&lt;/strong&gt;로 전환되고, 운영체제의 &lt;strong&gt;페이지 부재 처리루틴(page fault handler)이 호출&lt;/strong&gt;된다.&lt;/li&gt;
@@ -787,7 +793,9 @@
 		alt=&#34;페이지 교체&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://thevaishnud.wordpress.com/2020/05/11/virtual-memory/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;페이지 교체(page replacement)&lt;/strong&gt;
 &lt;ul&gt;
@@ -923,7 +931,9 @@
 		alt=&#34;클럭 알고리즘&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://jhi93.github.io/category/os/2019-12-25-operatingsystem-09-2/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;각 프레임 마다 &lt;strong&gt;참조 비트(reference bit)&lt;/strong&gt; 를 두어 사용한다.
 &lt;ul&gt;
@@ -999,7 +1009,9 @@
 		alt=&#34;스레싱&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://woodforest.tistory.com/15&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;스레싱(thrashing)&lt;/strong&gt;
 &lt;ul&gt;
@@ -1074,7 +1086,9 @@
 		alt=&#34;페이지 부재 빈도 알고리즘&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://m.blog.naver.com/dilector/221787111229&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;페이지 부재 빈도 알고리즘(page-fault frequency scheme)&lt;/strong&gt;
 &lt;ul&gt;
@@ -1186,7 +1200,9 @@
 		alt=&#34;MMU 예시&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://rebro.kr/178&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;메모리 관리 유닛 (Memory Management Unit; MMU)&lt;/strong&gt;&lt;/p&gt;
@@ -1446,7 +1462,9 @@
 		alt=&#34;페이징&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.enterprisestorageforum.com/hardware/paging-and-segmentation/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;논리적인 페이지 번호 &lt;code&gt;p&lt;/code&gt;로 페이지 테이블에 접근한다. 거기에서 물리적인 프레임 번호 &lt;code&gt;f&lt;/code&gt;를 얻는다.&lt;/li&gt;
 &lt;li&gt;프레임 내에서의 위치(오프셋 &lt;code&gt;d&lt;/code&gt;)는 프레임 내에서의 주소로 그대로 사용된다. &lt;code&gt;f&lt;/code&gt; + &lt;code&gt;d&lt;/code&gt;로 물리적 메모리에 접근한다.&lt;/li&gt;
@@ -1510,7 +1528,9 @@
 		alt=&#34;2단계 페이징&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://baked-corn.tistory.com/17&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;컴퓨터가 $32bit$ 주소 체계를 사용한다면, $2^{32}byte(4GB)$의 주소 공간을 갖는 프로그램을 지원할 수 있다.&lt;/p&gt;
@@ -1653,7 +1673,9 @@
 		alt=&#34;세그먼트 테이블&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.enterprisestorageforum.com/hardware/paging-and-segmentation/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;논리적인 세그먼트 번호 &lt;code&gt;s&lt;/code&gt;는 해당 논리적 주소가 프로세스 주소 공간 내에서 몇 번째 세그먼트인지를 알려준다. 이것을 사용해서 세그먼트 테이블에 접근한다.&lt;/li&gt;
 &lt;li&gt;물리적 메모리의 세그먼트 내에서의 위치(오프셋 &lt;code&gt;d&lt;/code&gt;)는 그대로 사용된다. &lt;code&gt;base&lt;/code&gt; + &lt;code&gt;d&lt;/code&gt; 로 물리적 메모리에 접근한다.&lt;/li&gt;
@@ -1852,7 +1874,9 @@
 		alt=&#34;safe, unsaafe, deadlock&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cs.csustan.edu/~john/Classes/CS3750/Notes/Chap08/08_Deadlocks.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;safe state&lt;/strong&gt;
 &lt;ul&gt;
@@ -1900,7 +1924,9 @@
 		alt=&#34;자원 할당 그래프&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cs.csustan.edu/~john/Classes/CS3750/Notes/Chap08/08_Deadlocks.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$P_2$가 $R_2$자원을 할당받으면 사이클이 생기므로, $P_1$이 먼저 할당받는다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1996,7 +2022,9 @@
 		alt=&#34;대기 그래프&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.cs.csustan.edu/~john/Classes/CS3750/Notes/Chap08/08_Deadlocks.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;자원 타입의 노드를 제거하고 프로세스만으로 노드를 구성해서 사이클이 존재하는지 조사한다. ($n^2$)&lt;/li&gt;
 &lt;/ul&gt;

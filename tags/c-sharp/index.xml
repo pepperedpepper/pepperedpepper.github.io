@@ -232,7 +232,9 @@
 		alt=&#34;C#의 자료구조&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.naver.com/PostView.nhn?blogId=tutorials_korea&amp;amp;logNo=221610337593&amp;amp;redirect=Dlog&amp;amp;widgetTypeCall=true&amp;amp;directAccess=false&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;C#에서 지원하는 자료구조 클래스이다. C++의 컨테이너와 비슷하다.&lt;/li&gt;
 &lt;li&gt;컬렉션은 &lt;strong&gt;제네릭(Generic)&lt;/strong&gt; 과 &lt;strong&gt;논제네릭(Non-Generic)&lt;/strong&gt; 으로 나뉜다.
@@ -825,7 +827,9 @@
 		alt=&#34;가상 테이블&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://www.csharpstudy.com/DevNote/Article/28&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;한 클래스가 해당 클래스 or 상위 클래스에서 virtual 메서드를 갖는다면,
 &lt;ul&gt;
@@ -1203,7 +1207,9 @@
 		alt=&#34;객체 메모리 구조&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://www.csharpstudy.com/DevNote/Article/5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -1625,7 +1631,9 @@
 		alt=&#34;CLR&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://riucc.tistory.com/m/560?category=781320&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;C# 코드를 빌드하면 &lt;strong&gt;CIL 이라는 중간 코드(Intermediate Language; 어셈블리 코드의 일종)&lt;/strong&gt; 를 만들어 낸다.&lt;/li&gt;
 &lt;li&gt;프로그램 실행시 런타임에 &lt;strong&gt;CLR&lt;/strong&gt;이 이 IL 코드를 읽어서 &lt;strong&gt;JIT 컴파일(Just In Time Compile; 적시 컴파일) 방식&lt;/strong&gt;을 이용해서 Native 코드로 변경한다.&lt;/li&gt;
@@ -1673,7 +1681,9 @@
 		alt=&#34;.NET Assembly&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.shovelman.dev/634&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;.NET 플랫폼에서는 한 덩어리의 실행 파일을 여러 개의 어셈블리 파일로 나눌 수 있다. 따라서 바이너리 파일이 하나인 어셈블리(단일 파일 어셈블리)가 될 수도 있고, 여러 바이너리 파일이 모여서 다중 파일 어셈블리가 될 수도 있다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1687,7 +1697,9 @@
 		alt=&#34;.NET Assembly&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://blog.shovelman.dev/634&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;다중 파일 어셈블리에서, 컴파일 완료된 바이너리 파일의 각각을 모듈이라고 한다.
 &lt;ul&gt;

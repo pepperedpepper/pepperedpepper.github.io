@@ -18995,6 +18995,8 @@
 	
 	
 &gt;
+&lt;a class=&#34;link&#34; href=&#34;http://www.ktword.co.kr/test/view/view.php?m_temp1=4886&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/cpp/images/fp2.png&#34;
 	
 	
@@ -19004,7 +19006,9 @@
 		alt=&#34;부동 소수점형 표기&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://do-rang.tistory.com/73&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;3.14&lt;/code&gt; : 가수, &lt;code&gt;16&lt;/code&gt; : 지수&lt;/li&gt;
 &lt;/ul&gt;
@@ -19205,7 +19209,9 @@
 		alt=&#34;실행 파일 생성 순서&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;http://m.blog.naver.com/herbbread/220519164335&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;(1) 전처리기가 선행처리문자(&lt;code&gt;#&lt;/code&gt;)로 시작하는 선행처리지시문을 처리한다.&lt;/li&gt;
 &lt;li&gt;(2) 컴파일러가 전처리기문이 사라진 소스코드를 어셈블리 코드로 변환한다.&lt;/li&gt;
@@ -19223,7 +19229,9 @@
 		alt=&#34;컴파일러 번역 순서&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;
+&lt;a class=&#34;link&#34; href=&#34;https://gusdnd852.tistory.com/205&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Image Source&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;(1) &lt;strong&gt;어휘 분석(Lexical)&lt;/strong&gt;
 &lt;ul&gt;

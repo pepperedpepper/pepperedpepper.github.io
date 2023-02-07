@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='컬렉션이란? C#에서 지원하는 자료구조 클래스이다. C&#43;&#43;의 컨테이너와 비슷하다. 컬렉션은 제네릭(Generic) 과 논제네릭(Non-Generic) 으로 나뉜다. 논제네릭은 object 형식을 사용해서 데이터를 관리하기 때문에 박싱과 언박싱이 잦아 성능 문제가 있어서 제네릭 컬렉션을 사용한다. 특징 Generic Non-Generic 인덱스 List&amp;lt;T&amp;gt; Array, ArrayList 키 - 값 쌍 Dictionary&amp;lt;TKey,TValue&amp;gt; Hashtable FIFO Queue&amp;lt;T&amp;gt; Queue LIFO Stack&amp;lt;T&amp;gt; Stack 순서대로 엑세스 LinkedList&amp;lt;T&amp;gt; 정렬된 컬렉션 SortedList&amp;lt;TKey,TValue&amp;gt; SortedList 수학함수용 집합 HashSet&amp;lt;T&amp;gt; 불변성과 가변성 불변성(Invariance) 변경할 수 없는. 인스턴스가 생성된 후 값을 변경할 수 없는 타입이다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='컬렉션이란? Image Source
+C#에서 지원하는 자료구조 클래스이다. C&#43;&#43;의 컨테이너와 비슷하다. 컬렉션은 제네릭(Generic) 과 논제네릭(Non-Generic) 으로 나뉜다. 논제네릭은 object 형식을 사용해서 데이터를 관리하기 때문에 박싱과 언박싱이 잦아 성능 문제가 있어서 제네릭 컬렉션을 사용한다. 특징 Generic Non-Generic 인덱스 List&amp;lt;T&amp;gt; Array, ArrayList 키 - 값 쌍 Dictionary&amp;lt;TKey,TValue&amp;gt; Hashtable FIFO Queue&amp;lt;T&amp;gt; Queue LIFO Stack&amp;lt;T&amp;gt; Stack 순서대로 엑세스 LinkedList&amp;lt;T&amp;gt; 정렬된 컬렉션 SortedList&amp;lt;TKey,TValue&amp;gt; SortedList 수학함수용 집합 HashSet&amp;lt;T&amp;gt; 불변성과 가변성 불변성(Invariance) 변경할 수 없는. 인스턴스가 생성된 후 값을 변경할 수 없는 타입이다.'>
 <title>[C#] 컬렉션</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/c-sharp-04/'>
 
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[C#] 컬렉션'>
-<meta property='og:description' content='컬렉션이란? C#에서 지원하는 자료구조 클래스이다. C&#43;&#43;의 컨테이너와 비슷하다. 컬렉션은 제네릭(Generic) 과 논제네릭(Non-Generic) 으로 나뉜다. 논제네릭은 object 형식을 사용해서 데이터를 관리하기 때문에 박싱과 언박싱이 잦아 성능 문제가 있어서 제네릭 컬렉션을 사용한다. 특징 Generic Non-Generic 인덱스 List&amp;lt;T&amp;gt; Array, ArrayList 키 - 값 쌍 Dictionary&amp;lt;TKey,TValue&amp;gt; Hashtable FIFO Queue&amp;lt;T&amp;gt; Queue LIFO Stack&amp;lt;T&amp;gt; Stack 순서대로 엑세스 LinkedList&amp;lt;T&amp;gt; 정렬된 컬렉션 SortedList&amp;lt;TKey,TValue&amp;gt; SortedList 수학함수용 집합 HashSet&amp;lt;T&amp;gt; 불변성과 가변성 불변성(Invariance) 변경할 수 없는. 인스턴스가 생성된 후 값을 변경할 수 없는 타입이다.'>
+<meta property='og:description' content='컬렉션이란? Image Source
+C#에서 지원하는 자료구조 클래스이다. C&#43;&#43;의 컨테이너와 비슷하다. 컬렉션은 제네릭(Generic) 과 논제네릭(Non-Generic) 으로 나뉜다. 논제네릭은 object 형식을 사용해서 데이터를 관리하기 때문에 박싱과 언박싱이 잦아 성능 문제가 있어서 제네릭 컬렉션을 사용한다. 특징 Generic Non-Generic 인덱스 List&amp;lt;T&amp;gt; Array, ArrayList 키 - 값 쌍 Dictionary&amp;lt;TKey,TValue&amp;gt; Hashtable FIFO Queue&amp;lt;T&amp;gt; Queue LIFO Stack&amp;lt;T&amp;gt; Stack 순서대로 엑세스 LinkedList&amp;lt;T&amp;gt; 정렬된 컬렉션 SortedList&amp;lt;TKey,TValue&amp;gt; SortedList 수학함수용 집합 HashSet&amp;lt;T&amp;gt; 불변성과 가변성 불변성(Invariance) 변경할 수 없는. 인스턴스가 생성된 후 값을 변경할 수 없는 타입이다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/c-sharp-04/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C-Sharp' /><meta property='article:published_time' content='2022-04-19T04:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-19T04:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[C#] 컬렉션">
-<meta name="twitter:description" content="컬렉션이란? C#에서 지원하는 자료구조 클래스이다. C&#43;&#43;의 컨테이너와 비슷하다. 컬렉션은 제네릭(Generic) 과 논제네릭(Non-Generic) 으로 나뉜다. 논제네릭은 object 형식을 사용해서 데이터를 관리하기 때문에 박싱과 언박싱이 잦아 성능 문제가 있어서 제네릭 컬렉션을 사용한다. 특징 Generic Non-Generic 인덱스 List&amp;lt;T&amp;gt; Array, ArrayList 키 - 값 쌍 Dictionary&amp;lt;TKey,TValue&amp;gt; Hashtable FIFO Queue&amp;lt;T&amp;gt; Queue LIFO Stack&amp;lt;T&amp;gt; Stack 순서대로 엑세스 LinkedList&amp;lt;T&amp;gt; 정렬된 컬렉션 SortedList&amp;lt;TKey,TValue&amp;gt; SortedList 수학함수용 집합 HashSet&amp;lt;T&amp;gt; 불변성과 가변성 불변성(Invariance) 변경할 수 없는. 인스턴스가 생성된 후 값을 변경할 수 없는 타입이다.">
+<meta name="twitter:description" content="컬렉션이란? Image Source
+C#에서 지원하는 자료구조 클래스이다. C&#43;&#43;의 컨테이너와 비슷하다. 컬렉션은 제네릭(Generic) 과 논제네릭(Non-Generic) 으로 나뉜다. 논제네릭은 object 형식을 사용해서 데이터를 관리하기 때문에 박싱과 언박싱이 잦아 성능 문제가 있어서 제네릭 컬렉션을 사용한다. 특징 Generic Non-Generic 인덱스 List&amp;lt;T&amp;gt; Array, ArrayList 키 - 값 쌍 Dictionary&amp;lt;TKey,TValue&amp;gt; Hashtable FIFO Queue&amp;lt;T&amp;gt; Queue LIFO Stack&amp;lt;T&amp;gt; Stack 순서대로 엑세스 LinkedList&amp;lt;T&amp;gt; 정렬된 컬렉션 SortedList&amp;lt;TKey,TValue&amp;gt; SortedList 수학함수용 집합 HashSet&amp;lt;T&amp;gt; 불변성과 가변성 불변성(Invariance) 변경할 수 없는. 인스턴스가 생성된 후 값을 변경할 수 없는 타입이다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -396,7 +399,9 @@ if (!doNotTrack) {
 		alt="C#의 자료구조"
 	
 	
-></p>
+>
+<a class="link" href="https://blog.naver.com/PostView.nhn?blogId=tutorials_korea&amp;logNo=221610337593&amp;redirect=Dlog&amp;widgetTypeCall=true&amp;directAccess=false"  target="_blank" rel="noopener"
+    >Image Source</a></p>
 <ul>
 <li>C#에서 지원하는 자료구조 클래스이다. C++의 컨테이너와 비슷하다.</li>
 <li>컬렉션은 <strong>제네릭(Generic)</strong> 과 <strong>논제네릭(Non-Generic)</strong> 으로 나뉜다.
