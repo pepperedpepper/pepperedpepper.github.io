@@ -2,7 +2,9 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로세스 프로세스(process) 실행 중인 프로그램(program in execution)을 뜻한다. 프로세스의 문맥(context) 프로세스가 현재 어떤 상태에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다. 프로세스가 CPU를 다시 획득해서 명령 수행을 재개하려면 문맥이 필요하다. 종류 내용 하드웨어 문맥 프로그램 카운터값 각종 레지스터에 저장하고 있는 값 프로세스의 주소 공간 코드, 데이터, 스택으로 구성된 자신만의 독자적 주소 공간 커널 상의 문맥 PCB 커널 스택 프로세스의 상태 상태 설명 준비'>
+프로세스 프로세스(process)
+실행 중인 프로그램(program in execution)을 뜻한다. 프로세스의 문맥(context)
+프로세스가 현재 어떤 상태에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다. 프로세스가 CPU를 다시 획득해서 명령 수행을 재개하려면 문맥이 필요하다. 종류 내용 프로세스의 주소 공간 코드, 데이터, 스택으로 구성된 자신만의 독자적 주소 공간 하드웨어 문맥 프로그램 카운터값 각종 레지스터에 저장하고 있는 값 커널 상의 문맥 PCB 커널 스택 프로세스의 상태 프로세스는 항상 다음 중 어느 한 상태에 머물러 있다.'>
 <title>[OS] Chapter 5. 프로세스 관리</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/os-it-principles-05/'>
@@ -10,13 +12,17 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[OS] Chapter 5. 프로세스 관리'>
 <meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로세스 프로세스(process) 실행 중인 프로그램(program in execution)을 뜻한다. 프로세스의 문맥(context) 프로세스가 현재 어떤 상태에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다. 프로세스가 CPU를 다시 획득해서 명령 수행을 재개하려면 문맥이 필요하다. 종류 내용 하드웨어 문맥 프로그램 카운터값 각종 레지스터에 저장하고 있는 값 프로세스의 주소 공간 코드, 데이터, 스택으로 구성된 자신만의 독자적 주소 공간 커널 상의 문맥 PCB 커널 스택 프로세스의 상태 상태 설명 준비'>
+프로세스 프로세스(process)
+실행 중인 프로그램(program in execution)을 뜻한다. 프로세스의 문맥(context)
+프로세스가 현재 어떤 상태에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다. 프로세스가 CPU를 다시 획득해서 명령 수행을 재개하려면 문맥이 필요하다. 종류 내용 프로세스의 주소 공간 코드, 데이터, 스택으로 구성된 자신만의 독자적 주소 공간 하드웨어 문맥 프로그램 카운터값 각종 레지스터에 저장하고 있는 값 커널 상의 문맥 PCB 커널 스택 프로세스의 상태 프로세스는 항상 다음 중 어느 한 상태에 머물러 있다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-05/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-06-09T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-06-09T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[OS] Chapter 5. 프로세스 관리">
 <meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로세스 프로세스(process) 실행 중인 프로그램(program in execution)을 뜻한다. 프로세스의 문맥(context) 프로세스가 현재 어떤 상태에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다. 프로세스가 CPU를 다시 획득해서 명령 수행을 재개하려면 문맥이 필요하다. 종류 내용 하드웨어 문맥 프로그램 카운터값 각종 레지스터에 저장하고 있는 값 프로세스의 주소 공간 코드, 데이터, 스택으로 구성된 자신만의 독자적 주소 공간 커널 상의 문맥 PCB 커널 스택 프로세스의 상태 상태 설명 준비">
+프로세스 프로세스(process)
+실행 중인 프로그램(program in execution)을 뜻한다. 프로세스의 문맥(context)
+프로세스가 현재 어떤 상태에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다. 프로세스가 CPU를 다시 획득해서 명령 수행을 재개하려면 문맥이 필요하다. 종류 내용 프로세스의 주소 공간 코드, 데이터, 스택으로 구성된 자신만의 독자적 주소 공간 하드웨어 문맥 프로그램 카운터값 각종 레지스터에 저장하고 있는 값 커널 상의 문맥 PCB 커널 스택 프로세스의 상태 프로세스는 항상 다음 중 어느 한 상태에 머물러 있다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -408,17 +414,16 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="프로세스">프로세스</h2>
 <ul>
-<li><strong>프로세스(process)</strong>
+<li>
+<p><strong>프로세스(process)</strong></p>
 <ul>
 <li>실행 중인 프로그램(program in execution)을 뜻한다.</li>
 </ul>
 </li>
-</ul>
-<br />
+<li>
+<p>프로세스의 <strong>문맥(context)</strong></p>
 <ul>
-<li>프로세스의 <strong>문맥(context)</strong>
-<ul>
-<li>프로세스가 현재 어떤 상태에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다.</li>
+<li>프로세스가 <u>현재 어떤 상태</u>에서 수행되고 있는지 정확히 규명하기 위해 필요한 정보이다.</li>
 <li>프로세스가 CPU를 다시 획득해서 명령 수행을 재개하려면 문맥이 필요하다.</li>
 </ul>
 </li>
@@ -432,21 +437,24 @@ if (!doNotTrack) {
 </thead>
 <tbody>
 <tr>
-<td>하드웨어 문맥</td>
-<td>프로그램 카운터값 <br />각종 레지스터에 저장하고 있는 값</td>
-</tr>
-<tr>
-<td>프로세스의 주소 공간</td>
+<td><strong>프로세스의 주소 공간</strong></td>
 <td>코드, 데이터, 스택으로 구성된 자신만의 독자적 주소 공간</td>
 </tr>
 <tr>
-<td>커널 상의 문맥</td>
+<td><strong>하드웨어 문맥</strong></td>
+<td>프로그램 카운터값 <br />각종 레지스터에 저장하고 있는 값</td>
+</tr>
+<tr>
+<td><strong>커널 상의 문맥</strong></td>
 <td>PCB <br />커널 스택</td>
 </tr>
 </tbody>
 </table></div>
 <p><br /><br /></p>
 <h3 id="프로세스의-상태">프로세스의 상태</h3>
+<ul>
+<li>프로세스는 항상 다음 중 어느 한 상태에 머물러 있다.</li>
+</ul>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -477,7 +485,7 @@ if (!doNotTrack) {
 </tr>
 <tr>
 <td><strong>중지<br />(suspended, stopped)</strong></td>
-<td>(이어서&hellip;)</td>
+<td>외부적인 이유로 프로세스의 수행이 정지된 상태 <br />메모리를 조금도 보유하지 않고 디스크에 통째로 스왑 아웃된 상태로 존재한다. <br />(이어서&hellip;)</td>
 </tr>
 </tbody>
 </table></div>
@@ -531,7 +539,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>문맥 교환(context switch)</strong>
 <ul>
-<li><strong>하나의 사용자 프로세스로부터 다른 사용자 프로세스로 CPU의 제어권이 이양되는 것</strong>이다.</li>
+<li><u>하나의 사용자 프로세스로부터 다른 사용자 프로세스로 CPU의 제어권이 이양되는 것</u>이다.</li>
 <li>이전의 프로세스의 상태(문맥)를 보관하고 새로운 프로세스의 상태를 적재하는 작업이 이루어진다.</li>
 <li>한 프로세스의 문맥은 그 프로세스의 프로세스 제어 블록에 기록되어 있다.</li>
 <li>문맥 교환에 소요되는 시간은 오버헤드이기 때문에 적절한 타이머의 CPU 할당 시간을 정하는 것이 중요하겠다.</li>
@@ -540,7 +548,11 @@ if (!doNotTrack) {
 </ul>
 <br />
 <ul>
-<li>발생하는 경우
+<li>준비 상태에 있는 프로세스가 실행 상태로 되면서 CPU의 제어권이 넘어가는 과정을 <strong>CPU 디스패치(dispatch)</strong> 라고 한다.</li>
+</ul>
+<br />
+<ul>
+<li>문맥교환이 발생하는 경우
 <ul>
 <li>타이머 인터럽트 발생</li>
 <li>실행 중이던 프로세스의 입출력 요청</li>
@@ -601,7 +613,7 @@ if (!doNotTrack) {
 	
 ></p>
 <ul>
-<li>스케줄러(scheduler)
+<li><strong>스케줄러(scheduler)</strong>
 <ul>
 <li>어떤 프로세스에게 자원을 할당할지를 결정하는 운영체제 커널의 코드이다.</li>
 </ul>
@@ -618,15 +630,15 @@ if (!doNotTrack) {
 <tbody>
 <tr>
 <td><strong>장기 스케줄러 <br />= 작업 스케줄러 (job scheduler)</strong></td>
-<td>어떤 프로세스를 준비 큐에 진입시킬지 결정한다. <br />즉, <strong>프로세스에게 메모리를 할당하는 문제</strong>에 관여하므로, 메모리에 동시에 올라가 있는 프로세스의 수(degree of multiprogramming)를 조절하는 역할을 한다. <br />현대의 시분할 시스템에서는 장기 스케줄러가 없고, 실행되면 무조건 ready 상태로 된다. degree of multiprogramming은 중기 스케줄러가 대신한다.</td>
+<td>어떤 프로세스를 <u>준비 큐</u>에 진입시킬지 결정한다. <br />즉, 프로세스에게 <u>메모리를 할당하는 문제</u>에 관여하므로, 메모리에 동시에 올라가 있는 프로세스의 수(degree of multiprogramming)를 조절하는 역할을 한다. <br />현대의 시분할 시스템에서는 장기 스케줄러가 없고, 실행되면 무조건 ready 상태로 된다. 따라서 degree of multiprogramming은 <u>중기 스케줄러가 대신</u>한다.</td>
 </tr>
 <tr>
 <td><strong>단기 스케줄러 <br />= CPU 스케줄러</strong></td>
-<td>어떤 프로세스를 실행 상태로 만들지 결정한다. <br />즉, <mark style="background-color: lightblue"><strong>프로세스에게 CPU를 할당하는 문제</strong></mark>에 관여한다. <br />시분할 시스템에서는 타이머 인터럽트가 발생하면 단기 스케줄러가 호출된다.</td>
+<td>어떤 프로세스를 <u>실행 상태</u>로 만들지 결정한다. <br />즉, 프로세스에게 <mark style="background-color: lightblue"><strong>CPU를 할당하는 문제</strong></mark>에 관여한다. <br />시분할 시스템에서는 타이머 인터럽트가 발생하면 단기 스케줄러가 호출된다.</td>
 </tr>
 <tr>
 <td><strong>중기 스케줄러 <br />= swapper</strong></td>
-<td>여유공간 마련을 위해 <strong>프로세스를 통째로 메모리에서 디스크로 쫒아낸다. (스왑 아웃; swap out)</strong> <br />0순위로 스왑 아웃되는 프로세스는 봉쇄 상태에 있는 프로세스들이다.</td>
+<td>여유공간 마련을 위해 <u>프로세스를 통째로 메모리에서 디스크로 쫒아낸다. (스왑 아웃; swap out)</u> <br />0순위로 스왑 아웃되는 프로세스는 봉쇄 상태에 있는 프로세스들이다.</td>
 </tr>
 </tbody>
 </table></div>
@@ -636,7 +648,7 @@ if (!doNotTrack) {
 <li><mark style="background-color: lightblue"><strong>중지(suspended, stopped)</strong></mark>
 <ul>
 <li>외부적인 이유로 프로세스의 수행이 정지된 상태이다.</li>
-<li><strong>메모리를 조금도 보유하지 않고 디스크에 통째로 스왑 아웃된 상태로 존재</strong>한다.</li>
+<li>메모리를 조금도 보유하지 않고 디스크에 통째로 <u>스왑 아웃된 상태로 존재</u>한다.</li>
 <li>예: 사용자가 프로그램을 일시 정지한 경우, 메모리에 너무 많은 프로세스가 올라와 있어서 시스템이 프로세스를 잠시 중단시킨 경우</li>
 <li><strong>중지준비(suspended ready)</strong>
 <ul>
@@ -648,13 +660,14 @@ if (!doNotTrack) {
 <li>봉쇄 상태에 있던 프로세스가 중기 스케줄러에 의해 디스크로 스왑 아웃되었을 때</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-<br />
+<li>봉쇄와 중지의 차이점
 <ul>
 <li>봉쇄: 자신이 요청한 event가 만족되면 Ready 상태가 된다.</li>
 <li>중지: 외부에서 resume해주어야 Active 된다.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p><br /><br /></p>
 <h2 id="스레드">스레드</h2>
@@ -677,10 +690,10 @@ if (!doNotTrack) {
 <tbody>
 <tr>
 <td><strong>스레드가 독자적으로 갖고 있는 것들 <br />= CPU 수행을 위한 것들</strong></td>
-<td><strong>프로그램 카운터 값</strong> <br /><strong>레지스터 값</strong> <br /><strong>스택</strong></td>
+<td>프로그램 카운터 값 <br />레지스터 값 <br />스택</td>
 </tr>
 <tr>
-<td>스레드가 동료 스레드와 공유하는 부분</td>
+<td><strong>스레드가 동료 스레드와 공유하는 부분</strong></td>
 <td>코드 영역<br />데이터 영역 <br />운영체제 자원들</td>
 </tr>
 </tbody>
@@ -730,7 +743,7 @@ if (!doNotTrack) {
 <ul>
 <li>프로세스의 생성 (process creation)
 <ul>
-<li>시스템이 부팅된 후 최초의 프로세스는 운영체제가 직접 생성하지만, 그 다음 부터는 <strong>이미 존재하는 프로세스가 다른 프로세스를 복제 생성한다.</strong></li>
+<li>시스템이 부팅된 후 최초의 프로세스는 운영체제가 직접 생성하지만, 그 다음 부터는 이미 존재하는 프로세스가 다른 프로세스를 <u>복제 생성</u>한다.</li>
 <li>각각을 부모 프로세스, 자식 프로세스라고 하며, 트리와 같은 계층 구조을 형성하게 된다.</li>
 </ul>
 </li>
@@ -757,18 +770,18 @@ if (!doNotTrack) {
 <ul>
 <li>프로세스 ID를 제외한 부모 프로세스의 모든 내용을 그대로 복제해서 자식 프로세스를 생성한다.</li>
 <li>프로그램 카운터 값도 복제되므로, 부모 프로세스가 실행한 그 다음 위치 부터 실행하게 된다.</li>
-<li>자식 프로세스는 자신만의 <strong>독자적인 주소 공간</strong>을 갖지만, 처음에 내용은 부모 프로세스의 내용을 그대로 <strong>복사해서 생성</strong>한다.</li>
-<li>구분하는 법: <code>fork()</code> 함수의 결괏값이 <strong>양수</strong>이면 <strong>부모 프로세스</strong>이고, <strong>0</strong>이면 복제된 <strong>자식 프로세스</strong>이다.</li>
+<li>자식 프로세스는 자신만의 <u>독자적인 주소 공간</u>을 갖지만, 처음에 내용은 부모 프로세스의 내용을 그대로 <u>복사해서 생성</u>한다.</li>
+<li>구분하는 법: <code>fork()</code> 함수의 결괏값이 <strong>양수</strong>이면 <u>부모 프로세스</u>이고, <strong>0</strong>이면 복제된 <u>자식 프로세스</u>이다.</li>
 </ul>
 </li>
 <li><code>exec()</code> 시스템 콜
 <ul>
-<li>프로세스의 주소 공간을 완전히 <strong>새로운 프로그램으로 덮어씌운</strong> 후 새로운 프로그램의 첫 부분부터 다시 실행을 시작하도록 한다.</li>
+<li>프로세스의 주소 공간을 완전히 <u>새로운 프로그램으로 덮어씌운 후 새로운 프로그램의 첫 부분부터 다시 실행을 시작</u>하도록 한다.</li>
 </ul>
 </li>
 <li><code>wait()</code> 시스템 콜
 <ul>
-<li>자식 프로세스가 종료되기를 기다리며 <strong>부모 프로세스가 봉쇄 상태</strong>에 머무르도록 한다.</li>
+<li>자식 프로세스가 종료되기를 기다리며 <u>부모 프로세스가 봉쇄 상태</u>에 머무르도록 한다.</li>
 <li>부모 프로세스와 자식 프로세스 간의 동기화(synchronization)가 가능해진다.</li>
 </ul>
 </li>
@@ -809,7 +822,7 @@ if (!doNotTrack) {
 <li><strong>1. 메시지 전달 방식(message passing)</strong>
 <ul>
 <li>공유 데이터를 일절 사용하지 않고, 메시지를 주고받으면서 통신하는 방식이다.</li>
-<li>메시지는 시스템 콜 방식으로 운영체제의 <strong>커널에게 요청해서</strong> 주고받는다.</li>
+<li>메시지는 시스템 콜 방식으로 운영체제의 <u>커널에게 요청</u>해서 주고받는다.</li>
 <li><strong>(1) 직접 통신(direct communication)</strong>
 <ul>
 <li>통신하려는 프로세스의 이름을 명시적으로 표시한다.</li>

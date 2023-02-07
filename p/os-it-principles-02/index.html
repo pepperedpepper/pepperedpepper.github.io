@@ -383,7 +383,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    2 minute read
+                    3 minute read
                 </time>
             </div>
         
@@ -409,13 +409,13 @@ if (!doNotTrack) {
 <li>
 <p><strong>운영체제</strong>란?</p>
 <ul>
-<li>사용자 및 다른 모든 소프트웨어와 하드웨어를 연결하는 소프트웨어이다.</li>
+<li>사용자 및 다른 모든 소프트웨어와 하드웨어를 연결하는 <u>소프트웨어</u>이다.</li>
 </ul>
 </li>
 <li>
 <p>운영체제도 하나의 소프트웨어이기 때문에 컴퓨터 전원이 켜짐과 동시에 메모리에 올라간다.</p>
 <ul>
-<li>모두 다 올라가면 메모리 공간의 낭비가 심하기 때문에 <strong>항상 필요한 부분만을 올리고</strong>, 나머지는 필요할 때 메모리로 올린다.</li>
+<li>모두 다 올라가면 메모리 공간의 낭비가 심하기 때문에 <u>항상 필요한 부분만을 올리고</u>, 나머지는 필요할 때 메모리로 올린다.</li>
 <li>여기서 항상 필요한 부분을 <strong>커널(kernel)</strong> 이라고 한다.</li>
 </ul>
 </li>
@@ -568,17 +568,26 @@ if (!doNotTrack) {
 <ul>
 <li>매 시점 어떤 프로세스에게 CPU를 할당할 것인가?</li>
 <li>선입선출, 라운드 로빈, 우선순위 스케줄링&hellip;</li>
+<li><a class="link" href="/p/os-it-principles-06/#%ec%8a%a4%ec%bc%80%ec%a4%84%eb%a7%81-%ec%95%8c%ea%b3%a0%eb%a6%ac%ec%a6%98" >CPU 스케줄링 알고리즘</a></li>
 </ul>
 </li>
 <li><strong>메모리</strong> 자원 관리
 <ul>
-<li><strong>고정분할(fixed partition) 방식, 가변분할(variable partition)방식, 가상메모리(virtual memory) 방식&hellip;</strong></li>
+<li><strong>고정분할 방식, 가변분할방식, 가상메모리 방식&hellip;</strong></li>
+<li><a class="link" href="/p/os-it-principles-09/#%eb%ac%bc%eb%a6%ac%ec%a0%81-%eb%a9%94%eb%aa%a8%eb%a6%ac%ec%9d%98-%ed%95%a0%eb%8b%b9-%eb%b0%a9%ec%8b%9d" >메모리 할당 방식</a></li>
+<li><a class="link" href="/p/os-it-principles-10/#%ed%8e%98%ec%9d%b4%ec%a7%80-%ea%b5%90%ec%b2%b4" >가상 메모리 방식의 페이지 교체 알고리즘</a></li>
+</ul>
+</li>
+<li><strong>파일</strong> 관리
+<ul>
+<li>디스크에 파일이 저장되는 방식 및 접근 권한을 관리한다.</li>
 </ul>
 </li>
 <li><strong>주변장치 및 입출력 장치</strong> 자원 관리
 <ul>
 <li><strong>인터럽트(interrupt)</strong> 를 통해 관리가 이루어진다.</li>
 <li>주변장치들은 CPU의 서비스가 필요해지면 신호(인터럽트)를 발생시켜서 서비스를 요청한다. 그러면 CPU가 잠시 하던 일을 멈추고 인터럽트에 의한 요청 서비스를 수행한다.</li>
+<li><a class="link" href="/p/os-it-principles-03/#%ec%9d%b8%ed%84%b0%eb%9f%bd%ed%8a%b8" >인터럽트</a></li>
 </ul>
 </li>
 </ul>

@@ -2,7 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 논리적 주소를 물리적 주소로 연결시켜주는 것이다. Symbolic address → Logical address →(이 시점이 언제인가?) Physical address 여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다.'>
+주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 CPU가 기계어 명령을 수행하려고 논리적 주소를 통해 메모리를 참조하면, 그 논리적 주소가 물리적 메모리의 어느 위치에 매핑되는지 확인해야 한다. 이렇게 논리적 주소를 물리적 주소로 연결시켜주는 것을 주소 바인딩이라고 한다.'>
 <title>[OS] Chapter 9. 메모리 관리</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/os-it-principles-09/'>
@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[OS] Chapter 9. 메모리 관리'>
 <meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 논리적 주소를 물리적 주소로 연결시켜주는 것이다. Symbolic address → Logical address →(이 시점이 언제인가?) Physical address 여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다.'>
+주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 CPU가 기계어 명령을 수행하려고 논리적 주소를 통해 메모리를 참조하면, 그 논리적 주소가 물리적 메모리의 어느 위치에 매핑되는지 확인해야 한다. 이렇게 논리적 주소를 물리적 주소로 연결시켜주는 것을 주소 바인딩이라고 한다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-09/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-07-06T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-07-06T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[OS] Chapter 9. 메모리 관리">
 <meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 논리적 주소를 물리적 주소로 연결시켜주는 것이다. Symbolic address → Logical address →(이 시점이 언제인가?) Physical address 여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다.">
+주소 바인딩 논리적 주소(Logical address) = Virtual address 프로세스마다 독립적으로 가지는 주소 공간이다. 각 프로세스마다 0번지부터 시작한다. CPU가 보는 주소는 이 논리적 주소이다. 물리적 주소(Physical address) 메모리에 실제로 올라가는 위치이다. 낮은 주소 영역에는 운영체제가 올라가고, 높은 주소 영역에는 사용자 프로세스들이 올라간다. 주소 바인딩 CPU가 기계어 명령을 수행하려고 논리적 주소를 통해 메모리를 참조하면, 그 논리적 주소가 물리적 메모리의 어느 위치에 매핑되는지 확인해야 한다. 이렇게 논리적 주소를 물리적 주소로 연결시켜주는 것을 주소 바인딩이라고 한다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -305,7 +305,7 @@ if (!doNotTrack) {
     <li><a href="#주소-바인딩">주소 바인딩</a>
       <ul>
         <li><a href="#주소-바인딩의-종류">주소 바인딩의 종류</a></li>
-        <li><a href="#mmu">MMU</a></li>
+        <li><a href="#런타임-바인딩을-위한-하드웨어적-지원-요소">런타임 바인딩을 위한 하드웨어적 지원 요소</a></li>
       </ul>
     </li>
     <li><a href="#메모리-관리와-관련된-용어">메모리 관리와 관련된 용어</a>
@@ -317,15 +317,15 @@ if (!doNotTrack) {
       </ul>
     </li>
     <li><a href="#물리적-메모리의-할당-방식">물리적 메모리의 할당 방식</a></li>
-    <li><a href="#연속할당contiguous-allocation-방식">연속할당(Contiguous allocation) 방식</a>
+    <li><a href="#연속할당-방식">연속할당 방식</a>
       <ul>
-        <li><a href="#1-고정-분할fixed-partition-allocation-방식">(1) 고정 분할(Fixed partition allocation) 방식</a></li>
-        <li><a href="#2-가변-분할variable-partition-allocation-방식">(2) 가변 분할(Variable partition allocation) 방식</a></li>
+        <li><a href="#1-고정-분할-방식">(1) 고정 분할 방식</a></li>
+        <li><a href="#2-가변-분할-방식">(2) 가변 분할 방식</a></li>
       </ul>
     </li>
-    <li><a href="#불연속할당noncontiguous-allocation-방식">불연속할당(Noncontiguous allocation) 방식</a>
+    <li><a href="#불연속할당-방식">불연속할당 방식</a>
       <ul>
-        <li><a href="#1-페이징paging-기법">(1) 페이징(Paging) 기법</a>
+        <li><a href="#1-페이징-기법">(1) 페이징 기법</a>
           <ul>
             <li><a href="#주소-변환-기법">주소 변환 기법</a></li>
             <li><a href="#페이지-테이블의-구현">페이지 테이블의 구현</a></li>
@@ -335,13 +335,13 @@ if (!doNotTrack) {
             <li><a href="#역페이지-테이블">역페이지 테이블</a></li>
           </ul>
         </li>
-        <li><a href="#2-세그먼테이션segmentation">(2) 세그먼테이션(Segmentation)</a>
+        <li><a href="#2-세그먼테이션">(2) 세그먼테이션</a>
           <ul>
             <li><a href="#주소-변환-기법-1">주소 변환 기법</a></li>
             <li><a href="#공유-보호-할당">공유, 보호, 할당</a></li>
           </ul>
         </li>
-        <li><a href="#3-페이지드-세그먼테이션paged-segmentation">(3) 페이지드 세그먼테이션(Paged segmentation)</a>
+        <li><a href="#3-페이지드-세그먼테이션">(3) 페이지드 세그먼테이션</a>
           <ul>
             <li><a href="#주소-변환-기법-2">주소 변환 기법</a></li>
           </ul>
@@ -412,7 +412,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    10 minute read
+                    11 minute read
                 </time>
             </div>
         
@@ -463,7 +463,12 @@ if (!doNotTrack) {
 <ul>
 <li><strong>주소 바인딩</strong>
 <ul>
-<li>논리적 주소를 물리적 주소로 연결시켜주는 것이다.</li>
+<li>CPU가 기계어 명령을 수행하려고 논리적 주소를 통해 메모리를 참조하면, 그 논리적 주소가 물리적 메모리의 어느 위치에 매핑되는지 확인해야 한다.</li>
+<li>이렇게 <u>논리적 주소를 물리적 주소로 연결시켜주는 것</u>을 주소 바인딩이라고 한다.</li>
+</ul>
+</li>
+<li>주소 바인딩의 시점에 따라 그 종류가 나뉠 수 있겠다.
+<ul>
 <li><strong>Symbolic address → Logical address →<mark style="background-color: lightblue">(이 시점이 언제인가?)</mark> Physical address</strong></li>
 <li>여기서 Symbolic address는 프로그래머가 사용하는, 숫자가 아닌 심볼로 된 주소를 의미한다. 이것이 컴파일이 되면 숫자로 된 Logical address로 바뀌겠다.</li>
 </ul>
@@ -485,29 +490,29 @@ if (!doNotTrack) {
 <li><strong>컴파일 타임 바인딩(compile time binding)</strong>
 <ul>
 <li>물리적 메모리의 주소가 컴파일 시에 결정된다.</li>
-<li>컴파일러가 <strong>절대 코드(absolute code)</strong> 를 생성하는 방식이다.</li>
+<li>컴파일러가 <u>절대 코드(absolute code)</u> 를 생성하는 방식이다.</li>
 </ul>
 </li>
 <li><strong>로드 타임 바인딩(load time bining)</strong>
 <ul>
 <li>물리적 메모리의 주소가 프로그램의 실행이 시작될 때 결정된다.</li>
-<li>컴파일러가 <strong>재배치 가능 코드(relocatable code)</strong> 를 생성한 경우 가능하다.</li>
+<li>컴파일러가 <u>재배치 가능 코드(relocatable code)</u> 를 생성한 경우 가능하다.</li>
 </ul>
 </li>
 <li><strong>런타임 바인딩(runtime binding = executione time binding)</strong>
 <ul>
 <li>프로그램을 시작한 후에도 물리적 메모리의 주소를 변경할 수 있는 방식이다.</li>
-<li>CPU가 주소를 참조할 때마다 <strong>주소 매핑 테이블(address mapping table)</strong> 을 이용해서 바인딩을 점검한다.</li>
+<li>CPU가 주소를 참조할 때마다 <u>주소 매핑 테이블(address mapping table)</u> 을 이용해서 바인딩을 점검한다.</li>
 <li>하드웨어적 지원이 필요하다.
 <ul>
-<li><strong>기준 레지스터(base register), 한계 레지스터(limit register), MMU(Memory Management Unit)</strong></li>
+<li>**MMU, 기준 레지스터, 한계 레지스터, **</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <br />
-<h3 id="mmu">MMU</h3>
+<h3 id="런타임-바인딩을-위한-하드웨어적-지원-요소">런타임 바인딩을 위한 하드웨어적 지원 요소</h3>
 <p><img src="/post/os/images/09-03-mmu.png"
 	
 	
@@ -530,21 +535,20 @@ if (!doNotTrack) {
 <li>
 <p><strong>기준 레지스터 = 재배치 레지스터 (base register = relocation register)</strong></p>
 <ul>
-<li>해당 프로세스의 물리적 메모리 시작 주소를 가지고 있다.</li>
+<li>해당 프로세스의 <u>물리적 메모리 시작 주소</u>를 가지고 있다.</li>
 <li>따라서 논리적 주소는 일종의 오프셋(offset) 개념으로 생각할 수 있다.</li>
 </ul>
 </li>
 <li>
 <p><strong>한계 레지스터 (limit register)</strong></p>
 <ul>
-<li>논리적 주소값에 기준 레지스터 값을 더한 결과가 해당 프로세스의 주소 공간을 벗어나는 경우를 방지하기 위해서, 해당 프로세스의 논리적 주소의 최댓값(프로세스의 크기)을 가지고 있다.</li>
+<li>논리적 주소값에 기준 레지스터 값을 더한 결과가 해당 프로세스의 주소 공간을 벗어나는 경우를 방지하기 위해서, 해당 프로세스의 <u>논리적 주소의 최댓값(프로세스의 크기)</u>을 가지고 있다.</li>
 <li>만약 주소 공간을 벗어나는 경우에는 트랩을 발생시켜 해당 프로세스를 강제종료시킨다.</li>
 </ul>
 </li>
 </ul>
 <p><br /><br /></p>
 <h2 id="메모리-관리와-관련된-용어">메모리 관리와 관련된 용어</h2>
-<br />
 <h3 id="동적로딩dynamic-loading">동적로딩(Dynamic loading)</h3>
 <ul>
 <li>의미
@@ -589,26 +593,24 @@ if (!doNotTrack) {
 <ul>
 <li><strong>연결(linking)</strong>
 <ul>
-<li>소스 코드를 컴파일해서 생성된 <strong>목적 파일(object file)과, 이미 컴파일 된 라이브러리 파일(library file)들을 묶어서 하나의 실행 파일을 생성하는 과정</strong>을 말한다.</li>
+<li>소스 코드를 컴파일해서 생성된 <u>목적 파일(object file)</u>과, 이미 컴파일 된 <u>라이브러리 파일(library file)들</u>을 묶어서 <u>하나의 실행 파일을 생성하는 과정</u>을 말한다.</li>
 </ul>
 </li>
 </ul>
 <br />
 <ul>
-<li>의미
+<li>동적연결 의미
 <ul>
-<li><strong>연결을 실행 시간까지 미루는 기법</strong>이다.</li>
-<li>라이브러리 호출 부분에 <strong>스텁(stub)</strong> 이라는 작은 코드를 두고, 프로그램이 실행되고 <mark style="background-color: lightblue"><strong>라이브러리 함수를 호출하면, 그 때가 되어서야 라이브러리에 대한 연결</strong></mark>이 이루어진다.</li>
-<li>라이브러리가 메모리에 있으면 불러오고, 없으면 디스크에서 읽어온다.</li>
+<li><u>연결을 실행 시간까지 미루는 기법</u>이다. 즉, <mark style="background-color: lightblue"><strong>프로그램이 실행되고 라이브러리 함수를 호출해서야 라이브러리에 대한 연결</strong></mark>이 이루어진다.</li>
+<li>라이브러리 호출 부분에 라이브러리 위치를 찾기 위한 <strong>스텁(stub)</strong> 이라는 작은 코드를 둔다. 프로그램이 실행되고 라이브러리 함수를 호출하면, 스텁을 통해 해당 라이브러리가 메모리에 이미 존재하는 지 살펴본다. 라이브러리가 메모리에 있으면 불러오고,없으면, 디스크에서 동적 라이브러리 파일을 찾아 메모리로 적재한다.</li>
 </ul>
 </li>
 <li>목적
 <ul>
-<li><strong>정적연결(Static linking)</strong>
+<li><strong>정적연결(Static linking)</strong> 와 비교된다.
 <ul>
-<li>라이브러리가 프로그램의 실행 파일에 포함된다. (예: <code>printf</code> 함수의 라이브러리 코드)</li>
-<li>따라서 실행 파일이 커진다.</li>
-<li>동일한 라이브러리를 각각의 프로세스가 메모리에 올려서 메모리의 낭비가 있다.</li>
+<li>정적연결은 라이브러리가 프로그램의 실행 파일에 포함된다. (예: <code>printf</code> 함수의 라이브러리 코드) 따라서 실행 파일이 커진다.</li>
+<li>또한 동일한 라이브러리를 각각의 프로세스가 메모리에 올려서 메모리의 낭비가 있다.</li>
 </ul>
 </li>
 <li>동적연결의 경우 공통으로 사용하는 라이브러리를 한 번만 적재하므로 <strong>메모리 효율성</strong>을 높일 수 있다.</li>
@@ -659,8 +661,9 @@ if (!doNotTrack) {
 <li>여기서는 <strong>사용자 프로세스 영역의 관리 방법</strong>에 대해 살펴본다.</li>
 </ul>
 <br />
-<h2 id="연속할당contiguous-allocation-방식">연속할당(Contiguous allocation) 방식</h2>
+<h2 id="연속할당-방식">연속할당 방식</h2>
 <ul>
+<li>Contiguous allocation</li>
 <li>각각의 프로세스를 물리적 메모리의 <strong>연속적인 공간에</strong> 올리는 방식이다.</li>
 <li>물리적 메모리를 다수의 분할로 나누어서 하나의 분할에 하나의 프로세스가 적재되도록 한다.</li>
 </ul>
@@ -675,8 +678,9 @@ if (!doNotTrack) {
 	
 ></p>
 <br />
-<h3 id="1-고정-분할fixed-partition-allocation-방식">(1) 고정 분할(Fixed partition allocation) 방식</h3>
+<h3 id="1-고정-분할-방식">(1) 고정 분할 방식</h3>
 <ul>
+<li>Fixed partition allocation</li>
 <li>물리적 메모리를 <mark style="background-color: lightblue"><strong>주어진 개수만큼 영구적인 분할로 미리 나누어두는</strong></mark> 방식이다.</li>
 <li>분할의 크기는 모두 동일하게 할 수도 있고, 서로 다르게 할 수도 있다.</li>
 <li><strong>하나의 분할에는 하나의 프로그램만을 적재</strong>할 수 있다.</li>
@@ -685,7 +689,7 @@ if (!doNotTrack) {
 <ul>
 <li>단점
 <ul>
-<li>동시에 메모리에 올릴 수 있는 프로그램 수가 고정되어 있으므로 유통성이 떨어진다.</li>
+<li>동시에 메모리에 올릴 수 있는 프로그램 수가 고정되어 있으므로 융통성이 떨어진다.</li>
 <li>외부 단편화와 내부 단편화가 발생할 수 있다.</li>
 </ul>
 </li>
@@ -704,29 +708,30 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><br /><br /></p>
-<h3 id="2-가변-분할variable-partition-allocation-방식">(2) 가변 분할(Variable partition allocation) 방식</h3>
+<h3 id="2-가변-분할-방식">(2) 가변 분할 방식</h3>
 <ul>
+<li>Variable partition allocation</li>
 <li>물리적 메모리를 미리 나누어 두지 않고, <mark style="background-color: lightblue"><strong>프로그램 크기에 따라서 동적으로 분할의 크기, 개수가 변하는</strong></mark> 방식이다.</li>
 </ul>
 <br />
 <ul>
 <li><strong>동적 메모리 할당 문제(dynamic storage-allocation problem)</strong>
 <ul>
-<li>주소 공간의 크기가 $n$인 프로세스를 메모리에 올릴 때, 물리적 메모리 내 가용 공간(hole) 중에 <strong>어떤 위치에 올릴 것인가?</strong></li>
+<li>주소 공간의 크기가 $n$인 프로세스를 메모리에 올릴 때, 물리적 메모리 내 가용 공간(hole) 중에 <u>어떤 위치에 올릴 것인가?</u></li>
 <li>방법1. <strong>최초적합(first-fit)</strong>
 <ul>
-<li>크기가 $n$이상인 가용 공간 중, 가장 먼저 찾아지는 곳에 프로세스를 할당한다.</li>
+<li>크기가 $n$이상인 가용 공간 중, <u>가장 먼저 찾아지는 곳</u>에 프로세스를 할당한다.</li>
 </ul>
 </li>
 <li>방법2. <strong>최적적합(best-fit)</strong>
 <ul>
-<li>크기가 $n$이상인 가용 공간 중, 가장 작은 곳에 프로세스를 할당한다.</li>
+<li>크기가 $n$이상인 가용 공간 중, <u>가장 작은 곳</u>에 프로세스를 할당한다.</li>
 <li>많은 수의 작은 가용 공간들이 생성되겠다.</li>
 </ul>
 </li>
 <li>방법3. <strong>최악적합(worts-fit)</strong>
 <ul>
-<li>가용 공간 중에서 크기가 가장 큰 곳에 프로세스를 할당한다.</li>
+<li>가용 공간 중에서 크기가 <u>가장 큰 곳</u>에 프로세스를 할당한다.</li>
 <li>상대적으로 큰 가용 공간들이 생성되겠다.</li>
 </ul>
 </li>
@@ -749,13 +754,15 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><br /><br /></p>
-<h2 id="불연속할당noncontiguous-allocation-방식">불연속할당(Noncontiguous allocation) 방식</h2>
+<h2 id="불연속할당-방식">불연속할당 방식</h2>
 <ul>
+<li>Noncontiguous allocation</li>
 <li>하나의 프로세스를 물리적 메모리의 여러 영역에 <strong>분산해서</strong> 적재하는 방식이다.</li>
 </ul>
 <br />
-<h3 id="1-페이징paging-기법">(1) 페이징(Paging) 기법</h3>
+<h3 id="1-페이징-기법">(1) 페이징 기법</h3>
 <ul>
+<li>Paging</li>
 <li>각 프로세스의 주소 공간을 <mark style="background-color: lightblue"><strong>동일한 크기의 페이지로 자르고</strong></mark>, 물리적 메모리도 프레임(frame)으로 잘라서 적재시키는 방식이다.</li>
 <li>논리적 메모리 주소를 가진 페이지를 물리적 메모리의 몇 번째 프레임에 있는지로 변환하기 위한 <strong>페이지 테이블(page table)</strong> 이 필요하다.
 <ul>
@@ -787,12 +794,12 @@ if (!doNotTrack) {
 <ul>
 <li><strong>페이지 테이블 기준 레지스터(page-table base register; PTBR)</strong>
 <ul>
-<li>페이지 테이블은 메인 메모리에 상주하는데, PTBR은 이 물리적 메모리에서 페이지 테이블이 존재하는 시작 위치를 가리킨다.</li>
+<li>페이지 테이블은 메인 메모리에 상주하는데, PTBR은 이 물리적 메모리에서 <u>페이지 테이블이 존재하는 시작 위치</u>를 가리킨다.</li>
 </ul>
 </li>
 <li><strong>페이지 테이블 길이 레지스터(page-table length register; PTLR)</strong>
 <ul>
-<li>페이지 테이블의 크기를 보관한다.</li>
+<li><u>페이지 테이블의 크기</u>를 보관한다.</li>
 </ul>
 </li>
 </ul>
@@ -922,9 +929,9 @@ if (!doNotTrack) {
 <br />
 <h4 id="역페이지-테이블">역페이지 테이블</h4>
 <ul>
-<li>페이지 테이블로 인한 공간의 낭비
+<li>페이지 테이블에는 공간의 낭비가 발생한다.
 <ul>
-<li>모든 프로세스 별로 그 논리적 주소에 대응하는 모든 페이지에 대해 페이지 테이블 entry가 존재한다.</li>
+<li>모든 프로세스 별로 그 논리적 주소에 대응하는 모든 페이지에 대해 페이지 테이블 entry가 존재하기 때문이다.</li>
 <li>entry는 그 페이지가 물리적 메모리에 있든 없든간에 존재한다.</li>
 <li>그래서 대안으로 역페이지 테이블이 등장했다.</li>
 </ul>
@@ -961,8 +968,9 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><br /><br /></p>
-<h3 id="2-세그먼테이션segmentation">(2) 세그먼테이션(Segmentation)</h3>
+<h3 id="2-세그먼테이션">(2) 세그먼테이션</h3>
 <ul>
+<li>Segmentation</li>
 <li>프로그램의 주소 공간을 코드, 데이터, 스택 등 <mark style="background-color: lightblue"><strong>의미 있는 단위인 세그먼트로 나누어서</strong></mark> 세그먼트 단위로 적재하는 방식이다.
 <ul>
 <li>논리적 단위(logical unit)로 나누었기 때문에 그 크기가 균일하지 않다.</li>
@@ -1000,12 +1008,12 @@ if (!doNotTrack) {
 <ul>
 <li><strong>세그먼트 테이블 기준 레지스터(Segment-Table Base Register; STBR)</strong>
 <ul>
-<li>물리적 메모리에서 세그먼트 테이블이 존재하는 시작 위치를 가리킨다.</li>
+<li>물리적 메모리에서 <u>세그먼트 테이블이 존재하는 시작 위치</u>를 가리킨다.</li>
 </ul>
 </li>
 <li><strong>세그먼트 테이블 길이 레지스터(Segment-Table Length Register; STLR)</strong>
 <ul>
-<li>프로세스의 주소 공간이 총 몇 개의 세그먼트로 구성되는지, 즉 세그먼트의 개수를 나타낸다.</li>
+<li>프로세스의 주소 공간이 총 몇 개의 세그먼트로 구성되는지, 즉 <u>세그먼트의 개수</u>를 나타낸다.</li>
 </ul>
 </li>
 </ul>
@@ -1033,7 +1041,7 @@ if (!doNotTrack) {
 </li>
 </ul>
 </li>
-<li>햘당
+<li>할당
 <ul>
 <li>최초적합(first-fit), 최적적합(best-fit) 방식을 사용해서 세그먼트를 가용 공간에 할당할 수 있다.</li>
 <li>세그먼트의 크기가 모두 균일하지 않으므로 <strong>외부 조각이 발생</strong>한다.</li>
@@ -1041,10 +1049,11 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><br /><br /></p>
-<h3 id="3-페이지드-세그먼테이션paged-segmentation">(3) 페이지드 세그먼테이션(Paged segmentation)</h3>
+<h3 id="3-페이지드-세그먼테이션">(3) 페이지드 세그먼테이션</h3>
 <ul>
+<li>Paged segmentation</li>
 <li>페이징 기법과 세그먼테이션 기법의 장점만을 취하는 주소 변환 기법이다.</li>
-<li>프로그램의 주소 공간을 의미 단위인 세그먼트로 나누되, <mark style="background-color: lightblue"><strong>세그먼트를 임의의 길이가 아닌 동일한 크기의 페이지들의 집합으로 구성</strong></mark>하는 방식이다.</li>
+<li>프로그램의 <mark style="background-color: lightblue"><strong>주소 공간을 의미 단위인 세그먼트로 나누되, 세그먼트를 임의의 길이가 아닌 동일한 크기의 페이지들의 집합으로 구성</strong></mark>하는 방식이다.</li>
 <li>따라서 하나의 세그먼트는 페이지 크기의 배수가 된다. 그리고 물리적 메모리에 적재하는 단위는 페이지 단위로 한다.
 <ul>
 <li>외부조각의 문제점을 해결하며, 의미 단위로 프로세스 간의 공유나 접근권한 보호가 이루어지도록 해서 각각의 단점을 보완한다.</li>

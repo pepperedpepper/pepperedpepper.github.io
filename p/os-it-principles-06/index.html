@@ -2,7 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
+CPU 버스트와 I/O 버스트 프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
 CPU 버스트: 사용자 프로그램이 CPU를 직접 가지고 빠른 명령을 수행하는 단계 I/O 버스트: I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행하는 비교적 느린 단계 CPU 바운드 프로세스: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.'>
 <title>[OS] Chapter 6. CPU 스케줄링</title>
 
@@ -11,14 +11,14 @@ CPU 버스트: 사용자 프로그램이 CPU를 직접 가지고 빠른 명령�
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[OS] Chapter 6. CPU 스케줄링'>
 <meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
+CPU 버스트와 I/O 버스트 프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
 CPU 버스트: 사용자 프로그램이 CPU를 직접 가지고 빠른 명령을 수행하는 단계 I/O 버스트: I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행하는 비교적 느린 단계 CPU 바운드 프로세스: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-06/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-06-16T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-06-16T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[OS] Chapter 6. CPU 스케줄링">
 <meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
+CPU 버스트와 I/O 버스트 프로그램 실행과 관련된 기계어 명령들 CPU 내에서 수행되는 명령: Add 명령 메모리 접근을 수행하는 명령: Load, Store 명령 메모리를 접근하는 명령 입출력을 동반하는 명령 → 운영체제를 통해서만 가능한 특권명령 사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.
 CPU 버스트: 사용자 프로그램이 CPU를 직접 가지고 빠른 명령을 수행하는 단계 I/O 버스트: I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행하는 비교적 느린 단계 CPU 바운드 프로세스: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
@@ -305,18 +305,19 @@ if (!doNotTrack) {
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ul>
+    <li><a href="#cpu-버스트와-io-버스트">CPU 버스트와 I/O 버스트</a></li>
     <li><a href="#cpu-스케줄러">CPU 스케줄러</a></li>
     <li><a href="#디스패처">디스패처</a></li>
     <li><a href="#스케줄링의-성능-평가">스케줄링의 성능 평가</a></li>
     <li><a href="#스케줄링-알고리즘">스케줄링 알고리즘</a>
       <ul>
-        <li><a href="#선입선출first-come-first-served-fcfs-스케줄링">선입선출(First-Come First-Served; FCFS) 스케줄링</a></li>
-        <li><a href="#최단작업-우선shortest-job-first-sjf-스케줄링">최단작업 우선(Shortest-Job First; SJF) 스케줄링</a></li>
-        <li><a href="#우선순위priority-스케줄링">우선순위(priority) 스케줄링</a></li>
-        <li><a href="#라운드-로빈round-robin-스케줄링">라운드 로빈(Round Robin) 스케줄링</a></li>
-        <li><a href="#다단계-큐muti-level-queue">다단계 큐(muti-level queue)</a></li>
-        <li><a href="#다단계-피드백-큐multi-level-feedback-queue">다단계 피드백 큐(multi-level feedback queue)</a></li>
-        <li><a href="#다중처리기multi-processor-system-스케줄링">다중처리기(multi-processor system) 스케줄링</a></li>
+        <li><a href="#선입선출fcfs-스케줄링">선입선출(FCFS) 스케줄링</a></li>
+        <li><a href="#최단작업-우선sjf-스케줄링">최단작업 우선(SJF) 스케줄링</a></li>
+        <li><a href="#우선순위-스케줄링">우선순위 스케줄링</a></li>
+        <li><a href="#라운드-로빈-스케줄링">라운드 로빈 스케줄링</a></li>
+        <li><a href="#다단계-큐">다단계 큐</a></li>
+        <li><a href="#다단계-피드백-큐">다단계 피드백 큐</a></li>
+        <li><a href="#다중처리기-스케줄링">다중처리기 스케줄링</a></li>
         <li><a href="#실시간-스케줄링">실시간 스케줄링</a></li>
         <li><a href="#스레드-스케줄링">스레드 스케줄링</a></li>
       </ul>
@@ -407,6 +408,7 @@ if (!doNotTrack) {
 </div>
 <hr>
 <p><br /><br /></p>
+<h2 id="cpu-버스트와-io-버스트">CPU 버스트와 I/O 버스트</h2>
 <ul>
 <li>프로그램 실행과 관련된 기계어 명령들
 <ul>
@@ -422,16 +424,16 @@ if (!doNotTrack) {
 <li>
 <p>사용자 프로그램이 수행되는 과정은 CPU 작업와 I/O 작업의 반복으로 구성된다.</p>
 <ul>
-<li><mark style="background-color: lightblue"><strong>CPU 버스트</strong></mark>: 사용자 프로그램이 <strong>CPU를 직접 가지고 빠른 명령을 수행</strong>하는 단계</li>
-<li><mark style="background-color: lightblue"><strong>I/O 버스트</strong></mark>: <strong>I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행</strong>하는 비교적 느린 단계</li>
-<li><strong>CPU 바운드 프로세스</strong>: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.
-<ul>
-<li>→ 대화형 프로그램(interactive program)</li>
-</ul>
-</li>
-<li><strong>I/O 바운드 프로세스</strong>: I/O 요청이 빈번해서 CPU 버스트가 짧게 나타나는 프로세스이다.
+<li><mark style="background-color: lightblue"><strong>CPU 버스트</strong></mark>: 사용자 프로그램이 <u>CPU를 직접 가지고 빠른 명령을 수행</u>하는 단계</li>
+<li><mark style="background-color: lightblue"><strong>I/O 버스트</strong></mark>: <u>I/O 요청이 발생해서 커널에 의해 입출력 작업을 진행</u>하는 비교적 느린 단계</li>
+<li><mark style="background-color: lightblue"><strong>CPU 바운드 프로세스</strong></mark>: I/O 작업이 거의 없어서 CPU 버스트가 길게 나타나는 프로세스이다.
 <ul>
 <li>→ 계산 위주의 프로그램</li>
+</ul>
+</li>
+<li><mark style="background-color: lightblue"><strong>I/O 바운드 프로세스</strong></mark>: I/O 요청이 빈번해서 CPU 버스트가 짧게 나타나는 프로세스이다.
+<ul>
+<li>→ 대화형 프로그램(interactive program)</li>
 </ul>
 </li>
 </ul>
@@ -454,12 +456,12 @@ if (!doNotTrack) {
 </ul>
 <br />
 <ul>
-<li>CPU 스케줄러가 호출되는 경우
+<li>CPU 스케줄러가 호출되는 예시
 <ul>
 <li>(1) <strong>Running → Blocked</strong> : I/O 요청하는 시스템 콜</li>
 <li>(2) <strong>Running → Ready</strong> : 타이머 인터럽트</li>
 <li>(3) <strong>Blocked → Ready</strong> : I/O 완료로 인터럽트 (우선순위가 높아서 바로 CPU를 얻는 경우)</li>
-<li>(4) <strong>Terminate</strong></li>
+<li>(4) <strong>Terminate</strong> : 프로세스 종료</li>
 </ul>
 </li>
 </ul>
@@ -467,14 +469,14 @@ if (!doNotTrack) {
 <ul>
 <li><strong>비선점형(nonpreemptive) 방식</strong>
 <ul>
-<li>프로세스가 CPU를 스스로 반납하기 전까지는 빼앗기지 않는다.</li>
-<li>(1), (4)</li>
+<li>프로세스가 CPU를 스스로 반납하기 전까지는 <u>빼앗기지 않는다.</u></li>
+<li>(1), (4)의 경우</li>
 </ul>
 </li>
 <li><strong>선점형(preemptive) 방식</strong>
 <ul>
-<li>프로세스에게 할당된 CPU를 강제로 빼앗을 수 있다.</li>
-<li>(2), (3)</li>
+<li>프로세스에게 할당된 CPU를 강제로 <u>빼앗을 수 있다.</u></li>
+<li>(2), (3)의 경우</li>
 </ul>
 </li>
 </ul>
@@ -483,7 +485,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>디스패처(dispatcher)</strong>
 <ul>
-<li>CPU 스케줄러가 어떤 프로세스에게 CPU를 할당할지 결정하고 나면, 실제로  <mark style="background-color: lightblue"><strong>CPU를 이양하기 위해 환경설정</strong></mark>을 하는 운영체제의 코드를 말한다.</li>
+<li>CPU 스케줄러가 어떤 프로세스에게 CPU를 할당할지 결정하고 나면, 실제로 <mark style="background-color: lightblue"><strong>CPU를 이양하기 위해 환경설정</strong></mark>을 하는 운영체제의 코드를 말한다.</li>
 <li>현재 수행 중이던 프로세스의 문맥(context)을 PCB에 저장하고, 새롭게 선택된 프로세스의 문맥을 PCB로부터 복원한다. 그리고 시스템 상태를 사용자 모드로 전환해서 사용자 프로그램에게 CPU의 제어권을 넘긴다.</li>
 </ul>
 </li>
@@ -504,12 +506,12 @@ if (!doNotTrack) {
 <ul>
 <li>(1) <strong>CPU 이용률(CPU utilization)</strong>
 <ul>
-<li>전체 시간에서 CPU가 일을 한 시간의 비율</li>
+<li>전체 시간에서 <u>CPU가 일을 한 시간</u>의 비율</li>
 </ul>
 </li>
 <li>(2) <strong>처리량(throughput)</strong>
 <ul>
-<li>주어진 시간 동안 프로세스 몇 개를 끝마쳤는지(CPU 버스트를 완료한 프로세스의 개수)</li>
+<li>주어진 시간 동안 <u>프로세스 몇 개를 끝마쳤는지</u> (CPU 버스트를 완료한 프로세스의 개수)</li>
 </ul>
 </li>
 </ul>
@@ -518,18 +520,18 @@ if (!doNotTrack) {
 <ul>
 <li>(3) <strong>소요 시간(turnaround time)</strong>
 <ul>
-<li>프로세스가 CPU를 요청한 시점 ~ CPU 버스트를 완료하는데까지 걸린 시간</li>
+<li>프로세스가 <u>CPU를 요청한 시점 ~ CPU 버스트를 완료</u>하는데까지 걸린 시간</li>
 </ul>
 </li>
 <li>(4) <strong>대기 시간(waiting time)</strong>
 <ul>
-<li>CPU 버스트 기간 중 프로세스가 준비 큐에서 CPU를 얻기 위해 기다린 시간의 합</li>
+<li>CPU 버스트 기간 중 프로세스가 <u>준비 큐에서 CPU를 얻기 위해 기다린 시간의 합</u></li>
 <li>시분할 시스템에서는 타이머 인터럽트를 사용하므로, 한 번의 CPU 버스트 중에도 준비 큐에서 기다린 시간이 여러번 발생할 수 있다.</li>
 </ul>
 </li>
 <li>(5) <strong>응답 시간(response time)</strong>
 <ul>
-<li>프로세스가 준비 큐에 들어온 후 ~ 첫 번째 CPU를 획득하기까지 기다린 시간</li>
+<li>프로세스가 <u>준비 큐에 들어온 후 ~ 첫 번째 CPU를 획득</u>하기까지 기다린 시간</li>
 <li>타이머 인터럽트가 빈번히 발생할 수록 처음 CPU를 획득하기까지 걸리는 시간은 줄어들겠다.</li>
 </ul>
 </li>
@@ -538,9 +540,9 @@ if (!doNotTrack) {
 </ul>
 <p><br /><br /></p>
 <h2 id="스케줄링-알고리즘">스케줄링 알고리즘</h2>
-<br />
-<h3 id="선입선출first-come-first-served-fcfs-스케줄링">선입선출(First-Come First-Served; FCFS) 스케줄링</h3>
+<h3 id="선입선출fcfs-스케줄링">선입선출(FCFS) 스케줄링</h3>
 <ul>
+<li>First-Come First-Served</li>
 <li>준비 큐에 도착한 시간 순서대로( <mark style="background-color: lightblue"><strong>CPU를 먼저 요청한 프로세스에게</strong></mark>) CPU를 할당하는 방식이다.</li>
 </ul>
 <br />
@@ -549,7 +551,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>콘보이 현상(Convoy effect)</strong>
 <ul>
-<li>CPU 버스트가 긴 작업이 먼저 들어오면, CPU를 잠깐만 사용하면 준비 큐를 떠나 I/O작업을 수행할 수 있는 다수의 프로세스들이 계속 기다려야 하는 상황이 생긴다.</li>
+<li><u>CPU 버스트가 긴 작업이 먼저</u> 들어오면, CPU를 잠깐만 사용하면 준비 큐를 떠나 I/O작업을 수행할 수 있는<u>(CPU 버스트가 짧은) 다수의 프로세스들이 계속 기다려야 하는 상황</u>이 생긴다.</li>
 <li>먼저 도착한 프로세스의 CPU 버스트 기간에 따라 평균 대기시간이 크게 달라진다.</li>
 <li>평균 대기시간(waiting time)이 길어진다.</li>
 <li>I/O 장치의 이용률이 하락한다.</li>
@@ -586,10 +588,11 @@ if (!doNotTrack) {
 <li>평균 대기 시간: $(0 + 12 + 15) / 3 = 9$</li>
 </ul>
 <br />
-<h3 id="최단작업-우선shortest-job-first-sjf-스케줄링">최단작업 우선(Shortest-Job First; SJF) 스케줄링</h3>
+<h3 id="최단작업-우선sjf-스케줄링">최단작업 우선(SJF) 스케줄링</h3>
 <ul>
+<li>Shortest-Job First</li>
 <li><mark style="background-color: lightblue"><strong>CPU 버스트가 가장 짧은 프로세스에게</strong></mark> 제일 먼저 CPU를 할당하는 방식이다.</li>
-<li><strong>선점형(Shortest Remaining Time First; SRTF)</strong> 과 비선점형 방식으로 구현할 수 있다.
+<li>선점형(Shortest Remaining Time First; SRTF) 과 비선점형 방식으로 구현할 수 있다.
 <ul>
 <li>선점형의 경우, 어떤 프로세스가 CPU를 할당받고 수행 중이더라도, CPU 버스트 시간이 더 짧은 프로세스가 도착하면 빼앗기는 방식이다.</li>
 <li>프로세스들이 준비 큐에 도착하는 시간이 불규칙한 환경에서는 선점형 방식이 평균 대기시간을 최소화하는 최적의 알고리즘이 된다.</li>
@@ -642,7 +645,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>기아 현상(starvation)</strong> 이 발생한다.
 <ul>
-<li>CPU 버스트가 짧은 프로세스가 계속 도착하면 CPU 버스트가 긴 프로세스는 영원히 CPU를 할당받지 못하는 것이다.</li>
+<li>CPU 버스트가 짧은 프로세스가 계속 도착하면 <u>CPU 버스트가 긴 프로세스는 영원히 CPU를 할당받지 못하는</u> 것이다.</li>
 </ul>
 </li>
 <li>CPU 버스트 시간을 미리 예측할 수 없다.</li>
@@ -661,7 +664,7 @@ if (!doNotTrack) {
 </li>
 </ul>
 <br />
-<h3 id="우선순위priority-스케줄링">우선순위(priority) 스케줄링</h3>
+<h3 id="우선순위-스케줄링">우선순위 스케줄링</h3>
 <ul>
 <li><mark style="background-color: lightblue"><strong>우선순위가 가장 높은 프로세스에게</strong></mark> 제일 먼저 CPU를 할당하는 방식이다.</li>
 <li>우선순위 값(priority number)은 그 값이 작을수록 우선순위가 높다.</li>
@@ -675,15 +678,16 @@ if (!doNotTrack) {
 <li>기아 현상이 발생할 수 있다.</li>
 <li>해결 방안: <strong>노화(aging) 기법</strong>
 <ul>
-<li>기다리는 시간이 길어지면 우선순위를 조금씩 높여서 언젠가는 가장 높은 우선순위가 되어 CPU를 할당받을 수 있게 해주는 방법이다.</li>
+<li>기다리는 <u>시간이 길어지면 우선순위를 조금씩 높여서</u> 언젠가는 가장 높은 우선순위가 되어 CPU를 할당받을 수 있게 해주는 방법이다.</li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
 <br />
-<h3 id="라운드-로빈round-robin-스케줄링">라운드 로빈(Round Robin) 스케줄링</h3>
+<h3 id="라운드-로빈-스케줄링">라운드 로빈 스케줄링</h3>
 <ul>
+<li>Round Robin</li>
 <li>각 프로세스가 한 번에 CPU를 연속적으로 사용할 수 있는 최대시간( <mark style="background-color: lightblue"><strong>할당시간; timequantum</strong></mark>)을 주는 방식이다.
 <ul>
 <li>할당 시간이 너무 길면, FCFS와 같은 결과를 나타내며,</li>
@@ -708,20 +712,20 @@ if (!doNotTrack) {
 </li>
 </ul>
 <br />
-<h3 id="다단계-큐muti-level-queue">다단계 큐(muti-level queue)</h3>
+<h3 id="다단계-큐">다단계 큐</h3>
 <ul>
-<li>
-<p><mark style="background-color: lightblue"><strong>준비 큐를 여러 개</strong></mark>로 분할해서 관리하는 방식이다.</p>
-</li>
-<li>
-<p>일반적으로, 전위 큐(foreground queue)와 후위 큐(background queue)로 분할하여 운영한다.</p>
+<li>muti-level queue</li>
+<li><mark style="background-color: lightblue"><strong>준비 큐를 여러 개</strong></mark>로 분할해서 관리하는 방식이다.</li>
+<li>일반적으로, 전위 큐(foreground queue)와 후위 큐(background queue)로 분할하여 운영한다.
 <ul>
 <li>전위 큐: 대화형 작업을 담는다. 라운드 로빈 스케줄링을 사용한다.</li>
 <li>후위 큐: 계산 위주의 작업을 담는다. FCFS 스케줄링을 사용한다.</li>
 </ul>
 </li>
-<li>
-<p>어느 큐에게 먼저 CPU를 할당할 것인가?</p>
+</ul>
+<br />
+<ul>
+<li>어느 큐에게 먼저 CPU를 할당할 것인가?
 <ul>
 <li><strong>고정 우선순위 방식(fixed priority scheduling)</strong>
 <ul>
@@ -737,8 +741,9 @@ if (!doNotTrack) {
 </li>
 </ul>
 <br />
-<h3 id="다단계-피드백-큐multi-level-feedback-queue">다단계 피드백 큐(multi-level feedback queue)</h3>
+<h3 id="다단계-피드백-큐">다단계 피드백 큐</h3>
 <ul>
+<li>multi-level feedback queue</li>
 <li>준비 큐를 여러 개로 둔다는 점은 다단계 큐와 동일하나, 프로세스가  <mark style="background-color: lightblue"><strong>하나의 큐에서 다른 큐로 이동 가능하다</strong></mark>는 점이 다르다.
 <ul>
 <li>대표적인 방식은, 라운드 로빈을 사용하면서 할당시간이 5, 10인 준비 큐가 있고, 그다음에 FCFS 준비 큐가 있는 것이다.</li>
@@ -759,8 +764,9 @@ if (!doNotTrack) {
 </li>
 </ul>
 <br />
-<h3 id="다중처리기multi-processor-system-스케줄링">다중처리기(multi-processor system) 스케줄링</h3>
+<h3 id="다중처리기-스케줄링">다중처리기 스케줄링</h3>
 <ul>
+<li>multi-processor system</li>
 <li><mark style="background-color: lightblue"><strong>CPU가 여러 개</strong></mark>인 시스템인 다중처리기 시스템에서 사용하는 스케줄링이다.</li>
 </ul>
 <br />
