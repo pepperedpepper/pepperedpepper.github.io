@@ -3,7 +3,7 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
 디스크의 구조 Image Source
-논리블록(logical block) 디스크의 단위 정보 저장 공간이다. 1차원 배열처럼 취급한다. 논리블록 단위로 저장, 전송된다. 섹터(sector) 디스크 내에서 논리블록이 저장되는 물리적인 위치이다. 섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다. 디스크 관리 (1) physical-formatting (low-level formatting) 디스크를 컨트롤러가 읽고 쓸수 있도록 섹터들로 나누는 과정이다. 각 섹터는 header &#43; 실제 data(보통 512bytes) &#43; trailer로 구성된다. header와 trailer는 sector number, ECC(error-collecting code)등의 정보가 저장되며, 컨트롤러가 직접 접근 및 운영한다.'>
+논리블록(logical block) 디스크의 단위 정보 저장 공간이다. 디스크에 데이터가 저장될 때나 입출력이 일어날 때, 이 논리블록 단위로 저장, 전송된다. 디스크 외부에서는 디스크를 논리블록들로 이루어진 1차원 배열처럼 취급한다. 섹터(sector) 디스크 내에서 논리블록이 저장되는 물리적인 위치이다. 섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다. 디스크 관리 (1) physical-formatting (low-level formatting) 디스크를 컨트롤러가 읽고 쓸 수 있도록 섹터들로 나누는 과정이다.'>
 <title>[OS] Chapter 12. 디스크 관리</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/os-it-principles-12/'>
@@ -12,14 +12,14 @@
      crossorigin="anonymous"></script><meta property='og:title' content='[OS] Chapter 12. 디스크 관리'>
 <meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
 디스크의 구조 Image Source
-논리블록(logical block) 디스크의 단위 정보 저장 공간이다. 1차원 배열처럼 취급한다. 논리블록 단위로 저장, 전송된다. 섹터(sector) 디스크 내에서 논리블록이 저장되는 물리적인 위치이다. 섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다. 디스크 관리 (1) physical-formatting (low-level formatting) 디스크를 컨트롤러가 읽고 쓸수 있도록 섹터들로 나누는 과정이다. 각 섹터는 header &#43; 실제 data(보통 512bytes) &#43; trailer로 구성된다. header와 trailer는 sector number, ECC(error-collecting code)등의 정보가 저장되며, 컨트롤러가 직접 접근 및 운영한다.'>
+논리블록(logical block) 디스크의 단위 정보 저장 공간이다. 디스크에 데이터가 저장될 때나 입출력이 일어날 때, 이 논리블록 단위로 저장, 전송된다. 디스크 외부에서는 디스크를 논리블록들로 이루어진 1차원 배열처럼 취급한다. 섹터(sector) 디스크 내에서 논리블록이 저장되는 물리적인 위치이다. 섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다. 디스크 관리 (1) physical-formatting (low-level formatting) 디스크를 컨트롤러가 읽고 쓸 수 있도록 섹터들로 나누는 과정이다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-12/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-07-27T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-07-27T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[OS] Chapter 12. 디스크 관리">
 <meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
 디스크의 구조 Image Source
-논리블록(logical block) 디스크의 단위 정보 저장 공간이다. 1차원 배열처럼 취급한다. 논리블록 단위로 저장, 전송된다. 섹터(sector) 디스크 내에서 논리블록이 저장되는 물리적인 위치이다. 섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다. 디스크 관리 (1) physical-formatting (low-level formatting) 디스크를 컨트롤러가 읽고 쓸수 있도록 섹터들로 나누는 과정이다. 각 섹터는 header &#43; 실제 data(보통 512bytes) &#43; trailer로 구성된다. header와 trailer는 sector number, ECC(error-collecting code)등의 정보가 저장되며, 컨트롤러가 직접 접근 및 운영한다.">
+논리블록(logical block) 디스크의 단위 정보 저장 공간이다. 디스크에 데이터가 저장될 때나 입출력이 일어날 때, 이 논리블록 단위로 저장, 전송된다. 디스크 외부에서는 디스크를 논리블록들로 이루어진 1차원 배열처럼 취급한다. 섹터(sector) 디스크 내에서 논리블록이 저장되는 물리적인 위치이다. 섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다. 디스크 관리 (1) physical-formatting (low-level formatting) 디스크를 컨트롤러가 읽고 쓸 수 있도록 섹터들로 나누는 과정이다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -309,10 +309,10 @@ if (!doNotTrack) {
     <li><a href="#디스크-관리">디스크 관리</a></li>
     <li><a href="#디스크-스케줄링">디스크 스케줄링</a>
       <ul>
-        <li><a href="#1-fcfsfirst-come-first-served-스케줄링">(1) FCFS(First Come First Served) 스케줄링</a></li>
-        <li><a href="#2-sstfshortest-seek-time-first-스케줄링">(2) SSTF(Shortest Seek Time First) 스케줄링</a></li>
+        <li><a href="#1-fcfs-스케줄링">(1) FCFS 스케줄링</a></li>
+        <li><a href="#2-sstf-스케줄링">(2) SSTF 스케줄링</a></li>
         <li><a href="#3-scan-알고리즘">(3) SCAN 알고리즘</a></li>
-        <li><a href="#4-c-scancircular-scan-알고리즘">(4) C-SCAN(Circular-SCAN) 알고리즘</a></li>
+        <li><a href="#4-c-scan-알고리즘">(4) C-SCAN 알고리즘</a></li>
         <li><a href="#5-look과-c-look-알고리즘">(5) LOOK과 C-LOOK 알고리즘</a></li>
       </ul>
     </li>
@@ -420,14 +420,14 @@ if (!doNotTrack) {
 <ul>
 <li><strong>논리블록(logical block)</strong>
 <ul>
-<li>디스크의 <strong>단위 정보 저장 공간</strong>이다.</li>
-<li>1차원 배열처럼 취급한다.</li>
-<li>논리블록 단위로 저장, 전송된다.</li>
+<li>디스크의 <u>단위 정보 저장 공간</u>이다.</li>
+<li>디스크에 데이터가 저장될 때나 입출력이 일어날 때, 이 논리블록 단위로 저장, 전송된다.</li>
+<li>디스크 외부에서는 디스크를 논리블록들로 이루어진 1차원 배열처럼 취급한다.</li>
 </ul>
 </li>
 <li><strong>섹터(sector)</strong>
 <ul>
-<li>디스크 내에서 <strong>논리블록이 저장되는 물리적인 위치</strong>이다.</li>
+<li>디스크 내에서 <u>논리블록이 저장되는 물리적인 위치</u>이다.</li>
 <li>섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다.</li>
 </ul>
 </li>
@@ -437,7 +437,7 @@ if (!doNotTrack) {
 <ul>
 <li>(1) <strong>physical-formatting (low-level formatting)</strong>
 <ul>
-<li>디스크를 컨트롤러가 읽고 쓸수 있도록 섹터들로 나누는 과정이다.</li>
+<li>디스크를 컨트롤러가 읽고 쓸 수 있도록 섹터들로 나누는 과정이다.</li>
 <li>각 섹터는 <code>header</code> + <code>실제 data</code>(보통 512bytes) + <code>trailer</code>로 구성된다.</li>
 <li><code>header</code>와 <code>trailer</code>는 sector number, ECC(error-collecting code)등의 정보가 저장되며, 컨트롤러가 직접 접근 및 운영한다.</li>
 </ul>
@@ -498,19 +498,21 @@ if (!doNotTrack) {
 <ul>
 <li>회전지연시간, 전송시간은 상대적인 수치가 작을 뿐 아니라 운영체제가 통제하기 힘든 부분이다.
 <ul>
-<li>따라서 운영체제는 탐색시간을 줄이기 위해 <strong>헤드의 움직임을 최소화하는 스케줄링 작업</strong>을 한다.</li>
-<li>그렇다면 <strong>여러 섹터들에 대한 입출력 요청이 들어왔을 때 이들을 어떤 순서로 처리할 것인가?</strong></li>
+<li>따라서 운영체제는 <u>탐색시간을 줄이기 위해 헤드의 움직임을 최소화하는 스케줄링 작업</u>을 한다.</li>
+<li>그렇다면 여러 섹터들에 대한 입출력 요청이 들어왔을 때 이들을 <u>어떤 순서로 처리할 것인가?</u></li>
 </ul>
 </li>
 </ul>
 <br />
-<h3 id="1-fcfsfirst-come-first-served-스케줄링">(1) FCFS(First Come First Served) 스케줄링</h3>
+<h3 id="1-fcfs-스케줄링">(1) FCFS 스케줄링</h3>
 <ul>
+<li>First Come First Served</li>
 <li>디스크에 <strong>먼저 들어온 요청</strong>을 먼저 처리한다.</li>
 </ul>
 <br />
-<h3 id="2-sstfshortest-seek-time-first-스케줄링">(2) SSTF(Shortest Seek Time First) 스케줄링</h3>
+<h3 id="2-sstf-스케줄링">(2) SSTF 스케줄링</h3>
 <ul>
+<li>Shortest Seek Time First</li>
 <li>헤드의 현재 위치로부터 <strong>가장 가까운 위치</strong>에 있는 요청을 먼저 처리한다.</li>
 <li><strong>기아 현상(starvation)</strong> 을 발생시킬 수 있다.
 <ul>
@@ -530,8 +532,9 @@ if (!doNotTrack) {
 </li>
 </ul>
 <br />
-<h3 id="4-c-scancircular-scan-알고리즘">(4) C-SCAN(Circular-SCAN) 알고리즘</h3>
+<h3 id="4-c-scan-알고리즘">(4) C-SCAN 알고리즘</h3>
 <ul>
+<li>Circular-SCAN</li>
 <li>헤드가 <strong>정해진 방향으로 이동</strong>하면서 길목에 있는 요청들을 처리하는 것은 SCAN과 똑같지만, 끝에 도달하면 요청을 처리하지 않고 출발점으로 이동만 하는 방식이다.</li>
 <li>이동거리는 길어지지만, 탐색시간의 편차를 줄이기 위함이다.</li>
 </ul>
@@ -568,8 +571,8 @@ if (!doNotTrack) {
 <ul>
 <li>디스크를 사용하는 두 가지 이유
 <ul>
-<li>(1) 메모리의 휘발성 → <strong>파일 시스템</strong></li>
-<li>(2) 메모리의 공간 부족 → <strong>스왑 영역</strong></li>
+<li>(1) 메모리의 휘발성 해결을 위해 → <strong>파일 시스템</strong></li>
+<li>(2) 메모리의 공간 부족 해결을 위해 → <strong>스왑 영역</strong></li>
 </ul>
 </li>
 </ul>
@@ -602,11 +605,8 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="raid">RAID</h2>
 <ul>
-<li><strong>RAID(Redundant Array of Independent Disks)</strong>
-<ul>
+<li>Redundant Array of Independent Disks</li>
 <li><strong>디스크 여러개를 묶어서 함께 사용</strong>하는 것이다.</li>
-</ul>
-</li>
 </ul>
 <br />
 <ul>
@@ -614,12 +614,12 @@ if (!doNotTrack) {
 <ul>
 <li><strong>디스크 처리 속도 향상</strong>
 <ul>
-<li>여러 디스크에 블록의 내용을 <strong>분산 저장</strong>한다. 그리고 병렬적으로 읽는다. (interleaving, striping)</li>
+<li>여러 디스크에 블록의 내용을 <u>분산 저장</u>한다. 그리고 병렬적으로 읽는다. (interleaving, striping)</li>
 </ul>
 </li>
 <li><strong>신뢰성(reliability) 향상</strong>
 <ul>
-<li>동일한 정보를 디스크에 <strong>중복 저장</strong>한다. 하나의 디스크가 고장나도 다른 디스크에서 읽어올 수 있다. (mirroring, shadowing)</li>
+<li>동일한 정보를 디스크에 <u>중복 저장</u>한다. 하나의 디스크가 고장나도 다른 디스크에서 읽어올 수 있다. (mirroring, shadowing)</li>
 <li>단순한 중복 저장이 아니라, 일부 디스크에 parity를 저장해서 공간 효율성을 높일 수도 있다.</li>
 </ul>
 </li>

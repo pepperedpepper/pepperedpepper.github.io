@@ -306,10 +306,20 @@ if (!doNotTrack) {
     <li><a href="#데드락-발생의-4가지-조건">데드락 발생의 4가지 조건</a></li>
     <li><a href="#데드락-해결-방법">데드락 해결 방법</a>
       <ul>
-        <li><a href="#데드락-예방-deadlock-prevention">데드락 예방 (Deadlock Prevention)</a></li>
-        <li><a href="#데드락-회피-deadlock-avoidance">데드락 회피 (Deadlock Avoidance)</a></li>
-        <li><a href="#데드락-탐지-및-회복-deadlock-detection-and-recovery">데드락 탐지 및 회복 (Deadlock Detection and Recovery)</a></li>
-        <li><a href="#데드락-무시-deadlock-ignorance">데드락 무시 (Deadlock Ignorance)</a></li>
+        <li><a href="#예방">예방</a></li>
+        <li><a href="#회피">회피</a>
+          <ul>
+            <li><a href="#1-자원-할당-그래프-알고리즘">(1) 자원 할당 그래프 알고리즘</a></li>
+            <li><a href="#2-은행원-알고리즘">(2) 은행원 알고리즘</a></li>
+          </ul>
+        </li>
+        <li><a href="#탐지-및-회복">탐지 및 회복</a>
+          <ul>
+            <li><a href="#1-대기-그래프wait-for-graph">(1) 대기 그래프(Wait-for graph)</a></li>
+            <li><a href="#2-은행원-알고리즘과-유사한-방법">(2) 은행원 알고리즘과 유사한 방법</a></li>
+          </ul>
+        </li>
+        <li><a href="#무시">무시</a></li>
       </ul>
     </li>
   </ul>
@@ -401,7 +411,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>교착상태(deadlock)</strong>
 <ul>
-<li>둘 이상의 프로세스가 <strong>서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태</strong>이다.</li>
+<li>둘 이상의 프로세스가 <u>서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태</u>이다.</li>
 <li>여기서 자원이란 하드웨어, 소프트웨어 등을 포함하는 개념이다. (예: I/O device, CPU cycle, memory space, semaphore 등)</li>
 <li>프로세스가 자원을 사용하는 절차: Request → Allocate → Use → Release</li>
 </ul>
@@ -418,34 +428,33 @@ if (!doNotTrack) {
 </thead>
 <tbody>
 <tr>
-<td><strong>상호 배제 <br /> (Mutual exclusion)</strong></td>
-<td>매 순간 하나의 프로세스만 자원을 획득할 수 있다.</td>
+<td><strong>상호 배제 <br />(Mutual exclusion)</strong></td>
+<td>매 순간 <u>하나의 프로세스만</u> 자원을 획득할 수 있다.</td>
 </tr>
 <tr>
-<td><strong>보유 대기 <br /> (Hold and wait)</strong></td>
-<td>자원을 가진 프로세스가 다른 자원을 기다릴 때, <br /> 보유 자원을 놓지 않고 계속 가지고 있다.</td>
+<td><strong>보유 대기 <br />(Hold and wait)</strong></td>
+<td>자원을 가진 프로세스가 다른 자원을 기다릴 때, <br /><u>보유 자원을 놓지 않고</u> 계속 가지고 있다.</td>
 </tr>
 <tr>
-<td><strong>비선점 <br /> (No preemption)</strong></td>
-<td>프로세스의 자원을 강제로 빼앗을 수 없다.</td>
+<td><strong>비선점 <br />(No preemption)</strong></td>
+<td>프로세스의 자원을 <u>강제로 빼앗을 수 없다.</u></td>
 </tr>
 <tr>
-<td><strong>순환 대기 <br /> (Circular wait)</strong></td>
-<td>자원을 기다리는 프로세스 간에 사이클이 형성되어 있다.</td>
+<td><strong>순환 대기 <br />(Circular wait)</strong></td>
+<td>자원을 기다리는 프로세스 간에 <u>사이클</u>이 형성되어 있다.</td>
 </tr>
 </tbody>
 </table></div>
 <p><br /><br /></p>
 <h2 id="데드락-해결-방법">데드락 해결 방법</h2>
-<br />
-<h3 id="데드락-예방-deadlock-prevention">데드락 예방 (Deadlock Prevention)</h3>
+<h3 id="예방">예방</h3>
 <ul>
-<li>
-<p>자원 할당 시 <strong>데드락 발생의 4가지 <mark style="background-color: lightblue">조건 중 어느 하나가 만족되지 않도록</mark> 하는 것</strong>이다.</p>
-</li>
-<li>
-<p>만족되지 않도록 배제 할 수 있는 조건 살펴보기</p>
-</li>
+<li>Deadlock Prevention</li>
+<li>자원 할당 시 <strong>데드락 발생의 4가지 <mark style="background-color: lightblue">조건 중 어느 하나가 만족되지 않도록</mark> 하는 것</strong>이다.</li>
+</ul>
+<br />
+<ul>
+<li>만족되지 않도록 배제 할 수 있는 조건 살펴보기</li>
 </ul>
 <div class="table-wrapper"><table>
 <thead>
@@ -456,31 +465,29 @@ if (!doNotTrack) {
 </thead>
 <tbody>
 <tr>
-<td><strong>상호 배제 <br /> (Mutual exclusion)</strong></td>
-<td>공유하면 안 되는 자원은 이 조건을 반드시 성립해야 해서 <strong>배제 불가능</strong>.</td>
+<td><strong>상호 배제 <br />(Mutual exclusion)</strong></td>
+<td>공유하면 안 되는 자원은 이 조건을 반드시 성립해야 해서 <u>배제 불가능.</u></td>
 </tr>
 <tr>
-<td><strong>보유 대기 <br /> (Hold and wait)</strong></td>
-<td>자원을 <strong>요청할 때 자원을 가지지 않도록</strong> 하면 된다. <br /> 방법1. 프로세스 시작 시 모든 필요한 자원을 할당받게 한다. <br /> 방법2. 자원이 필요한 경우 보유 자원을 모두 놓고 다시 요청한다.</td>
+<td><strong>보유 대기 <br />(Hold and wait)</strong></td>
+<td><u>자원을 요청할 때 자원을 가지지 않도록</u> 하면 된다. <br />방법1. 프로세스 시작 시 모든 필요한 자원을 할당받게 한다. <br />방법2. 자원이 필요한 경우 보유 자원을 모두 놓고 다시 요청한다.</td>
 </tr>
 <tr>
-<td><strong>비선점 <br /> (No preemption)</strong></td>
-<td>다른 자원을 요청할 때 자원을 보유한 자원을 빼앗을 수 있도록 한다. (<strong>선점</strong>) <br /> 상태를 쉽게 저장하고 복구할 수 있는 자원에서 주로 사용한다. (CPU, memory)</td>
+<td><strong>비선점 <br />(No preemption)</strong></td>
+<td>다른 자원을 요청할 때 자원을 보유한 자원을 빼앗을 수 있도록 한다. (<u>선점</u>) <br />상태를 쉽게 저장하고 복구할 수 있는 자원에서 주로 사용한다. (CPU, memory)</td>
 </tr>
 <tr>
-<td><strong>순환 대기 <br /> (Circular wait)</strong></td>
-<td>모든 자원 유형에 할당 순서를 정해서 <strong>정해진 순서대로만 자원을 할당한다.</strong> <br /> 예를 들어, 1번, 3번 자원을 획득해야지만 5번 자원을 획득할 수 있는 것이다.  <br /> 자원 A(순서 3)을 보유 중인데 자원 B(순서 1)을 할당받으려면 우선 자원 A를 해제해야한다.  <br /> 하지만, 자원에 대한 이용률(Utilization)이 낮아지고, Throughput 감소, Starvation이 발생할 수 있다.</td>
+<td><strong>순환 대기 <br />(Circular wait)</strong></td>
+<td>모든 자원 유형에 할당 순서를 정해서 <u>정해진 순서대로만 자원을 할당</u>한다.<br />예를 들어, 1번, 3번 자원을 획득해야지만 5번 자원을 획득할 수 있는 것이다.  <br />자원 A(순서 3)을 보유 중인데 자원 B(순서 1)을 할당받으려면 우선 자원 A를 해제해야한다.  <br />하지만, 자원에 대한 이용률(Utilization)이 낮아지고, Throughput 감소, Starvation이 발생할 수 있다.</td>
 </tr>
 </tbody>
 </table></div>
 <p><br /><br /></p>
-<h3 id="데드락-회피-deadlock-avoidance">데드락 회피 (Deadlock Avoidance)</h3>
+<h3 id="회피">회피</h3>
 <ul>
-<li>자원 요청에 대한 부가적인 정보를 이용해서 자원 할당을 하면 <mark style="background-color: lightblue"><strong>데드락의 가능성이 없는지를 동적으로 검사해서 안전한 경우에만 자원을 할당</strong></mark>하는 것이다.
-<ul>
-<li>가장 단순하고 일반적인 모델은, 프로세스들이 시작될 때, <strong>평생 필요로 하는 자원별 최대 사용량을 미리 선언</strong>하도록 하는 것이다.</li>
-</ul>
-</li>
+<li>Deadlock Avoidance</li>
+<li>자원 요청에 대한 부가적인 정보를 이용해서 자원 할당을 하면 <mark style="background-color: lightblue"><strong>데드락의 가능성이 없는지를 동적으로 검사해서 안전한 경우에만 자원을 할당</strong></mark>하는 것이다.</li>
+<li>가장 단순하고 일반적인 모델은, 프로세스들이 시작될 때, <u>평생 필요로 하는 자원별 최대 사용량을 미리 선언하도록</u> 하는 것이다.</li>
 </ul>
 <br />
 <p><img src="/post/os/images/08-01-safeUnsafe.png"
@@ -515,24 +522,28 @@ if (!doNotTrack) {
 <br />
 <ul>
 <li>2가지 회피 알고리즘
-<ul>
-<li>자원의 인스턴스가 1개일 때
-<ul>
-<li>(1) <strong>자원 할당 그래프 알고리즘(Resource Allocation Grapeh algorithm)</strong> 사용</li>
-</ul>
-</li>
-<li>자원의 인스턴스가 여러개 일 때
-<ul>
-<li>(2) <strong>은행원 알고리즘(Banker&rsquo;s algorithm)</strong> 사용</li>
-</ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>상황</th>
+<th>알고리즘</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자원의 인스턴스가 1개일 때</td>
+<td><strong>자원 할당 그래프 알고리즘<br />(Resource Allocation Grapeh algorithm)</strong></td>
+</tr>
+<tr>
+<td>자원의 인스턴스가 여러개 일 때</td>
+<td><strong>은행원 알고리즘<br />(Banker&rsquo;s algorithm)</strong></td>
+</tr>
+</tbody>
+</table></div>
 </li>
 </ul>
 <br />
-<ul>
-<li>(1) <mark style="background-color: lightblue"><strong>자원 할당 그래프 알고리즘</strong></mark></li>
-</ul>
+<h4 id="1-자원-할당-그래프-알고리즘">(1) 자원 할당 그래프 알고리즘</h4>
 <p><img src="/post/os/images/08-02-resourceAllocGraph.png"
 	
 	
@@ -549,20 +560,17 @@ if (!doNotTrack) {
 <li>$P_2$가 $R_2$자원을 할당받으면 사이클이 생기므로, $P_1$이 먼저 할당받는다.</li>
 </ul>
 <br />
-<ul>
-<li>(2) <mark style="background-color: lightblue"><strong>은행원 알고리즘</strong></mark>
+<h4 id="2-은행원-알고리즘">(2) 은행원 알고리즘</h4>
 <ul>
 <li>가정
 <ul>
-<li>모든 프로세스는 <strong>자원의 최대 사용량</strong>을 미리 명시한다.</li>
+<li>모든 프로세스는 <u>자원의 최대 사용량을 미리 명시</u>한다.</li>
 <li>그리고 자원을 최대 사용량만큼 할당 받은 프로세스는 작업이 끝나면 자원을 반납한다.</li>
 </ul>
 </li>
 <li>방법
 <ul>
-<li><strong>현재 가용 자원(Available)</strong> 과 각 프로세스들이 <strong>작업을 완료하기 위해 필요한 자원(Need)</strong> 을 비교하여, <strong>당장 작업을 마칠 수있는 프로세스부터 자원을 할당</strong>하여, 프로세스가 작업을 완료하고 <strong>반환하는 자원을 다른 프로세스에게 다시 할당</strong>하는 것이다.</li>
-</ul>
-</li>
+<li><strong>현재 가용 자원(Available)</strong> 과 각 프로세스들이 <strong>작업을 완료하기 위해 필요한 자원(Need)</strong> 을 비교하여, <u>당장 작업을 마칠 수있는 프로세스부터 자원을 할당</u>하여, 프로세스가 작업을 완료하고 반환하는 자원을 다른 프로세스에게 다시 할당하는 것이다.</li>
 </ul>
 </li>
 </ul>
@@ -606,31 +614,36 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><br /><br /></p>
-<h3 id="데드락-탐지-및-회복-deadlock-detection-and-recovery">데드락 탐지 및 회복 (Deadlock Detection and Recovery)</h3>
+<h3 id="탐지-및-회복">탐지 및 회복</h3>
 <ul>
-<li>데드락 발생은 허용하되, 그에 대한 detection 루틴을 두어 데드락 발생 시 recover하는 것이다.</li>
+<li>Deadlock Detection and Recovery</li>
+<li>데드락 발생은 허용하되, 그에 대한 <mark style="background-color: lightblue"><strong>detection 루틴을 두어 데드락 발생 시 recover</strong></mark>하는 것이다.</li>
 </ul>
 <br />
 <ul>
 <li>2가지 탐지 및 회복 알고리즘
-<ul>
-<li>자원의 인스턴스가 1개일 때
-<ul>
-<li>(1) 자원 할당 그래프의 변형인 <strong>대기 그래프(Wait-for graph)</strong> 사용</li>
-</ul>
-</li>
-<li>자원의 인스턴스가 여러개 일 때
-<ul>
-<li>(2) 은행원 알고리즘과 유사한 방법 사용</li>
-</ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>상황</th>
+<th>알고리즘</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자원의 인스턴스가 1개일 때</td>
+<td>자원 할당 그래프의 변형인 <strong>대기 그래프(Wait-for graph)</strong></td>
+</tr>
+<tr>
+<td>자원의 인스턴스가 여러개 일 때</td>
+<td>은행원 알고리즘과 유사한 방법</td>
+</tr>
+</tbody>
+</table></div>
 </li>
 </ul>
 <br />
-<ul>
-<li>(1) <mark style="background-color: lightblue"><strong>대기 그래프(Wait-for graph)</strong></mark></li>
-</ul>
+<h4 id="1-대기-그래프wait-for-graph">(1) 대기 그래프(Wait-for graph)</h4>
 <p><img src="/post/os/images/08-03-waitForGraph.png"
 	
 	
@@ -647,12 +660,9 @@ if (!doNotTrack) {
 <li>자원 타입의 노드를 제거하고 프로세스만으로 노드를 구성해서 사이클이 존재하는지 조사한다. ($n^2$)</li>
 </ul>
 <br />
+<h4 id="2-은행원-알고리즘과-유사한-방법">(2) 은행원 알고리즘과 유사한 방법</h4>
 <ul>
-<li>
-<p>(2) <strong>은행원 알고리즘과 유사한 방법</strong></p>
-</li>
-<li>
-<p>은행원 알고리즘과 다른 것</p>
+<li>은행원 알고리즘과 다른 것
 <ul>
 <li>각 프로세스가 <strong>실제로 요청한 자원(Request)</strong> 개수를 사용한다. 이것은 추가적으로 요청할 수 있는 것(Need)과 다르다.</li>
 <li><strong>현재</strong> 상태가 안전 상태(safe state)인지 확인하고, 불안정 상태(unsafe state)라면 데드락이라고 판단한 후 recovery 한다.</li>
@@ -665,13 +675,13 @@ if (!doNotTrack) {
 <ul>
 <li>방법 1. <strong>Process Termination</strong>
 <ul>
-<li>데드락과 연루된 프로세스를 모두 <strong>종료시킨다.</strong></li>
+<li>데드락과 연루된 프로세스를 모두 <u>종료</u>시킨다.</li>
 <li>혹은 데드락과 연루된 프로세스를 하나씩 종료시킨다.</li>
 </ul>
 </li>
 <li>방법 2. <strong>Resource Preemption</strong>
 <ul>
-<li>비용을 최소화하는 프로세스 <strong>희생양을 하나 찾아서, 자원을 뺏는다.</strong> (safe state로 rollback해서 프로세스를 다시 시작한다. )</li>
+<li>비용을 최소화하는 프로세스 <u>희생양을 하나 찾아서, 자원을 뺏는다.</u> (safe state로 rollback해서 프로세스를 다시 시작한다. )</li>
 <li>동일한 프로세스가 희생양이 되는 starvation 문제가 발생할 수 있다. 따라서 rollback 횟수도 고려해서 선정해야 한다.</li>
 </ul>
 </li>
@@ -679,8 +689,9 @@ if (!doNotTrack) {
 </li>
 </ul>
 <p><br /><br /></p>
-<h3 id="데드락-무시-deadlock-ignorance">데드락 무시 (Deadlock Ignorance)</h3>
+<h3 id="무시">무시</h3>
 <ul>
+<li>Deadlock Ignorance</li>
 <li>데드락을 시스템이 책임지지 않는 것이다. 데드락이 일어나지 않는다고 생각하고 <mark style="background-color: lightblue"><strong>아무런 조취도 취하지 않는다.</strong></mark></li>
 <li>만약 데드락이 발생하면, 시스템이 비정상적으로 작동한다는 것을 사람이 느끼고 직접 프로세스를 죽이도록 한다.</li>
 <li>UNIX, Windows 등의 대부분의 운영체제가 채택한 방법이다.</li>

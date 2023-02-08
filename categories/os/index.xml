@@ -34,14 +34,14 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;논리블록(logical block)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;디스크의 &lt;strong&gt;단위 정보 저장 공간&lt;/strong&gt;이다.&lt;/li&gt;
-&lt;li&gt;1차원 배열처럼 취급한다.&lt;/li&gt;
-&lt;li&gt;논리블록 단위로 저장, 전송된다.&lt;/li&gt;
+&lt;li&gt;디스크의 &lt;u&gt;단위 정보 저장 공간&lt;/u&gt;이다.&lt;/li&gt;
+&lt;li&gt;디스크에 데이터가 저장될 때나 입출력이 일어날 때, 이 논리블록 단위로 저장, 전송된다.&lt;/li&gt;
+&lt;li&gt;디스크 외부에서는 디스크를 논리블록들로 이루어진 1차원 배열처럼 취급한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;섹터(sector)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;디스크 내에서 &lt;strong&gt;논리블록이 저장되는 물리적인 위치&lt;/strong&gt;이다.&lt;/li&gt;
+&lt;li&gt;디스크 내에서 &lt;u&gt;논리블록이 저장되는 물리적인 위치&lt;/u&gt;이다.&lt;/li&gt;
 &lt;li&gt;섹터가 0이면 최외곽 실린더의 첫 번째 트랙에 있는 첫 번째 섹터이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -51,7 +51,7 @@
 &lt;ul&gt;
 &lt;li&gt;(1) &lt;strong&gt;physical-formatting (low-level formatting)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;디스크를 컨트롤러가 읽고 쓸수 있도록 섹터들로 나누는 과정이다.&lt;/li&gt;
+&lt;li&gt;디스크를 컨트롤러가 읽고 쓸 수 있도록 섹터들로 나누는 과정이다.&lt;/li&gt;
 &lt;li&gt;각 섹터는 &lt;code&gt;header&lt;/code&gt; + &lt;code&gt;실제 data&lt;/code&gt;(보통 512bytes) + &lt;code&gt;trailer&lt;/code&gt;로 구성된다.&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;header&lt;/code&gt;와 &lt;code&gt;trailer&lt;/code&gt;는 sector number, ECC(error-collecting code)등의 정보가 저장되며, 컨트롤러가 직접 접근 및 운영한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -112,19 +112,21 @@
 &lt;ul&gt;
 &lt;li&gt;회전지연시간, 전송시간은 상대적인 수치가 작을 뿐 아니라 운영체제가 통제하기 힘든 부분이다.
 &lt;ul&gt;
-&lt;li&gt;따라서 운영체제는 탐색시간을 줄이기 위해 &lt;strong&gt;헤드의 움직임을 최소화하는 스케줄링 작업&lt;/strong&gt;을 한다.&lt;/li&gt;
-&lt;li&gt;그렇다면 &lt;strong&gt;여러 섹터들에 대한 입출력 요청이 들어왔을 때 이들을 어떤 순서로 처리할 것인가?&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;따라서 운영체제는 &lt;u&gt;탐색시간을 줄이기 위해 헤드의 움직임을 최소화하는 스케줄링 작업&lt;/u&gt;을 한다.&lt;/li&gt;
+&lt;li&gt;그렇다면 여러 섹터들에 대한 입출력 요청이 들어왔을 때 이들을 &lt;u&gt;어떤 순서로 처리할 것인가?&lt;/u&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
-&lt;h3 id=&#34;1-fcfsfirst-come-first-served-스케줄링&#34;&gt;(1) FCFS(First Come First Served) 스케줄링&lt;/h3&gt;
+&lt;h3 id=&#34;1-fcfs-스케줄링&#34;&gt;(1) FCFS 스케줄링&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;First Come First Served&lt;/li&gt;
 &lt;li&gt;디스크에 &lt;strong&gt;먼저 들어온 요청&lt;/strong&gt;을 먼저 처리한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
-&lt;h3 id=&#34;2-sstfshortest-seek-time-first-스케줄링&#34;&gt;(2) SSTF(Shortest Seek Time First) 스케줄링&lt;/h3&gt;
+&lt;h3 id=&#34;2-sstf-스케줄링&#34;&gt;(2) SSTF 스케줄링&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;Shortest Seek Time First&lt;/li&gt;
 &lt;li&gt;헤드의 현재 위치로부터 &lt;strong&gt;가장 가까운 위치&lt;/strong&gt;에 있는 요청을 먼저 처리한다.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;기아 현상(starvation)&lt;/strong&gt; 을 발생시킬 수 있다.
 &lt;ul&gt;
@@ -144,8 +146,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
-&lt;h3 id=&#34;4-c-scancircular-scan-알고리즘&#34;&gt;(4) C-SCAN(Circular-SCAN) 알고리즘&lt;/h3&gt;
+&lt;h3 id=&#34;4-c-scan-알고리즘&#34;&gt;(4) C-SCAN 알고리즘&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;Circular-SCAN&lt;/li&gt;
 &lt;li&gt;헤드가 &lt;strong&gt;정해진 방향으로 이동&lt;/strong&gt;하면서 길목에 있는 요청들을 처리하는 것은 SCAN과 똑같지만, 끝에 도달하면 요청을 처리하지 않고 출발점으로 이동만 하는 방식이다.&lt;/li&gt;
 &lt;li&gt;이동거리는 길어지지만, 탐색시간의 편차를 줄이기 위함이다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -182,8 +185,8 @@
 &lt;ul&gt;
 &lt;li&gt;디스크를 사용하는 두 가지 이유
 &lt;ul&gt;
-&lt;li&gt;(1) 메모리의 휘발성 → &lt;strong&gt;파일 시스템&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;(2) 메모리의 공간 부족 → &lt;strong&gt;스왑 영역&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;(1) 메모리의 휘발성 해결을 위해 → &lt;strong&gt;파일 시스템&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;(2) 메모리의 공간 부족 해결을 위해 → &lt;strong&gt;스왑 영역&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -216,11 +219,8 @@
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;raid&#34;&gt;RAID&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;RAID(Redundant Array of Independent Disks)&lt;/strong&gt;
-&lt;ul&gt;
+&lt;li&gt;Redundant Array of Independent Disks&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;디스크 여러개를 묶어서 함께 사용&lt;/strong&gt;하는 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
@@ -228,12 +228,12 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;디스크 처리 속도 향상&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;여러 디스크에 블록의 내용을 &lt;strong&gt;분산 저장&lt;/strong&gt;한다. 그리고 병렬적으로 읽는다. (interleaving, striping)&lt;/li&gt;
+&lt;li&gt;여러 디스크에 블록의 내용을 &lt;u&gt;분산 저장&lt;/u&gt;한다. 그리고 병렬적으로 읽는다. (interleaving, striping)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;신뢰성(reliability) 향상&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;동일한 정보를 디스크에 &lt;strong&gt;중복 저장&lt;/strong&gt;한다. 하나의 디스크가 고장나도 다른 디스크에서 읽어올 수 있다. (mirroring, shadowing)&lt;/li&gt;
+&lt;li&gt;동일한 정보를 디스크에 &lt;u&gt;중복 저장&lt;/u&gt;한다. 하나의 디스크가 고장나도 다른 디스크에서 읽어올 수 있다. (mirroring, shadowing)&lt;/li&gt;
 &lt;li&gt;단순한 중복 저장이 아니라, 일부 디스크에 parity를 저장해서 공간 효율성을 높일 수도 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -274,7 +274,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;File attribute&lt;/strong&gt; (혹은 파일의 metadata)
 &lt;ul&gt;
-&lt;li&gt;파일 자체의 내용이 아니라 파일을 관리하기 위한 &lt;strong&gt;각종 정보들&lt;/strong&gt;이다.
+&lt;li&gt;파일 자체의 내용이 아니라 파일을 관리하기 위한 &lt;u&gt;각종 정보들&lt;/u&gt;이다.
 &lt;ul&gt;
 &lt;li&gt;파일 이름, 유형, 저장된 위치, 파일 사이즈&lt;/li&gt;
 &lt;li&gt;접근 권한(읽기/쓰기/실행), 시간(생성/변경/사용), 소유자 등&lt;/li&gt;
@@ -287,7 +287,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;File system&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;운영체제에서 &lt;strong&gt;파일을 관리하는 부분&lt;/strong&gt;이다.&lt;/li&gt;
+&lt;li&gt;운영체제에서 &lt;u&gt;파일을 관리하는 부분&lt;/u&gt;이다.&lt;/li&gt;
 &lt;li&gt;파일, 파일의 메타데이터, 디렉터리 등의 정보를 관리한다.&lt;/li&gt;
 &lt;li&gt;파일의 저장방법을 결정한다.&lt;/li&gt;
 &lt;li&gt;파일을 보호한다.&lt;/li&gt;
@@ -298,7 +298,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Directory&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;해당 디렉터리에 &lt;strong&gt;속한 파일의 이름, 메타데이터 등의 정보를 가지는 파일&lt;/strong&gt;이다.&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;해당 디렉터리에 속한 파일의 이름, 메타데이터 등의 정보를 가지는 파일&lt;/u&gt;이다.&lt;/li&gt;
 &lt;li&gt;파일의 메타데이터 중 일부를 보관하고 있는 일종의 특별한 파일이다.&lt;/li&gt;
 &lt;li&gt;Operation
 &lt;ul&gt;
@@ -322,7 +322,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;open(a/b/c)&lt;/code&gt;
 &lt;ul&gt;
-&lt;li&gt;디스크로부터 파일 c의 메타데이터를 메모리로 가지고 오기 위해서 디렉터리 경로를 search 한다.
+&lt;li&gt;디스크로부터 파일 &lt;code&gt;c&lt;/code&gt;의 메타데이터를 메모리로 가지고 오기 위해서 디렉터리 경로를 search 한다.
 &lt;ul&gt;
 &lt;li&gt;루트 디렉터리 &lt;code&gt;/&lt;/code&gt;를 &lt;code&gt;open&lt;/code&gt;하고, 그 안에서 파일 &lt;code&gt;a&lt;/code&gt;의 위치 획득&lt;/li&gt;
 &lt;li&gt;파일 &lt;code&gt;a&lt;/code&gt;를 &lt;code&gt;read&lt;/code&gt;하고, 그 안에서 파일 &lt;code&gt;b&lt;/code&gt;의 위치 획득&lt;/li&gt;
@@ -341,9 +341,9 @@
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;파일-보호&#34;&gt;파일 보호&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;각 파일들에 대해 누구에게 어떤 유형의 접근(read/write/execution)을 허락할 것인가?&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;접근 제어 방법&lt;/strong&gt;
 &lt;ul&gt;
+&lt;li&gt;각 파일들에 대해 누구에게 어떤 유형의 접근(read/write/execution)을 허락할 것인가?&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Access control Matrix&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;Access control list
@@ -404,6 +404,7 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;디스크에-파일-정보를-저장하는-방법&#34;&gt;디스크에 파일 정보를 저장하는 방법&lt;/h2&gt;
+&lt;h3 id=&#34;1-contiguous-allocation&#34;&gt;(1) &lt;strong&gt;Contiguous Allocation&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/11-01-contiguousAllocation.png&#34;
 	
 	
@@ -415,9 +416,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;(1) &lt;strong&gt;Contiguous Allocation&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;디스크의 연속적인 블럭에 파일을 저장하는 방법이다.&lt;/li&gt;
+&lt;li&gt;디스크의 &lt;strong&gt;연속적인 블럭에 파일을 저장&lt;/strong&gt;하는 방법이다.&lt;/li&gt;
 &lt;li&gt;장점
 &lt;ul&gt;
 &lt;li&gt;빠른 I/O가 가능하다. 한번의 디스크 seek/rotation으로 많은 바이트를 transfer할 수 있다.&lt;/li&gt;
@@ -431,9 +430,8 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;br /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2-linked-allocation&#34;&gt;(2) &lt;strong&gt;Linked Allocation&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/11-02-linkedAllocation.png&#34;
 	
 	
@@ -445,9 +443,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;(2) &lt;strong&gt;Linked Allocation&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;파일을 불연속적으로 저장하고 pointer로 연결하는 방법이다.&lt;/li&gt;
+&lt;li&gt;파일을 &lt;strong&gt;불연속적으로 저장하고 pointer로 연결&lt;/strong&gt;하는 방법이다.&lt;/li&gt;
 &lt;li&gt;장점
 &lt;ul&gt;
 &lt;li&gt;외부조각이 발생하지 않는다.&lt;/li&gt;
@@ -466,9 +462,8 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;br /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;3-indexed-allocation&#34;&gt;(3) &lt;strong&gt;Indexed Allocation&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/11-03-indexedAllocation.png&#34;
 	
 	
@@ -480,9 +475,7 @@
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;(3) &lt;strong&gt;Indexed Allocation&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;index를 가지고 있는 블럭을 두는 방법이다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;index를 가지고 있는 블럭&lt;/strong&gt;을 두는 방법이다.&lt;/li&gt;
 &lt;li&gt;장점
 &lt;ul&gt;
 &lt;li&gt;외부조각이 발생하지 않는다.&lt;/li&gt;
@@ -496,10 +489,9 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;실제로-사용되는-파일-시스템의-구조&#34;&gt;실제로 사용되는 파일 시스템의 구조&lt;/h2&gt;
+&lt;h3 id=&#34;unix-파일-시스템&#34;&gt;&lt;strong&gt;UNIX 파일 시스템&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/11-04-unixFileSystem.jpeg&#34;
 	
 	
@@ -510,8 +502,6 @@
 	
 	
 &gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;UNIX 파일 시스템&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Boot block&lt;/strong&gt;
 &lt;ul&gt;
@@ -535,9 +525,8 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;br /&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;fat-파일-시스템&#34;&gt;&lt;strong&gt;FAT 파일 시스템&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/11-05-fat.png&#34;
 	
 	
@@ -549,17 +538,12 @@
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;FAT 파일 시스템&lt;/strong&gt;
-&lt;ul&gt;
 &lt;li&gt;Data block의 개수 만큼 FAT 블럭이 존재하고, 내용에는 다음 블럭이 어딘지가 저장되어(pointer) 있다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;free-spcae-management&#34;&gt;Free-Spcae Management&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;비어 있는 블럭들을 어떻게 관리할 것인가?
-&lt;ul&gt;
+&lt;li&gt;비어 있는 블럭들을 어떻게 관리할 것인가?&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;(1) Bit map / Bit vector&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;블럭이 비어있는지 혹은 사용중인지를 &lt;code&gt;0&lt;/code&gt;, &lt;code&gt;1&lt;/code&gt;로 저장한다.&lt;/li&gt;
@@ -586,13 +570,10 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;directory-implementation&#34;&gt;Directory Implementation&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;디렉터리를 어떻게 구현할 것인가?
-&lt;ul&gt;
+&lt;li&gt;디렉터리를 어떻게 구현할 것인가?&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;(1) Linear list&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;파일의 이름과 메타데이터를 리스트로 저장한다. &amp;lt;file name, file metadata&amp;gt;&lt;/li&gt;
@@ -606,8 +587,6 @@
 &lt;li&gt;해시 함수를 적용해서 파일 이름을 파일의 위치로 바꾸어주고, 거기에 이름과 메타데이터를 저장한다.&lt;/li&gt;
 &lt;li&gt;탐색시간을 없앴다.&lt;/li&gt;
 &lt;li&gt;충돌 발생 가능성이 있다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1783,7 +1762,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;교착상태(deadlock)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;둘 이상의 프로세스가 &lt;strong&gt;서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태&lt;/strong&gt;이다.&lt;/li&gt;
+&lt;li&gt;둘 이상의 프로세스가 &lt;u&gt;서로 상대방이 가진 자원을 얻기 위해 무한히 기다리며 block된 상태&lt;/u&gt;이다.&lt;/li&gt;
 &lt;li&gt;여기서 자원이란 하드웨어, 소프트웨어 등을 포함하는 개념이다. (예: I/O device, CPU cycle, memory space, semaphore 등)&lt;/li&gt;
 &lt;li&gt;프로세스가 자원을 사용하는 절차: Request → Allocate → Use → Release&lt;/li&gt;
 &lt;/ul&gt;
@@ -1800,34 +1779,33 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;상호 배제 &lt;br /&gt; (Mutual exclusion)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;매 순간 하나의 프로세스만 자원을 획득할 수 있다.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;상호 배제 &lt;br /&gt;(Mutual exclusion)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;매 순간 &lt;u&gt;하나의 프로세스만&lt;/u&gt; 자원을 획득할 수 있다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;보유 대기 &lt;br /&gt; (Hold and wait)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;자원을 가진 프로세스가 다른 자원을 기다릴 때, &lt;br /&gt; 보유 자원을 놓지 않고 계속 가지고 있다.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;보유 대기 &lt;br /&gt;(Hold and wait)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;자원을 가진 프로세스가 다른 자원을 기다릴 때, &lt;br /&gt;&lt;u&gt;보유 자원을 놓지 않고&lt;/u&gt; 계속 가지고 있다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;비선점 &lt;br /&gt; (No preemption)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;프로세스의 자원을 강제로 빼앗을 수 없다.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;비선점 &lt;br /&gt;(No preemption)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;프로세스의 자원을 &lt;u&gt;강제로 빼앗을 수 없다.&lt;/u&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;순환 대기 &lt;br /&gt; (Circular wait)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;자원을 기다리는 프로세스 간에 사이클이 형성되어 있다.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;순환 대기 &lt;br /&gt;(Circular wait)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;자원을 기다리는 프로세스 간에 &lt;u&gt;사이클&lt;/u&gt;이 형성되어 있다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;데드락-해결-방법&#34;&gt;데드락 해결 방법&lt;/h2&gt;
-&lt;br /&gt;
-&lt;h3 id=&#34;데드락-예방-deadlock-prevention&#34;&gt;데드락 예방 (Deadlock Prevention)&lt;/h3&gt;
+&lt;h3 id=&#34;예방&#34;&gt;예방&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;자원 할당 시 &lt;strong&gt;데드락 발생의 4가지 &lt;mark style=&#34;background-color: lightblue&#34;&gt;조건 중 어느 하나가 만족되지 않도록&lt;/mark&gt; 하는 것&lt;/strong&gt;이다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;만족되지 않도록 배제 할 수 있는 조건 살펴보기&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;Deadlock Prevention&lt;/li&gt;
+&lt;li&gt;자원 할당 시 &lt;strong&gt;데드락 발생의 4가지 &lt;mark style=&#34;background-color: lightblue&#34;&gt;조건 중 어느 하나가 만족되지 않도록&lt;/mark&gt; 하는 것&lt;/strong&gt;이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;만족되지 않도록 배제 할 수 있는 조건 살펴보기&lt;/li&gt;
 &lt;/ul&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -1838,31 +1816,29 @@
 &lt;/thead&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;상호 배제 &lt;br /&gt; (Mutual exclusion)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;공유하면 안 되는 자원은 이 조건을 반드시 성립해야 해서 &lt;strong&gt;배제 불가능&lt;/strong&gt;.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;상호 배제 &lt;br /&gt;(Mutual exclusion)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;공유하면 안 되는 자원은 이 조건을 반드시 성립해야 해서 &lt;u&gt;배제 불가능.&lt;/u&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;보유 대기 &lt;br /&gt; (Hold and wait)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;자원을 &lt;strong&gt;요청할 때 자원을 가지지 않도록&lt;/strong&gt; 하면 된다. &lt;br /&gt; 방법1. 프로세스 시작 시 모든 필요한 자원을 할당받게 한다. &lt;br /&gt; 방법2. 자원이 필요한 경우 보유 자원을 모두 놓고 다시 요청한다.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;보유 대기 &lt;br /&gt;(Hold and wait)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;u&gt;자원을 요청할 때 자원을 가지지 않도록&lt;/u&gt; 하면 된다. &lt;br /&gt;방법1. 프로세스 시작 시 모든 필요한 자원을 할당받게 한다. &lt;br /&gt;방법2. 자원이 필요한 경우 보유 자원을 모두 놓고 다시 요청한다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;비선점 &lt;br /&gt; (No preemption)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;다른 자원을 요청할 때 자원을 보유한 자원을 빼앗을 수 있도록 한다. (&lt;strong&gt;선점&lt;/strong&gt;) &lt;br /&gt; 상태를 쉽게 저장하고 복구할 수 있는 자원에서 주로 사용한다. (CPU, memory)&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;비선점 &lt;br /&gt;(No preemption)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;다른 자원을 요청할 때 자원을 보유한 자원을 빼앗을 수 있도록 한다. (&lt;u&gt;선점&lt;/u&gt;) &lt;br /&gt;상태를 쉽게 저장하고 복구할 수 있는 자원에서 주로 사용한다. (CPU, memory)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;strong&gt;순환 대기 &lt;br /&gt; (Circular wait)&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;모든 자원 유형에 할당 순서를 정해서 &lt;strong&gt;정해진 순서대로만 자원을 할당한다.&lt;/strong&gt; &lt;br /&gt; 예를 들어, 1번, 3번 자원을 획득해야지만 5번 자원을 획득할 수 있는 것이다.  &lt;br /&gt; 자원 A(순서 3)을 보유 중인데 자원 B(순서 1)을 할당받으려면 우선 자원 A를 해제해야한다.  &lt;br /&gt; 하지만, 자원에 대한 이용률(Utilization)이 낮아지고, Throughput 감소, Starvation이 발생할 수 있다.&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;순환 대기 &lt;br /&gt;(Circular wait)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;모든 자원 유형에 할당 순서를 정해서 &lt;u&gt;정해진 순서대로만 자원을 할당&lt;/u&gt;한다.&lt;br /&gt;예를 들어, 1번, 3번 자원을 획득해야지만 5번 자원을 획득할 수 있는 것이다.  &lt;br /&gt;자원 A(순서 3)을 보유 중인데 자원 B(순서 1)을 할당받으려면 우선 자원 A를 해제해야한다.  &lt;br /&gt;하지만, 자원에 대한 이용률(Utilization)이 낮아지고, Throughput 감소, Starvation이 발생할 수 있다.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;데드락-회피-deadlock-avoidance&#34;&gt;데드락 회피 (Deadlock Avoidance)&lt;/h3&gt;
+&lt;h3 id=&#34;회피&#34;&gt;회피&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;자원 요청에 대한 부가적인 정보를 이용해서 자원 할당을 하면 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;데드락의 가능성이 없는지를 동적으로 검사해서 안전한 경우에만 자원을 할당&lt;/strong&gt;&lt;/mark&gt;하는 것이다.
-&lt;ul&gt;
-&lt;li&gt;가장 단순하고 일반적인 모델은, 프로세스들이 시작될 때, &lt;strong&gt;평생 필요로 하는 자원별 최대 사용량을 미리 선언&lt;/strong&gt;하도록 하는 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;Deadlock Avoidance&lt;/li&gt;
+&lt;li&gt;자원 요청에 대한 부가적인 정보를 이용해서 자원 할당을 하면 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;데드락의 가능성이 없는지를 동적으로 검사해서 안전한 경우에만 자원을 할당&lt;/strong&gt;&lt;/mark&gt;하는 것이다.&lt;/li&gt;
+&lt;li&gt;가장 단순하고 일반적인 모델은, 프로세스들이 시작될 때, &lt;u&gt;평생 필요로 하는 자원별 최대 사용량을 미리 선언하도록&lt;/u&gt; 하는 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/08-01-safeUnsafe.png&#34;
@@ -1897,24 +1873,28 @@
 &lt;br /&gt;
 &lt;ul&gt;
 &lt;li&gt;2가지 회피 알고리즘
-&lt;ul&gt;
-&lt;li&gt;자원의 인스턴스가 1개일 때
-&lt;ul&gt;
-&lt;li&gt;(1) &lt;strong&gt;자원 할당 그래프 알고리즘(Resource Allocation Grapeh algorithm)&lt;/strong&gt; 사용&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;자원의 인스턴스가 여러개 일 때
-&lt;ul&gt;
-&lt;li&gt;(2) &lt;strong&gt;은행원 알고리즘(Banker&amp;rsquo;s algorithm)&lt;/strong&gt; 사용&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;상황&lt;/th&gt;
+&lt;th&gt;알고리즘&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;자원의 인스턴스가 1개일 때&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;자원 할당 그래프 알고리즘&lt;br /&gt;(Resource Allocation Grapeh algorithm)&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;자원의 인스턴스가 여러개 일 때&lt;/td&gt;
+&lt;td&gt;&lt;strong&gt;은행원 알고리즘&lt;br /&gt;(Banker&amp;rsquo;s algorithm)&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
-&lt;ul&gt;
-&lt;li&gt;(1) &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;자원 할당 그래프 알고리즘&lt;/strong&gt;&lt;/mark&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h4 id=&#34;1-자원-할당-그래프-알고리즘&#34;&gt;(1) 자원 할당 그래프 알고리즘&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/08-02-resourceAllocGraph.png&#34;
 	
 	
@@ -1931,20 +1911,17 @@
 &lt;li&gt;$P_2$가 $R_2$자원을 할당받으면 사이클이 생기므로, $P_1$이 먼저 할당받는다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
-&lt;ul&gt;
-&lt;li&gt;(2) &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;은행원 알고리즘&lt;/strong&gt;&lt;/mark&gt;
+&lt;h4 id=&#34;2-은행원-알고리즘&#34;&gt;(2) 은행원 알고리즘&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;가정
 &lt;ul&gt;
-&lt;li&gt;모든 프로세스는 &lt;strong&gt;자원의 최대 사용량&lt;/strong&gt;을 미리 명시한다.&lt;/li&gt;
+&lt;li&gt;모든 프로세스는 &lt;u&gt;자원의 최대 사용량을 미리 명시&lt;/u&gt;한다.&lt;/li&gt;
 &lt;li&gt;그리고 자원을 최대 사용량만큼 할당 받은 프로세스는 작업이 끝나면 자원을 반납한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;방법
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;현재 가용 자원(Available)&lt;/strong&gt; 과 각 프로세스들이 &lt;strong&gt;작업을 완료하기 위해 필요한 자원(Need)&lt;/strong&gt; 을 비교하여, &lt;strong&gt;당장 작업을 마칠 수있는 프로세스부터 자원을 할당&lt;/strong&gt;하여, 프로세스가 작업을 완료하고 &lt;strong&gt;반환하는 자원을 다른 프로세스에게 다시 할당&lt;/strong&gt;하는 것이다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;현재 가용 자원(Available)&lt;/strong&gt; 과 각 프로세스들이 &lt;strong&gt;작업을 완료하기 위해 필요한 자원(Need)&lt;/strong&gt; 을 비교하여, &lt;u&gt;당장 작업을 마칠 수있는 프로세스부터 자원을 할당&lt;/u&gt;하여, 프로세스가 작업을 완료하고 반환하는 자원을 다른 프로세스에게 다시 할당하는 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1988,31 +1965,36 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;데드락-탐지-및-회복-deadlock-detection-and-recovery&#34;&gt;데드락 탐지 및 회복 (Deadlock Detection and Recovery)&lt;/h3&gt;
+&lt;h3 id=&#34;탐지-및-회복&#34;&gt;탐지 및 회복&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;데드락 발생은 허용하되, 그에 대한 detection 루틴을 두어 데드락 발생 시 recover하는 것이다.&lt;/li&gt;
+&lt;li&gt;Deadlock Detection and Recovery&lt;/li&gt;
+&lt;li&gt;데드락 발생은 허용하되, 그에 대한 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;detection 루틴을 두어 데드락 발생 시 recover&lt;/strong&gt;&lt;/mark&gt;하는 것이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
 &lt;li&gt;2가지 탐지 및 회복 알고리즘
-&lt;ul&gt;
-&lt;li&gt;자원의 인스턴스가 1개일 때
-&lt;ul&gt;
-&lt;li&gt;(1) 자원 할당 그래프의 변형인 &lt;strong&gt;대기 그래프(Wait-for graph)&lt;/strong&gt; 사용&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;자원의 인스턴스가 여러개 일 때
-&lt;ul&gt;
-&lt;li&gt;(2) 은행원 알고리즘과 유사한 방법 사용&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;상황&lt;/th&gt;
+&lt;th&gt;알고리즘&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;자원의 인스턴스가 1개일 때&lt;/td&gt;
+&lt;td&gt;자원 할당 그래프의 변형인 &lt;strong&gt;대기 그래프(Wait-for graph)&lt;/strong&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;자원의 인스턴스가 여러개 일 때&lt;/td&gt;
+&lt;td&gt;은행원 알고리즘과 유사한 방법&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
-&lt;ul&gt;
-&lt;li&gt;(1) &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;대기 그래프(Wait-for graph)&lt;/strong&gt;&lt;/mark&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h4 id=&#34;1-대기-그래프wait-for-graph&#34;&gt;(1) 대기 그래프(Wait-for graph)&lt;/h4&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/os/images/08-03-waitForGraph.png&#34;
 	
 	
@@ -2029,12 +2011,9 @@
 &lt;li&gt;자원 타입의 노드를 제거하고 프로세스만으로 노드를 구성해서 사이클이 존재하는지 조사한다. ($n^2$)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
+&lt;h4 id=&#34;2-은행원-알고리즘과-유사한-방법&#34;&gt;(2) 은행원 알고리즘과 유사한 방법&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;(2) &lt;strong&gt;은행원 알고리즘과 유사한 방법&lt;/strong&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;은행원 알고리즘과 다른 것&lt;/p&gt;
+&lt;li&gt;은행원 알고리즘과 다른 것
 &lt;ul&gt;
 &lt;li&gt;각 프로세스가 &lt;strong&gt;실제로 요청한 자원(Request)&lt;/strong&gt; 개수를 사용한다. 이것은 추가적으로 요청할 수 있는 것(Need)과 다르다.&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;현재&lt;/strong&gt; 상태가 안전 상태(safe state)인지 확인하고, 불안정 상태(unsafe state)라면 데드락이라고 판단한 후 recovery 한다.&lt;/li&gt;
@@ -2047,13 +2026,13 @@
 &lt;ul&gt;
 &lt;li&gt;방법 1. &lt;strong&gt;Process Termination&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;데드락과 연루된 프로세스를 모두 &lt;strong&gt;종료시킨다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;데드락과 연루된 프로세스를 모두 &lt;u&gt;종료&lt;/u&gt;시킨다.&lt;/li&gt;
 &lt;li&gt;혹은 데드락과 연루된 프로세스를 하나씩 종료시킨다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;방법 2. &lt;strong&gt;Resource Preemption&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;비용을 최소화하는 프로세스 &lt;strong&gt;희생양을 하나 찾아서, 자원을 뺏는다.&lt;/strong&gt; (safe state로 rollback해서 프로세스를 다시 시작한다. )&lt;/li&gt;
+&lt;li&gt;비용을 최소화하는 프로세스 &lt;u&gt;희생양을 하나 찾아서, 자원을 뺏는다.&lt;/u&gt; (safe state로 rollback해서 프로세스를 다시 시작한다. )&lt;/li&gt;
 &lt;li&gt;동일한 프로세스가 희생양이 되는 starvation 문제가 발생할 수 있다. 따라서 rollback 횟수도 고려해서 선정해야 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -2061,8 +2040,9 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h3 id=&#34;데드락-무시-deadlock-ignorance&#34;&gt;데드락 무시 (Deadlock Ignorance)&lt;/h3&gt;
+&lt;h3 id=&#34;무시&#34;&gt;무시&lt;/h3&gt;
 &lt;ul&gt;
+&lt;li&gt;Deadlock Ignorance&lt;/li&gt;
 &lt;li&gt;데드락을 시스템이 책임지지 않는 것이다. 데드락이 일어나지 않는다고 생각하고 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;아무런 조취도 취하지 않는다.&lt;/strong&gt;&lt;/mark&gt;&lt;/li&gt;
 &lt;li&gt;만약 데드락이 발생하면, 시스템이 비정상적으로 작동한다는 것을 사람이 느끼고 직접 프로세스를 죽이도록 한다.&lt;/li&gt;
 &lt;li&gt;UNIX, Windows 등의 대부분의 운영체제가 채택한 방법이다.&lt;/li&gt;
@@ -2114,25 +2094,22 @@
 &lt;/table&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;하나의 저장 공간을 여러 주체가 접근하려고 할 때 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;경쟁 상태(Race Condition)&lt;/strong&gt;&lt;/mark&gt; 가 생길 가능성이 있다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;br /&gt;
+&lt;li&gt;따라서 하나의 저장 공간을 여러 주체가 접근하려고 할 때 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;경쟁 상태(Race Condition)&lt;/strong&gt;&lt;/mark&gt; 가 생길 가능성이 있다.&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;운영체제&lt;/u&gt;에서 Race Condition이 발생하는 경우
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;운영체제에서&lt;/strong&gt; Race Condition이 발생하는 경우
-&lt;ul&gt;
-&lt;li&gt;(1) &lt;strong&gt;커널 모드 수행 중에 인터럽트&lt;/strong&gt;가 발생해서 인터럽트 처리 루틴을 수행할 때
+&lt;li&gt;(1) &lt;u&gt;커널 모드 수행 중에 인터럽트&lt;/u&gt;가 발생해서 인터럽트 처리 루틴을 수행할 때
 &lt;ul&gt;
 &lt;li&gt;양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.&lt;/li&gt;
 &lt;li&gt;해결책: &lt;strong&gt;커널 모드 수행 중일 때는 인터럽트를 비활성화한다.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;(2) &lt;strong&gt;커널 모드 수행 중에 다른 프로세스가 시스템 콜&lt;/strong&gt;을 해서 문맥교환이 일어나고, 다른 프로세스가 커널 모드를 수행할 때
+&lt;li&gt;(2) &lt;u&gt;커널 모드 수행 중에 다른 프로세스가 시스템 콜&lt;/u&gt;을 해서 문맥교환이 일어나고, 다른 프로세스가 커널 모드를 수행할 때
 &lt;ul&gt;
 &lt;li&gt;두 프로세스는 데이터를 공유하지 않지만, 시스템 콜을 하는 동안에는 커널 주소 공간에 접근할 수 있다.&lt;/li&gt;
 &lt;li&gt;해결책: &lt;strong&gt;커널 모드 수행 중일 때는 CPU를 선점하지 않는다.&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;(3) &lt;strong&gt;멀티 프로세서&lt;/strong&gt;에서 공유 메모리 내의 커널 데이터
+&lt;li&gt;(3) &lt;u&gt;멀티 프로세서&lt;/u&gt;에서 공유 메모리 내의 커널 데이터
 &lt;ul&gt;
 &lt;li&gt;해결책: 커널 내부의 공유 데이터에 접근할 때마다 그 데이터에 대한 &lt;strong&gt;lock/unlock&lt;/strong&gt;을 한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -2144,42 +2121,43 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;프로세스 동기화(procee synchronization) 문제 = 병행 제어(concurrency control) 문제&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;공유 데이터에 여러 프로세서가 동시에 접근하는 상황(race condition)&lt;/strong&gt; 은 데이터의 불일치 문제(inconsistency)를 발생시킬 수 있다.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;일관성 유지를 위해서는 동시에 접근하는 프로세스 간에 실행 순서를 정하는 메커니즘이 필요하다. 즉, 동기화가 필요하다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;공유 데이터에 여러 프로세서가 동시에 접근하는 상황(race condition)은 데이터의 불일치 문제(inconsistency)를 발생시킬 수 있다.&lt;/li&gt;
+&lt;li&gt;일관성 유지를 위해서는 동시에 접근하는 &lt;u&gt;프로세스 간에 실행 순서를 정하는 메커니즘이 필요하다. 즉, 동기화가 필요하다.&lt;/u&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;크리티컬-섹션&#34;&gt;크리티컬 섹션&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;크리티컬 섹션(critical section)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;각 프로세스의 코드 영역에 있는, &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;공유 데이터를 접근하는 코드&lt;/strong&gt;&lt;/mark&gt;이다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;critical section&lt;/li&gt;
+&lt;li&gt;각 프로세스의 코드 영역에 있는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;공유 데이터를 접근하는 코드&lt;/strong&gt;&lt;/mark&gt;이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;크릴티컬 섹션 문제의 해결법 충족 조건
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;상호 배제(Mutual Exclusion)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;어떤 프로세스 하나가 &lt;strong&gt;크리티컬 섹션을 수행 중이면 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 없어야 한다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;크릴티컬 섹션 문제의 해결법 충족 조건&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;진행(Progress)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;아무도 크리티컬 섹션에 없을 때, 어떤 프로세스가 크리티컬 섹션에 들어가고자 한다면, &lt;strong&gt;들어갈 수 있어야 한다.&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;유한 대기(Bounded Waiting)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;어떤 프로세스가 크리티컬 섹션에 들어가려고 &lt;strong&gt;요청하고 기다릴 때, 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 있는 횟수가 제한&lt;/strong&gt;되어야 한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;조건&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;상호 배제&lt;br /&gt;(Mutual Exclusion)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;어떤 프로세스 하나가 크리티컬 섹션을 &lt;u&gt;수행 중이면 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 없어야&lt;/u&gt; 한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;진행&lt;br /&gt;(Progress)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;&lt;u&gt;아무도 크리티컬 섹션에 없을 때&lt;/u&gt;, 어떤 프로세스가 크리티컬 섹션에 들어가고자 한다면, &lt;u&gt;들어갈 수 있어야&lt;/u&gt; 한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;유한 대기&lt;br /&gt;(Bounded Waiting)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;어떤 프로세스가 크리티컬 섹션에 들어가려고 &lt;u&gt;요청하고 기다릴 때, 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 있는 횟수가 제한&lt;/u&gt;되어야 한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;br /&gt;
 &lt;ul&gt;
 &lt;li&gt;알고리즘 1&lt;/li&gt;
@@ -2345,14 +2323,11 @@
 &lt;/div&gt;&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;세마포어&#34;&gt;세마포어&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;세마포어(Semephores)&lt;/strong&gt;
-&lt;ul&gt;
+&lt;li&gt;Semephores&lt;/li&gt;
 &lt;li&gt;추상 자료형으로써, &lt;code&gt;integer&lt;/code&gt; 값을 가지며 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;자원의 개수&lt;/strong&gt;&lt;/mark&gt;를 나타낸다.&lt;/li&gt;
-&lt;li&gt;두 가지 연산으로만 접근이 가능하다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;세마포어 &lt;code&gt;S&lt;/code&gt;가 있을 때
+&lt;li&gt;두 가지 연산으로만 접근이 가능하다.
 &lt;ul&gt;
+&lt;li&gt;세마포어 &lt;code&gt;S&lt;/code&gt;가 있을 때&lt;/li&gt;
 &lt;li&gt;(1) &lt;code&gt;P(S)&lt;/code&gt; 연산: 자원을 가져간다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -2499,13 +2474,13 @@
 &lt;br /&gt;
 &lt;h3 id=&#34;세마포어의-종류&#34;&gt;세마포어의 종류&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;(1) &lt;strong&gt;Counting Semaphore&lt;/strong&gt;
+&lt;li&gt;&lt;strong&gt;Counting Semaphore&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;도메인이 0이상인 임의의 정수값이다.&lt;/li&gt;
 &lt;li&gt;자원을 카운팅하는 데 쓰인다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;(2) &lt;strong&gt;Binary Semaphore(=mutex)&lt;/strong&gt;
+&lt;li&gt;&lt;strong&gt;Binary Semaphore(=mutex)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;0과 1값만 가질 수 있는 세마포어이다.&lt;/li&gt;
 &lt;li&gt;주로 상호 배제 (lock/unlock)에 쓰인다.&lt;/li&gt;
@@ -2515,16 +2490,14 @@
 &lt;br /&gt;
 &lt;h3 id=&#34;교착상태와-기아&#34;&gt;교착상태와 기아&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;교착상태(Deadlock)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;교착상태(Deadlock)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;둘 이상의 프로세스가 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;서로 상대방이 가진 자원을 얻기 위해 무한히 기다리는&lt;/strong&gt;&lt;/mark&gt; 현상이다.&lt;/li&gt;
 &lt;li&gt;예: Dining-Philosophers problem&lt;/li&gt;
 &lt;li&gt;해결책: 자원을 얻을 수 있는 순서를 설정한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;기아(Starvation)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;기아(Starvation)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;프로세스가 suspend 당하고 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;세마포어 큐에서 영원히 나갈 수 없는&lt;/strong&gt;&lt;/mark&gt; 현상을 말한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -2532,7 +2505,6 @@
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;고전적인-동기화-문제들&#34;&gt;고전적인 동기화 문제들&lt;/h2&gt;
-&lt;br /&gt;
 &lt;h3 id=&#34;bounded-buffer-problem-producer-consumer-problem&#34;&gt;Bounded-Buffer problem (Producer-Consumer problem)&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;공유되는 메모리의 버퍼 크기가 유한한 환경에서, 자원을 생산하는 Producer와 사용하는 Consumer가 여럿일 때 발생하는 문제이다.&lt;/li&gt;

@@ -2,7 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로세스 동기화 문제 데이터 접근 방식 한 저장 공간(메모리, 주소 공간)에 있는 데이터를 연산 실행 주체(CPU, 프로세스)가 읽어와서 연산을 한 후, 다시 저장 공간에 연산 결과를 저장한다. 연산 주체 저장 공간 컴퓨터 하드디스크 CPU 메모리 프로세스 프로세스의 주소 공간 하나의 저장 공간을 여러 주체가 접근하려고 할 때 경쟁 상태(Race Condition) 가 생길 가능성이 있다. 운영체제에서 Race Condition이 발생하는 경우 (1) 커널 모드 수행 중에 인터럽트가 발생해서 인터럽트 처리 루틴을 수행할 때 양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.'>
+프로세스 동기화 문제 데이터 접근 방식 한 저장 공간(메모리, 주소 공간)에 있는 데이터를 연산 실행 주체(CPU, 프로세스)가 읽어와서 연산을 한 후, 다시 저장 공간에 연산 결과를 저장한다. 연산 주체 저장 공간 컴퓨터 하드디스크 CPU 메모리 프로세스 프로세스의 주소 공간 따라서 하나의 저장 공간을 여러 주체가 접근하려고 할 때 경쟁 상태(Race Condition) 가 생길 가능성이 있다. 운영체제에서 Race Condition이 발생하는 경우 (1) 커널 모드 수행 중에 인터럽트가 발생해서 인터럽트 처리 루틴을 수행할 때 양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.'>
 <title>[OS] Chapter 7. 프로세스 동기화</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/os-it-principles-07/'>
@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[OS] Chapter 7. 프로세스 동기화'>
 <meta property='og:description' content='운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로세스 동기화 문제 데이터 접근 방식 한 저장 공간(메모리, 주소 공간)에 있는 데이터를 연산 실행 주체(CPU, 프로세스)가 읽어와서 연산을 한 후, 다시 저장 공간에 연산 결과를 저장한다. 연산 주체 저장 공간 컴퓨터 하드디스크 CPU 메모리 프로세스 프로세스의 주소 공간 하나의 저장 공간을 여러 주체가 접근하려고 할 때 경쟁 상태(Race Condition) 가 생길 가능성이 있다. 운영체제에서 Race Condition이 발생하는 경우 (1) 커널 모드 수행 중에 인터럽트가 발생해서 인터럽트 처리 루틴을 수행할 때 양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.'>
+프로세스 동기화 문제 데이터 접근 방식 한 저장 공간(메모리, 주소 공간)에 있는 데이터를 연산 실행 주체(CPU, 프로세스)가 읽어와서 연산을 한 후, 다시 저장 공간에 연산 결과를 저장한다. 연산 주체 저장 공간 컴퓨터 하드디스크 CPU 메모리 프로세스 프로세스의 주소 공간 따라서 하나의 저장 공간을 여러 주체가 접근하려고 할 때 경쟁 상태(Race Condition) 가 생길 가능성이 있다. 운영체제에서 Race Condition이 발생하는 경우 (1) 커널 모드 수행 중에 인터럽트가 발생해서 인터럽트 처리 루틴을 수행할 때 양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/os-it-principles-07/'>
 <meta property='og:site_name' content='peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='OS' /><meta property='article:published_time' content='2022-06-23T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-06-23T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[OS] Chapter 7. 프로세스 동기화">
 <meta name="twitter:description" content="운영체제와 정보기술의 원리 강의을 듣고 공부한 노트입니다.
-프로세스 동기화 문제 데이터 접근 방식 한 저장 공간(메모리, 주소 공간)에 있는 데이터를 연산 실행 주체(CPU, 프로세스)가 읽어와서 연산을 한 후, 다시 저장 공간에 연산 결과를 저장한다. 연산 주체 저장 공간 컴퓨터 하드디스크 CPU 메모리 프로세스 프로세스의 주소 공간 하나의 저장 공간을 여러 주체가 접근하려고 할 때 경쟁 상태(Race Condition) 가 생길 가능성이 있다. 운영체제에서 Race Condition이 발생하는 경우 (1) 커널 모드 수행 중에 인터럽트가 발생해서 인터럽트 처리 루틴을 수행할 때 양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.">
+프로세스 동기화 문제 데이터 접근 방식 한 저장 공간(메모리, 주소 공간)에 있는 데이터를 연산 실행 주체(CPU, 프로세스)가 읽어와서 연산을 한 후, 다시 저장 공간에 연산 결과를 저장한다. 연산 주체 저장 공간 컴퓨터 하드디스크 CPU 메모리 프로세스 프로세스의 주소 공간 따라서 하나의 저장 공간을 여러 주체가 접근하려고 할 때 경쟁 상태(Race Condition) 가 생길 가능성이 있다. 운영체제에서 Race Condition이 발생하는 경우 (1) 커널 모드 수행 중에 인터럽트가 발생해서 인터럽트 처리 루틴을 수행할 때 양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -443,25 +443,22 @@ if (!doNotTrack) {
 </table></div>
 <br />
 <ul>
-<li>하나의 저장 공간을 여러 주체가 접근하려고 할 때 <mark style="background-color: lightblue"><strong>경쟁 상태(Race Condition)</strong></mark> 가 생길 가능성이 있다.</li>
-</ul>
-<br />
+<li>따라서 하나의 저장 공간을 여러 주체가 접근하려고 할 때 <mark style="background-color: lightblue"><strong>경쟁 상태(Race Condition)</strong></mark> 가 생길 가능성이 있다.</li>
+<li><u>운영체제</u>에서 Race Condition이 발생하는 경우
 <ul>
-<li><strong>운영체제에서</strong> Race Condition이 발생하는 경우
-<ul>
-<li>(1) <strong>커널 모드 수행 중에 인터럽트</strong>가 발생해서 인터럽트 처리 루틴을 수행할 때
+<li>(1) <u>커널 모드 수행 중에 인터럽트</u>가 발생해서 인터럽트 처리 루틴을 수행할 때
 <ul>
 <li>양쪽 모두 커널 코드를 수행하므로 커널 주소 공간을 공유하고 있다.</li>
 <li>해결책: <strong>커널 모드 수행 중일 때는 인터럽트를 비활성화한다.</strong></li>
 </ul>
 </li>
-<li>(2) <strong>커널 모드 수행 중에 다른 프로세스가 시스템 콜</strong>을 해서 문맥교환이 일어나고, 다른 프로세스가 커널 모드를 수행할 때
+<li>(2) <u>커널 모드 수행 중에 다른 프로세스가 시스템 콜</u>을 해서 문맥교환이 일어나고, 다른 프로세스가 커널 모드를 수행할 때
 <ul>
 <li>두 프로세스는 데이터를 공유하지 않지만, 시스템 콜을 하는 동안에는 커널 주소 공간에 접근할 수 있다.</li>
 <li>해결책: <strong>커널 모드 수행 중일 때는 CPU를 선점하지 않는다.</strong></li>
 </ul>
 </li>
-<li>(3) <strong>멀티 프로세서</strong>에서 공유 메모리 내의 커널 데이터
+<li>(3) <u>멀티 프로세서</u>에서 공유 메모리 내의 커널 데이터
 <ul>
 <li>해결책: 커널 내부의 공유 데이터에 접근할 때마다 그 데이터에 대한 <strong>lock/unlock</strong>을 한다.</li>
 </ul>
@@ -473,42 +470,43 @@ if (!doNotTrack) {
 <ul>
 <li><strong>프로세스 동기화(procee synchronization) 문제 = 병행 제어(concurrency control) 문제</strong>
 <ul>
-<li><strong>공유 데이터에 여러 프로세서가 동시에 접근하는 상황(race condition)</strong> 은 데이터의 불일치 문제(inconsistency)를 발생시킬 수 있다.</li>
-<li><strong>일관성 유지를 위해서는 동시에 접근하는 프로세스 간에 실행 순서를 정하는 메커니즘이 필요하다. 즉, 동기화가 필요하다.</strong></li>
+<li>공유 데이터에 여러 프로세서가 동시에 접근하는 상황(race condition)은 데이터의 불일치 문제(inconsistency)를 발생시킬 수 있다.</li>
+<li>일관성 유지를 위해서는 동시에 접근하는 <u>프로세스 간에 실행 순서를 정하는 메커니즘이 필요하다. 즉, 동기화가 필요하다.</u></li>
 </ul>
 </li>
 </ul>
 <p><br /><br /></p>
 <h2 id="크리티컬-섹션">크리티컬 섹션</h2>
 <ul>
-<li><strong>크리티컬 섹션(critical section)</strong>
-<ul>
-<li>각 프로세스의 코드 영역에 있는, <mark style="background-color: lightblue"><strong>공유 데이터를 접근하는 코드</strong></mark>이다.</li>
-</ul>
-</li>
+<li>critical section</li>
+<li>각 프로세스의 코드 영역에 있는 <mark style="background-color: lightblue"><strong>공유 데이터를 접근하는 코드</strong></mark>이다.</li>
 </ul>
 <br />
 <ul>
-<li>크릴티컬 섹션 문제의 해결법 충족 조건
-<ul>
-<li><strong>상호 배제(Mutual Exclusion)</strong>
-<ul>
-<li>어떤 프로세스 하나가 <strong>크리티컬 섹션을 수행 중이면 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 없어야 한다.</strong></li>
+<li>크릴티컬 섹션 문제의 해결법 충족 조건</li>
 </ul>
-</li>
-<li><strong>진행(Progress)</strong>
-<ul>
-<li>아무도 크리티컬 섹션에 없을 때, 어떤 프로세스가 크리티컬 섹션에 들어가고자 한다면, <strong>들어갈 수 있어야 한다.</strong></li>
-</ul>
-</li>
-<li><strong>유한 대기(Bounded Waiting)</strong>
-<ul>
-<li>어떤 프로세스가 크리티컬 섹션에 들어가려고 <strong>요청하고 기다릴 때, 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 있는 횟수가 제한</strong>되어야 한다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>상호 배제<br />(Mutual Exclusion)</strong></td>
+<td>어떤 프로세스 하나가 크리티컬 섹션을 <u>수행 중이면 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 없어야</u> 한다.</td>
+</tr>
+<tr>
+<td><strong>진행<br />(Progress)</strong></td>
+<td><u>아무도 크리티컬 섹션에 없을 때</u>, 어떤 프로세스가 크리티컬 섹션에 들어가고자 한다면, <u>들어갈 수 있어야</u> 한다.</td>
+</tr>
+<tr>
+<td><strong>유한 대기<br />(Bounded Waiting)</strong></td>
+<td>어떤 프로세스가 크리티컬 섹션에 들어가려고 <u>요청하고 기다릴 때, 다른 모든 프로세스가 크리티컬 섹션에 들어갈 수 있는 횟수가 제한</u>되어야 한다.</td>
+</tr>
+</tbody>
+</table></div>
 <br />
 <ul>
 <li>알고리즘 1</li>
@@ -674,14 +672,11 @@ if (!doNotTrack) {
 </div><p><br /><br /></p>
 <h2 id="세마포어">세마포어</h2>
 <ul>
-<li><strong>세마포어(Semephores)</strong>
-<ul>
+<li>Semephores</li>
 <li>추상 자료형으로써, <code>integer</code> 값을 가지며 <mark style="background-color: lightblue"><strong>자원의 개수</strong></mark>를 나타낸다.</li>
-<li>두 가지 연산으로만 접근이 가능하다.</li>
-</ul>
-</li>
-<li>세마포어 <code>S</code>가 있을 때
+<li>두 가지 연산으로만 접근이 가능하다.
 <ul>
+<li>세마포어 <code>S</code>가 있을 때</li>
 <li>(1) <code>P(S)</code> 연산: 자원을 가져간다.</li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -828,13 +823,13 @@ if (!doNotTrack) {
 <br />
 <h3 id="세마포어의-종류">세마포어의 종류</h3>
 <ul>
-<li>(1) <strong>Counting Semaphore</strong>
+<li><strong>Counting Semaphore</strong>
 <ul>
 <li>도메인이 0이상인 임의의 정수값이다.</li>
 <li>자원을 카운팅하는 데 쓰인다.</li>
 </ul>
 </li>
-<li>(2) <strong>Binary Semaphore(=mutex)</strong>
+<li><strong>Binary Semaphore(=mutex)</strong>
 <ul>
 <li>0과 1값만 가질 수 있는 세마포어이다.</li>
 <li>주로 상호 배제 (lock/unlock)에 쓰인다.</li>
@@ -844,16 +839,14 @@ if (!doNotTrack) {
 <br />
 <h3 id="교착상태와-기아">교착상태와 기아</h3>
 <ul>
-<li>
-<p><strong>교착상태(Deadlock)</strong></p>
+<li><strong>교착상태(Deadlock)</strong>
 <ul>
 <li>둘 이상의 프로세스가 <mark style="background-color: lightblue"><strong>서로 상대방이 가진 자원을 얻기 위해 무한히 기다리는</strong></mark> 현상이다.</li>
 <li>예: Dining-Philosophers problem</li>
 <li>해결책: 자원을 얻을 수 있는 순서를 설정한다.</li>
 </ul>
 </li>
-<li>
-<p><strong>기아(Starvation)</strong></p>
+<li><strong>기아(Starvation)</strong>
 <ul>
 <li>프로세스가 suspend 당하고 <mark style="background-color: lightblue"><strong>세마포어 큐에서 영원히 나갈 수 없는</strong></mark> 현상을 말한다.</li>
 </ul>
@@ -861,7 +854,6 @@ if (!doNotTrack) {
 </ul>
 <p><br /><br /></p>
 <h2 id="고전적인-동기화-문제들">고전적인 동기화 문제들</h2>
-<br />
 <h3 id="bounded-buffer-problem-producer-consumer-problem">Bounded-Buffer problem (Producer-Consumer problem)</h3>
 <ul>
 <li>공유되는 메모리의 버퍼 크기가 유한한 환경에서, 자원을 생산하는 Producer와 사용하는 Consumer가 여럿일 때 발생하는 문제이다.</li>

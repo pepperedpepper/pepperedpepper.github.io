@@ -306,8 +306,19 @@ if (!doNotTrack) {
     <li><a href="#파일-보호">파일 보호</a></li>
     <li><a href="#파일-시스템-마운팅">파일 시스템 마운팅</a></li>
     <li><a href="#파일-접근-방법">파일 접근 방법</a></li>
-    <li><a href="#디스크에-파일-정보를-저장하는-방법">디스크에 파일 정보를 저장하는 방법</a></li>
-    <li><a href="#실제로-사용되는-파일-시스템의-구조">실제로 사용되는 파일 시스템의 구조</a></li>
+    <li><a href="#디스크에-파일-정보를-저장하는-방법">디스크에 파일 정보를 저장하는 방법</a>
+      <ul>
+        <li><a href="#1-contiguous-allocation">(1) <strong>Contiguous Allocation</strong></a></li>
+        <li><a href="#2-linked-allocation">(2) <strong>Linked Allocation</strong></a></li>
+        <li><a href="#3-indexed-allocation">(3) <strong>Indexed Allocation</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#실제로-사용되는-파일-시스템의-구조">실제로 사용되는 파일 시스템의 구조</a>
+      <ul>
+        <li><a href="#unix-파일-시스템"><strong>UNIX 파일 시스템</strong></a></li>
+        <li><a href="#fat-파일-시스템"><strong>FAT 파일 시스템</strong></a></li>
+      </ul>
+    </li>
     <li><a href="#free-spcae-management">Free-Spcae Management</a></li>
     <li><a href="#directory-implementation">Directory Implementation</a></li>
     <li><a href="#vfs와-nfs">VFS와 NFS</a></li>
@@ -416,7 +427,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>File attribute</strong> (혹은 파일의 metadata)
 <ul>
-<li>파일 자체의 내용이 아니라 파일을 관리하기 위한 <strong>각종 정보들</strong>이다.
+<li>파일 자체의 내용이 아니라 파일을 관리하기 위한 <u>각종 정보들</u>이다.
 <ul>
 <li>파일 이름, 유형, 저장된 위치, 파일 사이즈</li>
 <li>접근 권한(읽기/쓰기/실행), 시간(생성/변경/사용), 소유자 등</li>
@@ -429,7 +440,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>File system</strong>
 <ul>
-<li>운영체제에서 <strong>파일을 관리하는 부분</strong>이다.</li>
+<li>운영체제에서 <u>파일을 관리하는 부분</u>이다.</li>
 <li>파일, 파일의 메타데이터, 디렉터리 등의 정보를 관리한다.</li>
 <li>파일의 저장방법을 결정한다.</li>
 <li>파일을 보호한다.</li>
@@ -440,7 +451,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>Directory</strong>
 <ul>
-<li>해당 디렉터리에 <strong>속한 파일의 이름, 메타데이터 등의 정보를 가지는 파일</strong>이다.</li>
+<li><u>해당 디렉터리에 속한 파일의 이름, 메타데이터 등의 정보를 가지는 파일</u>이다.</li>
 <li>파일의 메타데이터 중 일부를 보관하고 있는 일종의 특별한 파일이다.</li>
 <li>Operation
 <ul>
@@ -464,7 +475,7 @@ if (!doNotTrack) {
 <ul>
 <li><code>open(a/b/c)</code>
 <ul>
-<li>디스크로부터 파일 c의 메타데이터를 메모리로 가지고 오기 위해서 디렉터리 경로를 search 한다.
+<li>디스크로부터 파일 <code>c</code>의 메타데이터를 메모리로 가지고 오기 위해서 디렉터리 경로를 search 한다.
 <ul>
 <li>루트 디렉터리 <code>/</code>를 <code>open</code>하고, 그 안에서 파일 <code>a</code>의 위치 획득</li>
 <li>파일 <code>a</code>를 <code>read</code>하고, 그 안에서 파일 <code>b</code>의 위치 획득</li>
@@ -483,9 +494,9 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="파일-보호">파일 보호</h2>
 <ul>
-<li>각 파일들에 대해 누구에게 어떤 유형의 접근(read/write/execution)을 허락할 것인가?</li>
 <li><strong>접근 제어 방법</strong>
 <ul>
+<li>각 파일들에 대해 누구에게 어떤 유형의 접근(read/write/execution)을 허락할 것인가?</li>
 <li><strong>Access control Matrix</strong>
 <ul>
 <li>Access control list
@@ -546,6 +557,7 @@ if (!doNotTrack) {
 </ul>
 <p><br /><br /></p>
 <h2 id="디스크에-파일-정보를-저장하는-방법">디스크에 파일 정보를 저장하는 방법</h2>
+<h3 id="1-contiguous-allocation">(1) <strong>Contiguous Allocation</strong></h3>
 <p><img src="/post/os/images/11-01-contiguousAllocation.png"
 	
 	
@@ -557,9 +569,7 @@ if (!doNotTrack) {
 	
 ></p>
 <ul>
-<li>(1) <strong>Contiguous Allocation</strong>
-<ul>
-<li>디스크의 연속적인 블럭에 파일을 저장하는 방법이다.</li>
+<li>디스크의 <strong>연속적인 블럭에 파일을 저장</strong>하는 방법이다.</li>
 <li>장점
 <ul>
 <li>빠른 I/O가 가능하다. 한번의 디스크 seek/rotation으로 많은 바이트를 transfer할 수 있다.</li>
@@ -573,9 +583,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<br />
+<p><br /><br /></p>
+<h3 id="2-linked-allocation">(2) <strong>Linked Allocation</strong></h3>
 <p><img src="/post/os/images/11-02-linkedAllocation.png"
 	
 	
@@ -587,9 +596,7 @@ if (!doNotTrack) {
 	
 ></p>
 <ul>
-<li>(2) <strong>Linked Allocation</strong>
-<ul>
-<li>파일을 불연속적으로 저장하고 pointer로 연결하는 방법이다.</li>
+<li>파일을 <strong>불연속적으로 저장하고 pointer로 연결</strong>하는 방법이다.</li>
 <li>장점
 <ul>
 <li>외부조각이 발생하지 않는다.</li>
@@ -608,9 +615,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<br />
+<p><br /><br /></p>
+<h3 id="3-indexed-allocation">(3) <strong>Indexed Allocation</strong></h3>
 <p><img src="/post/os/images/11-03-indexedAllocation.png"
 	
 	
@@ -622,9 +628,7 @@ if (!doNotTrack) {
 	
 ></p>
 <ul>
-<li>(3) <strong>Indexed Allocation</strong>
-<ul>
-<li>index를 가지고 있는 블럭을 두는 방법이다.</li>
+<li><strong>index를 가지고 있는 블럭</strong>을 두는 방법이다.</li>
 <li>장점
 <ul>
 <li>외부조각이 발생하지 않는다.</li>
@@ -638,10 +642,9 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <p><br /><br /></p>
 <h2 id="실제로-사용되는-파일-시스템의-구조">실제로 사용되는 파일 시스템의 구조</h2>
+<h3 id="unix-파일-시스템"><strong>UNIX 파일 시스템</strong></h3>
 <p><img src="/post/os/images/11-04-unixFileSystem.jpeg"
 	
 	
@@ -652,8 +655,6 @@ if (!doNotTrack) {
 	
 	
 ></p>
-<ul>
-<li><strong>UNIX 파일 시스템</strong>
 <ul>
 <li><strong>Boot block</strong>
 <ul>
@@ -677,9 +678,8 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<br />
+<p><br /><br /></p>
+<h3 id="fat-파일-시스템"><strong>FAT 파일 시스템</strong></h3>
 <p><img src="/post/os/images/11-05-fat.png"
 	
 	
@@ -691,17 +691,12 @@ if (!doNotTrack) {
 	
 ></p>
 <ul>
-<li><strong>FAT 파일 시스템</strong>
-<ul>
 <li>Data block의 개수 만큼 FAT 블럭이 존재하고, 내용에는 다음 블럭이 어딘지가 저장되어(pointer) 있다.</li>
-</ul>
-</li>
 </ul>
 <p><br /><br /></p>
 <h2 id="free-spcae-management">Free-Spcae Management</h2>
 <ul>
-<li>비어 있는 블럭들을 어떻게 관리할 것인가?
-<ul>
+<li>비어 있는 블럭들을 어떻게 관리할 것인가?</li>
 <li><strong>(1) Bit map / Bit vector</strong>
 <ul>
 <li>블럭이 비어있는지 혹은 사용중인지를 <code>0</code>, <code>1</code>로 저장한다.</li>
@@ -728,13 +723,10 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <p><br /><br /></p>
 <h2 id="directory-implementation">Directory Implementation</h2>
 <ul>
-<li>디렉터리를 어떻게 구현할 것인가?
-<ul>
+<li>디렉터리를 어떻게 구현할 것인가?</li>
 <li><strong>(1) Linear list</strong>
 <ul>
 <li>파일의 이름과 메타데이터를 리스트로 저장한다. &lt;file name, file metadata&gt;</li>
@@ -748,8 +740,6 @@ if (!doNotTrack) {
 <li>해시 함수를 적용해서 파일 이름을 파일의 위치로 바꾸어주고, 거기에 이름과 메타데이터를 저장한다.</li>
 <li>탐색시간을 없앴다.</li>
 <li>충돌 발생 가능성이 있다.</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
