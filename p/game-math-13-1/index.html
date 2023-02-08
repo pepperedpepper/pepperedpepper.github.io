@@ -14,7 +14,7 @@ Chapter 8에서 살펴본 것처럼, 주어진 세 점으로 두 벡터를 생�
 절두체 컬링 절두체 컬링(Frustum culling) 절두체를 구성하는 6개의 평면에 대해 각각 평면의 방정식을 세우고, 그것을 활용해서 게임 오브젝트가 평면의 바깥에 있는지 확인한다. 바깥에 있다면, 그리지 않는다. 평면의 방정식 절두체를 구성하는 평면의 방정식
 Chapter 8에서 살펴본 것처럼, 주어진 세 점으로 두 벡터를 생성해서 평면 상의 모든 점을 생성할 수 있다. 하지만 3차원 공간의 평면은 앞면과 뒷면이 존재하기 때문에 이를 구분할 수 있어야 하겠다. 따라서 평면이 바라보는 방향을 알려주는 법선 벡터와 평면 상에 위치한 한 점을 제공하는 방법을 사용한다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-13-1/'>
-<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2022-04-30T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-30T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (1)">
 <meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
@@ -81,7 +81,7 @@ if (!doNotTrack) {
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h1 class="site-name"><a href="/">Peppered pepper</a></h1>
             <h2 class="site-description">Keep moving forward.</h2>
         </div>
     </header><ol class="social-menu">
@@ -450,7 +450,7 @@ $$ = ax + by + cz - (ax_0 + by_0 + cz_0) = 0 $$</li>
 <ul>
 <li>여기서 $d$의 의미를 찾아보자.
 <ul>
-<li>$$d = -(ax_0 + by_0 + cz_0)$$
+<li>$$d = -(ax_0 + by_0 + cz_0)$$ 
 $$ d = -\hat{n} \cdot (x_0, y_0, z_0)$$
 $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 <img src="/post/game_math/images/13-02-dot.jpg"
@@ -1184,7 +1184,7 @@ $$ (P_{row4} - P_{row3} \cdot \vec{v}) \geq 0 $$</li>
         
             2022 - 
         
-        2023 peppered pepper
+        2023 Peppered pepper
     </section>
     
     <section class="powerby">

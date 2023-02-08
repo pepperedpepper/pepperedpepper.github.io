@@ -10,7 +10,7 @@
      crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 행동 패턴 1. 싱글톤 (Singleton)'>
 <meta property='og:description' content='싱글톤 (Singleton) 객체의 인스턴스가 오직 한 개만 생성되는 패턴이다. 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 특징 전역적인 접근점을 제공하기 때문에 데이터를 공유하기 쉽다. 공유 자원에 동시 접근을 제한하기 위해 사용할 수 있다. 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 단일 책임 원칙 위반 : 한 번에 두 가지의 문제를 동시에 해결한다. 동기화 문제 해결방안 고전적인 싱글톤 구현 방법 1 2 3 4 5 6 7 8 9 10 11 12 public class Singleton { static Singleton instance = null; Singleton() { } public static Singleton GetInstance() { if (instance == null) instance = new Singleton(); // 게으른 초기화 return instance; } } 문제점 멀티 스레드 환경에서 동기화처리를 안 하면 문제가 발생할 수 있다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/design-pattern-01/'>
-<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Design Pattern' /><meta property='article:published_time' content='2022-08-01T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-08-01T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Design Pattern] 행동 패턴 1. 싱글톤 (Singleton)">
 <meta name="twitter:description" content="싱글톤 (Singleton) 객체의 인스턴스가 오직 한 개만 생성되는 패턴이다. 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 특징 전역적인 접근점을 제공하기 때문에 데이터를 공유하기 쉽다. 공유 자원에 동시 접근을 제한하기 위해 사용할 수 있다. 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 단일 책임 원칙 위반 : 한 번에 두 가지의 문제를 동시에 해결한다. 동기화 문제 해결방안 고전적인 싱글톤 구현 방법 1 2 3 4 5 6 7 8 9 10 11 12 public class Singleton { static Singleton instance = null; Singleton() { } public static Singleton GetInstance() { if (instance == null) instance = new Singleton(); // 게으른 초기화 return instance; } } 문제점 멀티 스레드 환경에서 동기화처리를 안 하면 문제가 발생할 수 있다.">
@@ -75,7 +75,7 @@ if (!doNotTrack) {
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h1 class="site-name"><a href="/">Peppered pepper</a></h1>
             <h2 class="site-description">Keep moving forward.</h2>
         </div>
     </header><ol class="social-menu">
@@ -858,7 +858,7 @@ if (!doNotTrack) {
         
             2022 - 
         
-        2023 peppered pepper
+        2023 Peppered pepper
     </section>
     
     <section class="powerby">

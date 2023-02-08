@@ -12,7 +12,7 @@
 <meta property='og:description' content='C&#43;&#43; 기초 플러스 책을 읽고 공부한 노트입니다.
 변수 이름 규칙 영문자, 숫자, 밑줄만 사용 가능 대문자와 소문자는 구별됨 첫 문자가 숫자일 수는 없음 C&#43;&#43;의 키워드는 사용 못함 예약어는 사용 못함 길이 제한은 없음 비트와 바이트 비트 컴퓨터 메모리를 구성하는 기본 단위 바이트 8비트. C&#43;&#43;에서는 컴파일러의 기본 문자 세트를 수용할 수 있는 최소한의 연속된 비트들로 구성한다. sizeof 연산자 데이터형의 크기를 바이트 단위로 리턴한다. climits 헤더파일 컴파일러에 알맞은 최대값들을 정의해놓은 헤더파일 (INT_MAX 등) 변수 초기화 문법 1 2 3 4 int var = 10; int var = {10}; int var {10}; int var (10); 진법 진법 조건 10진수 첫 숫자가 1~9 8진수 첫 숫자가 0이고 두번째 숫자가 1~7 16진수 첫 두 문자가 0x 혹은 0X 조정자 hex, oct를 사용하면 16진법, 8진법으로 출력가능 1 2 cout &amp;lt;&amp;lt; hex cout &amp;lt;&amp;lt; oct 정수형 상수의 데이터형을 결정하는 방법 접미어를 붙이면 해당 데이터형으로 10진 정수 int &amp;lt; long &amp;lt; long long형 중에서 크기가 작은 것으로 8진, 16진 정수 int, unsigned int &amp;lt; long, unsigned long &amp;lt; long long, unsigned long long 중에서 크기가 작은 것으로 문자 이스케이프 시퀀스(escape sequence)'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/cpp-primer-plus-03/'>
-<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43; Primer Plus' /><meta property='article:published_time' content='2022-03-03T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-03-03T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[C&#43;&#43; Primer Plus] Chapter 3. 데이터 처리">
 <meta name="twitter:description" content="C&#43;&#43; 기초 플러스 책을 읽고 공부한 노트입니다.
@@ -78,7 +78,7 @@ if (!doNotTrack) {
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h1 class="site-name"><a href="/">Peppered pepper</a></h1>
             <h2 class="site-description">Keep moving forward.</h2>
         </div>
     </header><ol class="social-menu">
@@ -499,7 +499,7 @@ if (!doNotTrack) {
 </li>
 <li><strong>8진, 16진 정수</strong>
 <ul>
-<li><code>int</code>, <code>unsigned int</code> &lt; <code>long</code>, <code>unsigned long</code> &lt; <code>long long</code>, <code>unsigned long long</code> 중에서 크기가 작은 것으로
+<li><code>int</code>, <code>unsigned int</code> &lt; <code>long</code>, <code>unsigned long</code> &lt; <code>long long</code>, <code>unsigned long long</code> 중에서 크기가 작은 것으로 
 <br /><br /></li>
 </ul>
 </li>
@@ -522,7 +522,7 @@ if (!doNotTrack) {
 <p><code>char</code>형을 수에 쓰려고 한다면 <code>unsigned char</code>와 <code>signed char</code>가 중요해진다. 하지만 문자라면 단순히 <code>char</code>라고만 하면 된다.</p>
 </li>
 <li>
-<p>1바이트로 표현할 수 없는 한국어 문자 세트 같은 경우는 확장문자 세트를 제공한다. <code>wchar_t</code>이다. 이것은 기초 데이터형과 동일한 크기와 부호 속성을 가진다. 이 문자의 스트림을 처리하기 위해 <code>wcout</code>, <code>wcin</code>이 존재하고, 문자열 앞에 <code>L</code>을 붙여 나타낸다.
+<p>1바이트로 표현할 수 없는 한국어 문자 세트 같은 경우는 확장문자 세트를 제공한다. <code>wchar_t</code>이다. 이것은 기초 데이터형과 동일한 크기와 부호 속성을 가진다. 이 문자의 스트림을 처리하기 위해 <code>wcout</code>, <code>wcin</code>이 존재하고, 문자열 앞에 <code>L</code>을 붙여 나타낸다. 
 <br /><br /></p>
 </li>
 </ul>
@@ -587,13 +587,13 @@ if (!doNotTrack) {
 <ul>
 <li>기본은 <code>double</code>형</li>
 <li><code>float</code>로 하고 싶으면 <code>f</code>, <code>F</code>를 붙이고</li>
-<li><code>long double</code>형으로 하고 싶으면 <code>l</code>, <code>L</code>을 접미어로 붙인다.
+<li><code>long double</code>형으로 하고 싶으면 <code>l</code>, <code>L</code>을 접미어로 붙인다. 
 <br /><br /></li>
 </ul>
 <h2 id="산술-연산자">산술 연산자</h2>
 <ul>
 <li><code>%</code>연산자의 두개의 피연산자는 모두 정수여야한다. 아니면 컴파일 에러가 발생한다.</li>
-<li><code>/</code>연산자의 두개의 피연산자 중 한 개이상이 부동 소수점형이면 결과도 부동 소수점형이다.
+<li><code>/</code>연산자의 두개의 피연산자 중 한 개이상이 부동 소수점형이면 결과도 부동 소수점형이다. 
 <br /><br /></li>
 </ul>
 <h2 id="수식에서의-데이터-형-변환">수식에서의 데이터 형 변환</h2>
@@ -879,7 +879,7 @@ if (!doNotTrack) {
         
             2022 - 
         
-        2023 peppered pepper
+        2023 Peppered pepper
     </section>
     
     <section class="powerby">

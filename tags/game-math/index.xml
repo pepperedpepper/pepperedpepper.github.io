@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Game Math on peppered pepper</title>
+        <title>Game Math on Peppered pepper</title>
         <link>https://pepperedpepper.github.io/tags/game-math/</link>
-        <description>Recent content in Game Math on peppered pepper</description>
+        <description>Recent content in Game Math on Peppered pepper</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Mon, 02 May 2022 01:00:00 +0900</lastBuildDate><atom:link href="https://pepperedpepper.github.io/tags/game-math/index.xml" rel="self" type="application/rss+xml" /><item>
@@ -1889,7 +1889,7 @@ $$ = ax + by + cz - (ax_0 + by_0 + cz_0) = 0 $$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;여기서 $d$의 의미를 찾아보자.
 &lt;ul&gt;
-&lt;li&gt;$$d = -(ax_0 + by_0 + cz_0)$$
+&lt;li&gt;$$d = -(ax_0 + by_0 + cz_0)$$ 
 $$ d = -\hat{n} \cdot (x_0, y_0, z_0)$$
 $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ &lt;br /&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/13-02-dot.jpg&#34;
@@ -8967,7 +8967,7 @@ $$\begin{bmatrix} a &amp;amp; d \\ b &amp;amp; e \\ c &amp;amp; f \end{bmatrix}^
 &lt;br /&gt;
 &lt;h3 id=&#34;행렬과-행렬의-곱셈&#34;&gt;행렬과 행렬의 곱셈&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;앞의 행벡터와 뒤의 열벡터를 각각 곱해서 더한다.
+&lt;li&gt;앞의 행벡터와 뒤의 열벡터를 각각 곱해서 더한다. 
 $$\begin{bmatrix} a &amp;amp; b \\ c &amp;amp; d \end{bmatrix} \cdot \begin{bmatrix} e &amp;amp; f \\ g &amp;amp; h \end{bmatrix} = \begin{bmatrix} ae + bg &amp;amp; af + bh \\ ce + dg &amp;amp; cf + dh \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
@@ -9136,7 +9136,7 @@ $$\begin{bmatrix} a &amp;amp; b \\ c &amp;amp; d \end{bmatrix} \cdot \begin{bmat
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;위 그림과 같이 $\alpha$와 $\beta$를 합한 만큼 회전한 행렬은 다음과 같이 나타낼 수 있다.
+&lt;li&gt;위 그림과 같이 $\alpha$와 $\beta$를 합한 만큼 회전한 행렬은 다음과 같이 나타낼 수 있다. 
 $$R_(\alpha + \beta) = \begin{bmatrix} \cos(\alpha + \beta) &amp;amp; -\sin(\alpha + \beta) \\ \sin(\alpha + \beta) &amp;amp; \cos(\alpha + \beta) \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
@@ -9893,12 +9893,12 @@ $y&amp;rsquo; = x\sin\theta + y\cos\theta$&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;표준기저벡터(Standard basis vector)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;표준기저의 원소.&lt;/li&gt;
-&lt;li&gt;2차원 실벡터 공간 $\mathbb{R}^2$ &lt;br /&gt;
-&lt;mark style=&#34;background-color: lightblue&#34;&gt;$e_1 = (1, 0)$&lt;/mark&gt; &lt;br /&gt;
+&lt;li&gt;2차원 실벡터 공간 $\mathbb{R}^2$ &lt;br /&gt; 
+&lt;mark style=&#34;background-color: lightblue&#34;&gt;$e_1 = (1, 0)$&lt;/mark&gt; &lt;br /&gt; 
 &lt;mark style=&#34;background-color: lightblue&#34;&gt;$e_2 = (0, 1)$&lt;/mark&gt;&lt;/li&gt;
-&lt;li&gt;3차원 실벡터 공간 $\mathbb{R}^3$ &lt;br /&gt;
-$e_1 = (1, 0, 0)$ &lt;br /&gt;
-$e_2 = (0, 1, 0)$ &lt;br /&gt;
+&lt;li&gt;3차원 실벡터 공간 $\mathbb{R}^3$ &lt;br /&gt; 
+$e_1 = (1, 0, 0)$ &lt;br /&gt; 
+$e_2 = (0, 1, 0)$ &lt;br /&gt; 
 $e_3 = (0, 0, 1)$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;

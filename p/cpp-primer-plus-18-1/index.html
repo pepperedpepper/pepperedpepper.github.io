@@ -12,7 +12,7 @@ Move Semantics의 필요성 Move Semantics는 객체의 리소스(동적 할당�
 <meta property='og:description' content='C&#43;&#43; 기초 플러스 책을 읽고 공부한 노트입니다.
 Move Semantics의 필요성 Move Semantics는 객체의 리소스(동적 할당된 메모리 같은 것)를 또 다른 객체로 이동하는 것을 의미한다. 만약 1,000자의 문자 string을 20,000개 가지고 있는 vector가 있다고 하자. 이것을 복사하면? vector 복사 생성자가 new를 이용해서 20,000개의 string 객체를 넣을 메모리를 만들어서 대입하고, string 복사 생성자가 또 new를 이용해서 1,000개의 문자를 넣을 메모리를 만들어서 대입한다. 그러면 총 20,000,000개의 문자가 복사된다. 하지만 굳이 이런 복사를 하지 않아도 되는 경우가 있다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/cpp-primer-plus-18-1/'>
-<meta property='og:site_name' content='peppered pepper'>
+<meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C&#43;&#43; Primer Plus' /><meta property='article:published_time' content='2022-03-27T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-03-27T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[C&#43;&#43; Primer Plus] Chapter 18. (1) Move Semantics와 rvalue참조, 새로운 클래스 형태">
 <meta name="twitter:description" content="C&#43;&#43; 기초 플러스 책을 읽고 공부한 노트입니다.
@@ -78,7 +78,7 @@ if (!doNotTrack) {
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">peppered pepper</a></h1>
+            <h1 class="site-name"><a href="/">Peppered pepper</a></h1>
             <h2 class="site-description">Keep moving forward.</h2>
         </div>
     </header><ol class="social-menu">
@@ -1622,7 +1622,7 @@ if (!doNotTrack) {
         
             2022 - 
         
-        2023 peppered pepper
+        2023 Peppered pepper
     </section>
     
     <section class="powerby">
