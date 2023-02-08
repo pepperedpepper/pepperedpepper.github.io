@@ -505,7 +505,7 @@ if (!doNotTrack) {
 <li>CPU가 주소를 참조할 때마다 <u>주소 매핑 테이블(address mapping table)</u> 을 이용해서 바인딩을 점검한다.</li>
 <li>하드웨어적 지원이 필요하다.
 <ul>
-<li>**MMU, 기준 레지스터, 한계 레지스터, **</li>
+<li><strong>MMU, 기준 레지스터, 한계 레지스터</strong></li>
 </ul>
 </li>
 </ul>
@@ -530,7 +530,7 @@ if (!doNotTrack) {
 <p><strong>메모리 관리 유닛 (Memory Management Unit; MMU)</strong></p>
 <ul>
 <li>논리적 주소를 물리적 주소로 바인딩 해주는 하드웨어 장치이다.</li>
-<li>CPU가 사용자 프로세스의 논리적 주소를 참조하려고 할 때, <mark style="background-color: lightblue"><strong>그 주소값에 기준 레지스터(base register)의 값을 더해서</strong></mark> 물리적 주소값을 얻어낸다.</li>
+<li>CPU가 사용자 프로세스의 논리적 주소를 가지고 참조하려고 할 때, <mark style="background-color: lightblue"><strong>그 주소값에 기준 레지스터(base register)의 값을 더해서</strong></mark> 물리적 주소값을 얻어낸다.</li>
 <li>그래서 사용자 프로세스는 논리적 주소만 다루고, 실제 물리적 주소를 다루지 못하면 알 필요가 없다.</li>
 </ul>
 </li>

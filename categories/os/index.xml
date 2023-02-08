@@ -672,7 +672,7 @@
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;요구-페이징&#34;&gt;요구 페이징&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;운영체제는 CPU에서 당장 수행해야 할 부분만을 메모리에 올려놓고, 그렇지 않은 부분은 디스크의 스왑 영역에 내려놓았다가 다시 필요해지면 메모리에 올리가 있는 부분과 교체하는 방식을 사용한다.&lt;/li&gt;
+&lt;li&gt;운영체제는 프로그램에서 당장 수행해야 할 부분만을 메모리에 올려놓고, 그렇지 않은 부분은 디스크의 스왑 영역에 내려놓았다가 다시 필요해지면 메모리에 올리가 있는 부분과 교체하는 방식을 사용한다.&lt;/li&gt;
 &lt;li&gt;이렇게 하면, &lt;strong&gt;메모리의 연장 공간인 것처럼 디스크 스왑 영역을 사용&lt;/strong&gt;할 수 있게 된다. 그래서 프로그램은 물리적 메모리의 크기 제약을 신경쓰지 않아도 되므로 각자 독자적인 메모리 주소 공간을 가질 수 있게 된다.&lt;/li&gt;
 &lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;프로세스마다 가지고 있는 0번지부터 시작하는 메모리 주소 공간&lt;/strong&gt;&lt;/mark&gt;을 &lt;strong&gt;가상 메모리(virtual memory)&lt;/strong&gt; 라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -1162,7 +1162,7 @@
 &lt;li&gt;CPU가 주소를 참조할 때마다 &lt;u&gt;주소 매핑 테이블(address mapping table)&lt;/u&gt; 을 이용해서 바인딩을 점검한다.&lt;/li&gt;
 &lt;li&gt;하드웨어적 지원이 필요하다.
 &lt;ul&gt;
-&lt;li&gt;**MMU, 기준 레지스터, 한계 레지스터, **&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;MMU, 기준 레지스터, 한계 레지스터&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -1187,7 +1187,7 @@
 &lt;p&gt;&lt;strong&gt;메모리 관리 유닛 (Memory Management Unit; MMU)&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;논리적 주소를 물리적 주소로 바인딩 해주는 하드웨어 장치이다.&lt;/li&gt;
-&lt;li&gt;CPU가 사용자 프로세스의 논리적 주소를 참조하려고 할 때, &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;그 주소값에 기준 레지스터(base register)의 값을 더해서&lt;/strong&gt;&lt;/mark&gt; 물리적 주소값을 얻어낸다.&lt;/li&gt;
+&lt;li&gt;CPU가 사용자 프로세스의 논리적 주소를 가지고 참조하려고 할 때, &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;그 주소값에 기준 레지스터(base register)의 값을 더해서&lt;/strong&gt;&lt;/mark&gt; 물리적 주소값을 얻어낸다.&lt;/li&gt;
 &lt;li&gt;그래서 사용자 프로세스는 논리적 주소만 다루고, 실제 물리적 주소를 다루지 못하면 알 필요가 없다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -4550,6 +4550,8 @@
 &lt;li&gt;&lt;strong&gt;파일&lt;/strong&gt; 관리
 &lt;ul&gt;
 &lt;li&gt;디스크에 파일이 저장되는 방식 및 접근 권한을 관리한다.&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://pepperedpepper.github.io/p/os-it-principles-11/&#34; &gt;파일 시스템&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://pepperedpepper.github.io/p/os-it-principles-12/&#34; &gt;디스크 관리&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;주변장치 및 입출력 장치&lt;/strong&gt; 자원 관리
