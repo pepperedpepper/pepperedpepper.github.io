@@ -318,9 +318,9 @@ if (!doNotTrack) {
     </li>
     <li><a href="#행렬의-설계">행렬의 설계</a>
       <ul>
-        <li><a href="#크기-변환행렬-scale-transformation-matrix">크기 변환행렬 (Scale transformation matrix)</a></li>
-        <li><a href="#회전-변환행렬-rotation-transformation-matrix">회전 변환행렬 (Rotation transformation matrix)</a></li>
-        <li><a href="#전단-변환행렬-shear-transformation-matrix">전단 변환행렬 (Shear transformation matrix)</a></li>
+        <li><a href="#크기-변환행렬">크기 변환행렬</a></li>
+        <li><a href="#회전-변환행렬">회전 변환행렬</a></li>
+        <li><a href="#전단-변환행렬">전단 변환행렬</a></li>
         <li><a href="#삼각함수의-덧셈-정리">삼각함수의 덧셈 정리</a></li>
       </ul>
     </li>
@@ -328,8 +328,8 @@ if (!doNotTrack) {
       <ul>
         <li><a href="#역행렬의-존재를-판별하는-성립식">역행렬의 존재를 판별하는 성립식</a></li>
         <li><a href="#크기-변환행렬의-역행렬">크기 변환행렬의 역행렬</a></li>
-        <li><a href="#전단-변환행렬의-역행렬">전단 변환행렬의 역행렬</a></li>
         <li><a href="#회전-변환행렬의-역행렬">회전 변환행렬의 역행렬</a></li>
+        <li><a href="#전단-변환행렬의-역행렬">전단 변환행렬의 역행렬</a></li>
         <li><a href="#행렬-곱의-역행렬">행렬 곱의 역행렬</a></li>
       </ul>
     </li>
@@ -482,7 +482,7 @@ if (!doNotTrack) {
 </ul>
 <br />
 <ul>
-<li>선형성이란 두 집합의 <strong>순수한 비로 구성된 1차적 대응 관계</strong>를 의미한다.
+<li><mark style="background-color: lightblue">선형성이란 두 집합의 순수한 비로 구성된 1차적 대응 관계</mark>를 의미한다.
 <ul>
 <li>단지 곧게 뻗은 직선의 성질을 뜻하는 것이 아니다.</li>
 <li>순수한 비로 구성되어 있기 때문에 다른 입력값을 투여했을 때 어떤 출력값이 나올지 쉽게 예측할 수 있고,</li>
@@ -494,25 +494,22 @@ if (!doNotTrack) {
 <br />
 <h3 id="벡터-공간의-선형-변환">벡터 공간의 선형 변환</h3>
 <ul>
-<li>
-<p>그렇다면, 입력과 출력을 실수가 아닌 벡터를 넣어보자!</p>
+<li>그렇다면, 입력과 출력을 실수가 아닌 벡터를 넣어보자!
 <ul>
 <li>선형성을 가지는 함수는 순수한 비의 형태로 구성되어 있으므로, $\vec{v} = (x, y)$에서 $x$와 $y$에 선형성을 유지하고자 한다면 다음과 같이 설계해 볼 수 있겠다.</li>
 </ul>
 </li>
-<li>
-<p><mark style="background-color: lightblue">$f(\vec{v}) = f(x, y) = (ax + by, cx + dy)$</mark></p>
+<li><mark style="background-color: lightblue">$f(\vec{v}) = f(x, y) = (ax + by, cx + dy)$</mark>
 <ul>
 <li>이 식은 가법성과 1차 동차성을 만족하므로 선형성을 지닌다. (풀이 생략)
 <ul>
-<li>따라서 순수한 비를 통해 <strong>예측할 수 있는 형태로 변환</strong>되며,</li>
-<li><strong>역함수</strong>를 통해 변환 후의 벡터로부터 변환 전의 벡터를 파악할 수 있다.</li>
+<li>따라서 순수한 비를 통해 <mark style="background-color: lightblue">예측할 수 있는 형태로 변환</mark>되며,</li>
+<li><mark style="background-color: lightblue">역함수를 통해 변환 후의 벡터로부터 변환 전의 벡터를 파악</mark>할 수 있다.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>
-<p>표준기저벡터의 선형 결합으로 형성된 벡터 공간은 선형성을 지닌다. 그리고 이 벡터 공간을 위와 같은 선형 함수를 이용해서 변화시킨 새로운 공간도 표준기저벡터의 선형 결합으로 형성되므로 선형성을 지니겠다.</p>
+<li>표준기저벡터의 선형 결합으로 형성된 벡터 공간은 선형성을 지닌다. 그리고 이 벡터 공간을 위와 같은 선형 함수를 이용해서 변화시킨 새로운 공간도 표준기저벡터의 선형 결합으로 형성되므로 선형성을 지니겠다.
 <ul>
 <li>이렇게 동일한 구조를 지니는 두 공간의 대응관계를 변환(Transformation)이라고 하며,</li>
 <li>선형성을 유지시켜주는 위와같은 선형 함수를 <strong>선형 변환(Linear transformation)</strong> 이라고 한다.</li>
@@ -521,14 +518,12 @@ if (!doNotTrack) {
 </ul>
 <br />
 <ul>
-<li>
-<p>스칼라 곱셈 $f(\vec{v}) = f(x, y) = (kx, ky)$의 경우</p>
+<li>스칼라 곱셈 $f(\vec{v}) = f(x, y) = (kx, ky)$의 경우
 <ul>
 <li>$(ax + by, cx + dy)$에다가 $a = k, b = 0, c = 0, d = k$를 대입한 것이므로, 선형변환이다.</li>
 </ul>
 </li>
-<li>
-<p>벡터를 회전시키는 $f(\vec{v}) = f(x, y) = (\cos\theta x - \sin\theta y, \cos\theta x + \sin\theta y)$의 경우</p>
+<li>벡터를 회전시키는 $f(\vec{v}) = f(x, y) = (\cos\theta x - \sin\theta y, \cos\theta x + \sin\theta y)$의 경우
 <ul>
 <li>$(ax + by, cx + dy)$에다가 $a = \cos\theta, b = - \sin\theta, c = \cos\theta, d = \sin\theta$를 대입한 것이므로, 선형변환이다.</li>
 </ul>
@@ -549,18 +544,29 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="행렬">행렬</h2>
 <ul>
-<li>
-<p>행렬은 수를 사각형의 형태로 행과 열을 맞춰 배열한 테이블이다.</p>
-</li>
-<li>
-<p>행렬로 벡터를 나타낼 수 있다.</p>
-<ul>
-<li>열벡터: $$ \begin{bmatrix} x \\ y \end{bmatrix} $$</li>
-<li>행벡터: $$ \begin{bmatrix} x &amp; y \end{bmatrix} $$</li>
+<li>행렬은 수를 사각형의 형태로 행과 열을 맞춰 배열한 테이블이다.</li>
+<li>행렬을 사용해서 벡터를 나타낼 수 있다.</li>
 </ul>
-</li>
-<li>
-<p>선형변환을 표현할 때는 행과 열의 크기가 같은 <strong>정방행렬(Square matrix)</strong> 을 사용한다.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>명칭</th>
+<th>표기 방식</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>열벡터</td>
+<td>$$ \begin{bmatrix} x \\ y \end{bmatrix} $$</td>
+</tr>
+<tr>
+<td>행벡터</td>
+<td>$$ \begin{bmatrix} x &amp; y \end{bmatrix} $$</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>선형변환을 표현할 때는 행과 열의 크기가 같은 <strong>정방행렬(Square matrix)</strong> 을 사용한다.
 <ul>
 <li>$f(x, y) = (ax + by, cx + dy)$의 경우에는 $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}$$과 같이 표현할 수 있겠다.</li>
 </ul>
@@ -569,8 +575,7 @@ if (!doNotTrack) {
 <br />
 <h3 id="행렬의-기본-연산">행렬의 기본 연산</h3>
 <ul>
-<li>반드시 알아야 하는 행렬의 연산들
-<ul>
+<li>반드시 알아야 하는 행렬의 연산들</li>
 <li><strong>(1) 행렬과 행렬의 덧셈</strong> <br />
 $$A + B = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} + \begin{bmatrix} e &amp; f \\ g &amp; h \end{bmatrix} = \begin{bmatrix} a+e &amp; b+f \\ c+g &amp; d+h \end{bmatrix} $$</li>
 <li><strong>(2) 행렬과 스칼라의 곱셈</strong> <br />
@@ -581,14 +586,16 @@ $$k \cdot A = k \cdot \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} = \be
 $$\begin{bmatrix} a &amp; d \\ b &amp; e \\ c &amp; f \end{bmatrix}^T = \begin{bmatrix} a &amp; b &amp; c \\ d &amp; e &amp; f \end{bmatrix}$$</li>
 </ul>
 </li>
-<li><strong>(4) 행렬과 행렬의 곱셈 (행렬 곱)</strong></li>
+<li><strong>(4) 행렬과 행렬의 곱셈 (행렬 곱)</strong>
+<ul>
+<li>(이어서..)</li>
 </ul>
 </li>
 </ul>
 <br />
 <h3 id="행렬과-행렬의-곱셈">행렬과 행렬의 곱셈</h3>
 <ul>
-<li>앞의 행벡터와 뒤의 열벡터를 각각 곱해서 더한다. 
+<li>앞의 행벡터와 뒤의 열벡터를 각각 곱해서 더한다.
 $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &amp; f \\ g &amp; h \end{bmatrix} = \begin{bmatrix} ae + bg &amp; af + bh \\ ce + dg &amp; cf + dh \end{bmatrix}$$</li>
 </ul>
 <br />
@@ -611,10 +618,10 @@ $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &
 </ul>
 <br />
 <ul>
-<li>2차원 벡터에 선형 변환을 적용해서 새로운 벡터를 생성하는 작업.
+<li>앞서서 본 $f(x, y) = (ax + by, cx + dy)$ 를 행렬로 표현하면 다음과 같다.
 <ul>
-<li>$f(x, y) = (ax + by, cx + dy)$ 를 표현하면 다음과 같다.</li>
 <li>$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$</li>
+<li><strong>2차원 벡터에 선형 변환을 적용해서 새로운 벡터를 생성하는 작업</strong>이라고 볼 수 있다.</li>
 <li>연산의 순서는 오른쪽에서 왼쪽으로 <strong>역방향</strong>으로 이루어짐을 알 수 있다.</li>
 </ul>
 </li>
@@ -640,34 +647,28 @@ $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &
 </ul>
 <br />
 <h3 id="열-기준-행렬과-행-기준-행렬">열 기준 행렬과 행 기준 행렬</h3>
-<ul>
-<li><strong>열 기준 행렬</strong>
-<ul>
-<li>역방향으로 연산된다.</li>
-<li>사례: DirectX, Unity</li>
-<li>$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$</li>
-</ul>
-</li>
-</ul>
-<br />
-<ul>
-<li><strong>행 기준 행렬</strong>
-<ul>
-<li>순방향으로 연산된다.</li>
-<li>사례: OpenGL, Unreal</li>
-<li>열 기준 행렬에 <strong>전치연산</strong>을 적용하면 된다.</li>
-<li>$(A \cdot \vec{v})^T = \vec{v}^T \cdot A^T$</li>
-<li>$$\begin{bmatrix} x &amp; y \end{bmatrix} \cdot \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}  = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$</li>
-</ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>명칭</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>열 기준 행렬</strong></td>
+<td>역방향으로 연산된다.<br />사례: DirectX, Unity<br />$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$</td>
+</tr>
+<tr>
+<td><strong>행 기준 행렬</strong></td>
+<td>순방향으로 연산된다.<br />사례: OpenGL, Unreal<br />열 기준 행렬에 <strong>전치연산</strong>을 적용하면 된다.<br />$(A \cdot \vec{v})^T = \vec{v}^T \cdot A^T$<br />$$\begin{bmatrix} x &amp; y \end{bmatrix} \cdot \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}  = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$</td>
+</tr>
+</tbody>
+</table></div>
 <p><br /><br /></p>
 <h2 id="행렬의-설계">행렬의 설계</h2>
 <ul>
 <li>평면 상의 물체를 원하는 대로 변환하기 위해 $2 \times 2$행렬을 설계해보자.
-<ul>
-<li>아래 그림과 같이 표준기저벡터를 변화시켜서 벡터와 선형 결합을 하면 $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$와 동일한 값을 가진다.</li>
-<li>따라서 표준기저벡터를 변화시킨 벡터인 $(a, c)$와 $(b, d)$는 정방행렬을 구성하는 <strong>열벡터</strong>임을 알 수 있다.  <br />
 <img src="/post/game_math/images/05-01-linearTransformation.jpg"
 	
 	
@@ -677,19 +678,18 @@ $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &
 		alt="선형 변환을 통한 기저벡터의 변화"
 	
 	
-></li>
+>
+<ul>
+<li>위 그림과 같이 표준기저벡터를 변화시켜서 벡터와 선형 결합을 하면 $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$와 동일한 값을 가진다.</li>
+<li>따라서 표준기저벡터를 변화시킨 벡터인 $(a, c)$와 $(b, d)$는 정방행렬을 구성하는 <strong>열벡터</strong>임을 알 수 있다.  <br /></li>
 </ul>
 </li>
 </ul>
 <br />
-<h3 id="크기-변환행렬-scale-transformation-matrix">크기 변환행렬 (Scale transformation matrix)</h3>
+<h3 id="크기-변환행렬">크기 변환행렬</h3>
 <ul>
+<li>Scale transformation matrix</li>
 <li>물체를 크기를 변경하는 행렬을 설계해보자.
-<ul>
-<li>표준기저벡터 $e_1$을 $a$배 늘리거나 줄인 벡터: $a \cdot (1, 0) = (a, 0)$</li>
-<li>표준기저벡터 $e_2$을 $b$배 늘리거나 줄인 벡터: $b \cdot (0, 1) = (0, b)$</li>
-<li>그렇다면 이 두 표준기저벡터를 열벡터로 설정하면 다음과 같은 크기 변환행렬을 만들 수 있겠다.</li>
-<li>$$S = \begin{bmatrix} a &amp; 0 \\ 0 &amp; b \end{bmatrix}$$ <br />
 <img src="/post/game_math/images/05-02-scale.jpg"
 	
 	
@@ -699,18 +699,20 @@ $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &
 		alt="크기 변환행렬"
 	
 	
-></li>
+>
+<ul>
+<li>표준기저벡터 $e_1$을 $a$배 늘리거나 줄인 벡터: $a \cdot (1, 0) = (a, 0)$</li>
+<li>표준기저벡터 $e_2$을 $b$배 늘리거나 줄인 벡터: $b \cdot (0, 1) = (0, b)$</li>
+<li>이 두 표준기저벡터를 열벡터로 설정하면 다음과 같은 크기 변환행렬을 만들 수 있겠다.</li>
+<li>$$S = \begin{bmatrix} a &amp; 0 \\ 0 &amp; b \end{bmatrix}$$ <br /></li>
 </ul>
 </li>
 </ul>
 <br />
-<h3 id="회전-변환행렬-rotation-transformation-matrix">회전 변환행렬 (Rotation transformation matrix)</h3>
+<h3 id="회전-변환행렬">회전 변환행렬</h3>
 <ul>
+<li>Rotation transformation matrix</li>
 <li>물체를 각 $\theta$만큼 회전시키는 행렬을 설계해보자.
-<ul>
-<li>Chapter 4에서 살펴본 바와 같이 표준기저벡터가 $\theta$만큼 회전한 결과는 $(\cos\theta, \sin\theta)$와 $(-\sin\theta, \cos\theta)$가 된다.</li>
-<li>따라서 이 두 표준기저벡터를 열벡터로 설정해서 다음과 같은 회전 변환행렬을 만들 수 있겠다.</li>
-<li>$$R_\theta = \begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}$$ <br />
 <img src="/post/game_math/images/05-03-rot.jpg"
 	
 	
@@ -720,17 +722,19 @@ $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &
 		alt="회전 변환행렬"
 	
 	
-></li>
+>
+<ul>
+<li>Chapter 4에서 살펴본 바와 같이 표준기저벡터가 $\theta$만큼 회전한 결과는 $(\cos\theta, \sin\theta)$와 $(-\sin\theta, \cos\theta)$가 된다.</li>
+<li>따라서 이 두 표준기저벡터를 열벡터로 설정해서 다음과 같은 회전 변환행렬을 만들 수 있겠다.</li>
+<li>$$R_\theta = \begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}$$ <br /></li>
 </ul>
 </li>
 </ul>
 <br />
-<h3 id="전단-변환행렬-shear-transformation-matrix">전단 변환행렬 (Shear transformation matrix)</h3>
+<h3 id="전단-변환행렬">전단 변환행렬</h3>
 <ul>
+<li>Shear transformation matrix</li>
 <li>표준기저벡터 $e_1$은 고정한 상태에서 $e_2$를 $x$축 방향으로 $a$만큼 미는 변환을 생각해보자.
-<ul>
-<li>이러한 것을 전단변환이라고 하며, 전단변환행렬은 다음과 같을 것이다.</li>
-<li>$$S = \begin{bmatrix} 1 &amp; a \\ 0 &amp; 1 \end{bmatrix}$$ <br />
 <img src="/post/game_math/images/05-04-shear.jpg"
 	
 	
@@ -740,7 +744,10 @@ $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &
 		alt="전단 변환행렬"
 	
 	
-></li>
+>
+<ul>
+<li>이러한 것을 전단변환이라고 하며, 전단변환행렬은 다음과 같을 것이다.</li>
+<li>$$S = \begin{bmatrix} 1 &amp; a \\ 0 &amp; 1 \end{bmatrix}$$ <br /></li>
 </ul>
 </li>
 </ul>
@@ -757,7 +764,7 @@ $$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \cdot \begin{bmatrix} e &
 	
 ></p>
 <ul>
-<li>위 그림과 같이 $\alpha$와 $\beta$를 합한 만큼 회전한 행렬은 다음과 같이 나타낼 수 있다. 
+<li>위 그림과 같이 $\alpha$와 $\beta$를 합한 만큼 회전한 행렬은 다음과 같이 나타낼 수 있다.
 $$R_(\alpha + \beta) = \begin{bmatrix} \cos(\alpha + \beta) &amp; -\sin(\alpha + \beta) \\ \sin(\alpha + \beta) &amp; \cos(\alpha + \beta) \end{bmatrix}$$</li>
 </ul>
 <br />
@@ -787,23 +794,19 @@ $\sin(\alpha + \beta) = \cos\alpha\sin\beta + \sin\alpha\cos\beta$</li>
 <p><br /><br /></p>
 <h2 id="역행렬">역행렬</h2>
 <ul>
-<li>
-<p>행렬은 본질적으로 함수의 성질을 지니기 때문에 항등행렬과 역행렬이라는 개념이 존재한다.</p>
-</li>
-<li>
-<p><strong>항등행렬(Identity matrix)</strong></p>
+<li>행렬은 본질적으로 함수의 성질을 지니기 때문에 항등행렬과 역행렬이라는 개념이 존재한다.</li>
+<li><strong>항등행렬(Identity matrix)</strong>
 <ul>
-<li>원 공간의 변화없이 동일한 공간으로 유지하는 변환을 의미한다.</li>
+<li>원 공간의 <strong>변화없이</strong> 동일한 공간으로 유지하는 변환을 의미한다.</li>
 <li>표준기저벡터 $(1, 0)$과 $(0, 1)$을 순서대로 넣어 만들 수 있다.</li>
 <li>$$I = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 </li>
-<li>
-<p><strong>역행렬(Inverse matrix)</strong></p>
+<li><strong>역행렬(Inverse matrix)</strong>
 <ul>
 <li>행렬 곱의 결과가 항등행렬이 나오는 행렬을 의미한다.</li>
 <li>$A \cdot A^{-1} = A^{-1} \cdot A = I$</li>
-<li>역행렬을 시각적으로 나타내본다면, 아래 그림과 같이 선형 변환된 벡터 공간을 원 벡터 공간으로 다시 되돌리는 선형 변환이라고 볼 수 있다. <br />
+<li>역행렬을 시각적으로 나타내본다면, 아래 그림과 같이 선형 변환된 벡터 공간을 <mark style="background-color: lightblue">원 벡터 공간으로 되돌리는 선형 변환</mark>이라고 볼 수 있다. <br />
 <img src="/post/game_math/images/05-06-inverse.jpg"
 	
 	
@@ -820,12 +823,15 @@ $\sin(\alpha + \beta) = \cos\alpha\sin\beta + \sin\alpha\cos\beta$</li>
 <br />
 <h3 id="역행렬의-존재를-판별하는-성립식">역행렬의 존재를 판별하는 성립식</h3>
 <ul>
-<li>역행렬 또한 함수이므로, 두 공간의 변환이 전단사로 대응될 때만 역행렬이 존재한다.
+<li>역행렬 또한 함수이므로, 두 공간의 변환이 <u>전단사로 대응될 때만 역행렬이 존재</u>한다.
 <ul>
-<li>역행렬이 존재하는지 파악할 수 있는 특별한 수식이 있는 데 이것을. <strong>행렬식(Determinant)</strong> 이라고 한다.</li>
-<li>$2 \times 2$정방행렬 $A$의 행렬식은 다음과 같이 계산한다. <br /></li>
-<li>$$A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}$$ <br />
-<mark style="background-color: lightblue">$det(A) = ad - bc$</mark></li>
+<li><u>역행렬이 존재하는지 파악할 수 있는 특별한 수식</u>이 있는 데 이것을 <strong>행렬식(Determinant)</strong> 이라고 한다.</li>
+</ul>
+</li>
+<li>$2 \times 2$정방행렬 $A$의 행렬식은 다음과 같이 계산한다. <br />
+<ul>
+<li>$$A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}$$ <br /></li>
+<li><mark style="background-color: lightblue">$det(A) = ad - bc$</mark></li>
 <li><mark style="background-color: lightblue">$det(A)$의 값이 $0$인 선형 변환은 전단사 대응이 성립하지 않아서 역행렬이 존재하지 않는다.</mark></li>
 </ul>
 </li>
@@ -834,7 +840,7 @@ $\sin(\alpha + \beta) = \cos\alpha\sin\beta + \sin\alpha\cos\beta$</li>
 <ul>
 <li>행렬식이 $0$이라는 것의 의미는 무엇일까?
 <ul>
-<li>임의의 행렬 $$A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}$$를 사용해서 표준기저벡터가 $(a, c)$와 $(b, d)$로 변환된 새로운 벡터 공간의 넒이는 어떻게 될까? <br />
+<li>임의의 행렬 $$A = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix}$$를 사용해서 표준기저벡터가 $(a, c)$와 $(b, d)$로 변환된, 새로운 벡터 공간의 넒이는 어떻게 될까? <br />
 <img src="/post/game_math/images/05-07-area.jpg"
 	
 	
@@ -882,39 +888,34 @@ $\sin(\alpha + \beta) = \cos\alpha\sin\beta + \sin\alpha\cos\beta$</li>
 </ul>
 <br />
 <h3 id="크기-변환행렬의-역행렬">크기 변환행렬의 역행렬</h3>
-<ul>
-<li>$$S = \begin{bmatrix} a &amp; 0 \\ 0 &amp; b \end{bmatrix}$$ <br />
-$$S^{-1} = \begin{bmatrix} \frac{1}{a} &amp; 0 \\ 0 &amp; \frac{1}{b} \end{bmatrix}$$</li>
-</ul>
-<br />
-<h3 id="전단-변환행렬의-역행렬">전단 변환행렬의 역행렬</h3>
-<ul>
-<li>$$S = \begin{bmatrix} 1 &amp; a \\ 0 &amp; 1 \end{bmatrix}$$ <br />
-$$S^{-1} = \begin{bmatrix} 1 &amp; -a \\ 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
+<p>$$S = \begin{bmatrix} a &amp; 0 \\ 0 &amp; b \end{bmatrix}$$ <br />
+$$S^{-1} = \begin{bmatrix} \frac{1}{a} &amp; 0 \\ 0 &amp; \frac{1}{b} \end{bmatrix}$$</p>
 <br />
 <h3 id="회전-변환행렬의-역행렬">회전 변환행렬의 역행렬</h3>
 <ul>
-<li>Chapter 4에서 보았던 $\sin$, $\cos$함수의 다음과 같은 성질을 사용해서 역행렬을 구할 수가 있겠다.
+<li>Chapter 4에서 보았던 $\cos$, $\sin$ 함수의 짝함수, 홀함수 성질을 사용해서 역행렬을 구할 수가 있겠다.
 <ul>
-<li>$\cos(-\theta) = \cos(\theta)$</li>
-<li>$\sin(\theta) = -\sin(\theta)$</li>
+<li>짝함수 : $\cos(-\theta) = \cos(\theta)$</li>
+<li>홀함수 : $\sin(\theta) = -\sin(\theta)$</li>
 </ul>
 </li>
 </ul>
 <br />
-<ul>
-<li>$$R_{\theta} = \begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}$$ <br />
-$$R_{\theta}^{-1} = \begin{bmatrix} \cos\theta &amp; \sin\theta \\ -\sin\theta &amp; \cos\theta \end{bmatrix}$$</li>
-</ul>
+<p>$$R_{\theta} = \begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}$$ <br />
+$$R_{\theta}^{-1} = R_{(-\theta)} = \begin{bmatrix} \cos\theta &amp; \sin\theta \\ -\sin\theta &amp; \cos\theta \end{bmatrix}$$</p>
 <br />
 <ul>
-<li>이 결과는 전치행렬과 동일하므로, <strong>회전 변환행렬의 역행렬</strong>은 <strong>전치연산</strong>을 적용하는 방법으로 쉽게 구할 수 있겠다.
+<li>가만보니 이 결과는 전치행렬과 동일하다.
 <ul>
+<li>따라서 <strong>회전 변환행렬의 역행렬</strong>은 <strong>전치연산</strong>을 적용하는 방법으로 쉽게 구할 수 있겠다.</li>
 <li>$R_{\theta}^{-1} = R_{\theta}^{T}$</li>
 </ul>
 </li>
 </ul>
+<br />
+<h3 id="전단-변환행렬의-역행렬">전단 변환행렬의 역행렬</h3>
+<p>$$S = \begin{bmatrix} 1 &amp; a \\ 0 &amp; 1 \end{bmatrix}$$ <br />
+$$S^{-1} = \begin{bmatrix} 1 &amp; -a \\ 0 &amp; 1 \end{bmatrix}$$</p>
 <br />
 <h3 id="행렬-곱의-역행렬">행렬 곱의 역행렬</h3>
 <ul>

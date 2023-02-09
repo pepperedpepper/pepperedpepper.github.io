@@ -638,7 +638,7 @@
 &lt;h2 id=&#34;udp의-구조&#34;&gt;UDP의 구조&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;TCP와 달리, UDP는 효율성을 중요하게 생각하는 비연결형 통신이라서 TCP처럼 확인작업을 일일이 하지 않는다.&lt;/li&gt;
-&lt;li&gt;또한 UDP를 사용하면 LAN에 있는 컴퓨터나 네트워크 장비에 데이터를 일괄로 보내는 &lt;strong&gt;브로드캐스트(broadcast)&lt;/strong&gt; 를 할 수 있다. 
+&lt;li&gt;또한 UDP를 사용하면 LAN에 있는 컴퓨터나 네트워크 장비에 데이터를 일괄로 보내는 &lt;strong&gt;브로드캐스트(broadcast)&lt;/strong&gt; 를 할 수 있다.
 &lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/network/images/06-04-udpHeader.jpeg&#34;

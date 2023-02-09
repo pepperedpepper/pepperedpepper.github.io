@@ -2,7 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-데카르트 좌표계 데카르트 좌표계(Cartesian coordinate system) Chapter 2에서 보았던 것처럼, 직선으로 된 수 집합을 수직으로 배치해서 평면을 표기하는 방식. 좌표(Coordinate) 데카르트 좌표계의 한 원소이다. 곱집합과 동일하게 순서쌍으로 표현한다. 벡터 공간과 벡터 스칼라와 벡터 벡터 공간(Vector space) 두 개 이상의 실수를 곱집합으로 묶어서 형성된 집합을 공리적 집합론의 관점에서 규정한 것. 벡터(Vector) 벡터 공간의 원소. $\vec{v} = (x, y)$ 스칼라(Scalar) 체 구조를 가지는 수 집합의 원소.'>
+데카르트 좌표계 Cartesian coordinate system Chapter 2에서 보았던 것처럼, 직선으로 된 수 집합을 수직으로 배치해서 평면을 표기하는 방식. 데카르트 좌표계의 한 원소는 곱집합과 동일하게 $(x, y)$처럼 순서쌍으로 표현하며 좌표(Coordinate)라고 부른다. 벡터 공간과 벡터 스칼라와 벡터 벡터 공간(Vector space) 두 개 이상의 실수를 곱집합으로 묶어서 형성된 집합을 공리적 집합론의 관점에서 규정한 것. 벡터(Vector) 벡터 공간의 원소. $\vec{v} = (x, y)$ 스칼라(Scalar) 체 구조를 가지는 수 집합의 원소.'>
 <title>[Game Math] Chapter 3. 벡터: 가상 공간의 탄생</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-03/'>
@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 3. 벡터: 가상 공간의 탄생'>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-데카르트 좌표계 데카르트 좌표계(Cartesian coordinate system) Chapter 2에서 보았던 것처럼, 직선으로 된 수 집합을 수직으로 배치해서 평면을 표기하는 방식. 좌표(Coordinate) 데카르트 좌표계의 한 원소이다. 곱집합과 동일하게 순서쌍으로 표현한다. 벡터 공간과 벡터 스칼라와 벡터 벡터 공간(Vector space) 두 개 이상의 실수를 곱집합으로 묶어서 형성된 집합을 공리적 집합론의 관점에서 규정한 것. 벡터(Vector) 벡터 공간의 원소. $\vec{v} = (x, y)$ 스칼라(Scalar) 체 구조를 가지는 수 집합의 원소.'>
+데카르트 좌표계 Cartesian coordinate system Chapter 2에서 보았던 것처럼, 직선으로 된 수 집합을 수직으로 배치해서 평면을 표기하는 방식. 데카르트 좌표계의 한 원소는 곱집합과 동일하게 $(x, y)$처럼 순서쌍으로 표현하며 좌표(Coordinate)라고 부른다. 벡터 공간과 벡터 스칼라와 벡터 벡터 공간(Vector space) 두 개 이상의 실수를 곱집합으로 묶어서 형성된 집합을 공리적 집합론의 관점에서 규정한 것. 벡터(Vector) 벡터 공간의 원소. $\vec{v} = (x, y)$ 스칼라(Scalar) 체 구조를 가지는 수 집합의 원소.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-03/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2022-04-20T02:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-20T02:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Game Math] Chapter 3. 벡터: 가상 공간의 탄생">
 <meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-데카르트 좌표계 데카르트 좌표계(Cartesian coordinate system) Chapter 2에서 보았던 것처럼, 직선으로 된 수 집합을 수직으로 배치해서 평면을 표기하는 방식. 좌표(Coordinate) 데카르트 좌표계의 한 원소이다. 곱집합과 동일하게 순서쌍으로 표현한다. 벡터 공간과 벡터 스칼라와 벡터 벡터 공간(Vector space) 두 개 이상의 실수를 곱집합으로 묶어서 형성된 집합을 공리적 집합론의 관점에서 규정한 것. 벡터(Vector) 벡터 공간의 원소. $\vec{v} = (x, y)$ 스칼라(Scalar) 체 구조를 가지는 수 집합의 원소.">
+데카르트 좌표계 Cartesian coordinate system Chapter 2에서 보았던 것처럼, 직선으로 된 수 집합을 수직으로 배치해서 평면을 표기하는 방식. 데카르트 좌표계의 한 원소는 곱집합과 동일하게 $(x, y)$처럼 순서쌍으로 표현하며 좌표(Coordinate)라고 부른다. 벡터 공간과 벡터 스칼라와 벡터 벡터 공간(Vector space) 두 개 이상의 실수를 곱집합으로 묶어서 형성된 집합을 공리적 집합론의 관점에서 규정한 것. 벡터(Vector) 벡터 공간의 원소. $\vec{v} = (x, y)$ 스칼라(Scalar) 체 구조를 가지는 수 집합의 원소.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -398,14 +398,10 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="데카르트-좌표계">데카르트 좌표계</h2>
 <ul>
-<li><strong>데카르트 좌표계(Cartesian coordinate system)</strong>
+<li>Cartesian coordinate system
 <ul>
-<li>Chapter 2에서 보았던 것처럼, <strong>직선으로 된 수 집합을 수직으로 배치해서 평면을 표기</strong>하는 방식.</li>
-</ul>
-</li>
-<li>좌표(Coordinate)
-<ul>
-<li>데카르트 좌표계의 한 원소이다. 곱집합과 동일하게 순서쌍으로 표현한다.</li>
+<li>Chapter 2에서 보았던 것처럼, <u>직선으로 된 수 집합을 수직으로 배치해서 평면을 표기</u>하는 방식.</li>
+<li>데카르트 좌표계의 한 원소는 곱집합과 동일하게 $(x, y)$처럼 순서쌍으로 표현하며 좌표(Coordinate)라고 부른다.</li>
 </ul>
 </li>
 </ul>
@@ -420,12 +416,14 @@ if (!doNotTrack) {
 </li>
 <li>벡터(Vector)
 <ul>
-<li>벡터 공간의 원소. $\vec{v} = (x, y)$</li>
+<li>벡터 공간의 원소.</li>
+<li>$\vec{v} = (x, y)$</li>
 </ul>
 </li>
 <li>스칼라(Scalar)
 <ul>
-<li>체 구조를 가지는 수 집합의 원소. $x$, $y$</li>
+<li>체 구조를 가지는 수 집합의 원소.</li>
+<li>$x$, $y$</li>
 </ul>
 </li>
 </ul>
@@ -434,8 +432,8 @@ if (!doNotTrack) {
 <ul>
 <li>벡터 공간의 두 가지 기본 연산 (선형성이 있어서 <strong>선형 연산</strong>이라고 한다)
 <ul>
-<li>(1) 벡터와 벡터의 덧셈(<strong>벡터의 합</strong>)</li>
-<li>(2) 스칼라와 벡터의 곱셈(스칼라 곱셈, <strong>스칼라배</strong>)</li>
+<li>(1) 벡터와 벡터의 덧셈 : <strong>벡터의 합</strong></li>
+<li>(2) 스칼라와 벡터의 곱셈 : 스칼라 곱셈, <strong>스칼라배</strong></li>
 </ul>
 </li>
 </ul>
@@ -455,7 +453,7 @@ if (!doNotTrack) {
 <tr>
 <td><strong>벡터의 합</strong></td>
 <td>닫혀 있다</td>
-<td>$\vec{a}$, $\vec{b}$가 벡터 공간 $V$에 존재하면 $\vec{a} + \vec{b}$도 $V$에 존재한다.</td>
+<td>$\vec{v}$, $\vec{w}$가 벡터 공간 $V$에 존재하면 $\vec{v} + \vec{w}$도 $V$에 존재한다.</td>
 </tr>
 <tr>
 <td></td>
@@ -490,16 +488,16 @@ if (!doNotTrack) {
 <tr>
 <td></td>
 <td>항등원</td>
-<td>$1 \cdot \vec{v} = \vec{v}$</td>
+<td>$\vec{v} \cdot 1 = \vec{v}$</td>
 </tr>
 <tr>
 <td></td>
-<td>(좌)분배법칙</td>
+<td>스칼라의 분배법칙</td>
 <td>$a(\vec{u} + \vec{v}) = a\vec{u} + a\vec{v}$</td>
 </tr>
 <tr>
 <td></td>
-<td>(우)분배법칙</td>
+<td>벡터의 분배법칙</td>
 <td>$(a + b)\vec{v} = a\vec{v} + b\vec{v}$</td>
 </tr>
 </tbody>
@@ -507,21 +505,23 @@ if (!doNotTrack) {
 <br />
 <h3 id="벡터의-크기와-이동">벡터의 크기와 이동</h3>
 <ul>
-<li>벡터의 크기
+<li><strong>벡터의 크기</strong>
 <ul>
 <li>피타고라스 정리를 사용해서 측정할 수 있다.</li>
 <li><mark style="background-color: lightblue">$||\vec{v}|| = \sqrt{x^2 + y^2}$</mark></li>
 </ul>
 </li>
-<li>단위 벡터(Unit Vector)
+<li><strong>단위 벡터(Unit Vector)</strong>
 <ul>
 <li>크기가 1인 벡터.</li>
-<li><mark style="background-color: lightblue">$\hat{v} = \frac{\vec{v}}{||\vec{v}||}$</mark></li>
+<li>모자를 씌워 표현한다.</li>
+<li>$\hat{v}$</li>
 </ul>
 </li>
-<li>정규화(Normalize)한다.
+<li><strong>정규화(Normalize)</strong>
 <ul>
 <li>임의의 벡터를 크기가 1인 단위 벡터로 다듬는 작업.</li>
+<li><mark style="background-color: lightblue">$\hat{v} = \frac{\vec{v}}{||\vec{v}||}$</mark></li>
 </ul>
 </li>
 </ul>
@@ -538,17 +538,31 @@ if (!doNotTrack) {
 </ul>
 <br />
 <ul>
-<li><strong>선형 종속</strong>
-<ul>
-<li>선형 결합에서 <strong>모든 $a$가 $0$이 아님에도 영벡터</strong>를 만들 수 있는 것.</li>
-<li>$2 \cdot (1, 1) + (-1) \cdot (2, 2) = (0, 0)$</li>
+<li>선형 종속과 선형 독립</li>
 </ul>
-</li>
-<li><strong>선형 독립</strong>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>명칭</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>선형 종속</strong></td>
+<td>선형 결합에서 모든 $a$가 <u>$0$이 아님에도</u> 영벡터를 만들 수 있는 것.<br />$2 \cdot (1, 1) + (-1) \cdot (2, 2) = (0, 0)$</td>
+</tr>
+<tr>
+<td><strong>선형 독립</strong></td>
+<td>선형 결합에서 모든 $a$가 <u>$0$이어야만</u> 영벡터를 만들 수 있는 것.<br />$0 \cdot (1, 2) + 0 \cdot (2, 1) = (0, 0)$</td>
+</tr>
+</tbody>
+</table></div>
 <ul>
-<li>선형 결합에서 <strong>모든 $a$가 $0$이어야만 영벡터</strong>를 만들 수 있는 것.</li>
-<li>$0 \cdot (1, 2) + 0 \cdot (2, 1) = (0, 0)$</li>
-<li><mark style="background-color: lightblue">선형 독립 관계를 가지는 벡터를 선형 결합하면, 벡터 공간에 속한 모든 벡터를 생성할 수 있다.</mark></li>
+<li><strong>평면의 모든 점을 생성하기 위한 선형 결합식</strong>을 만드려면&hellip;
+<ul>
+<li>서로 평행하지 않은 2개의 벡터가 필요하다.</li>
+<li>즉, <mark style="background-color: lightblue">선형 독립의 관계인 2개의 벡터</mark>가 필요하다.</li>
 <li>평면에서 선형 독립 관계를 유지하려면 2개의 벡터만 사용되어야 한다.</li>
 </ul>
 </li>
@@ -557,7 +571,7 @@ if (!doNotTrack) {
 <ul>
 <li><strong>기저(Basis)</strong>
 <ul>
-<li>벡터 공간 내 모든 벡터를 생성할 수 있는, <strong>선형 독립 관계를 가지는 벡터의 집합.</strong></li>
+<li>벡터 공간 내 모든 벡터를 생성할 수 있는, <u>선형 독립 관계를 가지는 벡터의 집합.</u></li>
 </ul>
 </li>
 <li><strong>기저벡터(Basis vector)</strong>
@@ -567,28 +581,24 @@ if (!doNotTrack) {
 </li>
 <li><strong>차원(Dimension)</strong>
 <ul>
-<li>평면에서 선형 독립 관계를 유지하려면 2개의 벡터만 사용되어야 한다.</li>
-<li>기저 집합의 원소 수는 언제나 2개 뿐이다.</li>
-<li>따라서 평면에 대응하는 벡터 공간을 2차원으로 정의할 수 있게 된다.</li>
+<li>평면에서 선형 독립 관계를 유지하려면 2개의 벡터만 사용되어야 하므로 기저 집합의 원소 수는 언제나 2개 뿐이다.</li>
+<li>따라서 평면에 대응하는 벡터 공간을 2차원이라고 정의할 수 있게 된다.</li>
 </ul>
 </li>
-</ul>
-<br />
-<ul>
 <li><strong>표준기저(Standard basis)</strong>
 <ul>
-<li>한 축만 사용하는 단위벡터로 구성된 집합.</li>
+<li>한 축만 사용하는 단위벡터 $(0, 1), (1, 0)$ 로 구성된 집합.</li>
 </ul>
 </li>
 <li><strong>표준기저벡터(Standard basis vector)</strong>
 <ul>
-<li>표준기저의 원소.</li>
-<li>2차원 실벡터 공간 $\mathbb{R}^2$ <br /> 
-<mark style="background-color: lightblue">$e_1 = (1, 0)$</mark> <br /> 
+<li>표준기저에 속한 원소.</li>
+<li>2차원 실벡터 공간 $\mathbb{R}^2$에서의 표준기저벡터 <br />
+<mark style="background-color: lightblue">$e_1 = (1, 0)$</mark> <br />
 <mark style="background-color: lightblue">$e_2 = (0, 1)$</mark></li>
-<li>3차원 실벡터 공간 $\mathbb{R}^3$ <br /> 
-$e_1 = (1, 0, 0)$ <br /> 
-$e_2 = (0, 1, 0)$ <br /> 
+<li>3차원 실벡터 공간 $\mathbb{R}^3$에서의 표준기저벡터 <br />
+$e_1 = (1, 0, 0)$ <br />
+$e_2 = (0, 1, 0)$ <br />
 $e_3 = (0, 0, 1)$</li>
 </ul>
 </li>

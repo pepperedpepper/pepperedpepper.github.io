@@ -26465,9 +26465,9 @@
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;inFile.eof()&lt;/code&gt; 는 파일의 끝에 도달하면 &lt;code&gt;true&lt;/code&gt; 
+&lt;li&gt;&lt;code&gt;inFile.eof()&lt;/code&gt; 는 파일의 끝에 도달하면 &lt;code&gt;true&lt;/code&gt;
 &lt;code&gt;inFile.fail()&lt;/code&gt; 은 데이터형 불일치나 파일의 끝에 도달하면 &lt;code&gt;true&lt;/code&gt;
-&lt;code&gt;inFile.bad()&lt;/code&gt; 는 파일이 깨지거나 하드웨어 실패하면 &lt;code&gt;true&lt;/code&gt; 
+&lt;code&gt;inFile.bad()&lt;/code&gt; 는 파일이 깨지거나 하드웨어 실패하면 &lt;code&gt;true&lt;/code&gt;
 &lt;code&gt;inFile.good()&lt;/code&gt; 은 잘못된 것이 하나도 없으면 &lt;code&gt;true&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
@@ -27620,7 +27620,7 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;8진, 16진 정수&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;code&gt;int&lt;/code&gt;, &lt;code&gt;unsigned int&lt;/code&gt; &amp;lt; &lt;code&gt;long&lt;/code&gt;, &lt;code&gt;unsigned long&lt;/code&gt; &amp;lt; &lt;code&gt;long long&lt;/code&gt;, &lt;code&gt;unsigned long long&lt;/code&gt; 중에서 크기가 작은 것으로 
+&lt;li&gt;&lt;code&gt;int&lt;/code&gt;, &lt;code&gt;unsigned int&lt;/code&gt; &amp;lt; &lt;code&gt;long&lt;/code&gt;, &lt;code&gt;unsigned long&lt;/code&gt; &amp;lt; &lt;code&gt;long long&lt;/code&gt;, &lt;code&gt;unsigned long long&lt;/code&gt; 중에서 크기가 작은 것으로
 &lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -27643,7 +27643,7 @@
 &lt;p&gt;&lt;code&gt;char&lt;/code&gt;형을 수에 쓰려고 한다면 &lt;code&gt;unsigned char&lt;/code&gt;와 &lt;code&gt;signed char&lt;/code&gt;가 중요해진다. 하지만 문자라면 단순히 &lt;code&gt;char&lt;/code&gt;라고만 하면 된다.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;1바이트로 표현할 수 없는 한국어 문자 세트 같은 경우는 확장문자 세트를 제공한다. &lt;code&gt;wchar_t&lt;/code&gt;이다. 이것은 기초 데이터형과 동일한 크기와 부호 속성을 가진다. 이 문자의 스트림을 처리하기 위해 &lt;code&gt;wcout&lt;/code&gt;, &lt;code&gt;wcin&lt;/code&gt;이 존재하고, 문자열 앞에 &lt;code&gt;L&lt;/code&gt;을 붙여 나타낸다. 
+&lt;p&gt;1바이트로 표현할 수 없는 한국어 문자 세트 같은 경우는 확장문자 세트를 제공한다. &lt;code&gt;wchar_t&lt;/code&gt;이다. 이것은 기초 데이터형과 동일한 크기와 부호 속성을 가진다. 이 문자의 스트림을 처리하기 위해 &lt;code&gt;wcout&lt;/code&gt;, &lt;code&gt;wcin&lt;/code&gt;이 존재하고, 문자열 앞에 &lt;code&gt;L&lt;/code&gt;을 붙여 나타낸다.
 &lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -27708,13 +27708,13 @@
 &lt;ul&gt;
 &lt;li&gt;기본은 &lt;code&gt;double&lt;/code&gt;형&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;float&lt;/code&gt;로 하고 싶으면 &lt;code&gt;f&lt;/code&gt;, &lt;code&gt;F&lt;/code&gt;를 붙이고&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;long double&lt;/code&gt;형으로 하고 싶으면 &lt;code&gt;l&lt;/code&gt;, &lt;code&gt;L&lt;/code&gt;을 접미어로 붙인다. 
+&lt;li&gt;&lt;code&gt;long double&lt;/code&gt;형으로 하고 싶으면 &lt;code&gt;l&lt;/code&gt;, &lt;code&gt;L&lt;/code&gt;을 접미어로 붙인다.
 &lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;산술-연산자&#34;&gt;산술 연산자&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;%&lt;/code&gt;연산자의 두개의 피연산자는 모두 정수여야한다. 아니면 컴파일 에러가 발생한다.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/&lt;/code&gt;연산자의 두개의 피연산자 중 한 개이상이 부동 소수점형이면 결과도 부동 소수점형이다. 
+&lt;li&gt;&lt;code&gt;/&lt;/code&gt;연산자의 두개의 피연산자 중 한 개이상이 부동 소수점형이면 결과도 부동 소수점형이다.
 &lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;수식에서의-데이터-형-변환&#34;&gt;수식에서의 데이터 형 변환&lt;/h2&gt;
@@ -27891,7 +27891,7 @@
 &lt;li&gt;(1) 전처리기가 선행처리문자(&lt;code&gt;#&lt;/code&gt;)로 시작하는 선행처리지시문을 처리한다.&lt;/li&gt;
 &lt;li&gt;(2) 컴파일러가 전처리기문이 사라진 소스코드를 어셈블리 코드로 변환한다.&lt;/li&gt;
 &lt;li&gt;(3) 어셈블러가 목적 코드로 만든다.&lt;/li&gt;
-&lt;li&gt;(4) 링커가 모든 오브젝트 파일들을 연결해서 실행 코드를 만든다. 
+&lt;li&gt;(4) 링커가 모든 오브젝트 파일들을 연결해서 실행 코드를 만든다.
 &lt;br /&gt;&lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id=&#34;컴파일러-번역-순서&#34;&gt;컴파일러 번역 순서&lt;/h2&gt;
