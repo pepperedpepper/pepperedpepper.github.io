@@ -2,10 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-3차원 공간의 설계 $x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다.
-오른손 좌표계(Right-handed coordinate system) 왼손 좌표계(Left-handed coordinate system) 프로그램 마다 각 축의 용도를 다르게 설정한다.
-아래 그림에서 (a)3DS맥스는 $z$업 오른손 좌표계이고, (b)유니티는 $y$업, (c)언리얼은 $z$업 왼손 좌표계이다. (저자가 제시한) 우리의 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. ($y$업 오른손 좌표계)
-3차원 공간의 트랜스폼 3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.'>
+3차원 공간의 설계 $x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다. 오른손 좌표계(Right-handed coordinate system) 왼손 좌표계(Left-handed coordinate system) 프로그램 마다 각 축의 용도를 다르게 설정한다. 3DS맥스는 $z$업 오른손 좌표계이고, 유니티는 $y$업, 언리얼은 $z$업 왼손 좌표계이다. (저자가 제시한) 우리가 사용할 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. $y$업 오른손 좌표계 3차원 공간의 트랜스폼 3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.'>
 <title>[Game Math] Chapter 10. 3차원 공간: 입체 공간의 생성</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-10/'>
@@ -13,19 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 10. 3차원 공간: 입체 공간의 생성'>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-3차원 공간의 설계 $x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다.
-오른손 좌표계(Right-handed coordinate system) 왼손 좌표계(Left-handed coordinate system) 프로그램 마다 각 축의 용도를 다르게 설정한다.
-아래 그림에서 (a)3DS맥스는 $z$업 오른손 좌표계이고, (b)유니티는 $y$업, (c)언리얼은 $z$업 왼손 좌표계이다. (저자가 제시한) 우리의 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. ($y$업 오른손 좌표계)
-3차원 공간의 트랜스폼 3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.'>
+3차원 공간의 설계 $x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다. 오른손 좌표계(Right-handed coordinate system) 왼손 좌표계(Left-handed coordinate system) 프로그램 마다 각 축의 용도를 다르게 설정한다. 3DS맥스는 $z$업 오른손 좌표계이고, 유니티는 $y$업, 언리얼은 $z$업 왼손 좌표계이다. (저자가 제시한) 우리가 사용할 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. $y$업 오른손 좌표계 3차원 공간의 트랜스폼 3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-10/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2022-04-27T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-27T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Game Math] Chapter 10. 3차원 공간: 입체 공간의 생성">
 <meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-3차원 공간의 설계 $x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다.
-오른손 좌표계(Right-handed coordinate system) 왼손 좌표계(Left-handed coordinate system) 프로그램 마다 각 축의 용도를 다르게 설정한다.
-아래 그림에서 (a)3DS맥스는 $z$업 오른손 좌표계이고, (b)유니티는 $y$업, (c)언리얼은 $z$업 왼손 좌표계이다. (저자가 제시한) 우리의 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. ($y$업 오른손 좌표계)
-3차원 공간의 트랜스폼 3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.">
+3차원 공간의 설계 $x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다. 오른손 좌표계(Right-handed coordinate system) 왼손 좌표계(Left-handed coordinate system) 프로그램 마다 각 축의 용도를 다르게 설정한다. 3DS맥스는 $z$업 오른손 좌표계이고, 유니티는 $y$업, 언리얼은 $z$업 왼손 좌표계이다. (저자가 제시한) 우리가 사용할 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. $y$업 오른손 좌표계 3차원 공간의 트랜스폼 3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -322,7 +313,6 @@ if (!doNotTrack) {
     <li><a href="#카메라-공간">카메라 공간</a></li>
     <li><a href="#오일러-각의-특징">오일러 각의 특징</a>
       <ul>
-        <li><a href="#짐벌락-현상">짐벌락 현상</a></li>
         <li><a href="#회전-보간의-계산">회전 보간의 계산</a></li>
       </ul>
     </li>
@@ -413,8 +403,7 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="3차원-공간의-설계">3차원 공간의 설계</h2>
 <ul>
-<li>
-<p>$x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다.</p>
+<li>$x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다.
 <ul>
 <li><strong>오른손 좌표계(Right-handed coordinate system)</strong></li>
 <li><strong>왼손 좌표계(Left-handed coordinate system)</strong> <br /><br>
@@ -430,10 +419,10 @@ if (!doNotTrack) {
 ></li>
 </ul>
 </li>
-<li>
-<p>프로그램 마다 각 축의 용도를 다르게 설정한다.</p>
+</ul>
+<br />
 <ul>
-<li>아래 그림에서 (a)3DS맥스는 $z$업 오른손 좌표계이고, (b)유니티는 $y$업, (c)언리얼은 $z$업 왼손 좌표계이다. <br /><br>
+<li>프로그램 마다 각 축의 용도를 다르게 설정한다.
 <img src="/post/game_math/images/10-02-coords.jpg"
 	
 	
@@ -443,22 +432,27 @@ if (!doNotTrack) {
 		alt="3D 소프트웨어가 사용하는 좌표계 시스템"
 	
 	
-></li>
+>
+<ul>
+<li>3DS맥스는 $z$업 오른손 좌표계이고, 유니티는 $y$업, 언리얼은 $z$업 왼손 좌표계이다.</li>
 </ul>
 </li>
-<li>
-<p>(저자가 제시한) 우리의 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. ($y$업 오른손 좌표계)</p>
+</ul>
+<br />
+<ul>
+<li>(저자가 제시한) 우리가 사용할 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다.
+<ul>
+<li>$y$업 오른손 좌표계</li>
+</ul>
 </li>
 </ul>
 <p><br />  <br /></p>
 <h2 id="3차원-공간의-트랜스폼">3차원 공간의 트랜스폼</h2>
 <ul>
 <li>
-<p>3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.</p>
-<ul>
-<li>$$S = \begin{bmatrix} s_x &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; s_y &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; s_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-<li>$$T = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; t_x \\ 0 &amp; 1 &amp; 0 &amp; t_y \\ 0 &amp; 0 &amp; 1 &amp; t_z \\ 0 &amp; 0     &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
+<p>3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.
+$$S = \begin{bmatrix} s_x &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; s_y &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; s_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$
+$$T = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; t_x \\ 0 &amp; 1 &amp; 0 &amp; t_y \\ 0 &amp; 0 &amp; 1 &amp; t_z \\ 0 &amp; 0     &amp; 0 &amp; 1 \end{bmatrix}$$</p>
 </li>
 <li>
 <p>3차원 공간의 회전 변환은?</p>
@@ -484,8 +478,8 @@ if (!doNotTrack) {
 <li><strong>오일러 각(Euler&rsquo;s angle)</strong>
 <ul>
 <li>3차원 공간에서 물체가 놓인 방향을 3개의 각을 사용해서 표시하는 방법이다.</li>
-<li>오일러 각은 <strong>표준기저벡터를 중심으로해서 회전한 각의 크기</strong>로 나타낸다.</li>
-<li>$(\theta_x, \theta_y, \theta_z)$</li>
+<li>오일러 각은 <u>표준기저벡터를 중심으로해서 회전한 각의 크기</u>로 나타낸다.
+$$(\theta_x, \theta_y, \theta_z)$$</li>
 </ul>
 </li>
 </ul>
@@ -494,7 +488,10 @@ if (!doNotTrack) {
 <li>하지만 소프트웨어마다 $x$, $y$, $z$축의 용도가 다르다는 문제가 있다.
 <ul>
 <li>예를 들면 언리얼에서 사용하는 $x$축 회전은 유니티의 $x$축 회전과 다르게 동작하므로, 언리얼 엔진에서의 오일러 각 정보를 그대로 유니티 엔진으로 넘겨서 사용할 수 없다.</li>
-<li>이런 문제를 해결하기 위해 <strong>회전의 움직임</strong>으로 회전 동작을 구분하는 방법을 사용한다.</li>
+</ul>
+</li>
+<li>이런 문제를 해결하기 위해 <strong>회전의 움직임</strong>으로 회전 동작을 구분하는 방법을 사용한다.
+<ul>
 <li><mark style="background-color: lightblue">요, 롤, 피치</mark>의 움직임으로 오일러 각을 지정하면, 서로 다른 좌표계를 사용하는 프로그램 간에도 데이터를 쉽게 변환할 수 있다. <br /><br>
 <img src="/post/game_math/images/10-04-yrp.jpg"
 	
@@ -505,10 +502,7 @@ if (!doNotTrack) {
 		alt="요, 롤, 피치"
 	
 	
-></li>
-</ul>
-</li>
-</ul>
+>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -539,26 +533,21 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table></div>
+</li>
+</ul>
+</li>
+</ul>
 <br />  
 <ul>
-<li>오일러 각에서 회전은 <strong>표준기저벡터를 중심으로 진행되는 세 번의 연속적인 회전</strong>을 의미한다. 따라서 다음과 같이 각 기저축의 회전행렬을 구할 수 있겠다.
+<li>오일러 각에서 회전은 <u>표준기저벡터를 중심으로 진행되는 세 번의 연속적인 회전</u>을 의미한다. 따라서 다음과 같이 각 기저축의 회전행렬을 구할 수 있겠다.
 <ul>
 <li>3차원 공간에서는 <mark style="background-color: lightblue">$x$→$y$→$z$→$x$→$y$의 순서</mark>로 세 축이 순환된다.</li>
 <li>$x$축 회전은 $yz$평면의 회전을 의미한다.
-<ul>
-<li>$$R_x = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \cos\theta &amp; -\sin\theta \\ 0 &amp; \sin\theta &amp; \cos\theta \end{bmatrix}$$</li>
-</ul>
-</li>
+$$R_x = \begin{bmatrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; \cos\theta &amp; -\sin\theta \\ 0 &amp; \sin\theta &amp; \cos\theta \end{bmatrix}$$</li>
 <li>$y$축 회전은 $zx$평면의 회전을 의미한다. (위의 순서에 따르므로 $xz$가 아니다)
-<ul>
-<li>$$R_y = \begin{bmatrix} \cos\theta &amp; 0 &amp; \sin\theta \\ 0 &amp; 1 &amp; 0 \\ -\sin\theta &amp; 0 &amp; \cos\theta \end{bmatrix}$$</li>
-</ul>
-</li>
+$$R_y = \begin{bmatrix} \cos\theta &amp; 0 &amp; \sin\theta \\ 0 &amp; 1 &amp; 0 \\ -\sin\theta &amp; 0 &amp; \cos\theta \end{bmatrix}$$</li>
 <li>$z$축 회전은 $xy$평면의 회전을 의미한다.
-<ul>
-<li>$$R_z = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta &amp; \cos\theta &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
-</li>
+$$R_z = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta &amp; \cos\theta &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 </li>
 </ul>
@@ -567,23 +556,17 @@ if (!doNotTrack) {
 <ul>
 <li>각 기저축의 회전행렬을 순서대로 적용해서 최종 회전행렬을 만들어야 한다.</li>
 <li>어떤 순서로 적용할 것인가에 대한 경우의 수는 다양하다. 그 중에서 언리얼 엔진은 $Roll$→$Pitch$→$Yaw$의 순서를 채택한다. 이 순서로 회전행렬 $R$을 구하면 다음과 같다.
-<ul>
-<li>$ R = R_{yaw} \cdot R_{pitch} \cdot R_{roll} $</li>
-</ul>
-</li>
+$$ R = R_{yaw} \cdot R_{pitch} \cdot R_{roll} $$</li>
 <li>(저자가 제시한) 우리의 좌표계는 $Roll$→$Pitch$→$Yaw$가 $z$→$x$→$y$에 대응되므로 요, 피치, 롤 각의 값을 $\alpha$, $\beta$, $\gamma$라고 한다면 행렬 곱은 다음과 같이 계산할 수 있다.
-<ul>
-<li>$$R_{\alpha} \cdot R_{\beta} \cdot R_{\gamma} = \begin{bmatrix} \cos\alpha &amp; 0 &amp; \sin\alpha \\ 0 &amp; 1 &amp; 0 \\ -\sin\alpha &amp; 0 &amp; \cos\alpha \end{bmatrix}  \begin{bmatrix} \cos\beta &amp; 0 &amp; \sin\beta \\ 0 &amp; 1 &amp; 0 \\ -\sin\beta &amp; 0 &amp; \cos\beta \end{bmatrix} \begin{bmatrix} \cos\gamma &amp; -\sin\gamma &amp; 0 \\ \sin\gamma &amp; \cos\gamma &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$ <br /><br>
+$$R_{\alpha} \cdot R_{\beta} \cdot R_{\gamma} = \begin{bmatrix} \cos\alpha &amp; 0 &amp; \sin\alpha \\ 0 &amp; 1 &amp; 0 \\ -\sin\alpha &amp; 0 &amp; \cos\alpha \end{bmatrix}  \begin{bmatrix} \cos\beta &amp; 0 &amp; \sin\beta \\ 0 &amp; 1 &amp; 0 \\ -\sin\beta &amp; 0 &amp; \cos\beta \end{bmatrix} \begin{bmatrix} \cos\gamma &amp; -\sin\gamma &amp; 0 \\ \sin\gamma &amp; \cos\gamma &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$
 $$= \begin{bmatrix} \cos\alpha\cos\gamma + \sin\alpha\sin\beta\sin\gamma &amp; -\cos\alpha\sin\gamma + \sin\alpha\sin\beta\cos\gamma &amp; \sin\alpha\cos\beta \\ \cos\beta\sin\gamma &amp; \cos\beta\cos\gamma &amp; -\sin\beta \\ -\sin\alpha\cos\gamma + \cos\alpha\sin\beta\sin\gamma &amp; \sin\alpha\sin\gamma + \cos\alpha\sin\beta\cos\gamma &amp; \cos\alpha\cos\beta \end{bmatrix}$$</li>
-</ul>
-</li>
 </ul>
 <br />  
 <ul>
 <li>이렇게 계산한 회전행렬의 열벡터는 표준기저벡터가 회전 변환된 로컬 축을 의미한다. 따라서 다음과 같이 나타낼 수 있겠다. <br /><br>
-$x_{local} = ( \cos\alpha\cos\gamma + \sin\alpha\sin\beta\sin\gamma, \cos\beta\sin\gamma, -\sin\alpha\cos\gamma + \cos\alpha\sin\beta\sin\gamma )$ <br /><br>
-$y_{local} = ( -\cos\alpha\sin\gamma + \sin\alpha\sin\beta\cos\gamma, \cos\beta\cos\gamma, \sin\alpha\sin\gamma + \cos\alpha\sin\beta\cos\gamma )$ <br /><br>
-$z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
+$$x_{local} = ( \cos\alpha\cos\gamma + \sin\alpha\sin\beta\sin\gamma, \cos\beta\sin\gamma, -\sin\alpha\cos\gamma + \cos\alpha\sin\beta\sin\gamma )$$
+$$y_{local} = ( -\cos\alpha\sin\gamma + \sin\alpha\sin\beta\cos\gamma, \cos\beta\cos\gamma, \sin\alpha\sin\gamma + \cos\alpha\sin\beta\cos\gamma )$$
+$$z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$$</li>
 </ul>
 <br />  
 <div class="highlight"><div class="chroma">
@@ -678,10 +661,7 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
 <ul>
 <li>3차원 공간의 트랜스폼도 회전 변환이 발생할 때마다 로컬 축 데이터를 갱신한다면,</li>
 <li>로컬 축 벡터가 $\vec{x} = (x_x, x_y, x_z), \vec{y} = (y_x, y_y, y_z), \vec{z} = (z_x, z_y, z_z)$일 때 이들을 열벡터로 꽂아넣어 회전행렬을 구할 수 있다.
-<ul>
-<li>$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
-</li>
+$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -769,17 +749,11 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
 <h3 id="3차원-모델링-행렬">3차원 모델링 행렬</h3>
 <ul>
 <li>크기, 회전, 이동 변환행렬
-<ul>
-<li>$$S = \begin{bmatrix} s_x &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; s_y &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; s_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-<li>$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-<li>$$T = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; t_x \\ 0 &amp; 1 &amp; 0 &amp; t_y \\ 0 &amp; 0 &amp; 1 &amp; t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
-</li>
+$$S = \begin{bmatrix} s_x &amp; 0 &amp; 0 &amp; 0 \\ 0 &amp; s_y &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; s_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$
+$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$
+$$T = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; t_x \\ 0 &amp; 1 &amp; 0 &amp; t_y \\ 0 &amp; 0 &amp; 1 &amp; t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 <li>모델링 행렬
-<ul>
-<li>$$M = T \cdot R \cdot S = \begin{bmatrix} x_xs_x &amp; y_xs_y &amp; z_xs_z &amp; t_x \\ x_ys_x &amp; y_ys_y &amp; z_ys_z &amp; t_y \\ x_zs_x &amp; y_zs_y &amp; z_zs_z &amp; t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
-</li>
+$$M = T \cdot R \cdot S = \begin{bmatrix} x_xs_x &amp; y_xs_y &amp; z_xs_z &amp; t_x \\ x_ys_x &amp; y_ys_y &amp; z_ys_z &amp; t_y \\ x_zs_x &amp; y_zs_y &amp; z_zs_z &amp; t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -812,21 +786,18 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
 <ul>
 <li>2차원 카메라를 구현할 때에는 이동 기능만 부여 했지만, 3차원 공간의 카메라에는 이동과 회전 기능을 함께 부여할 것이다.
 <ul>
-<li>카메라의 경우 크기의 개념이 없기 때문에 제외한다.</li>
+<li>카메라의 경우 크기의 개념이 없기 때문에 크기는 제외한다.</li>
 </ul>
 </li>
 <li>카메라 트랜스폼에 저장된 위치값을 $t = (t_x, t_y, t_z)$로 지정하고, 로컬 축 값을 각각 $\vec{x} = (x_x, x_y, x_z), \vec{y} = (y_x, y_y, y_z), \vec{z} = (z_x, z_y, z_z)$로 지정한다면 이동 행렬과 회전 행렬은 다음과 같다.
-<ul>
-<li>$$T = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; t_x \\ 0 &amp; 1 &amp; 0 &amp; t_y \\ 0 &amp; 0 &amp; 1 &amp; t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-<li>$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
-</li>
+$$T = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; t_x \\ 0 &amp; 1 &amp; 0 &amp; t_y \\ 0 &amp; 0 &amp; 1 &amp; t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$
+$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 <li>Chapter 9에서 보았듯이 상대 좌표는 역행렬로 구할 수 있다.
 <ul>
 <li>이동 행렬의 역행렬은 덧셈의 역원인 반대수로 구한다.</li>
-<li>회전 행렬의 역행렬은 전치행렬로 구한다.</li>
-<li>$$T^{-1} = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; -t_x \\ 0 &amp; 1 &amp; 0 &amp; -t_y \\ 0 &amp; 0 &amp; 1 &amp; -t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-<li>$$R^{-1} = \begin{bmatrix} x_x &amp; x_y &amp; x_z &amp; 0 \\ y_x &amp; y_y &amp; y_z &amp; 0 \\ z_x &amp; z_y &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
+<li>회전 행렬의 역행렬은 전치행렬로 구한다.
+$$T^{-1} = \begin{bmatrix} 1 &amp; 0 &amp; 0 &amp; -t_x \\ 0 &amp; 1 &amp; 0 &amp; -t_y \\ 0 &amp; 0 &amp; 1 &amp; -t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$
+$$R^{-1} = \begin{bmatrix} x_x &amp; x_y &amp; x_z &amp; 0 \\ y_x &amp; y_y &amp; y_z &amp; 0 \\ z_x &amp; z_y &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 </li>
 </ul>
@@ -835,18 +806,19 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
 <li>순서는?
 <ul>
 <li>모든 물체의 좌표를 카메라를 중심으로 옮긴 후, 회전을 해야하므로 <strong>이동의 역행렬 → 회전의 역행렬</strong> 순이다.</li>
-<li>이것은 트랜스폼의 순서를 바꾸는 것이며, 즉 크기 변환 $S$를 제외한 <strong>모델링 행렬의 역행렬</strong>이 뷰 행렬이 된다.</li>
-<li>$M^{-1} = (T \cdot R)^{-1} = R^{-1} \cdot T^{-1}$</li>
+<li>이것은 트랜스폼의 순서를 바꾸는 것이며, 즉 크기 변환 $S$를 제외한 <strong>모델링 행렬의 역행렬</strong>이 뷰 행렬이 된다.
+$$M^{-1} = (T \cdot R)^{-1} = R^{-1} \cdot T^{-1}$$</li>
 </ul>
 </li>
-<li>따라서 <strong>뷰 행렬</strong>은 다음과 같으며, 마지막 4열은 내적을 사용해서 간단하게 정리할 수 있다.</li>
-<li>$$R^{-1} \cdot T^{-1} = \begin{bmatrix} x_x &amp; x_y &amp; x_z &amp; -x \cdot t \\ y_x &amp; y_y &amp; y_z &amp; -y \cdot t \\ z_x &amp; z_y &amp; z_z &amp; -z \cdot t \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
+<li>따라서 <mark style="background-color: lightblue"><strong>뷰 행렬</strong></mark>은 다음과 같으며, 마지막 4열은 내적을 사용해서 간단하게 정리할 수 있다.<br>
+$$R^{-1} \cdot T^{-1} = \begin{bmatrix} x_x &amp; x_y &amp; x_z &amp; -x \cdot t \\ y_x &amp; y_y &amp; y_z &amp; -y \cdot t \\ z_x &amp; z_y &amp; z_z &amp; -z \cdot t \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 <br />  
 <ul>
-<li>(저자가 제시한) 우리의 좌표계의 경우 카메라가 양의 $z$축을 바라보면 카메라가 만드는 화면 좌표계에서는 $x$축이 왼쪽을 향해서 2차원 데카르트 좌표계와 다르게 된다.
+<li>(저자가 제시한) 우리의 좌표계의 경우 카메라가 양의 $z$축을 바라볼 때,
 <ul>
-<li>따라서 $x$축이 오른쪽을 향하도록 $y$축을 기준으로 $180^{\circ}$회전 시켜서 뷰 공간을 구성한다.</li>
+<li>카메라를 기준으로 $x$축이 왼쪽을 향해서 2차원 데카르트 좌표계와 다르게 된다.</li>
+<li>따라서 $x$축이 오른쪽을 향하도록 $y$축을 기준으로 $180^{\circ}$회전 시켜서 뷰 공간을 구성해야 하겠다.</li>
 <li>이것을 위해 $x$축 기저와 $z$축 기저를 반전시킨다.</li>
 </ul>
 </li>
@@ -906,33 +878,28 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
 </div><p><br />  <br /></p>
 <h2 id="오일러-각의-특징">오일러 각의 특징</h2>
 <ul>
-<li>
-<p>오일러 각의 장점</p>
+<li>장점
 <ul>
-<li>오일러 각은 표준기저벡터를 회전축으로 삼아서 회전한 각의 크기를 설정하기 때문에 <strong>인터페이스가 직관적</strong>이다. 따라서 사용자 입장에서 물체의 회전을 설정하기에 용이하다.</li>
-<li>행렬을 사용해서 3차원 공간의 회전을 표현하려면 최소 9개의 실수 데이터가 필요하지만, 오일러 각은 3개의 데이터만 있으면 된다. 따라서 <strong>적은 용량</strong>으로 게임 데이터를 관리할 수 있게 도와준다.</li>
+<li>오일러 각은 표준기저벡터를 회전축으로 삼아서 회전한 각의 크기를 설정하기 때문에 <u>인터페이스가 직관적</u>이다. 따라서 사용자 입장에서 물체의 회전을 설정하기에 용이하다.</li>
+<li>행렬을 사용해서 3차원 공간의 회전을 표현하려면 최소 9개의 실수 데이터가 필요하지만, 오일러 각은 3개의 데이터만 있으면 된다. 따라서 <u>적은 용량</u>으로 게임 데이터를 관리할 수 있게 도와준다.</li>
 </ul>
 </li>
-<li>
-<p>오일러 각의 단점</p>
+<li>단점
 <ul>
-<li>짐벌락 현상이 발생한다.</li>
+<li><u>짐벌락 현상</u>이 발생한다.</li>
 </ul>
 </li>
 </ul>
 <br />  
-<h3 id="짐벌락-현상">짐벌락 현상</h3>
 <ul>
-<li>
-<p><strong>짐벌락(Gimbal lock) 현상</strong></p>
+<li><strong>짐벌락(Gimbal lock) 현상</strong>
 <ul>
 <li>오브젝트의 두 회전 축이 겹쳐서 자유도를 잃는 것을 말한다.</li>
 <li><a class="link" href="https://www.youtube.com/watch?v=zc8b2Jo7mno"  target="_blank" rel="noopener"
     >짐벌락 참고 영상</a></li>
 </ul>
 </li>
-<li>
-<p>해결 방법</p>
+<li>해결 방법
 <ul>
 <li>로드리게스 회전 공식(Chapter 11)</li>
 <li>사원수(Chapter 16)</li>
@@ -944,26 +911,20 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
 <ul>
 <li><strong>회전 보간(Rotational interpolation)</strong>
 <ul>
-<li>카메라의 움직임이나 캐릭터의 애니메이션을 구현할 때는 3차원 공간에서 시작 회전과 끝 회전을 지정하고 시간에 따라 두 회전 사이를 부드럽게 전환하는 기능이 필요할 수 있다. 이를 위해서 중간 회전 값을 계산하는 것을 회전 보간이라고 한다.</li>
+<li>카메라의 움직임이나 캐릭터의 애니메이션을 구현할 때는 3차원 공간에서 <u>시작 회전과 끝 회전을 지정</u>하고 <u>시간에 따라 두 회전 사이를 부드럽게 전환하는</u> 기능이 필요할 수 있다. 이를 위해서 중간 회전 값을 계산하는 것을 회전 보간이라고 한다.</li>
 </ul>
 </li>
 </ul>
 <br />  
 <ul>
-<li><strong>선형 보간식</strong>을 사용해서 중간 회전 값을 얻을 수 있다.
-<ul>
-<li><mark style="background-color: lightblue">$ \theta&rsquo; = (1-t)\theta_{start} + t\theta_{end} $</mark></li>
-<li>예를 들어, 동일한 평면 상에서 $15^{\circ}$에서 시작해서 $165^{\circ}$로 끝나는 회전의 $\frac{1}{3}$비율에 해당하는 회전 보간 값은 다음과 같이 구해서 $65^{\circ}$가 되겠다.</li>
-<li>$\frac{2}{3} \cdot 15^{\circ} + \frac{1}{3} \cdot 165^{\circ} = 65^{\circ}$</li>
-</ul>
-</li>
-</ul>
-<br />  
-<ul>
+<li><u>선형 보간식</u>을 사용해서 중간 회전 값을 얻을 수 있겠다.
+$$ \theta&rsquo; = (1-t)\theta_{start} + t\theta_{end} $$</li>
+<li>예를 들어, 동일한 평면 상에서 $15^{\circ}$에서 시작해서 $165^{\circ}$로 끝나는 회전의 $\frac{1}{3}$비율에 해당하는 회전 보간 값은 다음과 같이 구해서 $65^{\circ}$가 된다.
+$$\frac{2}{3} \cdot 15^{\circ} + \frac{1}{3} \cdot 165^{\circ} = 65^{\circ}$$</li>
 <li>선형 보간식이 성립하려면 두 각의 회전 변환을 곱합 결과가 두 각의 합의 회전 변환과 동일해야한다.
+$$R_{\beta} \cdot R_{\alpha} = R_{(\alpha + \beta)}$$</li>
+<li>Chapter 5에서 보았듯이 2차원 공간의 회전에서는 위 식이 만족하므로, 선형 보간식을 사용하는 데 문제가 없었다.
 <ul>
-<li>$R_{\beta} \cdot R_{\alpha} = R_{(\alpha + \beta)}$</li>
-<li>Chapter 5에서 보았듯이 2차원 공간의 회전에서는 위 식이 만족하므로, 선형 보간식을 사용하는 데 문제가 없었다.</li>
 <li>그렇다면 3차원 공간의 오일러 각 회전에서도 문제가 없을까?</li>
 </ul>
 </li>
@@ -973,16 +934,13 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$</li>
 <li>한 축으로만 회전하는 경우
 <ul>
 <li>맨 처음에 보았던 회전 행렬을 구하는 식: $ R = R_{yaw} \cdot R_{pitch} \cdot R_{roll} $</li>
-<li>만약 $y$축으로 $\alpha$와 $\beta$만큼 회전한다면&hellip;</li>
-<li>$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot I \cdot I = R_{yaw(\alpha + \beta)}$
-<ul>
-<li>$yaw$회전만 수행하므로 $pitch$와 $roll$회전 행렬은 변화가 없는 항등행렬이 된다.</li>
-</ul>
-</li>
-<li>$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot I \cdot I) \cdot (R_{yaw\alpha} \cdot I \cdot I)$ <br /><br>
-$ = R_{yaw\beta} \cdot R_{yaw\alpha}$ <br /><br>
-$ = R_{yaw(\alpha + \beta)}$</li>
-<li>이처럼, 오일러 각에서 한 축만 사용한다는 것은 결국 2차원 평면에서의 회전과 동일하므로, 선형 보간식을 사용하는 데 문제가 없다.</li>
+<li>만약 $y$축으로 $\alpha$와 $\beta$만큼 회전한다면&hellip;
+$$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot I \cdot I = R_{yaw(\alpha + \beta)}$$</li>
+<li>위 수식에서 보듯이, $yaw$회전만 수행하므로 $pitch$와 $roll$회전 행렬은 변화가 없는 항등행렬이 된다.
+$$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot I \cdot I) \cdot (R_{yaw\alpha} \cdot I \cdot I)$$
+$$ = R_{yaw\beta} \cdot R_{yaw\alpha}$$
+$$ = R_{yaw(\alpha + \beta)}$$</li>
+<li>이처럼 오일러 각에서 한 축만 사용한다는 것은 결국 2차원 평면에서의 회전과 동일하므로, 선형 보간식을 사용하는 데 문제가 없다.</li>
 </ul>
 </li>
 </ul>
@@ -990,12 +948,12 @@ $ = R_{yaw(\alpha + \beta)}$</li>
 <ul>
 <li>두 축에 대해서 회전하는 경우
 <ul>
-<li>만약 $x$축과 $y$축에 대해서 회전한다면&hellip;</li>
-<li>$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)} \cdot I = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)}$</li>
-<li>$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot R_{pitch\beta} \cdot I) \cdot (R_{yaw\alpha} \cdot R_{pitch\alpha} \cdot I)$ <br /><br>
-$ = R_{yaw\beta} \cdot R_{pitch\beta} \cdot R_{yaw\alpha} \cdot R_{pitch\alpha}$ <br /><br>
-$ \neq R_{(\alpha + \beta)}$</li>
-<li>이처럼, <strong>두 축 이상을 사용하는 오일러 각은 선형 보간식을 사용할 수 없다.</strong></li>
+<li>만약 $x$축과 $y$축에 대해서 회전한다면&hellip;
+$$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)} \cdot I = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)}$$
+$$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot R_{pitch\beta} \cdot I) \cdot (R_{yaw\alpha} \cdot R_{pitch\alpha} \cdot I)$$
+$$ = R_{yaw\beta} \cdot R_{pitch\beta} \cdot R_{yaw\alpha} \cdot R_{pitch\alpha}$$
+$$ \neq R_{(\alpha + \beta)}$$</li>
+<li>이처럼 <u>두 축 이상을 사용하는 오일러 각은 선형 보간식을 사용할 수 없다.</u></li>
 <li>해결 방법
 <ul>
 <li>로드리게스 회전 공식(Chapter 11)</li>

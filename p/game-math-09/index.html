@@ -2,7 +2,10 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-게임 엔진의 구성 요소 게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다. 게임 공간: 씬(Scene), 레벨(Level) 데이터: 리소스(Resource), 애셋(Asset) 게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. 씬의 구조 콘텐츠를 구성하는 기본단위: 액터(Actor), 게임 오브젝트(GameObject) 크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다. 이 트랜스폼 정보에 모델링 행렬을 사용해서 렌더링할 물체의 정점을 변환한다.'>
+게임 엔진의 구성 요소 게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다.
+공간 이름 하는 일 씬(Scene) 또는
+레벨(Level) 게임 공간 설계 리소스(Resource) 또는
+애셋(Asset) 데이터 관리 게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. 씬의 구조 액터(Actor) 또는 게임 오브젝트(GameObject) 씬 안에서 콘텐츠를 구성하는 기본단위이다. 크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다.'>
 <title>[Game Math] Chapter 9. 게임 엔진: 콘텐츠를 만드는 기술</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-09/'>
@@ -10,13 +13,19 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 9. 게임 엔진: 콘텐츠를 만드는 기술'>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-게임 엔진의 구성 요소 게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다. 게임 공간: 씬(Scene), 레벨(Level) 데이터: 리소스(Resource), 애셋(Asset) 게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. 씬의 구조 콘텐츠를 구성하는 기본단위: 액터(Actor), 게임 오브젝트(GameObject) 크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다. 이 트랜스폼 정보에 모델링 행렬을 사용해서 렌더링할 물체의 정점을 변환한다.'>
+게임 엔진의 구성 요소 게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다.
+공간 이름 하는 일 씬(Scene) 또는
+레벨(Level) 게임 공간 설계 리소스(Resource) 또는
+애셋(Asset) 데이터 관리 게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. 씬의 구조 액터(Actor) 또는 게임 오브젝트(GameObject) 씬 안에서 콘텐츠를 구성하는 기본단위이다. 크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-09/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2022-04-26T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-26T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Game Math] Chapter 9. 게임 엔진: 콘텐츠를 만드는 기술">
 <meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-게임 엔진의 구성 요소 게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다. 게임 공간: 씬(Scene), 레벨(Level) 데이터: 리소스(Resource), 애셋(Asset) 게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. 씬의 구조 콘텐츠를 구성하는 기본단위: 액터(Actor), 게임 오브젝트(GameObject) 크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다. 이 트랜스폼 정보에 모델링 행렬을 사용해서 렌더링할 물체의 정점을 변환한다.">
+게임 엔진의 구성 요소 게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다.
+공간 이름 하는 일 씬(Scene) 또는
+레벨(Level) 게임 공간 설계 리소스(Resource) 또는
+애셋(Asset) 데이터 관리 게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. 씬의 구조 액터(Actor) 또는 게임 오브젝트(GameObject) 씬 안에서 콘텐츠를 구성하는 기본단위이다. 크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -407,11 +416,29 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="게임-엔진의-구성-요소">게임 엔진의 구성 요소</h2>
 <ul>
-<li>게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다.
-<ul>
-<li>게임 공간: 씬(Scene), 레벨(Level)</li>
-<li>데이터: 리소스(Resource), 애셋(Asset)</li>
-<li>게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. <br /><br>
+<li>
+<p>게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>공간 이름</th>
+<th>하는 일</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>씬(Scene) 또는<br />레벨(Level)</strong></td>
+<td>게임 공간 설계</td>
+</tr>
+<tr>
+<td><strong>리소스(Resource) 또는<br />애셋(Asset)</strong></td>
+<td>데이터 관리</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>
+<p>게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. <br /><br>
 <img src="/post/game_math/images/09-01-rendering.jpg"
 	
 	
@@ -421,16 +448,17 @@ if (!doNotTrack) {
 		alt="씬과 리소스로 만들어지는 최종 화면의 렌더링"
 	
 	
-></li>
-</ul>
+></p>
 </li>
 </ul>
+<br />  
 <h3 id="씬의-구조">씬의 구조</h3>
 <ul>
-<li>콘텐츠를 구성하는 기본단위: 액터(Actor), 게임 오브젝트(GameObject)
+<li><strong>액터(Actor) 또는 게임 오브젝트(GameObject)</strong>
 <ul>
-<li>크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다.</li>
-<li>이 트랜스폼 정보에 <strong>모델링 행렬</strong>을 사용해서 렌더링할 물체의 정점을 변환한다.</li>
+<li>씬 안에서 콘텐츠를 구성하는 기본단위이다.</li>
+<li>크기, 회전, 위치로 구성된 <u>트랜스폼(Transform)</u>의 정보를 사용해서 관리한다.</li>
+<li>이 트랜스폼 정보에 <u>모델링 행렬을 사용해서 렌더링할 물체의 정점을 변환</u>한다.</li>
 </ul>
 </li>
 </ul>
@@ -438,20 +466,35 @@ if (!doNotTrack) {
 <h3 id="모델링-행렬의-설계">모델링 행렬의 설계</h3>
 <ul>
 <li>
-<p>트랜스폼의 크기, 회전, 이동 데이터</p>
-<ul>
-<li>크기(S): 2차원 벡터 $(s_x, s_y)$</li>
-<li>회전(R): 각 $\theta$</li>
-<li>이동(T): 2차원 벡터 $(t_x, t_y)$</li>
-</ul>
+<p>트랜스폼의 크기, 회전, 이동 데이터는 다음과 같다.</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>분류</th>
+<th>데이터</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>크기 ($S$)</td>
+<td>2차원 벡터 $(s_x, s_y)$</td>
+</tr>
+<tr>
+<td>회전 ($R$)</td>
+<td>각 $\theta$</td>
+</tr>
+<tr>
+<td>이동 ($T$)</td>
+<td>2차원 벡터 $(t_x, t_y)$</td>
+</tr>
+</tbody>
+</table></div>
 </li>
 <li>
-<p>크기, 회전, 이동에 대한 세 가지 아핀 변환행렬에 대응된다.</p>
-<ul>
-<li>$$S = \begin{bmatrix} a &amp; 0 &amp; 0 \\ 0 &amp; b &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-<li>$$R = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta &amp; \cos\theta &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-<li>$$T = \begin{bmatrix} 1 &amp; 0 &amp; a\\ 0 &amp; 1 &amp; b \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
+<p>위 데이터는 크기, 회전, 이동에 대한 세 가지 아핀 변환행렬에 대응된다.
+$$S = \begin{bmatrix} a &amp; 0 &amp; 0 \\ 0 &amp; b &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$
+$$R = \begin{bmatrix} \cos\theta &amp; -\sin\theta &amp; 0 \\ \sin\theta &amp; \cos\theta &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$
+$$T = \begin{bmatrix} 1 &amp; 0 &amp; a\\ 0 &amp; 1 &amp; b \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</p>
 </li>
 </ul>
 <br />  
@@ -470,7 +513,10 @@ if (!doNotTrack) {
 	
 	
 ></li>
-<li>이동변환을 제외하면 크기변환과 회전변환이 남는다. 크기와 회전변환을 할 경우에도 순서에 따라서 다른 결과가 나온다. Chapter 7에서 보았듯이 회전변환은 물체의 형태를 그대로 보존해주는 강체 변환(Rigid Transform)이기 때문에 <strong>회전변환을 나중에 해서 형태를 유지</strong>하는 것이 사용자 입장에서 직관적인 변환이겠다. <br /><br>
+</ul>
+</li>
+<li>
+<p>이동변환을 제외하면 크기변환과 회전변환이 남는다. 크기와 회전변환을 할 경우에도 순서에 따라서 다른 결과가 나온다. Chapter 7에서 보았듯이 회전변환은 물체의 형태를 그대로 보존해주는 강체 변환(Rigid Transform)이기 때문에 <strong>회전변환을 나중에 해서 형태를 유지</strong>하는 것이 사용자 입장에서 직관적인 변환이겠다. <br /><br>
 <img src="/post/game_math/images/09-03-sr.jpg"
 	
 	
@@ -480,20 +526,15 @@ if (!doNotTrack) {
 		alt="크기변환과 회전변환"
 	
 	
-></li>
-</ul>
+></p>
 </li>
 <li>
-<p>따라서 아핀 변환의 순서는 <mark style="background-color: lightblue">크기 → 회전 → 위치</mark>순서로 이뤄지며 행렬곱으로 나타내면 다음과 같다. (열 기준 행렬으로 설명한다. 따라서 변환의 순서는 오른쪽에서 왼쪽으로 진행된다.)</p>
-<ul>
-<li>$T \cdot R \cdot S$</li>
-</ul>
+<p>따라서 아핀 변환의 순서는 <mark style="background-color: lightblue">크기 → 회전 → 위치</mark>순서로 이뤄지며 행렬곱으로 나타내면 다음과 같다. (열 기준 행렬으로 설명한다. 따라서 변환의 순서는 오른쪽에서 왼쪽으로 진행된다.)
+$$T \cdot R \cdot S$$</p>
 </li>
 <li>
-<p>이 3가지 변환을 수행하는 합성행렬인 <strong>모델링 행렬(Modeling matrix)</strong> 은 다음과 같다.</p>
-<ul>
-<li>$$M = T \cdot R \cdot S = \begin{bmatrix} \cos\theta \cdot s_x &amp; -\sin\theta \cdot s_y &amp; t_x \\ \sin\theta \cdot s_x &amp; \cos\theta \cdot s_y &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
+<p>이 3가지 변환을 수행하는 합성행렬인 <mark style="background-color: lightblue">모델링 행렬(Modeling matrix)</mark> 은 다음과 같다.
+$$M = T \cdot R \cdot S = \begin{bmatrix} \cos\theta \cdot s_x &amp; -\sin\theta \cdot s_y &amp; t_x \\ \sin\theta \cdot s_x &amp; \cos\theta \cdot s_y &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</p>
 </li>
 </ul>
 <br />  
@@ -528,12 +569,9 @@ if (!doNotTrack) {
 <li>
 <p><strong>로컬 축(Local Axis)</strong></p>
 <ul>
-<li>이렇게 물체를 기준으로 설정된 방향 정보를 로컬 축이라고 한다.</li>
+<li>이렇게 <u>물체를 기준으로 설정된 방향 정보</u>를 로컬 축이라고 한다.</li>
 <li>로컬 축 정보는 로컬 공간의 기저벡터와 동일한 값을 가진다.</li>
-<li>게임 엔진은 월드의 $X$, $Y$, $Z$축과 구분하기 위해 각 로컬 축의 이름을 다음과 같이 부른다.</li>
-</ul>
-</li>
-</ul>
+<li>게임 엔진은 월드의 $X$, $Y$, $Z$축과 구분하기 위해 각 로컬 축의 이름을 다음과 같이 부른다.
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -556,21 +594,23 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table></div>
-<ul>
-<li>트랜스폼의 이동과 크기 정보가 변경되더라도 게임 오브젝트가 보는 방향은 변함이 없기 때문에, 로컬 축 정보는 오직 <strong>회전 정보에만 영향을 받는다.</strong>
+</li>
+</ul>
+</li>
+<li>
+<p>트랜스폼의 이동과 크기 정보가 변경되더라도 게임 오브젝트가 보는 방향은 변함이 없기 때문에, 로컬 축 정보는 오직 <u>회전 정보</u>에만 영향을 받는다.</p>
 <ul>
 <li>게임 오브젝트에 새로운 회전 값 $\theta$가 설정되면 로컬 축을 구성하는 표준기저벡터도 이에 따라 변한다.</li>
 <li>$e_1$이 변화된 값을 $\vec{r}$로, $e_2$가 변화된 값을 $\vec{u}$로 표현하면 그 값은 다음과 같다.
-<ul>
-<li>$\vec{r} = (\cos\theta, \sin\theta)$ <br /><br>
-$\vec{u} = (-\sin\theta, \cos\theta)$</li>
+$$\vec{r} = (\cos\theta, \sin\theta)$$
+$$\vec{u} = (-\sin\theta, \cos\theta)$$</li>
 </ul>
 </li>
-<li>여기서 로컬축 벡터의 원소를 각각 $\vec{r} = (r_x, r_y)$, $\vec{u} = (u_x, u_y)$로 지정하면, 아핀 회전 변환행렬은 삼각함수 대신 로컬 축 벡터를 사용해 생성할 수 있다. 따라서 모델링 행렬 역시 삼각함수 대신 로컬 축 정보를 사용해 계산할 수 있다.
+<li>
+<p>여기서 로컬축 벡터의 원소를 각각 $\vec{r} = (r_x, r_y)$, $\vec{u} = (u_x, u_y)$로 지정하면?</p>
 <ul>
-<li>$$M = T \cdot R \cdot S = \begin{bmatrix} r_x \cdot s_x &amp; u_x \cdot s_y &amp; t_x \\ r_y \cdot s_x &amp; u_y \cdot s_y &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
-</li>
+<li>아핀 회전 변환행렬은 삼각함수 대신 로컬 축 벡터를 사용해 생성할 수 있다. 따라서 모델링 행렬 역시 <u>삼각함수 대신 로컬 축 정보를 사용해 계산</u>할 수 있다.
+$$M = T \cdot R \cdot S = \begin{bmatrix} r_x \cdot s_x &amp; u_x \cdot s_y &amp; t_x \\ r_y \cdot s_x &amp; u_y \cdot s_y &amp; t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 </li>
 </ul>
@@ -659,18 +699,19 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 	
 	
 ></li>
-<li>여기서 각각의 게임 오브젝트들은 각자의 트랜스폼 정보를 포함하고 있다. 그렇다면 리소스 데이터는 어떨까?
-<ul>
-<li>용량이 큰 메시 정보를 모두 각각 가지고 있다면 메모리 공간이 낭비될 것이다. 따라서 리소스 데이터는 여러 게임 오브젝트들이 함께 사용할 수 있는 공유 자원의 형태로 관리하는 것이 바람직하다.</li>
-</ul>
-</li>
 </ul>
 </li>
 <li>
-<p>리소스 저장소(Resource repository)</p>
+<p>여기서 각각의 게임 오브젝트들은 각자의 트랜스폼 정보를 포함하고 있다. 그렇다면 리소스 데이터는 어떨까?</p>
+<ul>
+<li>용량이 큰 메시 정보를 모두 각각 가지고 있다면 메모리 공간이 낭비될 것이다. 따라서 <u>리소스 데이터는 여러 게임 오브젝트들이 함께 사용할 수 있는 공유 자원의 형태로 관리</u>하는 것이 바람직하다.</li>
+</ul>
+</li>
+<li>
+<p><strong>리소스 저장소(Resource repository)</strong></p>
 <ul>
 <li>씬과 무관하게 별도로 리소스를 모아두는 저장소이다.</li>
-<li>게임 오브젝트는 <strong>리소스의 키 값</strong>만 저장하며, 이것을 통해서 리소스에 접근한다. <br /><br>
+<li><u>게임 오브젝트는 리소스의 키 값만 저장</u>하며, 이것을 통해서 리소스에 접근한다. <br /><br>
 <img src="/post/game_math/images/09-06-resource.jpg"
 	
 	
@@ -684,46 +725,51 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 </ul>
 </li>
 </ul>
-<p><br />  <br /></p>
+<p><br /><br /></p>
 <h2 id="게임-엔진의-워크플로우">게임 엔진의 워크플로우</h2>
 <ul>
 <li>
 <p>워크플로우(Workflow)</p>
 <ul>
-<li>실행의 흐름.</li>
+<li>실행의 흐름이다.</li>
 <li>게임 엔진의 워크플로우는 크게 씬을 완성하는 과정, 완성된 씬으로부터 화면을 그려내는 과정으로 나뉜다.</li>
 </ul>
 </li>
 <li>
 <p>(저자가 제작한) 게임 엔진의 워크플로우</p>
-<ul>
-<li>1. 리소스 로딩 단계
-<ul>
-<li>메시, 텍스처 같은 리소스는 게임을 진행하면서 불러들이기에는 데이터 양이 크기 때문에 게임 시작 전에 미리 불러들여서 메모리에 올려둬야 안정적으로 게임을 진행할 수 있다.</li>
-<li><code>LoadResources()</code></li>
-</ul>
-</li>
-<li>2. 씬 구축 단계
-<ul>
-<li>게임 오브젝트의 트랜스폼 정보가 설정되며 리소스 정보가 게임 오브젝트에 연결된다.</li>
-<li><code>LoadScene2D()</code></li>
-</ul>
-</li>
-<li>3. 게임 로직 단계
-<ul>
-<li>프레임마다 게임 오브젝트의 트랜스폼 값을 변경한다.</li>
-<li><code>Update2D()</code></li>
-</ul>
-</li>
-<li>4. 렌더링 로직 단계
-<ul>
-<li>트랜스폼 정보와 리소스 데이터를 활용해서 최종화면을 그린다.</li>
-<li><code>Render2D()</code></li>
-</ul>
 </li>
 </ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>순서</th>
+<th>단계</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>리소스 로딩 단계</td>
+<td>메시, 텍스처 같은 리소스는 게임을 진행하면서 불러들이기에는 데이터 양이 크기 때문에 게임 시작 전에 미리 불러들여서 메모리에 올려둬야 안정적으로 게임을 진행할 수 있다.<br /><code>LoadResources()</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>씬 구축 단계</td>
+<td>게임 오브젝트의 트랜스폼 정보가 설정되고, 리소스 정보가 게임 오브젝트에 연결된다.<br /><code>LoadScene2D()</code></td>
+</tr>
+<tr>
+<td>3</td>
+<td>게임 로직 단계</td>
+<td>프레임마다 게임 오브젝트의 트랜스폼 값을 변경한다.<br /><code>Update2D()</code></td>
+</tr>
+<tr>
+<td>4</td>
+<td>렌더링 로직 단계</td>
+<td>트랜스폼 정보와 리소스 데이터를 활용해서 최종화면을 그린다.<br /><code>Render2D()</code></td>
+</tr>
+</tbody>
+</table></div>
 <br />  
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1051,7 +1097,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 <li>
 <p><strong>렌더링 파이프라인(Rendering pipeline)</strong></p>
 <ul>
-<li>게임 제작의 렌더링은 GPU가 처리한다. <mark style="background-color: lightblue">GPU 내부에 설정된 렌더링 워크플로우</mark>를 렌더링 파이프라인이라고 한다.  <br /><br>
+<li>게임 제작의 렌더링은 GPU가 처리한다. <u>GPU 내부에 설정된 렌더링 워크플로우</u>를 렌더링 파이프라인이라고 한다.  <br /><br>
 <img src="/post/game_math/images/09-07-renderingPipeline.png"
 	
 	
@@ -1076,24 +1122,29 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 </ul>
 <br />  
 <ul>
-<li>(저자가 제작한) 렌더링 파이프라인
-<ul>
-<li>1. 정점 변환과 처리 단계
-<ul>
-<li>메시에 설정된 정점의 데이터는 로컬 공간을 기준으로 설정되어 있다. 이것을 월드 공간 중심으로 변환하여 화면에 그려질 정점의 최종 위치 값을 구한다.</li>
-<li>즉, 모델링 행렬에 로컬 공간의 좌표를 곱한다.</li>
-<li><code>DrawMesh2D()</code>, <code>VertexShader2D()</code></li>
+<li>(저자가 제작한) 렌더링 파이프라인</li>
 </ul>
-</li>
-<li>2. 픽셀화와 픽셀 처리 단계
-<ul>
-<li>Chapter 8에서 보았던 무게중심좌표를 활용해서 삼각형 영역의 픽셀을 추려내고, 색상을 결정한다. 해당 픽셀의 UV에 대응되는 색상을 가져온 후 필요하다면 추가로 조명 효과 등을 적용해서 최종 픽셀 색상을 설정한다.</li>
-<li><code>DrawTriangle2D()</code>, <code>FragmentShader2D()</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>순서</th>
+<th>단계</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>정점 변환과 처리 단계</td>
+<td>메시에 설정된 정점의 데이터는 로컬 공간을 기준으로 설정되어 있다. 이것을 월드 공간 중심으로 변환하여 화면에 그려질 정점의 최종 위치 값을 구한다.<br />즉, 로컬 공간의 좌표에 모델링 행렬을 곱한다.<br /><code>DrawMesh2D()</code>, <code>VertexShader2D()</code></td>
+</tr>
+<tr>
+<td>2</td>
+<td>픽셀화와 픽셀 처리 단계</td>
+<td>Chapter 8에서 보았던 무게중심좌표를 활용해서 삼각형 영역의 픽셀을 추려내고, 색상을 결정한다. 해당 픽셀의 UV에 대응되는 색상을 가져온 후 필요하다면 추가로 조명 효과 등을 적용해서 최종 픽셀 색상을 설정한다.<br /><code>DrawTriangle2D()</code>, <code>FragmentShader2D()</code></td>
+</tr>
+</tbody>
+</table></div>
 <br />  
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1205,16 +1256,14 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 </div>
 </div><br />  
 <ul>
-<li>
-<p><strong>셰이더(Shader)</strong></p>
+<li><strong>셰이더(Shader)</strong>
 <ul>
-<li>GPU의 렌더링 파이프라인의 몇몇 부분은 프로그래밍이 가능하다. 이런 부분을 개발자가 프로그래밍해서 만들어낸, 렌더링 효과를 계산하는 함수를 셰이더라고 한다.</li>
+<li>GPU의 렌더링 파이프라인의 몇몇 부분은 프로그래밍이 가능하다. 이런 부분을 <u>개발자가 프로그래밍해서 만들어낸, 렌더링 효과를 계산하는 함수</u>를 셰이더라고 한다.</li>
 </ul>
 </li>
-<li>
-<p><strong>정점 셰이더(Vertex Shader)</strong></p>
+<li><strong>정점 셰이더(Vertex Shader)</strong>
 <ul>
-<li>개발자들이 변환을 직접 설계해서 만든 정점 처리 함수이다.</li>
+<li>개발자들이 변환을 직접 설계해서 만든 <u>정점 처리 함수</u>이다.</li>
 </ul>
 </li>
 </ul>
@@ -1244,7 +1293,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><br />  
+</div><p><br /><br /></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1339,14 +1388,14 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 </div>
 </div><br />  
 <ul>
-<li>파편(Fragment)
+<li><strong>파편(Fragment)</strong>
 <ul>
-<li>GPU에서는 삼각형을 구성하는 픽셀을 파편이라고 한다.</li>
+<li>GPU에서는 <u>삼각형을 구성하는 픽셀</u>을 파편이라고 한다.</li>
 </ul>
 </li>
 <li><strong>파편 셰이더(Fragment Shader)</strong> 혹은 <strong>픽셀 셰이더(Pixel Shader)</strong>
 <ul>
-<li>개발자들이 직접 설계한, 최종 픽셀을 계산하는 함수이다.</li>
+<li>개발자들이 직접 설계한, <u>최종 픽셀을 계산하는 함수</u>이다.</li>
 </ul>
 </li>
 </ul>
@@ -1380,7 +1429,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 <li>
 <p><strong>뷰포트(Viewport)</strong></p>
 <ul>
-<li>카메라는 자신이 출력할 화면의 해상도 정보를 가지고 월드의 일부를 그려낸다. 이 때 <strong>카메라가 출력할 화면의 크기 정보</strong>를 뷰포트라고 한다.</li>
+<li>카메라는 자신이 출력할 화면의 해상도 정보를 가지고 월드의 일부를 그려낸다. 이 때 <u>카메라가 출력할 화면의 크기 정보</u>를 뷰포트라고 한다.</li>
 <li>즉, 게이머가 보는 게임 공간의 크기가 바로 뷰포트다.</li>
 </ul>
 </li>
@@ -1388,7 +1437,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 <p><strong>뷰 공간(View space)</strong></p>
 <ul>
 <li>카메라에 설정된 뷰포트 정보를 바탕으로 월드 공간의 일부분을 렌더링해야 한다. 이를 위해서는 카메라를 중심으로 물체의 트랜스폼을 재조정하는 작업이 필요하다.</li>
-<li>여기서 <strong>카메라를 중심으로 변환한 공간</strong>을 뷰 공간이라고 한다.</li>
+<li>여기서 <u>카메라를 중심으로 변환한 공간</u>을 뷰 공간이라고 한다.</li>
 </ul>
 </li>
 <li>
@@ -1429,8 +1478,8 @@ $\vec{u} = (-\sin\theta, \cos\theta)$</li>
 <ul>
 <li>모델링 행렬이 로컬 공간의 좌표를 월드 공간의 좌표로 변환해준다면, 뷰 행렬은 월드 공간의 좌표를 뷰 공간의 좌표로 변환해준다.</li>
 <li>이전 예제를 다시보면, 뷰 공간 좌표인 $(20, 20)$은 물체의 월드 공간 좌표에다가 카메라의 위치를 기준으로 측정한 월드 원점의 상대 좌표인 $(10, 10)$을 더하면 얻을 수 있다.</li>
-<li>그리고 그 상대 좌표는 <mark style="background-color: lightblue">카메라의 월드 공간 좌표를 반전시켜서</mark> 얻을 수 있다. 즉, <mark style="background-color: lightblue">이동 행렬의 역행렬</mark>을 사용해서 계산하면 된다.</li>
-<li>$$V = \begin{bmatrix} 1 &amp; 0 &amp; -t_x \\ 0 &amp; 1 &amp; -t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
+<li>그리고 그 상대 좌표는 <mark style="background-color: lightblue">카메라의 월드 공간 좌표를 반전시켜서</mark> 얻을 수 있다. 즉, <mark style="background-color: lightblue">이동 행렬의 역행렬</mark>을 사용해서 계산하면 된다.
+$$V = \begin{bmatrix} 1 &amp; 0 &amp; -t_x \\ 0 &amp; 1 &amp; -t_y \\ 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 </li>
 <li>

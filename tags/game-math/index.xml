@@ -4750,8 +4750,7 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;3차원-공간의-설계&#34;&gt;3차원 공간의 설계&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;$x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다.&lt;/p&gt;
+&lt;li&gt;$x$축에서 $y$축 방향으로 손을 감았을 때, $z$축이 어느쪽 손의 엄지 손가락의 방향과 일치하는가에 따라 나뉜다.
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;오른손 좌표계(Right-handed coordinate system)&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;왼손 좌표계(Left-handed coordinate system)&lt;/strong&gt; &lt;br /&gt;&lt;br&gt;
@@ -4767,10 +4766,10 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 &gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;프로그램 마다 각 축의 용도를 다르게 설정한다.&lt;/p&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;아래 그림에서 (a)3DS맥스는 $z$업 오른손 좌표계이고, (b)유니티는 $y$업, (c)언리얼은 $z$업 왼손 좌표계이다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;프로그램 마다 각 축의 용도를 다르게 설정한다.
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/10-02-coords.jpg&#34;
 	
 	
@@ -4780,22 +4779,27 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 		alt=&#34;3D 소프트웨어가 사용하는 좌표계 시스템&#34;
 	
 	
-&gt;&lt;/li&gt;
+&gt;
+&lt;ul&gt;
+&lt;li&gt;3DS맥스는 $z$업 오른손 좌표계이고, 유니티는 $y$업, 언리얼은 $z$업 왼손 좌표계이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;(저자가 제시한) 우리의 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다. ($y$업 오른손 좌표계)&lt;/p&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;(저자가 제시한) 우리가 사용할 좌표계는 유니티 좌표계에서 $z$축의 방향이 반대인 형상이다.
+&lt;ul&gt;
+&lt;li&gt;$y$업 오른손 좌표계&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;  &lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;3차원-공간의-트랜스폼&#34;&gt;3차원 공간의 트랜스폼&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$S = \begin{bmatrix} s_x &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; s_y &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; s_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; t_z \\ 0 &amp;amp; 0     &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;3차원 공간 역시 이동 변환을 위해서 한 차원 더 늘어난 4차원 공간을 사용한다.
+$$S = \begin{bmatrix} s_x &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; s_y &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; s_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
+$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; t_z \\ 0 &amp;amp; 0     &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;3차원 공간의 회전 변환은?&lt;/p&gt;
@@ -4821,8 +4825,8 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 &lt;li&gt;&lt;strong&gt;오일러 각(Euler&amp;rsquo;s angle)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;3차원 공간에서 물체가 놓인 방향을 3개의 각을 사용해서 표시하는 방법이다.&lt;/li&gt;
-&lt;li&gt;오일러 각은 &lt;strong&gt;표준기저벡터를 중심으로해서 회전한 각의 크기&lt;/strong&gt;로 나타낸다.&lt;/li&gt;
-&lt;li&gt;$(\theta_x, \theta_y, \theta_z)$&lt;/li&gt;
+&lt;li&gt;오일러 각은 &lt;u&gt;표준기저벡터를 중심으로해서 회전한 각의 크기&lt;/u&gt;로 나타낸다.
+$$(\theta_x, \theta_y, \theta_z)$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -4831,7 +4835,10 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 &lt;li&gt;하지만 소프트웨어마다 $x$, $y$, $z$축의 용도가 다르다는 문제가 있다.
 &lt;ul&gt;
 &lt;li&gt;예를 들면 언리얼에서 사용하는 $x$축 회전은 유니티의 $x$축 회전과 다르게 동작하므로, 언리얼 엔진에서의 오일러 각 정보를 그대로 유니티 엔진으로 넘겨서 사용할 수 없다.&lt;/li&gt;
-&lt;li&gt;이런 문제를 해결하기 위해 &lt;strong&gt;회전의 움직임&lt;/strong&gt;으로 회전 동작을 구분하는 방법을 사용한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;이런 문제를 해결하기 위해 &lt;strong&gt;회전의 움직임&lt;/strong&gt;으로 회전 동작을 구분하는 방법을 사용한다.
+&lt;ul&gt;
 &lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;요, 롤, 피치&lt;/mark&gt;의 움직임으로 오일러 각을 지정하면, 서로 다른 좌표계를 사용하는 프로그램 간에도 데이터를 쉽게 변환할 수 있다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/10-04-yrp.jpg&#34;
 	
@@ -4842,10 +4849,7 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 		alt=&#34;요, 롤, 피치&#34;
 	
 	
-&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -4876,26 +4880,21 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;오일러 각에서 회전은 &lt;strong&gt;표준기저벡터를 중심으로 진행되는 세 번의 연속적인 회전&lt;/strong&gt;을 의미한다. 따라서 다음과 같이 각 기저축의 회전행렬을 구할 수 있겠다.
+&lt;li&gt;오일러 각에서 회전은 &lt;u&gt;표준기저벡터를 중심으로 진행되는 세 번의 연속적인 회전&lt;/u&gt;을 의미한다. 따라서 다음과 같이 각 기저축의 회전행렬을 구할 수 있겠다.
 &lt;ul&gt;
 &lt;li&gt;3차원 공간에서는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;$x$→$y$→$z$→$x$→$y$의 순서&lt;/mark&gt;로 세 축이 순환된다.&lt;/li&gt;
 &lt;li&gt;$x$축 회전은 $yz$평면의 회전을 의미한다.
-&lt;ul&gt;
-&lt;li&gt;$$R_x = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; \cos\theta &amp;amp; -\sin\theta \\ 0 &amp;amp; \sin\theta &amp;amp; \cos\theta \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$R_x = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; \cos\theta &amp;amp; -\sin\theta \\ 0 &amp;amp; \sin\theta &amp;amp; \cos\theta \end{bmatrix}$$&lt;/li&gt;
 &lt;li&gt;$y$축 회전은 $zx$평면의 회전을 의미한다. (위의 순서에 따르므로 $xz$가 아니다)
-&lt;ul&gt;
-&lt;li&gt;$$R_y = \begin{bmatrix} \cos\theta &amp;amp; 0 &amp;amp; \sin\theta \\ 0 &amp;amp; 1 &amp;amp; 0 \\ -\sin\theta &amp;amp; 0 &amp;amp; \cos\theta \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$R_y = \begin{bmatrix} \cos\theta &amp;amp; 0 &amp;amp; \sin\theta \\ 0 &amp;amp; 1 &amp;amp; 0 \\ -\sin\theta &amp;amp; 0 &amp;amp; \cos\theta \end{bmatrix}$$&lt;/li&gt;
 &lt;li&gt;$z$축 회전은 $xy$평면의 회전을 의미한다.
-&lt;ul&gt;
-&lt;li&gt;$$R_z = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta &amp;amp; 0 \\ \sin\theta &amp;amp; \cos\theta &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$R_z = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta &amp;amp; 0 \\ \sin\theta &amp;amp; \cos\theta &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -4904,23 +4903,17 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 &lt;ul&gt;
 &lt;li&gt;각 기저축의 회전행렬을 순서대로 적용해서 최종 회전행렬을 만들어야 한다.&lt;/li&gt;
 &lt;li&gt;어떤 순서로 적용할 것인가에 대한 경우의 수는 다양하다. 그 중에서 언리얼 엔진은 $Roll$→$Pitch$→$Yaw$의 순서를 채택한다. 이 순서로 회전행렬 $R$을 구하면 다음과 같다.
-&lt;ul&gt;
-&lt;li&gt;$ R = R_{yaw} \cdot R_{pitch} \cdot R_{roll} $&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$ R = R_{yaw} \cdot R_{pitch} \cdot R_{roll} $$&lt;/li&gt;
 &lt;li&gt;(저자가 제시한) 우리의 좌표계는 $Roll$→$Pitch$→$Yaw$가 $z$→$x$→$y$에 대응되므로 요, 피치, 롤 각의 값을 $\alpha$, $\beta$, $\gamma$라고 한다면 행렬 곱은 다음과 같이 계산할 수 있다.
-&lt;ul&gt;
-&lt;li&gt;$$R_{\alpha} \cdot R_{\beta} \cdot R_{\gamma} = \begin{bmatrix} \cos\alpha &amp;amp; 0 &amp;amp; \sin\alpha \\ 0 &amp;amp; 1 &amp;amp; 0 \\ -\sin\alpha &amp;amp; 0 &amp;amp; \cos\alpha \end{bmatrix}  \begin{bmatrix} \cos\beta &amp;amp; 0 &amp;amp; \sin\beta \\ 0 &amp;amp; 1 &amp;amp; 0 \\ -\sin\beta &amp;amp; 0 &amp;amp; \cos\beta \end{bmatrix} \begin{bmatrix} \cos\gamma &amp;amp; -\sin\gamma &amp;amp; 0 \\ \sin\gamma &amp;amp; \cos\gamma &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$ &lt;br /&gt;&lt;br&gt;
+$$R_{\alpha} \cdot R_{\beta} \cdot R_{\gamma} = \begin{bmatrix} \cos\alpha &amp;amp; 0 &amp;amp; \sin\alpha \\ 0 &amp;amp; 1 &amp;amp; 0 \\ -\sin\alpha &amp;amp; 0 &amp;amp; \cos\alpha \end{bmatrix}  \begin{bmatrix} \cos\beta &amp;amp; 0 &amp;amp; \sin\beta \\ 0 &amp;amp; 1 &amp;amp; 0 \\ -\sin\beta &amp;amp; 0 &amp;amp; \cos\beta \end{bmatrix} \begin{bmatrix} \cos\gamma &amp;amp; -\sin\gamma &amp;amp; 0 \\ \sin\gamma &amp;amp; \cos\gamma &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
 $$= \begin{bmatrix} \cos\alpha\cos\gamma + \sin\alpha\sin\beta\sin\gamma &amp;amp; -\cos\alpha\sin\gamma + \sin\alpha\sin\beta\cos\gamma &amp;amp; \sin\alpha\cos\beta \\ \cos\beta\sin\gamma &amp;amp; \cos\beta\cos\gamma &amp;amp; -\sin\beta \\ -\sin\alpha\cos\gamma + \cos\alpha\sin\beta\sin\gamma &amp;amp; \sin\alpha\sin\gamma + \cos\alpha\sin\beta\cos\gamma &amp;amp; \cos\alpha\cos\beta \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
 &lt;li&gt;이렇게 계산한 회전행렬의 열벡터는 표준기저벡터가 회전 변환된 로컬 축을 의미한다. 따라서 다음과 같이 나타낼 수 있겠다. &lt;br /&gt;&lt;br&gt;
-$x_{local} = ( \cos\alpha\cos\gamma + \sin\alpha\sin\beta\sin\gamma, \cos\beta\sin\gamma, -\sin\alpha\cos\gamma + \cos\alpha\sin\beta\sin\gamma )$ &lt;br /&gt;&lt;br&gt;
-$y_{local} = ( -\cos\alpha\sin\gamma + \sin\alpha\sin\beta\cos\gamma, \cos\beta\cos\gamma, \sin\alpha\sin\gamma + \cos\alpha\sin\beta\cos\gamma )$ &lt;br /&gt;&lt;br&gt;
-$z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&gt;
+$$x_{local} = ( \cos\alpha\cos\gamma + \sin\alpha\sin\beta\sin\gamma, \cos\beta\sin\gamma, -\sin\alpha\cos\gamma + \cos\alpha\sin\beta\sin\gamma )$$
+$$y_{local} = ( -\cos\alpha\sin\gamma + \sin\alpha\sin\beta\cos\gamma, \cos\beta\cos\gamma, \sin\alpha\sin\gamma + \cos\alpha\sin\beta\cos\gamma )$$
+$$z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -5015,10 +5008,7 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&g
 &lt;ul&gt;
 &lt;li&gt;3차원 공간의 트랜스폼도 회전 변환이 발생할 때마다 로컬 축 데이터를 갱신한다면,&lt;/li&gt;
 &lt;li&gt;로컬 축 벡터가 $\vec{x} = (x_x, x_y, x_z), \vec{y} = (y_x, y_y, y_z), \vec{z} = (z_x, z_y, z_z)$일 때 이들을 열벡터로 꽂아넣어 회전행렬을 구할 수 있다.
-&lt;ul&gt;
-&lt;li&gt;$$R = \begin{bmatrix} x_x &amp;amp; y_x &amp;amp; z_x &amp;amp; 0 \\ x_y &amp;amp; y_y &amp;amp; z_y &amp;amp; 0 \\ x_z &amp;amp; y_z &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$R = \begin{bmatrix} x_x &amp;amp; y_x &amp;amp; z_x &amp;amp; 0 \\ x_y &amp;amp; y_y &amp;amp; z_y &amp;amp; 0 \\ x_z &amp;amp; y_z &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5106,17 +5096,11 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&g
 &lt;h3 id=&#34;3차원-모델링-행렬&#34;&gt;3차원 모델링 행렬&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;크기, 회전, 이동 변환행렬
-&lt;ul&gt;
-&lt;li&gt;$$S = \begin{bmatrix} s_x &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; s_y &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; s_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;$$R = \begin{bmatrix} x_x &amp;amp; y_x &amp;amp; z_x &amp;amp; 0 \\ x_y &amp;amp; y_y &amp;amp; z_y &amp;amp; 0 \\ x_z &amp;amp; y_z &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$S = \begin{bmatrix} s_x &amp;amp; 0 &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; s_y &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; s_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
+$$R = \begin{bmatrix} x_x &amp;amp; y_x &amp;amp; z_x &amp;amp; 0 \\ x_y &amp;amp; y_y &amp;amp; z_y &amp;amp; 0 \\ x_z &amp;amp; y_z &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
+$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;li&gt;모델링 행렬
-&lt;ul&gt;
-&lt;li&gt;$$M = T \cdot R \cdot S = \begin{bmatrix} x_xs_x &amp;amp; y_xs_y &amp;amp; z_xs_z &amp;amp; t_x \\ x_ys_x &amp;amp; y_ys_y &amp;amp; z_ys_z &amp;amp; t_y \\ x_zs_x &amp;amp; y_zs_y &amp;amp; z_zs_z &amp;amp; t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$M = T \cdot R \cdot S = \begin{bmatrix} x_xs_x &amp;amp; y_xs_y &amp;amp; z_xs_z &amp;amp; t_x \\ x_ys_x &amp;amp; y_ys_y &amp;amp; z_ys_z &amp;amp; t_y \\ x_zs_x &amp;amp; y_zs_y &amp;amp; z_zs_z &amp;amp; t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5149,21 +5133,18 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&g
 &lt;ul&gt;
 &lt;li&gt;2차원 카메라를 구현할 때에는 이동 기능만 부여 했지만, 3차원 공간의 카메라에는 이동과 회전 기능을 함께 부여할 것이다.
 &lt;ul&gt;
-&lt;li&gt;카메라의 경우 크기의 개념이 없기 때문에 제외한다.&lt;/li&gt;
+&lt;li&gt;카메라의 경우 크기의 개념이 없기 때문에 크기는 제외한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;카메라 트랜스폼에 저장된 위치값을 $t = (t_x, t_y, t_z)$로 지정하고, 로컬 축 값을 각각 $\vec{x} = (x_x, x_y, x_z), \vec{y} = (y_x, y_y, y_z), \vec{z} = (z_x, z_y, z_z)$로 지정한다면 이동 행렬과 회전 행렬은 다음과 같다.
-&lt;ul&gt;
-&lt;li&gt;$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;$$R = \begin{bmatrix} x_x &amp;amp; y_x &amp;amp; z_x &amp;amp; 0 \\ x_y &amp;amp; y_y &amp;amp; z_y &amp;amp; 0 \\ x_z &amp;amp; y_z &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
+$$R = \begin{bmatrix} x_x &amp;amp; y_x &amp;amp; z_x &amp;amp; 0 \\ x_y &amp;amp; y_y &amp;amp; z_y &amp;amp; 0 \\ x_z &amp;amp; y_z &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;li&gt;Chapter 9에서 보았듯이 상대 좌표는 역행렬로 구할 수 있다.
 &lt;ul&gt;
 &lt;li&gt;이동 행렬의 역행렬은 덧셈의 역원인 반대수로 구한다.&lt;/li&gt;
-&lt;li&gt;회전 행렬의 역행렬은 전치행렬로 구한다.&lt;/li&gt;
-&lt;li&gt;$$T^{-1} = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; -t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; -t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; -t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;$$R^{-1} = \begin{bmatrix} x_x &amp;amp; x_y &amp;amp; x_z &amp;amp; 0 \\ y_x &amp;amp; y_y &amp;amp; y_z &amp;amp; 0 \\ z_x &amp;amp; z_y &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
+&lt;li&gt;회전 행렬의 역행렬은 전치행렬로 구한다.
+$$T^{-1} = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; 0 &amp;amp; -t_x \\ 0 &amp;amp; 1 &amp;amp; 0 &amp;amp; -t_y \\ 0 &amp;amp; 0 &amp;amp; 1 &amp;amp; -t_z \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
+$$R^{-1} = \begin{bmatrix} x_x &amp;amp; x_y &amp;amp; x_z &amp;amp; 0 \\ y_x &amp;amp; y_y &amp;amp; y_z &amp;amp; 0 \\ z_x &amp;amp; z_y &amp;amp; z_z &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5172,18 +5153,19 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&g
 &lt;li&gt;순서는?
 &lt;ul&gt;
 &lt;li&gt;모든 물체의 좌표를 카메라를 중심으로 옮긴 후, 회전을 해야하므로 &lt;strong&gt;이동의 역행렬 → 회전의 역행렬&lt;/strong&gt; 순이다.&lt;/li&gt;
-&lt;li&gt;이것은 트랜스폼의 순서를 바꾸는 것이며, 즉 크기 변환 $S$를 제외한 &lt;strong&gt;모델링 행렬의 역행렬&lt;/strong&gt;이 뷰 행렬이 된다.&lt;/li&gt;
-&lt;li&gt;$M^{-1} = (T \cdot R)^{-1} = R^{-1} \cdot T^{-1}$&lt;/li&gt;
+&lt;li&gt;이것은 트랜스폼의 순서를 바꾸는 것이며, 즉 크기 변환 $S$를 제외한 &lt;strong&gt;모델링 행렬의 역행렬&lt;/strong&gt;이 뷰 행렬이 된다.
+$$M^{-1} = (T \cdot R)^{-1} = R^{-1} \cdot T^{-1}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;따라서 &lt;strong&gt;뷰 행렬&lt;/strong&gt;은 다음과 같으며, 마지막 4열은 내적을 사용해서 간단하게 정리할 수 있다.&lt;/li&gt;
-&lt;li&gt;$$R^{-1} \cdot T^{-1} = \begin{bmatrix} x_x &amp;amp; x_y &amp;amp; x_z &amp;amp; -x \cdot t \\ y_x &amp;amp; y_y &amp;amp; y_z &amp;amp; -y \cdot t \\ z_x &amp;amp; z_y &amp;amp; z_z &amp;amp; -z \cdot t \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
+&lt;li&gt;따라서 &lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;뷰 행렬&lt;/strong&gt;&lt;/mark&gt;은 다음과 같으며, 마지막 4열은 내적을 사용해서 간단하게 정리할 수 있다.&lt;br&gt;
+$$R^{-1} \cdot T^{-1} = \begin{bmatrix} x_x &amp;amp; x_y &amp;amp; x_z &amp;amp; -x \cdot t \\ y_x &amp;amp; y_y &amp;amp; y_z &amp;amp; -y \cdot t \\ z_x &amp;amp; z_y &amp;amp; z_z &amp;amp; -z \cdot t \\ 0 &amp;amp; 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;(저자가 제시한) 우리의 좌표계의 경우 카메라가 양의 $z$축을 바라보면 카메라가 만드는 화면 좌표계에서는 $x$축이 왼쪽을 향해서 2차원 데카르트 좌표계와 다르게 된다.
+&lt;li&gt;(저자가 제시한) 우리의 좌표계의 경우 카메라가 양의 $z$축을 바라볼 때,
 &lt;ul&gt;
-&lt;li&gt;따라서 $x$축이 오른쪽을 향하도록 $y$축을 기준으로 $180^{\circ}$회전 시켜서 뷰 공간을 구성한다.&lt;/li&gt;
+&lt;li&gt;카메라를 기준으로 $x$축이 왼쪽을 향해서 2차원 데카르트 좌표계와 다르게 된다.&lt;/li&gt;
+&lt;li&gt;따라서 $x$축이 오른쪽을 향하도록 $y$축을 기준으로 $180^{\circ}$회전 시켜서 뷰 공간을 구성해야 하겠다.&lt;/li&gt;
 &lt;li&gt;이것을 위해 $x$축 기저와 $z$축 기저를 반전시킨다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -5243,33 +5225,28 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&g
 &lt;/div&gt;&lt;p&gt;&lt;br /&gt;  &lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;오일러-각의-특징&#34;&gt;오일러 각의 특징&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;오일러 각의 장점&lt;/p&gt;
+&lt;li&gt;장점
 &lt;ul&gt;
-&lt;li&gt;오일러 각은 표준기저벡터를 회전축으로 삼아서 회전한 각의 크기를 설정하기 때문에 &lt;strong&gt;인터페이스가 직관적&lt;/strong&gt;이다. 따라서 사용자 입장에서 물체의 회전을 설정하기에 용이하다.&lt;/li&gt;
-&lt;li&gt;행렬을 사용해서 3차원 공간의 회전을 표현하려면 최소 9개의 실수 데이터가 필요하지만, 오일러 각은 3개의 데이터만 있으면 된다. 따라서 &lt;strong&gt;적은 용량&lt;/strong&gt;으로 게임 데이터를 관리할 수 있게 도와준다.&lt;/li&gt;
+&lt;li&gt;오일러 각은 표준기저벡터를 회전축으로 삼아서 회전한 각의 크기를 설정하기 때문에 &lt;u&gt;인터페이스가 직관적&lt;/u&gt;이다. 따라서 사용자 입장에서 물체의 회전을 설정하기에 용이하다.&lt;/li&gt;
+&lt;li&gt;행렬을 사용해서 3차원 공간의 회전을 표현하려면 최소 9개의 실수 데이터가 필요하지만, 오일러 각은 3개의 데이터만 있으면 된다. 따라서 &lt;u&gt;적은 용량&lt;/u&gt;으로 게임 데이터를 관리할 수 있게 도와준다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;오일러 각의 단점&lt;/p&gt;
+&lt;li&gt;단점
 &lt;ul&gt;
-&lt;li&gt;짐벌락 현상이 발생한다.&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;짐벌락 현상&lt;/u&gt;이 발생한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
-&lt;h3 id=&#34;짐벌락-현상&#34;&gt;짐벌락 현상&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;짐벌락(Gimbal lock) 현상&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;짐벌락(Gimbal lock) 현상&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;오브젝트의 두 회전 축이 겹쳐서 자유도를 잃는 것을 말한다.&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=zc8b2Jo7mno&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;짐벌락 참고 영상&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;해결 방법&lt;/p&gt;
+&lt;li&gt;해결 방법
 &lt;ul&gt;
 &lt;li&gt;로드리게스 회전 공식(Chapter 11)&lt;/li&gt;
 &lt;li&gt;사원수(Chapter 16)&lt;/li&gt;
@@ -5281,26 +5258,20 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&g
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;회전 보간(Rotational interpolation)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;카메라의 움직임이나 캐릭터의 애니메이션을 구현할 때는 3차원 공간에서 시작 회전과 끝 회전을 지정하고 시간에 따라 두 회전 사이를 부드럽게 전환하는 기능이 필요할 수 있다. 이를 위해서 중간 회전 값을 계산하는 것을 회전 보간이라고 한다.&lt;/li&gt;
+&lt;li&gt;카메라의 움직임이나 캐릭터의 애니메이션을 구현할 때는 3차원 공간에서 &lt;u&gt;시작 회전과 끝 회전을 지정&lt;/u&gt;하고 &lt;u&gt;시간에 따라 두 회전 사이를 부드럽게 전환하는&lt;/u&gt; 기능이 필요할 수 있다. 이를 위해서 중간 회전 값을 계산하는 것을 회전 보간이라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;선형 보간식&lt;/strong&gt;을 사용해서 중간 회전 값을 얻을 수 있다.
-&lt;ul&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;$ \theta&amp;rsquo; = (1-t)\theta_{start} + t\theta_{end} $&lt;/mark&gt;&lt;/li&gt;
-&lt;li&gt;예를 들어, 동일한 평면 상에서 $15^{\circ}$에서 시작해서 $165^{\circ}$로 끝나는 회전의 $\frac{1}{3}$비율에 해당하는 회전 보간 값은 다음과 같이 구해서 $65^{\circ}$가 되겠다.&lt;/li&gt;
-&lt;li&gt;$\frac{2}{3} \cdot 15^{\circ} + \frac{1}{3} \cdot 165^{\circ} = 65^{\circ}$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;br /&gt;  
-&lt;ul&gt;
+&lt;li&gt;&lt;u&gt;선형 보간식&lt;/u&gt;을 사용해서 중간 회전 값을 얻을 수 있겠다.
+$$ \theta&amp;rsquo; = (1-t)\theta_{start} + t\theta_{end} $$&lt;/li&gt;
+&lt;li&gt;예를 들어, 동일한 평면 상에서 $15^{\circ}$에서 시작해서 $165^{\circ}$로 끝나는 회전의 $\frac{1}{3}$비율에 해당하는 회전 보간 값은 다음과 같이 구해서 $65^{\circ}$가 된다.
+$$\frac{2}{3} \cdot 15^{\circ} + \frac{1}{3} \cdot 165^{\circ} = 65^{\circ}$$&lt;/li&gt;
 &lt;li&gt;선형 보간식이 성립하려면 두 각의 회전 변환을 곱합 결과가 두 각의 합의 회전 변환과 동일해야한다.
+$$R_{\beta} \cdot R_{\alpha} = R_{(\alpha + \beta)}$$&lt;/li&gt;
+&lt;li&gt;Chapter 5에서 보았듯이 2차원 공간의 회전에서는 위 식이 만족하므로, 선형 보간식을 사용하는 데 문제가 없었다.
 &lt;ul&gt;
-&lt;li&gt;$R_{\beta} \cdot R_{\alpha} = R_{(\alpha + \beta)}$&lt;/li&gt;
-&lt;li&gt;Chapter 5에서 보았듯이 2차원 공간의 회전에서는 위 식이 만족하므로, 선형 보간식을 사용하는 데 문제가 없었다.&lt;/li&gt;
 &lt;li&gt;그렇다면 3차원 공간의 오일러 각 회전에서도 문제가 없을까?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -5310,16 +5281,13 @@ $z_{local} = ( \sin\alpha\cos\beta,  -\sin\beta, \cos\alpha\cos\beta )$&lt;/li&g
 &lt;li&gt;한 축으로만 회전하는 경우
 &lt;ul&gt;
 &lt;li&gt;맨 처음에 보았던 회전 행렬을 구하는 식: $ R = R_{yaw} \cdot R_{pitch} \cdot R_{roll} $&lt;/li&gt;
-&lt;li&gt;만약 $y$축으로 $\alpha$와 $\beta$만큼 회전한다면&amp;hellip;&lt;/li&gt;
-&lt;li&gt;$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot I \cdot I = R_{yaw(\alpha + \beta)}$
-&lt;ul&gt;
-&lt;li&gt;$yaw$회전만 수행하므로 $pitch$와 $roll$회전 행렬은 변화가 없는 항등행렬이 된다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot I \cdot I) \cdot (R_{yaw\alpha} \cdot I \cdot I)$ &lt;br /&gt;&lt;br&gt;
-$ = R_{yaw\beta} \cdot R_{yaw\alpha}$ &lt;br /&gt;&lt;br&gt;
-$ = R_{yaw(\alpha + \beta)}$&lt;/li&gt;
-&lt;li&gt;이처럼, 오일러 각에서 한 축만 사용한다는 것은 결국 2차원 평면에서의 회전과 동일하므로, 선형 보간식을 사용하는 데 문제가 없다.&lt;/li&gt;
+&lt;li&gt;만약 $y$축으로 $\alpha$와 $\beta$만큼 회전한다면&amp;hellip;
+$$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot I \cdot I = R_{yaw(\alpha + \beta)}$$&lt;/li&gt;
+&lt;li&gt;위 수식에서 보듯이, $yaw$회전만 수행하므로 $pitch$와 $roll$회전 행렬은 변화가 없는 항등행렬이 된다.
+$$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot I \cdot I) \cdot (R_{yaw\alpha} \cdot I \cdot I)$$
+$$ = R_{yaw\beta} \cdot R_{yaw\alpha}$$
+$$ = R_{yaw(\alpha + \beta)}$$&lt;/li&gt;
+&lt;li&gt;이처럼 오일러 각에서 한 축만 사용한다는 것은 결국 2차원 평면에서의 회전과 동일하므로, 선형 보간식을 사용하는 데 문제가 없다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5327,12 +5295,12 @@ $ = R_{yaw(\alpha + \beta)}$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;두 축에 대해서 회전하는 경우
 &lt;ul&gt;
-&lt;li&gt;만약 $x$축과 $y$축에 대해서 회전한다면&amp;hellip;&lt;/li&gt;
-&lt;li&gt;$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)} \cdot I = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)}$&lt;/li&gt;
-&lt;li&gt;$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot R_{pitch\beta} \cdot I) \cdot (R_{yaw\alpha} \cdot R_{pitch\alpha} \cdot I)$ &lt;br /&gt;&lt;br&gt;
-$ = R_{yaw\beta} \cdot R_{pitch\beta} \cdot R_{yaw\alpha} \cdot R_{pitch\alpha}$ &lt;br /&gt;&lt;br&gt;
-$ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
-&lt;li&gt;이처럼, &lt;strong&gt;두 축 이상을 사용하는 오일러 각은 선형 보간식을 사용할 수 없다.&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;만약 $x$축과 $y$축에 대해서 회전한다면&amp;hellip;
+$$R_{(\alpha + \beta)} = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)} \cdot I = R_{yaw(\alpha + \beta)} \cdot R_{pitch(\alpha + \beta)}$$
+$$R_{\beta} \cdot R_{\alpha} = (R_{yaw\beta} \cdot R_{pitch\beta} \cdot I) \cdot (R_{yaw\alpha} \cdot R_{pitch\alpha} \cdot I)$$
+$$ = R_{yaw\beta} \cdot R_{pitch\beta} \cdot R_{yaw\alpha} \cdot R_{pitch\alpha}$$
+$$ \neq R_{(\alpha + \beta)}$$&lt;/li&gt;
+&lt;li&gt;이처럼 &lt;u&gt;두 축 이상을 사용하는 오일러 각은 선형 보간식을 사용할 수 없다.&lt;/u&gt;&lt;/li&gt;
 &lt;li&gt;해결 방법
 &lt;ul&gt;
 &lt;li&gt;로드리게스 회전 공식(Chapter 11)&lt;/li&gt;
@@ -5359,11 +5327,29 @@ $ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;게임-엔진의-구성-요소&#34;&gt;게임 엔진의 구성 요소&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다.
-&lt;ul&gt;
-&lt;li&gt;게임 공간: 씬(Scene), 레벨(Level)&lt;/li&gt;
-&lt;li&gt;데이터: 리소스(Resource), 애셋(Asset)&lt;/li&gt;
-&lt;li&gt;게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;
+&lt;p&gt;게임 엔진의 인터페이스는 게임 콘텐츠가 담기는 게임 공간을 설계하는 작업 공간과, 게임 데이터를 관리하는 작업 공간으로 나뉜다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;공간 이름&lt;/th&gt;
+&lt;th&gt;하는 일&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;씬(Scene) 또는&lt;br /&gt;레벨(Level)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;게임 공간 설계&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;리소스(Resource) 또는&lt;br /&gt;애셋(Asset)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;데이터 관리&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;게임엔진은 씬 데이터와 리소스 데이터를 결합해서 최종 게임 화면이 렌더링되로록 설계됐다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/09-01-rendering.jpg&#34;
 	
 	
@@ -5373,16 +5359,17 @@ $ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
 		alt=&#34;씬과 리소스로 만들어지는 최종 화면의 렌더링&#34;
 	
 	
-&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;br /&gt;  
 &lt;h3 id=&#34;씬의-구조&#34;&gt;씬의 구조&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;콘텐츠를 구성하는 기본단위: 액터(Actor), 게임 오브젝트(GameObject)
+&lt;li&gt;&lt;strong&gt;액터(Actor) 또는 게임 오브젝트(GameObject)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;크기, 회전, 위치로 구성된 트랜스폼(Transform)의 정보를 사용해서 관리한다.&lt;/li&gt;
-&lt;li&gt;이 트랜스폼 정보에 &lt;strong&gt;모델링 행렬&lt;/strong&gt;을 사용해서 렌더링할 물체의 정점을 변환한다.&lt;/li&gt;
+&lt;li&gt;씬 안에서 콘텐츠를 구성하는 기본단위이다.&lt;/li&gt;
+&lt;li&gt;크기, 회전, 위치로 구성된 &lt;u&gt;트랜스폼(Transform)&lt;/u&gt;의 정보를 사용해서 관리한다.&lt;/li&gt;
+&lt;li&gt;이 트랜스폼 정보에 &lt;u&gt;모델링 행렬을 사용해서 렌더링할 물체의 정점을 변환&lt;/u&gt;한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5390,20 +5377,35 @@ $ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
 &lt;h3 id=&#34;모델링-행렬의-설계&#34;&gt;모델링 행렬의 설계&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;트랜스폼의 크기, 회전, 이동 데이터&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;크기(S): 2차원 벡터 $(s_x, s_y)$&lt;/li&gt;
-&lt;li&gt;회전(R): 각 $\theta$&lt;/li&gt;
-&lt;li&gt;이동(T): 2차원 벡터 $(t_x, t_y)$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;트랜스폼의 크기, 회전, 이동 데이터는 다음과 같다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;분류&lt;/th&gt;
+&lt;th&gt;데이터&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;크기 ($S$)&lt;/td&gt;
+&lt;td&gt;2차원 벡터 $(s_x, s_y)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;회전 ($R$)&lt;/td&gt;
+&lt;td&gt;각 $\theta$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;이동 ($T$)&lt;/td&gt;
+&lt;td&gt;2차원 벡터 $(t_x, t_y)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;크기, 회전, 이동에 대한 세 가지 아핀 변환행렬에 대응된다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$S = \begin{bmatrix} a &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; b &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;$$R = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta &amp;amp; 0 \\ \sin\theta &amp;amp; \cos\theta &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; a\\ 0 &amp;amp; 1 &amp;amp; b \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;위 데이터는 크기, 회전, 이동에 대한 세 가지 아핀 변환행렬에 대응된다.
+$$S = \begin{bmatrix} a &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; b &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
+$$R = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta &amp;amp; 0 \\ \sin\theta &amp;amp; \cos\theta &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$
+$$T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; a\\ 0 &amp;amp; 1 &amp;amp; b \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
@@ -5422,7 +5424,10 @@ $ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
 	
 	
 &gt;&lt;/li&gt;
-&lt;li&gt;이동변환을 제외하면 크기변환과 회전변환이 남는다. 크기와 회전변환을 할 경우에도 순서에 따라서 다른 결과가 나온다. Chapter 7에서 보았듯이 회전변환은 물체의 형태를 그대로 보존해주는 강체 변환(Rigid Transform)이기 때문에 &lt;strong&gt;회전변환을 나중에 해서 형태를 유지&lt;/strong&gt;하는 것이 사용자 입장에서 직관적인 변환이겠다. &lt;br /&gt;&lt;br&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이동변환을 제외하면 크기변환과 회전변환이 남는다. 크기와 회전변환을 할 경우에도 순서에 따라서 다른 결과가 나온다. Chapter 7에서 보았듯이 회전변환은 물체의 형태를 그대로 보존해주는 강체 변환(Rigid Transform)이기 때문에 &lt;strong&gt;회전변환을 나중에 해서 형태를 유지&lt;/strong&gt;하는 것이 사용자 입장에서 직관적인 변환이겠다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/09-03-sr.jpg&#34;
 	
 	
@@ -5432,20 +5437,15 @@ $ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
 		alt=&#34;크기변환과 회전변환&#34;
 	
 	
-&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;따라서 아핀 변환의 순서는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;크기 → 회전 → 위치&lt;/mark&gt;순서로 이뤄지며 행렬곱으로 나타내면 다음과 같다. (열 기준 행렬으로 설명한다. 따라서 변환의 순서는 오른쪽에서 왼쪽으로 진행된다.)&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$T \cdot R \cdot S$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;따라서 아핀 변환의 순서는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;크기 → 회전 → 위치&lt;/mark&gt;순서로 이뤄지며 행렬곱으로 나타내면 다음과 같다. (열 기준 행렬으로 설명한다. 따라서 변환의 순서는 오른쪽에서 왼쪽으로 진행된다.)
+$$T \cdot R \cdot S$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이 3가지 변환을 수행하는 합성행렬인 &lt;strong&gt;모델링 행렬(Modeling matrix)&lt;/strong&gt; 은 다음과 같다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$M = T \cdot R \cdot S = \begin{bmatrix} \cos\theta \cdot s_x &amp;amp; -\sin\theta \cdot s_y &amp;amp; t_x \\ \sin\theta \cdot s_x &amp;amp; \cos\theta \cdot s_y &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;이 3가지 변환을 수행하는 합성행렬인 &lt;mark style=&#34;background-color: lightblue&#34;&gt;모델링 행렬(Modeling matrix)&lt;/mark&gt; 은 다음과 같다.
+$$M = T \cdot R \cdot S = \begin{bmatrix} \cos\theta \cdot s_x &amp;amp; -\sin\theta \cdot s_y &amp;amp; t_x \\ \sin\theta \cdot s_x &amp;amp; \cos\theta \cdot s_y &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
@@ -5480,12 +5480,9 @@ $ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;로컬 축(Local Axis)&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;이렇게 물체를 기준으로 설정된 방향 정보를 로컬 축이라고 한다.&lt;/li&gt;
+&lt;li&gt;이렇게 &lt;u&gt;물체를 기준으로 설정된 방향 정보&lt;/u&gt;를 로컬 축이라고 한다.&lt;/li&gt;
 &lt;li&gt;로컬 축 정보는 로컬 공간의 기저벡터와 동일한 값을 가진다.&lt;/li&gt;
-&lt;li&gt;게임 엔진은 월드의 $X$, $Y$, $Z$축과 구분하기 위해 각 로컬 축의 이름을 다음과 같이 부른다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;게임 엔진은 월드의 $X$, $Y$, $Z$축과 구분하기 위해 각 로컬 축의 이름을 다음과 같이 부른다.
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -5508,21 +5505,23 @@ $ \neq R_{(\alpha + \beta)}$&lt;/li&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;ul&gt;
-&lt;li&gt;트랜스폼의 이동과 크기 정보가 변경되더라도 게임 오브젝트가 보는 방향은 변함이 없기 때문에, 로컬 축 정보는 오직 &lt;strong&gt;회전 정보에만 영향을 받는다.&lt;/strong&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;트랜스폼의 이동과 크기 정보가 변경되더라도 게임 오브젝트가 보는 방향은 변함이 없기 때문에, 로컬 축 정보는 오직 &lt;u&gt;회전 정보&lt;/u&gt;에만 영향을 받는다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;게임 오브젝트에 새로운 회전 값 $\theta$가 설정되면 로컬 축을 구성하는 표준기저벡터도 이에 따라 변한다.&lt;/li&gt;
 &lt;li&gt;$e_1$이 변화된 값을 $\vec{r}$로, $e_2$가 변화된 값을 $\vec{u}$로 표현하면 그 값은 다음과 같다.
-&lt;ul&gt;
-&lt;li&gt;$\vec{r} = (\cos\theta, \sin\theta)$ &lt;br /&gt;&lt;br&gt;
-$\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
+$$\vec{r} = (\cos\theta, \sin\theta)$$
+$$\vec{u} = (-\sin\theta, \cos\theta)$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;여기서 로컬축 벡터의 원소를 각각 $\vec{r} = (r_x, r_y)$, $\vec{u} = (u_x, u_y)$로 지정하면, 아핀 회전 변환행렬은 삼각함수 대신 로컬 축 벡터를 사용해 생성할 수 있다. 따라서 모델링 행렬 역시 삼각함수 대신 로컬 축 정보를 사용해 계산할 수 있다.
+&lt;li&gt;
+&lt;p&gt;여기서 로컬축 벡터의 원소를 각각 $\vec{r} = (r_x, r_y)$, $\vec{u} = (u_x, u_y)$로 지정하면?&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;$$M = T \cdot R \cdot S = \begin{bmatrix} r_x \cdot s_x &amp;amp; u_x \cdot s_y &amp;amp; t_x \\ r_y \cdot s_x &amp;amp; u_y \cdot s_y &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;아핀 회전 변환행렬은 삼각함수 대신 로컬 축 벡터를 사용해 생성할 수 있다. 따라서 모델링 행렬 역시 &lt;u&gt;삼각함수 대신 로컬 축 정보를 사용해 계산&lt;/u&gt;할 수 있다.
+$$M = T \cdot R \cdot S = \begin{bmatrix} r_x \cdot s_x &amp;amp; u_x \cdot s_y &amp;amp; t_x \\ r_y \cdot s_x &amp;amp; u_y \cdot s_y &amp;amp; t_y \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5611,18 +5610,19 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 	
 	
 &gt;&lt;/li&gt;
-&lt;li&gt;여기서 각각의 게임 오브젝트들은 각자의 트랜스폼 정보를 포함하고 있다. 그렇다면 리소스 데이터는 어떨까?
-&lt;ul&gt;
-&lt;li&gt;용량이 큰 메시 정보를 모두 각각 가지고 있다면 메모리 공간이 낭비될 것이다. 따라서 리소스 데이터는 여러 게임 오브젝트들이 함께 사용할 수 있는 공유 자원의 형태로 관리하는 것이 바람직하다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;리소스 저장소(Resource repository)&lt;/p&gt;
+&lt;p&gt;여기서 각각의 게임 오브젝트들은 각자의 트랜스폼 정보를 포함하고 있다. 그렇다면 리소스 데이터는 어떨까?&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;용량이 큰 메시 정보를 모두 각각 가지고 있다면 메모리 공간이 낭비될 것이다. 따라서 &lt;u&gt;리소스 데이터는 여러 게임 오브젝트들이 함께 사용할 수 있는 공유 자원의 형태로 관리&lt;/u&gt;하는 것이 바람직하다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;리소스 저장소(Resource repository)&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;씬과 무관하게 별도로 리소스를 모아두는 저장소이다.&lt;/li&gt;
-&lt;li&gt;게임 오브젝트는 &lt;strong&gt;리소스의 키 값&lt;/strong&gt;만 저장하며, 이것을 통해서 리소스에 접근한다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;&lt;u&gt;게임 오브젝트는 리소스의 키 값만 저장&lt;/u&gt;하며, 이것을 통해서 리소스에 접근한다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/09-06-resource.jpg&#34;
 	
 	
@@ -5636,46 +5636,51 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;br /&gt;  &lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;게임-엔진의-워크플로우&#34;&gt;게임 엔진의 워크플로우&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;워크플로우(Workflow)&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;실행의 흐름.&lt;/li&gt;
+&lt;li&gt;실행의 흐름이다.&lt;/li&gt;
 &lt;li&gt;게임 엔진의 워크플로우는 크게 씬을 완성하는 과정, 완성된 씬으로부터 화면을 그려내는 과정으로 나뉜다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;(저자가 제작한) 게임 엔진의 워크플로우&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;1. 리소스 로딩 단계
-&lt;ul&gt;
-&lt;li&gt;메시, 텍스처 같은 리소스는 게임을 진행하면서 불러들이기에는 데이터 양이 크기 때문에 게임 시작 전에 미리 불러들여서 메모리에 올려둬야 안정적으로 게임을 진행할 수 있다.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LoadResources()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;2. 씬 구축 단계
-&lt;ul&gt;
-&lt;li&gt;게임 오브젝트의 트랜스폼 정보가 설정되며 리소스 정보가 게임 오브젝트에 연결된다.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LoadScene2D()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;3. 게임 로직 단계
-&lt;ul&gt;
-&lt;li&gt;프레임마다 게임 오브젝트의 트랜스폼 값을 변경한다.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Update2D()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;4. 렌더링 로직 단계
-&lt;ul&gt;
-&lt;li&gt;트랜스폼 정보와 리소스 데이터를 활용해서 최종화면을 그린다.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;Render2D()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;순서&lt;/th&gt;
+&lt;th&gt;단계&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;리소스 로딩 단계&lt;/td&gt;
+&lt;td&gt;메시, 텍스처 같은 리소스는 게임을 진행하면서 불러들이기에는 데이터 양이 크기 때문에 게임 시작 전에 미리 불러들여서 메모리에 올려둬야 안정적으로 게임을 진행할 수 있다.&lt;br /&gt;&lt;code&gt;LoadResources()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;씬 구축 단계&lt;/td&gt;
+&lt;td&gt;게임 오브젝트의 트랜스폼 정보가 설정되고, 리소스 정보가 게임 오브젝트에 연결된다.&lt;br /&gt;&lt;code&gt;LoadScene2D()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;게임 로직 단계&lt;/td&gt;
+&lt;td&gt;프레임마다 게임 오브젝트의 트랜스폼 값을 변경한다.&lt;br /&gt;&lt;code&gt;Update2D()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;렌더링 로직 단계&lt;/td&gt;
+&lt;td&gt;트랜스폼 정보와 리소스 데이터를 활용해서 최종화면을 그린다.&lt;br /&gt;&lt;code&gt;Render2D()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;br /&gt;  
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6003,7 +6008,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;렌더링 파이프라인(Rendering pipeline)&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;게임 제작의 렌더링은 GPU가 처리한다. &lt;mark style=&#34;background-color: lightblue&#34;&gt;GPU 내부에 설정된 렌더링 워크플로우&lt;/mark&gt;를 렌더링 파이프라인이라고 한다.  &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;게임 제작의 렌더링은 GPU가 처리한다. &lt;u&gt;GPU 내부에 설정된 렌더링 워크플로우&lt;/u&gt;를 렌더링 파이프라인이라고 한다.  &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/09-07-renderingPipeline.png&#34;
 	
 	
@@ -6028,24 +6033,29 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;(저자가 제작한) 렌더링 파이프라인
-&lt;ul&gt;
-&lt;li&gt;1. 정점 변환과 처리 단계
-&lt;ul&gt;
-&lt;li&gt;메시에 설정된 정점의 데이터는 로컬 공간을 기준으로 설정되어 있다. 이것을 월드 공간 중심으로 변환하여 화면에 그려질 정점의 최종 위치 값을 구한다.&lt;/li&gt;
-&lt;li&gt;즉, 모델링 행렬에 로컬 공간의 좌표를 곱한다.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;DrawMesh2D()&lt;/code&gt;, &lt;code&gt;VertexShader2D()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;(저자가 제작한) 렌더링 파이프라인&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;2. 픽셀화와 픽셀 처리 단계
-&lt;ul&gt;
-&lt;li&gt;Chapter 8에서 보았던 무게중심좌표를 활용해서 삼각형 영역의 픽셀을 추려내고, 색상을 결정한다. 해당 픽셀의 UV에 대응되는 색상을 가져온 후 필요하다면 추가로 조명 효과 등을 적용해서 최종 픽셀 색상을 설정한다.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;DrawTriangle2D()&lt;/code&gt;, &lt;code&gt;FragmentShader2D()&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;순서&lt;/th&gt;
+&lt;th&gt;단계&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;정점 변환과 처리 단계&lt;/td&gt;
+&lt;td&gt;메시에 설정된 정점의 데이터는 로컬 공간을 기준으로 설정되어 있다. 이것을 월드 공간 중심으로 변환하여 화면에 그려질 정점의 최종 위치 값을 구한다.&lt;br /&gt;즉, 로컬 공간의 좌표에 모델링 행렬을 곱한다.&lt;br /&gt;&lt;code&gt;DrawMesh2D()&lt;/code&gt;, &lt;code&gt;VertexShader2D()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;픽셀화와 픽셀 처리 단계&lt;/td&gt;
+&lt;td&gt;Chapter 8에서 보았던 무게중심좌표를 활용해서 삼각형 영역의 픽셀을 추려내고, 색상을 결정한다. 해당 픽셀의 UV에 대응되는 색상을 가져온 후 필요하다면 추가로 조명 효과 등을 적용해서 최종 픽셀 색상을 설정한다.&lt;br /&gt;&lt;code&gt;DrawTriangle2D()&lt;/code&gt;, &lt;code&gt;FragmentShader2D()&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;br /&gt;  
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6157,16 +6167,14 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;셰이더(Shader)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;셰이더(Shader)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;GPU의 렌더링 파이프라인의 몇몇 부분은 프로그래밍이 가능하다. 이런 부분을 개발자가 프로그래밍해서 만들어낸, 렌더링 효과를 계산하는 함수를 셰이더라고 한다.&lt;/li&gt;
+&lt;li&gt;GPU의 렌더링 파이프라인의 몇몇 부분은 프로그래밍이 가능하다. 이런 부분을 &lt;u&gt;개발자가 프로그래밍해서 만들어낸, 렌더링 효과를 계산하는 함수&lt;/u&gt;를 셰이더라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;정점 셰이더(Vertex Shader)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;정점 셰이더(Vertex Shader)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;개발자들이 변환을 직접 설계해서 만든 정점 처리 함수이다.&lt;/li&gt;
+&lt;li&gt;개발자들이 변환을 직접 설계해서 만든 &lt;u&gt;정점 처리 함수&lt;/u&gt;이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -6196,7 +6204,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;br /&gt;  
+&lt;/div&gt;&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -6291,14 +6299,14 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;파편(Fragment)
+&lt;li&gt;&lt;strong&gt;파편(Fragment)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;GPU에서는 삼각형을 구성하는 픽셀을 파편이라고 한다.&lt;/li&gt;
+&lt;li&gt;GPU에서는 &lt;u&gt;삼각형을 구성하는 픽셀&lt;/u&gt;을 파편이라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;파편 셰이더(Fragment Shader)&lt;/strong&gt; 혹은 &lt;strong&gt;픽셀 셰이더(Pixel Shader)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;개발자들이 직접 설계한, 최종 픽셀을 계산하는 함수이다.&lt;/li&gt;
+&lt;li&gt;개발자들이 직접 설계한, &lt;u&gt;최종 픽셀을 계산하는 함수&lt;/u&gt;이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -6332,7 +6340,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;뷰포트(Viewport)&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;카메라는 자신이 출력할 화면의 해상도 정보를 가지고 월드의 일부를 그려낸다. 이 때 &lt;strong&gt;카메라가 출력할 화면의 크기 정보&lt;/strong&gt;를 뷰포트라고 한다.&lt;/li&gt;
+&lt;li&gt;카메라는 자신이 출력할 화면의 해상도 정보를 가지고 월드의 일부를 그려낸다. 이 때 &lt;u&gt;카메라가 출력할 화면의 크기 정보&lt;/u&gt;를 뷰포트라고 한다.&lt;/li&gt;
 &lt;li&gt;즉, 게이머가 보는 게임 공간의 크기가 바로 뷰포트다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -6340,7 +6348,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;p&gt;&lt;strong&gt;뷰 공간(View space)&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;카메라에 설정된 뷰포트 정보를 바탕으로 월드 공간의 일부분을 렌더링해야 한다. 이를 위해서는 카메라를 중심으로 물체의 트랜스폼을 재조정하는 작업이 필요하다.&lt;/li&gt;
-&lt;li&gt;여기서 &lt;strong&gt;카메라를 중심으로 변환한 공간&lt;/strong&gt;을 뷰 공간이라고 한다.&lt;/li&gt;
+&lt;li&gt;여기서 &lt;u&gt;카메라를 중심으로 변환한 공간&lt;/u&gt;을 뷰 공간이라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -6381,8 +6389,8 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;모델링 행렬이 로컬 공간의 좌표를 월드 공간의 좌표로 변환해준다면, 뷰 행렬은 월드 공간의 좌표를 뷰 공간의 좌표로 변환해준다.&lt;/li&gt;
 &lt;li&gt;이전 예제를 다시보면, 뷰 공간 좌표인 $(20, 20)$은 물체의 월드 공간 좌표에다가 카메라의 위치를 기준으로 측정한 월드 원점의 상대 좌표인 $(10, 10)$을 더하면 얻을 수 있다.&lt;/li&gt;
-&lt;li&gt;그리고 그 상대 좌표는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;카메라의 월드 공간 좌표를 반전시켜서&lt;/mark&gt; 얻을 수 있다. 즉, &lt;mark style=&#34;background-color: lightblue&#34;&gt;이동 행렬의 역행렬&lt;/mark&gt;을 사용해서 계산하면 된다.&lt;/li&gt;
-&lt;li&gt;$$V = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; -t_x \\ 0 &amp;amp; 1 &amp;amp; -t_y \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
+&lt;li&gt;그리고 그 상대 좌표는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;카메라의 월드 공간 좌표를 반전시켜서&lt;/mark&gt; 얻을 수 있다. 즉, &lt;mark style=&#34;background-color: lightblue&#34;&gt;이동 행렬의 역행렬&lt;/mark&gt;을 사용해서 계산하면 된다.
+$$V = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; -t_x \\ 0 &amp;amp; 1 &amp;amp; -t_y \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -6590,13 +6598,13 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;세-점의-결합&#34;&gt;세 점의 결합&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;Chapter 6에서 보았듯이, 아핀 결합은 여러개의 점을 결합해서 새로운 점을 생성하는 수식이다. 이 때 스칼라 값들은 그 합이 모두 $1$이어야 했다.
+&lt;li&gt;Chapter 6에서 보았듯이, 아핀 결합은 여러개의 점을 결합해서 새로운 점을 생성하는 수식이다. 이 때 스칼라 값들은 그 합이 모두 $1$이어야 했다.&lt;/li&gt;
+&lt;li&gt;세 점 $P_1$, $P_2$, $P_3$를 결합하는 경우에도 스칼라값 3개의 합은 $1$이 되어야 할 것이다.
 &lt;ul&gt;
-&lt;li&gt;세 점 $P_1$, $P_2$, $P_3$를 결합하는 경우에도 스칼라값 3개의 합은 $1$이 되어야 할 것이다.&lt;/li&gt;
 &lt;li&gt;$P&amp;rsquo; = s \cdot P_1 + t \cdot P_2 + (1 - s - t) \cdot P_3$&lt;/li&gt;
 &lt;li&gt;$(P&amp;rsquo; - P_3) = s(P_1 - P_3) + t(P_2 - P_3)$&lt;/li&gt;
 &lt;li&gt;$\vec{w} = s \cdot \vec{u} + t \cdot \vec{v}$&lt;/li&gt;
-&lt;li&gt;이 때 벡터 $\vec{u}$와 $\vec{v}$가 선형 독립의 관계라면, 벡터 $\vec{w}$는 2차원 벡터 공간 $\mathbb{R}^2$에 존재하는 모든 벡터가 될 수 있다. 즉, &lt;strong&gt;세 점의 아핀 결합은 평면의 모든 점을 만들어낸다.&lt;/strong&gt; &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;이 때 벡터 $\vec{u}$와 $\vec{v}$가 선형 독립의 관계라면, 벡터 $\vec{w}$는 2차원 벡터 공간 $\mathbb{R}^2$에 존재하는 모든 벡터가 될 수 있다. 즉, &lt;u&gt;세 점의 아핀 결합은 평면의 모든 점을 만들어낸다.&lt;/u&gt; &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-01-makePoint.jpg&#34;
 	
 	
@@ -6614,7 +6622,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;여기서 $s$와 $t$의 값의 범위를 $[0, 1]$로 고정시키면 어떻게 될까?
 &lt;ul&gt;
-&lt;li&gt;해당 영역은 &lt;strong&gt;삼각형&lt;/strong&gt;이 된다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;해당 영역은 &lt;u&gt;삼각형&lt;/u&gt;이 된다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-02-triangle.jpg&#34;
 	
 	
@@ -6625,31 +6633,18 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 	
 	
 &gt;&lt;/li&gt;
-&lt;li&gt;이렇게 &lt;mark style=&#34;background-color: lightblue&#34;&gt;아핀 결합에서 모든 스칼라 값을 $[0, 1]$ 범위로 한정한 결합&lt;/mark&gt;을 &lt;strong&gt;컨벡스 결합(Convex combination)&lt;/strong&gt; 이라고 부른다.&lt;/li&gt;
-&lt;li&gt;컨벡스 결합은 Chapter 6의 아핀 결합식에 각 스칼라 범위를 $[0, 1]$로 제한하는 조건을 추가해서 다음과 같이 표현할 수 있다.&lt;/li&gt;
-&lt;li&gt;$$\displaystyle\sum_{i=1}^{n} c_i \cdot P_i (s.t. \displaystyle\sum_{i=1}^{n} c_i = 1, 0 \leq c_i \leq 1)$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;컨벡스 결합(Convex combination)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;아핀 결합에서 모든 스칼라 값을 $[0, 1]$ 범위로 한정한 결합&lt;/mark&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;컨벡스 결합은 Chapter 6의 아핀 결합식에 각 스칼라 범위를 $[0, 1]$로 제한하는 조건을 추가해서 다음과 같이 표현할 수 있다.
+$$\displaystyle\sum_{i=1}^{n} c_i \cdot P_i (s.t. \displaystyle\sum_{i=1}^{n} c_i = 1, 0 \leq c_i \leq 1)$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;컨벡스 영역(Convex region)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;선분이나 삼각형처럼 컨벡스 결합으로 만든 영역.&lt;/li&gt;
-&lt;li&gt;컨벡스는 사전적으로 &amp;lsquo;볼록한&amp;rsquo;을 뜻한다.&lt;/li&gt;
-&lt;li&gt;수학에서 정의하는 볼록함이란, &lt;strong&gt;영역 내 임의의 두 점을 연결한 선분을 만들었을 때, 그 선분은 언제나 해당 컨벡스 영역 안에 속하는 성질&lt;/strong&gt;을 의미한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;컨케이브 영역(Concave region)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;컨벡스 영역과 반대로, &lt;strong&gt;임의의 두 점을 연결한 선분이 영역 밖으로 벗어나는 경우가 있는&lt;/strong&gt; 영역이다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;아래 사진에서 왼쪽이 컨벡스 영역, 오른쪽이 컨케이브 영역이다. &lt;br /&gt;&lt;br&gt;
-&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-03-convexConcave.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-03-convexConcave.jpg&#34;
 	
 	
 	
@@ -6659,6 +6654,18 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 	
 	
 &gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;컨벡스 영역(Convex region)&lt;/strong&gt; - 왼쪽 그림
+&lt;ul&gt;
+&lt;li&gt;선분이나 삼각형처럼 컨벡스 결합으로 만든 영역.&lt;/li&gt;
+&lt;li&gt;컨벡스는 사전적으로 &amp;lsquo;볼록한&amp;rsquo;을 뜻한다.&lt;/li&gt;
+&lt;li&gt;수학에서 정의하는 볼록함이란, &lt;strong&gt;영역 내 임의의 두 점을 연결한 선분을 만들었을 때 그 선분은 언제나 해당 컨벡스 영역 안에 속하는 성질&lt;/strong&gt;을 의미한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;컨케이브 영역(Concave region)&lt;/strong&gt; - 오른쪽 그림
+&lt;ul&gt;
+&lt;li&gt;컨벡스 영역과 반대로, &lt;strong&gt;임의의 두 점을 연결한 선분이 영역 밖으로 벗어나는 경우가 있는&lt;/strong&gt; 영역이다.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
@@ -6667,7 +6674,7 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;$\vec{x} = a \cdot \vec{u} + b \cdot \vec{v} + c \cdot \vec{w}$&lt;/li&gt;
 &lt;li&gt;세 벡터 $\vec{u}$, $\vec{v}$, $\vec{w}$가 선형 독립 관계를 이룬다면 3차원 공간의 모든 벡터를 생성할 수 있으므로, 벡터 $\vec{x}$는 3차원 공간의 벡터가 된다.&lt;/li&gt;
-&lt;li&gt;여기서 스칼라 값을 $[0, 1]$ 범위로 제한한다면 &lt;strong&gt;삼각뿔(Tetrahedron)&lt;/strong&gt; 영역이 형성된다.&lt;/li&gt;
+&lt;li&gt;여기서 스칼라 값을 $[0, 1]$ 범위로 제한한다면 &lt;u&gt;삼각뿔(Tetrahedron)&lt;/u&gt; 영역이 형성된다.&lt;/li&gt;
 &lt;li&gt;이 또한 컨벡스 성질을 가진다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-04-tetrahedron.jpg&#34;
 	
@@ -6687,18 +6694,22 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;메시(Mesh)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;삼각형을 중심으로 물체에 관련된 정보를 기록한 데이터이다.&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;삼각형을 중심으로 물체에 관련된 정보를 기록한 데이터&lt;/u&gt;이다.&lt;/li&gt;
 &lt;li&gt;메시는 다수의 삼각형으로 구성되고, 삼각형은 세 개의 점으로 구성되므로, 메시는 결국 다수의 점으로 구성된다고 볼 수 있다.&lt;/li&gt;
-&lt;li&gt;메시는 삼각형으로 물체의 외형을 표현하므로 삼각형의 위치정보를 가지고 있어야 한다. 이에 추가로 위치 뿐만 아니라 색상, 방향과 같은 부가 정보도 함께 제공한다. 이렇게 &lt;mark style=&#34;background-color: lightblue&#34;&gt;위치 정보와 부가 정보를 묶은 특별한 점&lt;/mark&gt;을 &lt;strong&gt;정점(Vertex)&lt;/strong&gt; 이라고 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;정점(Vertex)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;메시는 삼각형으로 물체의 외형을 표현하므로 삼각형의 위치정보를 가지고 있어야 한다. 이에 추가로 위치 뿐만 아니라 색상, 방향과 같은 부가 정보도 함께 제공한다. 이렇게 &lt;u&gt;위치 정보와 부가 정보를 묶은 특별한 점&lt;/u&gt;을 정점이라고 한다.&lt;/li&gt;
 &lt;li&gt;즉, 메시는 정점들이 모인 데이터라고 할 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
-&lt;li&gt;와이어 프레임(Wireframe)
+&lt;li&gt;&lt;strong&gt;와이어 프레임(Wireframe)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;삼각형의 외곽선만 그려 메시를 표현하는 방법을 와이어 프레임이라고 한다.&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;삼각형의 외곽선만 그려 메시를 표현하는 방법을&lt;/u&gt; 와이어 프레임이라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -6706,12 +6717,12 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;정점 버퍼(Vertex buffer)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;메시의 정점 정보를 빠르게 읽기 위해서 메모리에 정점 정보를 일렬로 나열하는 배열의 형태로 관리한다. 이것을 정점 버퍼라고 한다.&lt;/li&gt;
+&lt;li&gt;메시의 정점 정보를 빠르게 읽기 위해서 메모리에 &lt;u&gt;정점 정보를 일렬로 나열하는 배열&lt;/u&gt;의 형태로 관리한다. 이것을 정점 버퍼라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;인덱스 버퍼(Index buffer)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;정점 정보만으로는 삼각형을 만들 수 없으므로, 삼각형을 구성하는 정점의 인덱스(순번)만 기록한 배열을 별도로 만들어서 관리한다. 이것을 인덱스 버퍼라고 한다.&lt;/li&gt;
+&lt;li&gt;정점 정보만으로는 삼각형을 만들 수 없으므로, 삼각형을 구성하는 &lt;u&gt;정점의 인덱스(순번)만 기록한 배열&lt;/u&gt;을 별도로 만들어서 관리한다. 이것을 인덱스 버퍼라고 한다.&lt;/li&gt;
 &lt;li&gt;인덱스 버퍼는 삼각형의 수만큼 필요하기 때문에 인덱스 버퍼의 크기는 항상 3의 배수이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -6877,13 +6888,13 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;br /&gt;  &lt;br /&gt;&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;무게중심좌표&#34;&gt;무게중심좌표&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;무게중심좌표(Barycentric coordinate)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;$P&amp;rsquo; = s \cdot P_1 + t \cdot P_2 + (1 - s - t) \cdot P_3$&lt;/li&gt;
-&lt;li&gt;위 식에서 스칼라 값 $s$, $t$, $1 - s - t$는 모두 실수이다. 이들을 묶어서 하나의 3차원 벡터로 생성할 수 있다.&lt;/li&gt;
+&lt;li&gt;아핀 결합 수식에서 스칼라 값 $s$, $t$, $1 - s - t$는 모두 실수이다. 이들을 묶어서 하나의 3차원 벡터로 생성할 수 있다.&lt;/li&gt;
 &lt;li&gt;이렇게 &lt;mark style=&#34;background-color: lightblue&#34;&gt;아핀 결합의 스칼라를 묶어서 만든 좌표&lt;/mark&gt;를 무게중심좌표라고 한다. &lt;br /&gt;  &lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-06-barycentricCoordinate.jpg&#34;
 	
@@ -6899,17 +6910,16 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
-&lt;h3 id=&#34;무게중심좌표의-계산&#34;&gt;무게중심좌표의 계산&lt;/h3&gt;
+&lt;h3 id=&#34;아핀-결합으로-생성된-점이-삼각형-내부에-있는지-판별&#34;&gt;아핀 결합으로 생성된 점이 삼각형 내부에 있는지 판별&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;이전에 보았듯이 아핀 결합이 삼각형이 되려면 스칼라 값 $s$, $t$, $1 - s - t$는 $[0, 1]$ 범위 내에 있어야 한다.&lt;/p&gt;
+&lt;li&gt;이전에 보았듯이 아핀 결합이 삼각형이 되려면 스칼라 값 $s$, $t$, $1 - s - t$는 $[0, 1]$ 범위 내에 있어야 한다.
 &lt;ul&gt;
 &lt;li&gt;따라서 $[0, 1]$ 외부에 있다면 아핀 결합으로 생성된 점이 삼각형 외부에 있다고 볼 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;아핀 결합으로 생성된 점이 삼각형 내부에 있는지 판별하는 법&lt;/strong&gt; &lt;br /&gt;  &lt;br&gt;
-&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-07-threeVectors.jpg&#34;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/08-07-threeVectors.jpg&#34;
 	
 	
 	
@@ -6919,46 +6929,34 @@ $\vec{u} = (-\sin\theta, \cos\theta)$&lt;/li&gt;
 	
 	
 &gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;이전에 보았던 $\vec{w} = s \cdot \vec{u} + t \cdot \vec{v}$ 이 수식에 벡터 $\vec{u}$와 $\vec{v}$를 내적해보자.
+$$\vec{w} \cdot \vec{u} = ( s \cdot \vec{u} + t \cdot \vec{v}) \cdot \vec{u}$$
+$$\vec{w} \cdot \vec{v} = ( s \cdot \vec{u} + t \cdot \vec{v}) \cdot \vec{v}$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;$\vec{w} = s \cdot \vec{u} + t \cdot \vec{v}$ 이전에 보았던 이 수식에 벡터 $\vec{u}$와 $\vec{v}$를 내적해보자.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$\vec{w} \cdot \vec{u} = ( s \cdot \vec{u} + t \cdot \vec{v}) \cdot \vec{u}$ &lt;br /&gt;&lt;br&gt;
-$\vec{w} \cdot \vec{v} = ( s \cdot \vec{u} + t \cdot \vec{v}) \cdot \vec{v}$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;이것을 분배법칙에 따라 풀어준다.
+$$\vec{w} \cdot \vec{u} = s(\vec{u} \cdot \vec{u}) + t (\vec{u} \cdot \vec{v})$$
+$$\vec{w} \cdot \vec{v} = s(\vec{u} \cdot \vec{v}) + t (\vec{v} \cdot \vec{v})$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이것을 분배법칙에 따라 풀어준다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$ \vec{w} \cdot \vec{u} = s(\vec{u} \cdot \vec{u}) + t (\vec{u} \cdot \vec{v})$ &lt;br /&gt;&lt;br&gt;
-$ \vec{w} \cdot \vec{v} = s(\vec{u} \cdot \vec{v}) + t (\vec{v} \cdot \vec{v})$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;위의 식에는 $(\vec{u} \cdot \vec{v})$를, 및에 식에는 $(\vec{u} \cdot \vec{u})$를 곱해 각각 전개해보자.
+$$(\vec{w} \cdot \vec{u})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{u})(\vec{u} \cdot \vec{v}) + t(\vec{u} \cdot \vec{v})(\vec{u} \cdot \vec{v})$$
+$$(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{u}) = s(\vec{u} \cdot \vec{v})(\vec{u} \cdot \vec{u}) + t(\vec{v} \cdot \vec{v})(\vec{u} \cdot \vec{u})$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;위의 식에는 $(\vec{u} \cdot \vec{v})$를, 및에 식에는 $(\vec{u} \cdot \vec{u})$를 곱해 각각 전개해보자.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$(\vec{w} \cdot \vec{u})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{u})(\vec{u} \cdot \vec{v}) + t(\vec{u} \cdot \vec{v})(\vec{u} \cdot \vec{v})$ &lt;br /&gt;&lt;br&gt;
-$(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{u}) = s(\vec{u} \cdot \vec{v})(\vec{u} \cdot \vec{u}) + t(\vec{v} \cdot \vec{v})(\vec{u} \cdot \vec{u})$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;위에 식에서 아래식을 빼 $s$를 소거하고 $t$만 남긴다.
+$$ t = \frac{ (\vec{w} \cdot \vec{u})(\vec{u} \cdot \vec{v}) - (\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{u}) }{ (\vec{u} \cdot \vec{v})^2 - (\vec{u} \cdot \vec{u})(\vec{v} \cdot \vec{v}) }$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;위에 식에서 아래식을 빼 $s$를 소거하고 $t$만 남긴다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$ t = \frac{ (\vec{w} \cdot \vec{u})(\vec{u} \cdot \vec{v}) - (\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{u}) }{ (\vec{u} \cdot \vec{v})^2 - (\vec{u} \cdot \vec{u})(\vec{v} \cdot \vec{v}) }$$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;예전 식에서 이번에는 위의 식에 $(\vec{v} \cdot \vec{v})$를, 및에 식에는 $(\vec{u} \cdot \vec{v})$를 곱해 각각 전개해보자.
+$$(\vec{w} \cdot \vec{u})(\vec{v} \cdot \vec{v}) = s(\vec{u} \cdot \vec{u})(\vec{v} \cdot \vec{v}) + t(\vec{u} \cdot \vec{v})(\vec{v} \cdot \vec{v})$$
+$$(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{v})(\vec{u} \cdot \vec{v}) + t(\vec{v} \cdot \vec{v})(\vec{u} \cdot \vec{v})$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;예전 식에서 이번에는 위의 식에 $(\vec{v} \cdot \vec{v})$를, 및에 식에는 $(\vec{u} \cdot \vec{v})$를 곱해 각각 전개해보자.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$(\vec{w} \cdot \vec{u})(\vec{v} \cdot \vec{v}) = s(\vec{u} \cdot \vec{u})(\vec{v} \cdot \vec{v}) + t(\vec{u} \cdot \vec{v})(\vec{v} \cdot \vec{v})$ &lt;br /&gt;&lt;br&gt;
-$(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{v})(\vec{u} \cdot \vec{v}) + t(\vec{v} \cdot \vec{v})(\vec{u} \cdot \vec{v})$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;위의 식에서 아래 식을 빼 $t$를 소거하고 $s$만 남긴다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$ s = \frac{ (\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) - (\vec{w} \cdot \vec{u})(\vec{v} \cdot \vec{v}) }{ (\vec{u} \cdot \vec{v})^2 - (\vec{u} \cdot \vec{u})(\vec{v} \cdot \vec{v}) }$$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;위의 식에서 아래 식을 빼 $t$를 소거하고 $s$만 남긴다.
+$$ s = \frac{ (\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) - (\vec{w} \cdot \vec{u})(\vec{v} \cdot \vec{v}) }{ (\vec{u} \cdot \vec{v})^2 - (\vec{u} \cdot \vec{u})(\vec{v} \cdot \vec{v}) }$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;  
@@ -6968,7 +6966,7 @@ $(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{v})(\vec{
 &lt;ul&gt;
 &lt;li&gt;공통분모에서 내적을 $\cos$공식으로 변경하면 다음과 같아진다.&lt;/li&gt;
 &lt;li&gt;$(|\vec{u}||\vec{v}|)^2 \cdot \cos^2\theta - (|\vec{u}||\vec{v}|)^2$&lt;/li&gt;
-&lt;li&gt;이 값이 $0$이 되기 위한 조건은 $\vec{u}$ 혹은 $\vec{v}$의 크기가 $0$이거나, 그 두 벡터가 이루는 각 $\theta$가 $0^{\circ}$ 혹은 $180^{\circ}$일 때다. 이것은 두 벡터가 평행함을 의미한다.&lt;/li&gt;
+&lt;li&gt;이 값이 $0$이 되기 위한 조건은 $\vec{u}$ 혹은 $\vec{v}$의 크기가 $0$이거나, 그 두 벡터가 이루는 각 $\theta$가 $0^{\circ}$ 혹은 $180^{\circ}$일 때다. 이것은 &lt;u&gt;두 벡터가 평행함&lt;/u&gt;을 의미한다.&lt;/li&gt;
 &lt;li&gt;두 벡터가 평행하면 선형 종속의 관계를 가지며 삼각형이 아니라 선분을 만들어낸다. 이런 삼각형을 &lt;strong&gt;퇴화삼각형(Degenerate triangle)&lt;/strong&gt; 이라고 하며, 퇴화삼각형은 &lt;strong&gt;그리기에서 제외&lt;/strong&gt;한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -7094,9 +7092,9 @@ $(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{v})(\vec{
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;br /&gt;  
-&lt;h3 id=&#34;정점에-설정된-부가-정보의-활용&#34;&gt;정점에 설정된 부가 정보의 활용&lt;/h3&gt;
+&lt;h3 id=&#34;픽셀이-삼각형의-세-점으로부터-얼마나-영향을-받는지-파악&#34;&gt;픽셀이 삼각형의 세 점으로부터 얼마나 영향을 받는지 파악&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;무게중심좌표의 값은 주어진 &lt;strong&gt;픽셀이 삼각형의 세 점으로부터 얼마나 영향을 받는지&lt;/strong&gt; 파악하는 용도로도 활용할 수 있다.
+&lt;li&gt;무게중심좌표의 값은 주어진 픽셀이 삼각형의 세 점으로부터 얼마나 영향을 받는지 파악하는 용도로도 활용할 수 있다.
 &lt;ul&gt;
 &lt;li&gt;예를 들어 어떤점의 무게중심좌표가 $(0.333, 0.333, 0.333)$이라면 삼각형의 세 점이 균일하게 영향을 미치는 삼각형의 무게중심에 그 점이 위치한다고 볼 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
@@ -7264,26 +7262,21 @@ $(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{v})(\vec{
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;&lt;br /&gt;  &lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;텍스처-매핑&#34;&gt;텍스처 매핑&lt;/h2&gt;
+&lt;/div&gt;&lt;br /&gt;  
+&lt;h3 id=&#34;텍스처-매핑&#34;&gt;텍스처 매핑&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;무게중심좌표는 메시에 이미지를 입하는 용도로도 활용할 수 있다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;텍스처(Texture)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;무게중심좌표는 메시에 이미지를 입하는 용도로도 활용할 수 있다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;텍스처(Texture)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;메시에 이미지를 입히기 위해 변환된 데이터.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;텍스처 매핑(Texture mapping)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;텍스처 매핑(Texture mapping)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;메시에 이미지를 입하는 작업.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;UV 좌표계&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;UV 좌표계&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;사진이나 그림을 저장한 이미지는 각기 고유한 해상도를 가진다. 메시에 이것을 입히기 위해서 텍스처로 변환하면 관리 방식을 통일하기 위해 이미지 고유의 &lt;mark style=&#34;background-color: lightblue&#34;&gt;해상도에 관계없이 가로, 세로 크기가 $1$로 정규화&lt;/mark&gt;된다.&lt;/li&gt;
 &lt;li&gt;이처럼 렌더링 과정에서 텍스처를 사용할 때는 &lt;mark style=&#34;background-color: lightblue&#34;&gt;$[0, 1]$범위로 구성된 2차원 좌표계&lt;/mark&gt;를 사용하는 데 이 좌표계를 UV좌표계라고 한다.&lt;/li&gt;
@@ -7306,7 +7299,7 @@ $(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{v})(\vec{
 &lt;ul&gt;
 &lt;li&gt;텍스처 매핑 방법
 &lt;ul&gt;
-&lt;li&gt;삼각형의 세 정점에 UV 좌표 정보를 추가한다. 그리고 삼각형을 구성하는 각 픽셀들의 &lt;strong&gt;무게중심좌표를 계산해서 UV좌표와 선형보간&lt;/strong&gt;한다. 이렇게 하면 &lt;strong&gt;해당 픽셀에 해당하는 UV값&lt;/strong&gt;을 얻어낼 수 있다.&lt;/li&gt;
+&lt;li&gt;삼각형의 세 정점에 UV 좌표 정보를 추가한다. 그리고 삼각형을 구성하는 각 픽셀들의 &lt;u&gt;무게중심좌표를 계산해서 UV좌표와 선형보간&lt;/u&gt;한다. 이렇게 하면 &lt;u&gt;해당 픽셀에 해당하는 UV값&lt;/u&gt;을 얻어낼 수 있다.&lt;/li&gt;
 &lt;li&gt;이 UV값에 대응하는 텍스처의 색상 정보를 얻은 후에 이것을 최정 픽셀의 색상으로 지정하면 텍스처 매핑이 완성된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -7566,7 +7559,7 @@ $(\vec{w} \cdot \vec{v})(\vec{u} \cdot \vec{v}) = s(\vec{u} \cdot \vec{v})(\vec{
 &lt;br /&gt;
 &lt;h3 id=&#34;내적과-삼각함수와의-관계&#34;&gt;내적과 삼각함수와의 관계&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;벡터의 내적은 두 벡터의 사잇각에 대한 $\cos$함수와 비례한다.
+&lt;li&gt;벡터의 내적은 두 벡터의 사잇각에 대한 &lt;strong&gt;$\cos$함수와 비례&lt;/strong&gt;한다.
 &lt;ul&gt;
 &lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;$\vec{u} \cdot \vec{v} = |\vec{u}||\vec{v}|\cos\theta$&lt;/mark&gt;&lt;/li&gt;
 &lt;li&gt;이 식을 유도해보자.&lt;/li&gt;
@@ -7605,14 +7598,18 @@ $ = |\vec{a}|^2 + |\vec{c}|^2 - 2\vec{a} \cdot \vec{c}$&lt;/li&gt;
 &lt;p&gt;따라서 다음 식이 성립한다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\vec{a} \cdot \vec{c} = |\vec{a}||\vec{c}|\cos\theta$&lt;/li&gt;
-&lt;li&gt;여기서 두 벡터의 크기가 $1$이면, 두 벡터의 내적은 $\cos$함수가 된다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;여기서 두 벡터의 크기가 $1$이면, 두 벡터의 내적은 $\cos$함수가 된다.&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;$\vec{u} \cdot \vec{v} = \cos\theta$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;두 벡터의 내적이 $0$이면, 두 벡터는 직교한다.&lt;/strong&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;두 벡터의 내적이 $0$이면, 두 벡터는 직교한다.&lt;/mark&gt;
 &lt;ul&gt;
 &lt;li&gt;위의 공식에 따르면, 내적 값이 $0$이 되기 위한 조건은 $\cos$함수의 값이 $0$이 되는 경우 뿐이다.&lt;/li&gt;
 &lt;li&gt;$\cos$함수의 값이 $0$이 되는 경우는 두 벡터의 사잇각이 $90^\circ$ 혹은$270^\circ(-90^\circ)$인 경우다.&lt;/li&gt;
@@ -7635,18 +7632,14 @@ $ = |\vec{a}|^2 + |\vec{c}|^2 - 2\vec{a} \cdot \vec{c}$&lt;/li&gt;
 &lt;h3 id=&#34;행렬의-곱셈을-내적으로-표현하기&#34;&gt;행렬의 곱셈을 내적으로 표현하기&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;행렬과 벡터의 곱셈 연산을 내적으로 표현해보자.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$\begin{bmatrix} a &amp;amp; b \\ c &amp;amp; d \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$ &lt;br /&gt;
-$$ = \begin{bmatrix} (a, b) \cdot (x, y) \\ (c, d) \cdot (x, y) \end{bmatrix} $$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;행렬과 벡터의 곱셈 연산을 내적으로 표현해보자.
+$$\begin{bmatrix} a &amp;amp; b \\ c &amp;amp; d \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$ &lt;br /&gt;
+$$ = \begin{bmatrix} (a, b) \cdot (x, y) \\ (c, d) \cdot (x, y) \end{bmatrix} $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;이제 행렬과 행렬의 곱셈 연산을 내적으로 표현해보자.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$\begin{bmatrix} a &amp;amp; b \\ c &amp;amp; d \end{bmatrix} \begin{bmatrix} e &amp;amp; f \\ g &amp;amp; h \end{bmatrix} = \begin{bmatrix} ae + bg &amp;amp; af + bh \\ ce + dg &amp;amp; cf + dh \end{bmatrix}$$ &lt;br /&gt;
-$$ = \begin{bmatrix} (a, b) \cdot (e, g) &amp;amp; (a, b) \cdot (f, h) \\ (c, d) \cdot (e, g) &amp;amp; (c, d) \cdot (f, h) \end{bmatrix} $$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;행렬과 행렬의 곱셈 연산을 내적으로 표현해보자.
+$$\begin{bmatrix} a &amp;amp; b \\ c &amp;amp; d \end{bmatrix} \begin{bmatrix} e &amp;amp; f \\ g &amp;amp; h \end{bmatrix} = \begin{bmatrix} ae + bg &amp;amp; af + bh \\ ce + dg &amp;amp; cf + dh \end{bmatrix}$$ &lt;br /&gt;
+$$ = \begin{bmatrix} (a, b) \cdot (e, g) &amp;amp; (a, b) \cdot (f, h) \\ (c, d) \cdot (e, g) &amp;amp; (c, d) \cdot (f, h) \end{bmatrix} $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
@@ -7663,19 +7656,21 @@ $$ = \begin{bmatrix} (a, b) \cdot (e, g) &amp;amp; (a, b) \cdot (f, h) \\ (c, d)
 &lt;p&gt;직교행렬의 특징은 &lt;strong&gt;전치행렬이 곧 역행렬&lt;/strong&gt;이라는 점이다. 따라서 직교행렬과 그 전치행렬의 곱은 항등행렬이된다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;$Q \cdot Q^T = I$&lt;/mark&gt;&lt;/li&gt;
-&lt;li&gt;이는 내적을 사용해서 증명할 수 있다.&lt;/li&gt;
-&lt;li&gt;$(a, b)$와 $(c, d)$는 서로 직교하므로 두 벡터의 내적은 $0$이다. 그리고 행벡터와 열벡터의 크기가 $1$이므로 자기 자신과 내적한 결과는 $1$이 된다.&lt;/li&gt;
-&lt;li&gt;$$Q = \begin{bmatrix} a &amp;amp; c \\ b &amp;amp; d \end{bmatrix}$$ &lt;br /&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이는 내적을 사용해서 증명할 수 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$(a, b)$와 $(c, d)$는 서로 직교하므로 두 벡터의 내적은 $0$이다. 그리고 행벡터와 열벡터의 크기가 $1$이므로 자기 자신과 내적한 결과는 $1$이 된다.
+$$Q = \begin{bmatrix} a &amp;amp; c \\ b &amp;amp; d \end{bmatrix}$$ &lt;br /&gt;
 $$Q^T \cdot Q = \begin{bmatrix} a &amp;amp; b \\ c &amp;amp; d \end{bmatrix} \begin{bmatrix} a &amp;amp; c \\ b &amp;amp; d \end{bmatrix} $$ &lt;br /&gt;
 $$ = \begin{bmatrix} (a, b) \cdot (a, b) &amp;amp; (a, b) \cdot (c, d) \\ (c, d) \cdot (a, b) &amp;amp; (c, d) \cdot (c, d) \end{bmatrix} = \begin{bmatrix} 1 &amp;amp; 0 \\ 0 &amp;amp; 1 \end{bmatrix} = I$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;회전 변환행렬&lt;/strong&gt;은 직교행렬이다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;$$R_{\theta} = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta \end{bmatrix}$$ &lt;br /&gt;
-$$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &amp;amp; 0 \\ 0 &amp;amp; \cos^2\theta + \sin^2\theta \end{bmatrix} = \begin{bmatrix} 1 &amp;amp; 0 \\ 0 &amp;amp; 1 \end{bmatrix} = I$$&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;u&gt;&lt;strong&gt;회전 변환행렬&lt;/strong&gt;은 직교행렬&lt;/u&gt;이다.
+$$R_{\theta} = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta \\ \sin\theta &amp;amp; \cos\theta \end{bmatrix}$$ &lt;br /&gt;
+$$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &amp;amp; 0 \\ 0 &amp;amp; \cos^2\theta + \sin^2\theta \end{bmatrix} = \begin{bmatrix} 1 &amp;amp; 0 \\ 0 &amp;amp; 1 \end{bmatrix} = I$$&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
@@ -7694,7 +7689,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;회전 변환&lt;/strong&gt;은 강체 변환이다.&lt;/p&gt;
+&lt;p&gt;&lt;u&gt;&lt;strong&gt;회전 변환&lt;/strong&gt;은 강체 변환&lt;/u&gt;이다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;회전 행렬은 앞서 보았듯이 직교 행렬이기 때문에 1, 2번 조건을 만족한다.&lt;/li&gt;
 &lt;li&gt;3번의 경우 행렬식 $ad - bc$가 다음과 같이 $1$이 된다.&lt;/li&gt;
@@ -7703,8 +7698,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;시야-판별&#34;&gt;시야 판별&lt;/h2&gt;
-&lt;h3 id=&#34;앞뒤-판별&#34;&gt;앞뒤 판별&lt;/h3&gt;
+&lt;h2 id=&#34;1-앞뒤-판별&#34;&gt;(1) 앞뒤 판별&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;벡터의 크기 값은 언제나 양수이다. 따라서 내적의 부호는 $\cos$ 함수가 결정한다.&lt;/p&gt;
@@ -7734,28 +7728,33 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;따라서 이를 응용하면 벡터 내적의 부호만 가지고도 다음과 같이 판단할 수 있다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;벡터 내적의 결과가 양수이다.
-&lt;ul&gt;
-&lt;li&gt;두 벡터는 같은 방향을 향하고 있다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;벡터 내적의 결과가 음수이다.
-&lt;ul&gt;
-&lt;li&gt;두 벡터는 다른 방향을 향하고 있다. (서로 마주보고 있다.)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;벡터 내적의 결과가 $0$이다.
-&lt;ul&gt;
-&lt;li&gt;두 벡터는 직교한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;두 벡터 내적의 결과&lt;/th&gt;
+&lt;th&gt;의미&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;양수&lt;/td&gt;
+&lt;td&gt;두 벡터는 같은 방향을 향하고 있다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;음수&lt;/td&gt;
+&lt;td&gt;두 벡터는 다른 방향을 향하고 있다. (서로 마주보고 있다.)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$0$&lt;/td&gt;
+&lt;td&gt;두 벡터는 직교한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;이것들을 응용해서 &lt;strong&gt;목표물이 캐릭터 앞에 있는지 뒤에 있는지를 판별&lt;/strong&gt;할 수 있겠다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;이것들을 응용해서 &lt;mark style=&#34;background-color: lightblue&#34;&gt;목표물이 캐릭터 앞에 있는지 뒤에 있는지를 판별&lt;/mark&gt;할 수 있겠다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/07-05-isFront.jpg&#34;
 	
 	
@@ -7766,30 +7765,34 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 	
 	
 &gt;
-&lt;ul&gt;
-&lt;li&gt;$\vec{f} \cdot \vec{v}$이 양수
-&lt;ul&gt;
-&lt;li&gt;캐릭터 앞에 목표물이 있다.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;$\vec{f} \cdot \vec{v}$의 결과&lt;/th&gt;
+&lt;th&gt;의미&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;양수&lt;/td&gt;
+&lt;td&gt;캐릭터 앞에 목표물이 있다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;음수&lt;/td&gt;
+&lt;td&gt;캐릭터 뒤에 목표물이 있다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$0$&lt;/td&gt;
+&lt;td&gt;캐릭터 바로 옆에 목표물이 있다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/li&gt;
-&lt;li&gt;$\vec{f} \cdot \vec{v}$이 음수
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;2-시야-판별&#34;&gt;(2) 시야 판별&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;캐릭터 뒤에 목표물이 있다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;$\vec{f} \cdot \vec{v}$이 $0$
-&lt;ul&gt;
-&lt;li&gt;캐릭터 바로 옆에 목표물이 있다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;br /&gt;
-&lt;h3 id=&#34;시야-판별-1&#34;&gt;시야 판별&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;캐릭터에게 부여한 시야각이 $\beta$라고 하자. 그리고 캐릭터에서 목표물로 향하는 벡터 $\vec{v}$와의 사잇각을 $\alpha$라고 하자. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;캐릭터에게 부여한 시야각이 $\beta$라고 하자. 그리고 캐릭터에서 목표물로 향하는 벡터 $\vec{v}$와의 사잇각을 $\alpha$라고 하자. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/07-06-isInSight.jpg&#34;
 	
 	
@@ -7799,10 +7802,11 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 		alt=&#34;캐릭터 시야각의 설정&#34;
 	
 	
-&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;$\cos$함수의 경우 $[0^\circ, 180^\circ]$에서는 각이 커질 수록 값이 작아진다. &lt;br /&gt;&lt;br&gt;
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;  
+&lt;ul&gt;
+&lt;li&gt;$\cos$함수의 경우 $[0^\circ, 180^\circ]$에서는 각이 커질 수록 값이 작아진다. &lt;br /&gt;&lt;br&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/07-07-cos.jpg&#34;
 	
 	
@@ -7812,29 +7816,37 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 		alt=&#34;0~180도에서의 cos함수&#34;
 	
 	
-&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;이것을 활용해서 다음의 과정으로 &lt;strong&gt;캐릭터 시야 안에 목표물이 있는지 판별&lt;/strong&gt;할 수 있다.&lt;/p&gt;
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;  
+&lt;ul&gt;
+&lt;li&gt;이것을 활용해서 다음의 과정으로 &lt;mark style=&#34;background-color: lightblue&#34;&gt;캐릭터 시야 안에 목표물이 있는지 판별&lt;/mark&gt;할 수 있다.
 &lt;ul&gt;
 &lt;li&gt;(1) 시야각을 절반 나눈 각의 $\cos\frac{\beta}{2}$를 미리 계산해둔다.&lt;/li&gt;
 &lt;li&gt;(2) 캐릭터 시선 벡터의 크기를 $1$로 정규화시킨 단위 벡터 $\hat{f}$을 구한다.&lt;/li&gt;
 &lt;li&gt;(3) 캐릭터에서 목표물로 향하는 벡터를 정규화시킨 단위 벡터 $\hat{v}$을 구한다.&lt;/li&gt;
 &lt;li&gt;(4) 그 두 벡터의 내적 결과는 $\hat{f} \cdot \hat{v} = \cos\alpha$가 된다. 이것을 앞서 계산해 두었던 $\cos\frac{\beta}{2}$와 비교한다.&lt;/li&gt;
-&lt;li&gt;이 때 $\hat{f} \cdot \hat{v}$가 $\cos\frac{\beta}{2}$보다 작다면 사잇각이 시야보다 작다는 것을 의미하므로 물체가 시야 영역에 들어왔음을 의미한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;$\hat{f} \cdot \hat{v} \lt \cos\frac{\beta}{2}$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;목표물이 시야 범위 안에 있다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;$\hat{f} \cdot \hat{v} &amp;gt; \cos\frac{\beta}{2}$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;목표물이 시야 범위 밖에 있다.&lt;/li&gt;
-&lt;/ul&gt;
+&lt;li&gt;이 때 $\hat{f} \cdot \hat{v}$가 $\cos\frac{\beta}{2}$보다 크다면 사잇각이 시야보다 작다는 것을 의미하므로 물체가 시야 영역에 들어왔음을 의미한다.
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;결과&lt;/th&gt;
+&lt;th&gt;의미&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;$$\hat{f} \cdot \hat{v} \geq \cos\frac{\beta}{2}$$&lt;/td&gt;
+&lt;td&gt;목표물이 시야 범위 안에 있다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$$\hat{f} \cdot \hat{v} \lt \cos\frac{\beta}{2}$$&lt;/td&gt;
+&lt;td&gt;목표물이 시야 범위 밖에 있다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
@@ -7846,7 +7858,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;조명-효과의-구현&#34;&gt;조명 효과의 구현&lt;/h2&gt;
+&lt;h2 id=&#34;3-조명-효과의-구현&#34;&gt;(3) 조명 효과의 구현&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;램버트 반사(Lambertian reflection)&lt;/strong&gt;
 &lt;ul&gt;
@@ -7895,7 +7907,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;h2 id=&#34;투영-벡터&#34;&gt;투영 벡터&lt;/h2&gt;
+&lt;h2 id=&#34;4-투영-벡터&#34;&gt;(4) 투영 벡터&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;벡터의 내적은 어떤 벡터를 다른 벡터에 직교 투영하는 용도로도 사용된다.
 &lt;ul&gt;
@@ -7926,30 +7938,15 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 	
 	
 &gt;
-&lt;ul&gt;
-&lt;li&gt;$\vec{A} \cdot \vec{B} = |\vec{A}| \cdot |\vec{B}| \cdot \cos\theta = |\vec{A}| \cdot |\vec{B}| \cdot \frac{|\vec{proj}|}{|\vec{A}|} = |\vec{B}| \cdot |\vec{proj}|$
-&lt;ul&gt;
-&lt;li&gt;$|\vec{proj}| = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|}$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$\vec{A} \cdot \vec{B} = |\vec{A}| \cdot |\vec{B}| \cdot \cos\theta = |\vec{A}| \cdot |\vec{B}| \cdot \frac{|\vec{proj}|}{|\vec{A}|} = |\vec{B}| \cdot |\vec{proj}|$$
+$$|\vec{proj}| = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|}$$&lt;/li&gt;
 &lt;li&gt;$\vec{proj}$는 $\vec{B}$와 방향이 같으므로 $|\vec{proj}| \cdot \hat{B}$으로도 표현할 수 있다.
-&lt;ul&gt;
-&lt;li&gt;$\vec{proj} = |\vec{proj}| \cdot \hat{B}$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$\vec{proj} = |\vec{proj}| \cdot \hat{B}$$&lt;/li&gt;
 &lt;li&gt;여기에 맨 위의 공식을 대입하면 다음과 같다.
-&lt;ul&gt;
-&lt;li&gt;$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \hat{B}$&lt;/li&gt;
-&lt;li&gt;$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \frac{\vec{B}}{|\vec{B}|} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|^2} \cdot \vec{B}$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;여기서 $\vec{B}$ 크기가 $1$이라면 다음과 같이 단순하게 정리할 수 있다.
-&lt;ul&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt; $\vec{proj} = (\vec{A} \cdot \hat{B}) \cdot \hat{B}$ &lt;/mark&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \hat{B}$$
+$$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \frac{\vec{B}}{|\vec{B}|} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|^2} \cdot \vec{B}$$&lt;/li&gt;
+&lt;li&gt;여기서 $\vec{B}$ 크기를 $1$로 정규화 하면 다음과 같이 단순하게 정리할 수 있다.
+$$\vec{proj} = (\vec{A} \cdot \hat{B}) \cdot \hat{B}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -7987,7 +7984,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;이동-변환을-위한-아핀-공간&#34;&gt;이동 변환을 위한 아핀 공간&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;행렬 곱으로 어떻게 이동 기능을 구현할 수 있을까?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;행렬 곱으로 어떻게 이동 기능을 구현&lt;/strong&gt;할 수 있을까?&lt;/li&gt;
 &lt;li&gt;$$A \cdot \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} x + a \\ y + b \end{bmatrix}$$
 &lt;ul&gt;
 &lt;li&gt;이러한 행렬 곱을 만족하는 정방행렬 $A$는 존재하지 않는다.&lt;/li&gt;
@@ -7997,20 +7994,17 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;전단 변환&lt;/strong&gt;을 생각해보자.&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;전단 변환&lt;/strong&gt;을 생각해보자.
 &lt;ul&gt;
 &lt;li&gt;전단 변환으로 공간을 오른쪽으로 밀면, $y$값이 $1$인 영역의 $x$범위는 밀어낸만큼 이동한다.&lt;/li&gt;
 &lt;li&gt;따라서 다음과 같이 벡터의 $y$값을 $1$로 고정한다면 $x$를 이동시킬 수 있다.&lt;/li&gt;
 &lt;li&gt;$$\begin{bmatrix} 1 &amp;amp; a\\ 0 &amp;amp; 1 \end{bmatrix} \cdot \begin{bmatrix} x \\ 1 \end{bmatrix} = \begin{bmatrix} x + a \\ 1 \end{bmatrix} $$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;그렇다면, 2차원을 3차원으로 확장해서 &lt;mark style=&#34;background-color: lightblue&#34;&gt;마지막 차원 $z$값을 1로 고정한 전단 변환&lt;/mark&gt;을 시행하면 $x$와 $y$를 이동시킬 수 있겠다.&lt;/p&gt;
+&lt;li&gt;그렇다면, 2차원을 3차원으로 확장해서 &lt;mark style=&#34;background-color: lightblue&#34;&gt;마지막 차원 $z$값을 1로 고정한 전단 변환&lt;/mark&gt;을 시행하면 $x$와 $y$를 이동시킬 수 있겠다.
 &lt;ul&gt;
-&lt;li&gt;$$\begin{bmatrix} 1 &amp;amp; 0 &amp;amp; a\\ 0 &amp;amp; 1 &amp;amp; b \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix} \cdot \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x + a \\ y + b \\ 1 \end{bmatrix} $$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-01-affineSpace.jpg&#34;
+&lt;li&gt;$$\begin{bmatrix} 1 &amp;amp; 0 &amp;amp; a\\ 0 &amp;amp; 1 &amp;amp; b \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix} \cdot \begin{bmatrix} x \\ y \\ 1 \end{bmatrix} = \begin{bmatrix} x + a \\ y + b \\ 1 \end{bmatrix} $$
+&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-01-affineSpace.jpg&#34;
 	
 	
 	
@@ -8019,76 +8013,68 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 		alt=&#34;3차원 전단 변환으로 2차원 이동 변환 구현하기&#34;
 	
 	
-&gt;&lt;/p&gt;
+&gt;&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;이동 변환행렬(Translate transformation matrix)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;이동 변환행렬(Translate transformation matrix)&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;마지막 차원의 값이 1이라는 특정 조건을 가지는 전단 변환을 활용해서 이동 기능을 행렬로 구현한 것이다.&lt;/li&gt;
 &lt;li&gt;$$ T = \begin{bmatrix} 1 &amp;amp; 0 &amp;amp; a\\ 0 &amp;amp; 1 &amp;amp; b \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
-&lt;li&gt;우리가 Chapter 5에서 보았던 크기와 회전 변환행렬의 경우 $2 \times 2$정방행렬이기 때문에 이동 변환행렬과 같이 $3 \times 3$으로 맞추어 줄 필요가 있겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;우리가 Chapter 5에서 보았던 크기와 회전 변환행렬의 경우 $2 \times 2$정방행렬이기 때문에 이동 변환행렬과 같이 $3 \times 3$으로 맞추어 줄 필요가 있겠다.
+&lt;ul&gt;
 &lt;li&gt;$$S = \begin{bmatrix} a &amp;amp; 0 &amp;amp; 0 \\ 0 &amp;amp; b &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;li&gt;$$R = \begin{bmatrix} \cos\theta &amp;amp; -\sin\theta &amp;amp; 0 \\ \sin\theta &amp;amp; \cos\theta &amp;amp; 0 \\ 0 &amp;amp; 0 &amp;amp; 1 \end{bmatrix}$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;아핀 공간(Affine space)&lt;/strong&gt;&lt;/p&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;벡터 공간에서 이동을 위해 마지막 차원 값을 $1$로 한정한 부분 공간&lt;/mark&gt;을 말한다.&lt;/li&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;아핀 공간(Affine space)&lt;/strong&gt;&lt;/mark&gt;
+&lt;ul&gt;
+&lt;li&gt;벡터 공간에서 &lt;u&gt;이동을 위해 마지막 차원 값을 $1$로 한정한 부분 공간&lt;/u&gt;을 말한다.&lt;/li&gt;
 &lt;li&gt;위의 그림에서 파란색으로 칠한 공간이다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;아핀 변환(Affine transformation)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;아핀 변환(Affine transformation)&lt;/strong&gt;&lt;/mark&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;한 차원을 높여서 설계해서, 점, 직선, 평면을 보존하는 선형 변환&lt;/mark&gt;을 말한다.&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;한 차원을 높여서 설계해서 점, 직선, 평면을 보존하는 선형 변환&lt;/u&gt;을 말한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;아핀-공간의-구성요소&#34;&gt;아핀 공간의 구성요소&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;점(Point)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;물체를 표현하고 위치를 지정하는 요소.&lt;/li&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;마지막 차원의 값은 항상 $1$&lt;/mark&gt;이다.
-&lt;ul&gt;
-&lt;li&gt;2차원 공간의 점: $(x, y, 1)$&lt;/li&gt;
-&lt;li&gt;3차원 공간의 점: $(x, y, z, 1)$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;이동 벡터&lt;/strong&gt; 혹은 &lt;strong&gt;변위 벡터(Displacement vector)&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;물체를 움직이는 데 사용하는 요소.&lt;/li&gt;
-&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;마지막 차원의 값은 항상 $0$&lt;/mark&gt;이다.
-&lt;ul&gt;
-&lt;li&gt;아핀 공간의 점 $P_1$에 이동 벡터 $\vec{v}$를 더한 결과는 아핀 공간의 다른 점 $P_2$에 대응된다.&lt;/li&gt;
-&lt;li&gt;$P_1 + \vec{v} = P_2$ &lt;br /&gt;
-$\vec{v} = P_2 - P_1$&lt;/li&gt;
-&lt;li&gt;여기서 벡터 $\vec{v}$는 $P_1$에서 $P_2$를 향하는 벡터를 의미한다. (순서를 거꾸로하면 반대로 향한다.)&lt;/li&gt;
-&lt;li&gt;점 $P_1$이 $(x_1, y_1, 1)$이고 $P_2$이 $(x_2, y_2, 1)$이라면 두 점을 빼서. 만든 이동 벡터 $\vec{v}$는 $x$, $y$값과 무관하게 $0$이다.&lt;/li&gt;
-&lt;li&gt;$(x_1 - x_2, y_1 - y_2, 0)$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;구성요소&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;점&lt;br /&gt;(Point)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;물체를 표현하고 위치를 지정하는 요소.&lt;br /&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;마지막 차원의 값은 항상 $1$&lt;/mark&gt;이다. 예를 들어 $2$라면 이동 변환 시 $(x + 2a, y + 2b, 2)$와 같은 이상한 결과가 나올 것이다.&lt;br /&gt;- 2차원 공간의 점: $(x, y, 1)$&lt;br /&gt;- 3차원 공간의 점: $(x, y, z, 1)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;이동 벡터&lt;/strong&gt; 혹은&lt;br /&gt;&lt;strong&gt;변위 벡터&lt;br /&gt;(Displacement vector)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;물체를 움직이는 데 사용하는 요소.&lt;br /&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;마지막 차원의 값은 항상 $0$&lt;/mark&gt;이다.&lt;br /&gt;- 아핀 공간의 점 $P_1$에 이동 벡터 $\vec{v}$를 더한 결과는 아핀 공간의 다른 점 $P_2$에 대응된다.&lt;br /&gt;$P_1 + \vec{v} = P_2$&lt;br /&gt;$\vec{v} = P_2 - P_1$&lt;br /&gt;- 여기서 벡터 $\vec{v}$는 $P_1$에서 $P_2$를 향하는 벡터를 의미한다. (순서를 거꾸로하면 반대로 향한다.)&lt;br /&gt;- 점 $P_1$이 $(x_1, y_1, 1)$이고 $P_2$이 $(x_2, y_2, 1)$이라면 두 점을 빼서 만든 이동 벡터 $\vec{v}$는 $x$, $y$값과 무관하게 $0$이다.&lt;br /&gt;$(x_1 - x_2, y_1 - y_2, 0)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;br /&gt;
 &lt;h3 id=&#34;아핀-공간의-성질&#34;&gt;아핀 공간의 성질&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;유클리드 공간(Euclidean space) → 아핀 공간에 대응
+&lt;li&gt;유클리드 공간(Euclidean space) → 아핀 공간에 대응된다
 &lt;ul&gt;
 &lt;li&gt;물리적인 관점에서 바라본 현실 세계의 3차원 공간.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;유클리드 벡터(Euclidean vector) → 이동 벡터에 대응
+&lt;li&gt;유클리드 벡터(Euclidean vector) → 이동 벡터에 대응된다
 &lt;ul&gt;
 &lt;li&gt;유클리드 공간에서 작용하는 힘.&lt;/li&gt;
 &lt;/ul&gt;
@@ -8096,46 +8082,61 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;점과 이동 벡터의 마지막 차원 값을 토대로 다음과 같은 연산 규칙이 성립한다.
-&lt;ul&gt;
-&lt;li&gt;점 $-$ 점 $=$ 벡터 $(1 - 1 = 0)$&lt;/li&gt;
-&lt;li&gt;점 $+$ 벡터 $=$ 점 $(1 + 0 = 1)$&lt;/li&gt;
-&lt;li&gt;벡터 $+$ 벡터 $=$ 벡터 $(0 + 0 = 0)$&lt;/li&gt;
-&lt;li&gt;점 $+$ 점 $\neq$ 점 $(1 + 1 = 2)$
-&lt;ul&gt;
-&lt;li&gt;마지막 차원 값이 $2$가 되므로 아핀 공간 영역을 벗어나게 되어서 성립하지 않는다.&lt;/li&gt;
+&lt;li&gt;점과 이동 벡터의 &lt;strong&gt;마지막 차원 값&lt;/strong&gt;을 토대로 다음과 같은 연산 규칙이 성립한다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;연산 규칙&lt;/th&gt;
+&lt;th&gt;마지막 차원 값 계산&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;점 $-$ 점 $=$ 벡터&lt;/td&gt;
+&lt;td&gt;$(1 - 1 = 0)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;점 $+$ 벡터 $=$ 점&lt;/td&gt;
+&lt;td&gt;$(1 + 0 = 1)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;벡터 $+$ 벡터 $=$ 벡터&lt;/td&gt;
+&lt;td&gt;$(0 + 0 = 0)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;점 $+$ 점 $\neq$ 점&lt;/td&gt;
+&lt;td&gt;$(1 + 1 = 2)$&lt;br /&gt;마지막 차원 값이 $2$가 되므로&lt;br /&gt;아핀 공간 영역을 벗어나게 되어서 성립하지 않는다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;아핀-결합&#34;&gt;아핀 결합&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;점 $+$ 점 $\neq$ 점&lt;/p&gt;
+&lt;li&gt;점 $+$ 점 $\neq$ 점 이다.
 &lt;ul&gt;
-&lt;li&gt;만약 선형 결합의 형태로 점에 &lt;strong&gt;스칼라를 곱한 후 더한다면 특정 조건에서&lt;/strong&gt; 새로운 점을 생성하는 것이 가능하다.&lt;/li&gt;
+&lt;li&gt;하지만 만약 선형 결합의 형태로 &lt;strong&gt;점에 스칼라를 곱한 후 더한다면 특정 조건에서 새로운 점을 생성하는 것이 가능&lt;/strong&gt;하다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;점 $(x_1, y_1, 1)$과 $(x_2, y_2, 1)$에 각각 스칼라 $a$, $b$를 곱한 선형 결합은 다음과 같다.&lt;/p&gt;
+&lt;li&gt;점 $(x_1, y_1, 1)$과 $(x_2, y_2, 1)$에 각각 스칼라 $a$, $b$를 곱한 선형 결합은 다음과 같다.
 &lt;ul&gt;
 &lt;li&gt;$a \cdot P_1 + b \cdot P_2 = (ax_1 + ax_2, ay_1 + by_2, a + b)$&lt;/li&gt;
-&lt;li&gt;여기서 &lt;mark style=&#34;background-color: lightblue&#34;&gt;$a + b = 1$&lt;/mark&gt; 조건을 유지한다면 점과 점을 결합해서 새로운 점을 만들 수 있다.&lt;/li&gt;
-&lt;li&gt;동일한 원리로 점 세개를 가지고도 새로운 점을 만들 수 있다.&lt;/li&gt;
-&lt;li&gt;$a \cdot P_1 + b \cdot P_2 + c \cdot P_3 (s.t. a + b + c = 1)$&lt;/li&gt;
+&lt;li&gt;여기서 마지막 차원인 &lt;mark style=&#34;background-color: lightblue&#34;&gt;$a + b$가 $1$&lt;/mark&gt;인 조건을 유지한다면 점과 점을 결합해서 새로운 점을 만들 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;아핀 결합(Affine combination)&lt;/strong&gt;&lt;/p&gt;
+&lt;li&gt;동일한 원리로 점 세개를 가지고도 새로운 점을 만들 수 있다.
 &lt;ul&gt;
-&lt;li&gt;이렇게 &lt;mark style=&#34;background-color: lightblue&#34;&gt;여러 개의 점을 결합해서 새로운 점을 생성하는 수식&lt;/mark&gt;을 아핀 결합이라고 한다.&lt;/li&gt;
+&lt;li&gt;$a \cdot P_1 + b \cdot P_2 + c \cdot P_3$  $(s.t.$ $a + b + c = 1)$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;아핀 결합(Affine combination)&lt;/strong&gt;&lt;/mark&gt;
+&lt;ul&gt;
+&lt;li&gt;이렇게 &lt;u&gt;여러 개의 점을 결합해서 새로운 점을 생성하는 수식&lt;/u&gt;을 아핀 결합이라고 한다.&lt;/li&gt;
 &lt;li&gt;$n$개의 점을 아핀 결합하는 경우
-&lt;ul&gt;
-&lt;li&gt;$$\displaystyle\sum_{i=1}^{n} c_i \cdot P_i (s.t. \displaystyle\sum_{i=1}^{n} c_i = 1)$$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+$$\displaystyle\sum_{i=1}^{n} c_i \cdot P_i (s.t. \displaystyle\sum_{i=1}^{n} c_i = 1)$$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -8146,7 +8147,7 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 &lt;ul&gt;
 &lt;li&gt;$a$에 $1$을 대입하면, 점 $P_1$이 생성된다.&lt;/li&gt;
 &lt;li&gt;$a$에 $0$을 대입하면, 점 $P_2$가 생성된다.&lt;/li&gt;
-&lt;li&gt;$a$에 $0.5$을 대입하면, 점 $P_1$과 $P_2$의 중점이 생성된다. $(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}, 1)$  &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;$a$에 $0.5$을 대입하면, 점 $P_1$과 $P_2$의 중점이 생성된다. $(\frac{x_1 + x_2}{2}, \frac{y_1 + y_2}{2}, 1)$  &lt;br /&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-02-newDot.jpg&#34;
 	
 	
@@ -8157,12 +8158,16 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 	
 	
 &gt;&lt;/li&gt;
-&lt;li&gt;이렇듯 두 점 $P_1$, $P_2$의 아핀 결합으로 새로운 점을 생성하면 $a$값이 양의 방향으로 커질 수록. $P_1$의 바깥쪽에 점이 생성되고, $a$의 값이 음의 방향으로 커질 수록 $P_2$의 바깥쪽 방향에 점이 생성된다.&lt;/li&gt;
-&lt;li&gt;따라서 아핀 결합으로 생성되는 점을 모두 모으면 두 점 $P_1$, $P_2$을 지나는 무한한 긴 선이 만들어질 것이다.&lt;/li&gt;
-&lt;li&gt;이것을 수식으로 확인해보면,
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;이렇듯 두 점 $P_1$, $P_2$의 아핀 결합으로 새로운 점을 생성하면 $a$값이 양의 방향으로 커질 수록 $P_1$의 바깥쪽에 점이 생성되고, $a$의 값이 음의 방향으로 커질 수록 $P_2$의 바깥쪽 방향에 점이 생성된다.&lt;/li&gt;
+&lt;li&gt;따라서 &lt;u&gt;아핀 결합으로 생성되는 점을 모두 모으면 두 점 $P_1$, $P_2$을 지나는 무한한 긴 선&lt;/u&gt;이 만들어질 것이다.&lt;/li&gt;
+&lt;li&gt;이것을 수식으로 확인해보자.
 &lt;ul&gt;
-&lt;li&gt;$a \cdot + (1 - a) \cdot P_2 = P&amp;rsquo;$을 $a$로 묶어서 다시 정리하면 $a(P_1. - P_2) = (P&amp;rsquo; - P_2)$이다.&lt;/li&gt;
-&lt;li&gt;이것을 두 이동 벡터로 나타내면, $a \cdot \vec{u} = \vec{v}$이다. 이 식으로 두 벡터가 평행하다는 것을 알 수 있고, 따라서 아핀 결합으로 생성되는 점은 두 점을 지나는 직선 상에 위치함을 보장받게 된다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;$a \cdot P_1 + (1 - a) \cdot P_2 = P&amp;rsquo;$을 $a$로 묶어서 다시 정리하면,&lt;/li&gt;
+&lt;li&gt;$a(P_1 - P_2) = (P&amp;rsquo; - P_2)$이다.&lt;/li&gt;
+&lt;li&gt;이것을 두 이동 벡터로 나타내면, $a \cdot \vec{u} = \vec{v}$이다.&lt;/li&gt;
+&lt;li&gt;이 식으로 두 벡터가 평행하다는 것을 알 수 있고, 따라서 아핀 결합으로 생성되는 점은 두 점을 지나는 직선 상에 위치함을 보장받게 된다. &lt;br /&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-03-sameLine.jpg&#34;
 	
 	
@@ -8176,17 +8181,16 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;br /&gt;
 &lt;ul&gt;
-&lt;li&gt;직선의 방정식
+&lt;li&gt;&lt;strong&gt;직선의 방정식&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;$L(a) = a \cdot P_1 + (1 - a) \cdot P_2$&lt;/li&gt;
+&lt;li&gt;직선의 방정식은 $a$의 범위에 따라 다양한 종류의 선에 대응된다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;직선의 방정식은 $a$의 범위에 따라 다양한 종류의 선에 대응된다. &lt;br /&gt;&lt;br&gt;
-&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-04-lines.jpg&#34;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-04-lines.jpg&#34;
 	
 	
 	
@@ -8195,46 +8199,42 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 		alt=&#34;매개변수 범위에 따른 직선의 종류&#34;
 	
 	
-&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;(a) 직선(Line)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;양쪽 받향으로 무한히 뻗어나가는 선.&lt;/li&gt;
-&lt;li&gt;추상적인 선의 성질을 표현할 때 사용한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;(b) 반직선(Ray)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;지정한 위치에서 한쪽으로만 뻗어나가는 선.&lt;/li&gt;
-&lt;li&gt;레이캐스팅(Raycasting), 레이트레이싱(Raytracing)에 사용된다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;(c) 선분(Line segment)&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;시작점과 끝점의 위치가 정해져 있는 선.&lt;/li&gt;
-&lt;li&gt;프로그래밍을 활용해서 화면에 선을 그릴 때 사용한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;직선의 종류&lt;/th&gt;
+&lt;th&gt;설명&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;(a) 직선(Line)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;양쪽 받향으로 무한히 뻗어나가는 선.&lt;br /&gt;추상적인 선의 성질을 표현할 때 사용한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;(b) 반직선(Ray)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;지정한 위치에서 한쪽으로만 뻗어나가는 선.&lt;br /&gt;레이캐스팅(Raycasting), 레이트레이싱(Raytracing)에 사용된다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;(c) 선분(Line segment)&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;시작점과 끝점의 위치가 정해져 있는 선.&lt;br /&gt;프로그래밍을 활용해서 화면에 선을 그릴 때 사용한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;h2 id=&#34;선-그리기-알고리즘&#34;&gt;선 그리기 알고리즘&lt;/h2&gt;
 &lt;h3 id=&#34;벡터를-모니터의-점으로-표현&#34;&gt;벡터를 모니터의 점으로 표현&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;데카르트 좌표계가 빈틈 없이 연속된(Continuous) 실수로 평면을 채우는 반면, 스크린 좌표계는 서로 독립된 영역을 가지는 &lt;strong&gt;이산적인(Discrete) 정수&lt;/strong&gt;를 사용한다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;픽셀(Pixel)&lt;/p&gt;
+&lt;li&gt;데카르트 좌표계가 빈틈 없이 연속된(Continuous) 실수로 평면을 채우는 반면, 스크린 좌표계는 서로 독립된 영역을 가지는 &lt;strong&gt;이산적인(Discrete) 정수&lt;/strong&gt;를 사용한다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;픽셀(Pixel)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;스크린 좌표계를 사용해서 화면에 무언가를 표현하려면 스크린 좌표와 색상이 함께 지정되어야 한다. 이 때, 좌표와 색상에 대응하는 화면의 구성 요소를 픽셀이라고 한다.&lt;/li&gt;
+&lt;li&gt;스크린 좌표계를 사용해서 화면에 무언가를 표현하려면 스크린 좌표와 색상이 함께 지정되어야 한다. 이 때, &lt;strong&gt;좌표와 색상에 대응하는 화면의 구성 요소&lt;/strong&gt;를 픽셀이라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;픽셀화(Rasterization)&lt;/p&gt;
+&lt;li&gt;&lt;strong&gt;픽셀화(Rasterization)&lt;/strong&gt;
 &lt;ul&gt;
-&lt;li&gt;벡터를 화면의 점으로 표현하기 위해서 실수로 표현된 벡터 좌표를 정수로 변환한 후 색상을 부여하는 과정을 픽셀화라고 한다.&lt;/li&gt;
+&lt;li&gt;벡터를 화면의 점으로 표현하기 위해서 &lt;strong&gt;실수로 표현된 벡터 좌표를 정수로 변환한 후 색상을 부여하는 과정&lt;/strong&gt;을 픽셀화라고 한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -8283,6 +8283,7 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;br /&gt;
 &lt;p&gt;&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-05-8areas.jpg&#34;
 	
 	
@@ -8294,19 +8295,14 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 	
 &gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;첫 번째 영역인 1팔분면(Octant)은 $[0^\circ , 45^\circ]$의 범위를 가진다. 이것은 해당 영역에 존재하는 모든 선의 기울기가 $1$을 넘어설 수 없음을 의미한다.
-&lt;ul&gt;
+&lt;li&gt;첫 번째 영역인 1팔분면(Octant)의 알고리즘을 만들어보자.&lt;/li&gt;
+&lt;li&gt;1팔분면은 $[0^\circ , 45^\circ]$의 범위를 가진다. 이것은 해당 영역에 존재하는 모든 선의 기울기 $\frac{h}{w}$ ($h$는 높이, $w$는 너비)가 $1$을 넘어설 수 없음을 의미한다.&lt;/li&gt;
 &lt;li&gt;시작 위치의 픽셀 $(x_0, y_0)$을 찍은 후에 그 다음 픽셀을 어디에 찍어야 할까?&lt;/li&gt;
 &lt;li&gt;1팔분면의 특성상 평행으로 이동하거나 아래로 한 칸 내려가게 될 것이다.&lt;/li&gt;
-&lt;li&gt;오른쪽으로 한 칸 이동한 $x$좌표는 $x_0 + 1$이 된다. $y$좌표는 평행($y_0$)이거나, 아래로 한 칸 내려갈($y_0 + 1$) 것이다. 둘 중에서 어떤 것일지 판단하기 위해서 중간값인 $y_0 + 0.5$를 사용한다. 즉, $y_0 + 0.5$를 기준으로 우리가 그리려는 $y$값이 더 작으면 수평으로 이동하고($y_0$), 그렇지 않으면 아래로 한 칸 내려가는($y_0 + 1$) 것이다.&lt;/li&gt;
+&lt;li&gt;오른쪽으로 한 칸 이동한 $x$좌표는 $x_0 + 1$이 된다.&lt;/li&gt;
+&lt;li&gt;$y$좌표는 평행($y_0$)이거나, 아래로 한 칸 내려갈($y_0 + 1$) 것이다. 둘 중에서 어떤 것일지 판단하기 위해서 중간값인 $y_0 + 0.5$를 사용한다. 즉, $y_0 + 0.5$를 기준으로 우리가 그리려는 $y$값이 더 작으면 수평으로 이동하고($y_0$), 그렇지 않으면 아래로 한 칸 내려가는($y_0 + 1$) 것이다.&lt;/li&gt;
 &lt;li&gt;이것을 직선의 방정식 $y = ax + b$을 사용해서 구하면 $2h - w &amp;lt; 0$이라는 판별식이 도출된다. (풀이 생략)&lt;/li&gt;
-&lt;li&gt;그 다음 픽셀은?
-&lt;ul&gt;
-&lt;li&gt;이전에 평행이동을 했다면, $(x_0 + 2, y_0 + 0.5)$을 직선의 방정식에 대입해서 판별식이 $4h - w &amp;lt; 0$이 된다.&lt;/li&gt;
-&lt;li&gt;이전에 아래로 내려갔다면, $(x_0 + 2, y_0 + 1.5)$을 직선의 방정식에 대입해서 판별식이 $4h - 3w &amp;lt; 0$이 된다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;이처럼 $x$값이 증가할 수록 판별식은 언제나 $2h$만큼 증가하며, 한 칸 내려갈 수록 $2w$만큼 줄어든다. &lt;br /&gt;&lt;br&gt;
+&lt;li&gt;$2h - w &amp;lt; 0$ 으로 다음 픽셀의 위치를 계산할 수 있게 됐다. &lt;br /&gt;
 &lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/06-06-functions.jpg&#34;
 	
 	
@@ -8317,6 +8313,11 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 	
 	
 &gt;&lt;/li&gt;
+&lt;li&gt;그 다음 픽셀은?
+&lt;ul&gt;
+&lt;li&gt;이전에 평행이동을 했다면, $(x_0 + 2, y_0 + 0.5)$을 직선의 방정식에 대입해서 판별식이 $4h - w &amp;lt; 0$이 된다.&lt;/li&gt;
+&lt;li&gt;이전에 아래로 내려갔다면, $(x_0 + 2, y_0 + 1.5)$을 직선의 방정식에 대입해서 판별식이 $4h - 3w &amp;lt; 0$이 된다.&lt;/li&gt;
+&lt;li&gt;이처럼 $x$값이 증가할 수록 판별식은 언제나 $2h$만큼 증가하며, 한 칸 내려갈 수록 $2w$만큼 줄어든다. &lt;br /&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;2팔분면은 1팔분면에서 $x$, $y$가 변경되었을 뿐 전개 방식은 동일하다.&lt;/li&gt;
@@ -8535,27 +8536,30 @@ $\vec{v} = P_2 - P_1$&lt;/li&gt;
 		alt=&#34;클리핑 상황 세 가지&#34;
 	
 	
-&gt;
-&lt;ul&gt;
-&lt;li&gt;(1) 화면 안에 위치해서 자를 필요가 없는 경우
-&lt;ul&gt;
-&lt;li&gt;시작점과 끝점 모두 &lt;code&gt;0000&lt;/code&gt;이다.&lt;/li&gt;
+&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;(2) 화면 밖에 위치해서 그릴 필요가 없는 경우
-&lt;ul&gt;
-&lt;li&gt;시작점과 끝점의 &lt;code&gt;&amp;amp;&lt;/code&gt;연산 결과가 $0$보다 큰 값이 나온다.&lt;/li&gt;
-&lt;li&gt;혹은 $0$이 나올 때도 있다. 이 경우에는 클리핑을 한 후 다시 검사한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;(3) 화면을 가로질러서 화면에 유효한 영역으로 잘라내야 하는 경우
-&lt;ul&gt;
-&lt;li&gt;시작점과 끝점의 &lt;code&gt;&amp;amp;&lt;/code&gt;연산 결과가 $0$이 나온다. 따라서 클리핑을 한다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;상황&lt;/th&gt;
+&lt;th&gt;특징&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;(1) 화면 안에 위치해서 &lt;br /&gt;자를 필요가 없는 경우&lt;/td&gt;
+&lt;td&gt;시작점과 끝점 모두 &lt;code&gt;0000&lt;/code&gt;이다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;(2) 화면 밖에 위치해서 &lt;br /&gt;그릴 필요가 없는 경우&lt;/td&gt;
+&lt;td&gt;시작점과 끝점의 &lt;code&gt;&amp;amp;&lt;/code&gt;연산 결과가 $0$보다 큰 값이 나온다.&lt;br /&gt;혹은 $0$이 나올 때도 있다. 이 경우에는 클리핑을 한 후 다시 검사한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;(3) 화면을 가로질러서 &lt;br /&gt;화면에 유효한 영역으로 잘라내야 하는 경우&lt;/td&gt;
+&lt;td&gt;시작점과 끝점의 &lt;code&gt;&amp;amp;&lt;/code&gt;연산 결과가 $0$이 나온다. 따라서 클리핑을 한다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;br /&gt;  
 &lt;ul&gt;
 &lt;li&gt;따라서 다음과 같이 구현해 볼 수 있겠다.&lt;/li&gt;

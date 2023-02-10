@@ -309,14 +309,10 @@ if (!doNotTrack) {
         <li><a href="#행렬의-곱셈을-내적으로-표현하기">행렬의 곱셈을 내적으로 표현하기</a></li>
       </ul>
     </li>
-    <li><a href="#시야-판별">시야 판별</a>
-      <ul>
-        <li><a href="#앞뒤-판별">앞뒤 판별</a></li>
-        <li><a href="#시야-판별-1">시야 판별</a></li>
-      </ul>
-    </li>
-    <li><a href="#조명-효과의-구현">조명 효과의 구현</a></li>
-    <li><a href="#투영-벡터">투영 벡터</a></li>
+    <li><a href="#1-앞뒤-판별">(1) 앞뒤 판별</a></li>
+    <li><a href="#2-시야-판별">(2) 시야 판별</a></li>
+    <li><a href="#3-조명-효과의-구현">(3) 조명 효과의 구현</a></li>
+    <li><a href="#4-투영-벡터">(4) 투영 벡터</a></li>
   </ul>
 </nav>
         </div>
@@ -444,7 +440,7 @@ if (!doNotTrack) {
 <br />
 <h3 id="내적과-삼각함수와의-관계">내적과 삼각함수와의 관계</h3>
 <ul>
-<li>벡터의 내적은 두 벡터의 사잇각에 대한 $\cos$함수와 비례한다.
+<li>벡터의 내적은 두 벡터의 사잇각에 대한 <strong>$\cos$함수와 비례</strong>한다.
 <ul>
 <li><mark style="background-color: lightblue">$\vec{u} \cdot \vec{v} = |\vec{u}||\vec{v}|\cos\theta$</mark></li>
 <li>이 식을 유도해보자.</li>
@@ -483,14 +479,18 @@ $ = |\vec{a}|^2 + |\vec{c}|^2 - 2\vec{a} \cdot \vec{c}$</li>
 <p>따라서 다음 식이 성립한다.</p>
 <ul>
 <li>$\vec{a} \cdot \vec{c} = |\vec{a}||\vec{c}|\cos\theta$</li>
-<li>여기서 두 벡터의 크기가 $1$이면, 두 벡터의 내적은 $\cos$함수가 된다.</li>
+</ul>
+</li>
+<li>
+<p>여기서 두 벡터의 크기가 $1$이면, 두 벡터의 내적은 $\cos$함수가 된다.</p>
+<ul>
 <li>$\vec{u} \cdot \vec{v} = \cos\theta$</li>
 </ul>
 </li>
 </ul>
 <br />
 <ul>
-<li><strong>두 벡터의 내적이 $0$이면, 두 벡터는 직교한다.</strong>
+<li><mark style="background-color: lightblue">두 벡터의 내적이 $0$이면, 두 벡터는 직교한다.</mark>
 <ul>
 <li>위의 공식에 따르면, 내적 값이 $0$이 되기 위한 조건은 $\cos$함수의 값이 $0$이 되는 경우 뿐이다.</li>
 <li>$\cos$함수의 값이 $0$이 되는 경우는 두 벡터의 사잇각이 $90^\circ$ 혹은$270^\circ(-90^\circ)$인 경우다.</li>
@@ -513,18 +513,14 @@ $ = |\vec{a}|^2 + |\vec{c}|^2 - 2\vec{a} \cdot \vec{c}$</li>
 <h3 id="행렬의-곱셈을-내적으로-표현하기">행렬의 곱셈을 내적으로 표현하기</h3>
 <ul>
 <li>
-<p>행렬과 벡터의 곱셈 연산을 내적으로 표현해보자.</p>
-<ul>
-<li>$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$ <br />
-$$ = \begin{bmatrix} (a, b) \cdot (x, y) \\ (c, d) \cdot (x, y) \end{bmatrix} $$</li>
-</ul>
+<p>행렬과 벡터의 곱셈 연산을 내적으로 표현해보자.
+$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} ax + by \\ cx + dy \end{bmatrix}$$ <br />
+$$ = \begin{bmatrix} (a, b) \cdot (x, y) \\ (c, d) \cdot (x, y) \end{bmatrix} $$</p>
 </li>
 <li>
-<p>이제 행렬과 행렬의 곱셈 연산을 내적으로 표현해보자.</p>
-<ul>
-<li>$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \begin{bmatrix} e &amp; f \\ g &amp; h \end{bmatrix} = \begin{bmatrix} ae + bg &amp; af + bh \\ ce + dg &amp; cf + dh \end{bmatrix}$$ <br />
-$$ = \begin{bmatrix} (a, b) \cdot (e, g) &amp; (a, b) \cdot (f, h) \\ (c, d) \cdot (e, g) &amp; (c, d) \cdot (f, h) \end{bmatrix} $$</li>
-</ul>
+<p>행렬과 행렬의 곱셈 연산을 내적으로 표현해보자.
+$$\begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \begin{bmatrix} e &amp; f \\ g &amp; h \end{bmatrix} = \begin{bmatrix} ae + bg &amp; af + bh \\ ce + dg &amp; cf + dh \end{bmatrix}$$ <br />
+$$ = \begin{bmatrix} (a, b) \cdot (e, g) &amp; (a, b) \cdot (f, h) \\ (c, d) \cdot (e, g) &amp; (c, d) \cdot (f, h) \end{bmatrix} $$</p>
 </li>
 </ul>
 <br />
@@ -541,19 +537,21 @@ $$ = \begin{bmatrix} (a, b) \cdot (e, g) &amp; (a, b) \cdot (f, h) \\ (c, d) \cd
 <p>직교행렬의 특징은 <strong>전치행렬이 곧 역행렬</strong>이라는 점이다. 따라서 직교행렬과 그 전치행렬의 곱은 항등행렬이된다.</p>
 <ul>
 <li><mark style="background-color: lightblue">$Q \cdot Q^T = I$</mark></li>
-<li>이는 내적을 사용해서 증명할 수 있다.</li>
-<li>$(a, b)$와 $(c, d)$는 서로 직교하므로 두 벡터의 내적은 $0$이다. 그리고 행벡터와 열벡터의 크기가 $1$이므로 자기 자신과 내적한 결과는 $1$이 된다.</li>
-<li>$$Q = \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}$$ <br />
+</ul>
+</li>
+<li>
+<p>이는 내적을 사용해서 증명할 수 있다.</p>
+<ul>
+<li>$(a, b)$와 $(c, d)$는 서로 직교하므로 두 벡터의 내적은 $0$이다. 그리고 행벡터와 열벡터의 크기가 $1$이므로 자기 자신과 내적한 결과는 $1$이 된다.
+$$Q = \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix}$$ <br />
 $$Q^T \cdot Q = \begin{bmatrix} a &amp; b \\ c &amp; d \end{bmatrix} \begin{bmatrix} a &amp; c \\ b &amp; d \end{bmatrix} $$ <br />
 $$ = \begin{bmatrix} (a, b) \cdot (a, b) &amp; (a, b) \cdot (c, d) \\ (c, d) \cdot (a, b) &amp; (c, d) \cdot (c, d) \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = I$$</li>
 </ul>
 </li>
 <li>
-<p><strong>회전 변환행렬</strong>은 직교행렬이다.</p>
-<ul>
-<li>$$R_{\theta} = \begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}$$ <br />
-$$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &amp; 0 \\ 0 &amp; \cos^2\theta + \sin^2\theta \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = I$$</li>
-</ul>
+<p><u><strong>회전 변환행렬</strong>은 직교행렬</u>이다.
+$$R_{\theta} = \begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}$$ <br />
+$$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &amp; 0 \\ 0 &amp; \cos^2\theta + \sin^2\theta \end{bmatrix} = \begin{bmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{bmatrix} = I$$</p>
 </li>
 </ul>
 <br />
@@ -572,7 +570,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 </ul>
 </li>
 <li>
-<p><strong>회전 변환</strong>은 강체 변환이다.</p>
+<p><u><strong>회전 변환</strong>은 강체 변환</u>이다.</p>
 <ul>
 <li>회전 행렬은 앞서 보았듯이 직교 행렬이기 때문에 1, 2번 조건을 만족한다.</li>
 <li>3번의 경우 행렬식 $ad - bc$가 다음과 같이 $1$이 된다.</li>
@@ -581,8 +579,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 </li>
 </ul>
 <p><br /><br /></p>
-<h2 id="시야-판별">시야 판별</h2>
-<h3 id="앞뒤-판별">앞뒤 판별</h3>
+<h2 id="1-앞뒤-판별">(1) 앞뒤 판별</h2>
 <ul>
 <li>
 <p>벡터의 크기 값은 언제나 양수이다. 따라서 내적의 부호는 $\cos$ 함수가 결정한다.</p>
@@ -612,28 +609,33 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 </li>
 <li>
 <p>따라서 이를 응용하면 벡터 내적의 부호만 가지고도 다음과 같이 판단할 수 있다.</p>
-<ul>
-<li>벡터 내적의 결과가 양수이다.
-<ul>
-<li>두 벡터는 같은 방향을 향하고 있다.</li>
-</ul>
-</li>
-<li>벡터 내적의 결과가 음수이다.
-<ul>
-<li>두 벡터는 다른 방향을 향하고 있다. (서로 마주보고 있다.)</li>
-</ul>
-</li>
-<li>벡터 내적의 결과가 $0$이다.
-<ul>
-<li>두 벡터는 직교한다.</li>
-</ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>두 벡터 내적의 결과</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>양수</td>
+<td>두 벡터는 같은 방향을 향하고 있다.</td>
+</tr>
+<tr>
+<td>음수</td>
+<td>두 벡터는 다른 방향을 향하고 있다. (서로 마주보고 있다.)</td>
+</tr>
+<tr>
+<td>$0$</td>
+<td>두 벡터는 직교한다.</td>
+</tr>
+</tbody>
+</table></div>
 </li>
 </ul>
 <br />
 <ul>
-<li>이것들을 응용해서 <strong>목표물이 캐릭터 앞에 있는지 뒤에 있는지를 판별</strong>할 수 있겠다. <br /><br>
+<li>이것들을 응용해서 <mark style="background-color: lightblue">목표물이 캐릭터 앞에 있는지 뒤에 있는지를 판별</mark>할 수 있겠다. <br /><br>
 <img src="/post/game_math/images/07-05-isFront.jpg"
 	
 	
@@ -644,30 +646,34 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 	
 	
 >
-<ul>
-<li>$\vec{f} \cdot \vec{v}$이 양수
-<ul>
-<li>캐릭터 앞에 목표물이 있다.</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>$\vec{f} \cdot \vec{v}$의 결과</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>양수</td>
+<td>캐릭터 앞에 목표물이 있다.</td>
+</tr>
+<tr>
+<td>음수</td>
+<td>캐릭터 뒤에 목표물이 있다.</td>
+</tr>
+<tr>
+<td>$0$</td>
+<td>캐릭터 바로 옆에 목표물이 있다.</td>
+</tr>
+</tbody>
+</table></div>
 </li>
-<li>$\vec{f} \cdot \vec{v}$이 음수
+</ul>
+<p><br /><br /></p>
+<h2 id="2-시야-판별">(2) 시야 판별</h2>
 <ul>
-<li>캐릭터 뒤에 목표물이 있다.</li>
-</ul>
-</li>
-<li>$\vec{f} \cdot \vec{v}$이 $0$
-<ul>
-<li>캐릭터 바로 옆에 목표물이 있다.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<br />
-<h3 id="시야-판별-1">시야 판별</h3>
-<ul>
-<li>
-<p>캐릭터에게 부여한 시야각이 $\beta$라고 하자. 그리고 캐릭터에서 목표물로 향하는 벡터 $\vec{v}$와의 사잇각을 $\alpha$라고 하자. <br /><br>
+<li>캐릭터에게 부여한 시야각이 $\beta$라고 하자. 그리고 캐릭터에서 목표물로 향하는 벡터 $\vec{v}$와의 사잇각을 $\alpha$라고 하자. <br /><br>
 <img src="/post/game_math/images/07-06-isInSight.jpg"
 	
 	
@@ -677,10 +683,11 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 		alt="캐릭터 시야각의 설정"
 	
 	
-></p>
-</li>
-<li>
-<p>$\cos$함수의 경우 $[0^\circ, 180^\circ]$에서는 각이 커질 수록 값이 작아진다. <br /><br>
+></li>
+</ul>
+<br />  
+<ul>
+<li>$\cos$함수의 경우 $[0^\circ, 180^\circ]$에서는 각이 커질 수록 값이 작아진다. <br /><br>
 <img src="/post/game_math/images/07-07-cos.jpg"
 	
 	
@@ -690,29 +697,37 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 		alt="0~180도에서의 cos함수"
 	
 	
-></p>
-</li>
-<li>
-<p>이것을 활용해서 다음의 과정으로 <strong>캐릭터 시야 안에 목표물이 있는지 판별</strong>할 수 있다.</p>
+></li>
+</ul>
+<br />  
+<ul>
+<li>이것을 활용해서 다음의 과정으로 <mark style="background-color: lightblue">캐릭터 시야 안에 목표물이 있는지 판별</mark>할 수 있다.
 <ul>
 <li>(1) 시야각을 절반 나눈 각의 $\cos\frac{\beta}{2}$를 미리 계산해둔다.</li>
 <li>(2) 캐릭터 시선 벡터의 크기를 $1$로 정규화시킨 단위 벡터 $\hat{f}$을 구한다.</li>
 <li>(3) 캐릭터에서 목표물로 향하는 벡터를 정규화시킨 단위 벡터 $\hat{v}$을 구한다.</li>
 <li>(4) 그 두 벡터의 내적 결과는 $\hat{f} \cdot \hat{v} = \cos\alpha$가 된다. 이것을 앞서 계산해 두었던 $\cos\frac{\beta}{2}$와 비교한다.</li>
-<li>이 때 $\hat{f} \cdot \hat{v}$가 $\cos\frac{\beta}{2}$보다 작다면 사잇각이 시야보다 작다는 것을 의미하므로 물체가 시야 영역에 들어왔음을 의미한다.</li>
 </ul>
 </li>
-<li>
-<p>$\hat{f} \cdot \hat{v} \lt \cos\frac{\beta}{2}$</p>
-<ul>
-<li>목표물이 시야 범위 안에 있다.</li>
-</ul>
-</li>
-<li>
-<p>$\hat{f} \cdot \hat{v} &gt; \cos\frac{\beta}{2}$</p>
-<ul>
-<li>목표물이 시야 범위 밖에 있다.</li>
-</ul>
+<li>이 때 $\hat{f} \cdot \hat{v}$가 $\cos\frac{\beta}{2}$보다 크다면 사잇각이 시야보다 작다는 것을 의미하므로 물체가 시야 영역에 들어왔음을 의미한다.
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>결과</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$$\hat{f} \cdot \hat{v} \geq \cos\frac{\beta}{2}$$</td>
+<td>목표물이 시야 범위 안에 있다.</td>
+</tr>
+<tr>
+<td>$$\hat{f} \cdot \hat{v} \lt \cos\frac{\beta}{2}$$</td>
+<td>목표물이 시야 범위 밖에 있다.</td>
+</tr>
+</tbody>
+</table></div>
 </li>
 </ul>
 <br />
@@ -724,7 +739,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 </li>
 </ul>
 <p><br /><br /></p>
-<h2 id="조명-효과의-구현">조명 효과의 구현</h2>
+<h2 id="3-조명-효과의-구현">(3) 조명 효과의 구현</h2>
 <ul>
 <li><strong>램버트 반사(Lambertian reflection)</strong>
 <ul>
@@ -773,7 +788,7 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><br /><br /></p>
-<h2 id="투영-벡터">투영 벡터</h2>
+<h2 id="4-투영-벡터">(4) 투영 벡터</h2>
 <ul>
 <li>벡터의 내적은 어떤 벡터를 다른 벡터에 직교 투영하는 용도로도 사용된다.
 <ul>
@@ -804,30 +819,15 @@ $$R_{\theta}^T \cdot R_{\theta} = \begin{bmatrix} \cos^2\theta + \sin^2\theta &a
 	
 	
 >
-<ul>
-<li>$\vec{A} \cdot \vec{B} = |\vec{A}| \cdot |\vec{B}| \cdot \cos\theta = |\vec{A}| \cdot |\vec{B}| \cdot \frac{|\vec{proj}|}{|\vec{A}|} = |\vec{B}| \cdot |\vec{proj}|$
-<ul>
-<li>$|\vec{proj}| = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|}$</li>
-</ul>
-</li>
+$$\vec{A} \cdot \vec{B} = |\vec{A}| \cdot |\vec{B}| \cdot \cos\theta = |\vec{A}| \cdot |\vec{B}| \cdot \frac{|\vec{proj}|}{|\vec{A}|} = |\vec{B}| \cdot |\vec{proj}|$$
+$$|\vec{proj}| = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|}$$</li>
 <li>$\vec{proj}$는 $\vec{B}$와 방향이 같으므로 $|\vec{proj}| \cdot \hat{B}$으로도 표현할 수 있다.
-<ul>
-<li>$\vec{proj} = |\vec{proj}| \cdot \hat{B}$</li>
-</ul>
-</li>
+$$\vec{proj} = |\vec{proj}| \cdot \hat{B}$$</li>
 <li>여기에 맨 위의 공식을 대입하면 다음과 같다.
-<ul>
-<li>$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \hat{B}$</li>
-<li>$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \frac{\vec{B}}{|\vec{B}|} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|^2} \cdot \vec{B}$</li>
-</ul>
-</li>
-<li>여기서 $\vec{B}$ 크기가 $1$이라면 다음과 같이 단순하게 정리할 수 있다.
-<ul>
-<li><mark style="background-color: lightblue"> $\vec{proj} = (\vec{A} \cdot \hat{B}) \cdot \hat{B}$ </mark></li>
-</ul>
-</li>
-</ul>
-</li>
+$$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \hat{B}$$
+$$\vec{proj} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|} \cdot \frac{\vec{B}}{|\vec{B}|} = \frac{\vec{A} \cdot \vec{B}}{|\vec{B}|^2} \cdot \vec{B}$$</li>
+<li>여기서 $\vec{B}$ 크기를 $1$로 정규화 하면 다음과 같이 단순하게 정리할 수 있다.
+$$\vec{proj} = (\vec{A} \cdot \hat{B}) \cdot \hat{B}$$</li>
 </ul>
 <br />
 <div class="highlight"><div class="chroma">
