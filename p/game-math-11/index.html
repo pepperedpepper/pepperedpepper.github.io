@@ -2,7 +2,8 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-벡터의 외적 벡터의 외적(Cross product) $\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$ $\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$ Chapter 10에서 설명했던 회전의 순환 순서 $x$→$y$→$z$→$x$에 맞춰 벡터를 순서대로 나열하는 형태이며, 결과는 언제나 3차원 벡터가 된다. $x$성분의 결과를 만들기 위해 $x$와 관련없는 나머지 두 성분의 $y$와 $z$를 결합해서 만든다. 항상 같은 성분만 사용하는 내적과 대비된다.'>
+벡터의 외적 벡터의 외적(Cross product)
+$$\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$$ $$\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$$ Chapter 10에서 설명했던 회전의 순환 순서 $x$→$y$→$z$→$x$에 맞춰 벡터를 순서대로 나열하는 형태이며, 결과는 언제나 3차원 벡터가 된다. $x$성분의 결과를 만들기 위해 $x$와 관련없는 나머지 두 성분의 $y$와 $z$를 결합해서 만든다. 항상 같은 성분만 사용하는 내적과 대비된다.'>
 <title>[Game Math] Chapter 11. 외적: 3차원 공간의 분석과 응용</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-11/'>
@@ -10,13 +11,15 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 11. 외적: 3차원 공간의 분석과 응용'>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-벡터의 외적 벡터의 외적(Cross product) $\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$ $\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$ Chapter 10에서 설명했던 회전의 순환 순서 $x$→$y$→$z$→$x$에 맞춰 벡터를 순서대로 나열하는 형태이며, 결과는 언제나 3차원 벡터가 된다. $x$성분의 결과를 만들기 위해 $x$와 관련없는 나머지 두 성분의 $y$와 $z$를 결합해서 만든다. 항상 같은 성분만 사용하는 내적과 대비된다.'>
+벡터의 외적 벡터의 외적(Cross product)
+$$\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$$ $$\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$$ Chapter 10에서 설명했던 회전의 순환 순서 $x$→$y$→$z$→$x$에 맞춰 벡터를 순서대로 나열하는 형태이며, 결과는 언제나 3차원 벡터가 된다. $x$성분의 결과를 만들기 위해 $x$와 관련없는 나머지 두 성분의 $y$와 $z$를 결합해서 만든다. 항상 같은 성분만 사용하는 내적과 대비된다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-11/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2022-04-28T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-28T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Game Math] Chapter 11. 외적: 3차원 공간의 분석과 응용">
 <meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-벡터의 외적 벡터의 외적(Cross product) $\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$ $\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$ Chapter 10에서 설명했던 회전의 순환 순서 $x$→$y$→$z$→$x$에 맞춰 벡터를 순서대로 나열하는 형태이며, 결과는 언제나 3차원 벡터가 된다. $x$성분의 결과를 만들기 위해 $x$와 관련없는 나머지 두 성분의 $y$와 $z$를 결합해서 만든다. 항상 같은 성분만 사용하는 내적과 대비된다.">
+벡터의 외적 벡터의 외적(Cross product)
+$$\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$$ $$\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$$ Chapter 10에서 설명했던 회전의 순환 순서 $x$→$y$→$z$→$x$에 맞춰 벡터를 순서대로 나열하는 형태이며, 결과는 언제나 3차원 벡터가 된다. $x$성분의 결과를 만들기 위해 $x$와 관련없는 나머지 두 성분의 $y$와 $z$를 결합해서 만든다. 항상 같은 성분만 사용하는 내적과 대비된다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -302,13 +305,10 @@ if (!doNotTrack) {
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#벡터의-외적">벡터의 외적</a>
-      <ul>
-        <li><a href="#평행성-판별">평행성 판별</a></li>
-        <li><a href="#법선-벡터">법선 벡터</a></li>
-        <li><a href="#좌우-방향-판별">좌우 방향 판별</a></li>
-      </ul>
-    </li>
+    <li><a href="#벡터의-외적">벡터의 외적</a></li>
+    <li><a href="#평행성-판별">평행성 판별</a></li>
+    <li><a href="#법선-벡터">법선 벡터</a></li>
+    <li><a href="#좌우-방향-판별">좌우 방향 판별</a></li>
     <li><a href="#벡터로부터-회전행렬-생성">벡터로부터 회전행렬 생성</a></li>
     <li><a href="#렌더링-계산량을-줄여주는-백페이스-컬링">렌더링 계산량을 줄여주는 백페이스 컬링</a></li>
     <li><a href="#오일러-각의-문제를-해결하는-로드리게스-회전-공식">오일러 각의 문제를 해결하는 로드리게스 회전 공식</a></li>
@@ -404,9 +404,7 @@ if (!doNotTrack) {
 <hr>
 <p><br /><br /></p>
 <h2 id="벡터의-외적">벡터의 외적</h2>
-<ul>
-<li><strong>벡터의 외적(Cross product)</strong> <br /><br>
-<img src="/post/game_math/images/11-01-crossProduct.jpg"
+<p><img src="/post/game_math/images/11-01-crossProduct.jpg"
 	
 	
 	
@@ -415,32 +413,37 @@ if (!doNotTrack) {
 		alt="외적을 구하는 방법"
 	
 	
->
+></p>
 <ul>
-<li>$\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$ <br /><br>
-$\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$</li>
+<li><strong>벡터의 외적(Cross product)</strong><br>
+$$\vec{a} = (a_x, a_y, a_z), \vec{b} = (b_x, b_y, b_z)$$
+$$\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$$
+<ul>
 <li>Chapter 10에서 설명했던 회전의 순환 순서 $x$→$y$→$z$→$x$에 맞춰 벡터를 순서대로 나열하는 형태이며, 결과는 언제나 3차원 벡터가 된다.</li>
 <li>$x$성분의 결과를 만들기 위해 $x$와 관련없는 나머지 두 성분의 $y$와 $z$를 결합해서 만든다. 항상 같은 성분만 사용하는 내적과 대비된다.</li>
 </ul>
 </li>
+</ul>
+<br />
+<ul>
 <li>외적의 성질
 <ul>
-<li>교환법칙이 성립하지 않는다. 위의 식을 살펴보면 교환법칙이 성립하지 않는 뺄셈을 사용한 것을 알 수 있다.
+<li><strong>교환법칙이 성립하지 않는다.</strong> 위의 식을 살펴보면 교환법칙이 성립하지 않는 뺄셈을 사용한 것을 알 수 있다.
 <ul>
 <li>$\vec{a} \times \vec{b} \neq \vec{b} \times \vec{a}$</li>
 </ul>
 </li>
-<li>뺄셈처럼, 순서를 바꿔서 연산하면 반대 방향이 나온다.
+<li>뺄셈처럼, <strong>순서를 바꿔서 연산하면 반대 방향</strong>이 나온다.
 <ul>
-<li>$\vec{a} \times \vec{b} = -\vec{a} \times \vec{b}$</li>
+<li>$\vec{a} \times \vec{b} = -\vec{b} \times \vec{a}$</li>
 </ul>
 </li>
-<li>결합법칙이 성립하지 않는다.
+<li><strong>결합법칙이 성립하지 않는다.</strong>
 <ul>
 <li>$\vec{a} \times (\vec{b} \times \vec{c}) \neq (\vec{a} \times \vec{b}) \times \vec{c}$</li>
 </ul>
 </li>
-<li>덧셈에 대한 분배법칙은 성립한다.
+<li><strong>덧셈에 대한 분배법칙은 성립한다.</strong>
 <ul>
 <li>$\vec{a} \times (\vec{b} + \vec{c}) = \vec{a} \times \vec{b} + \vec{a} \times \vec{c}$</li>
 </ul>
@@ -448,6 +451,7 @@ $\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$</
 </ul>
 </li>
 </ul>
+<br /> 
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -485,34 +489,21 @@ $\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$</
 </tbody>
 </table></div>
 <br />  
-<h3 id="평행성-판별">평행성 판별</h3>
-<ul>
-<li><strong>평행한 두벡터를 외적하면 항상 영벡터가 나온다.</strong>
+<h2 id="평행성-판별">평행성 판별</h2>
 <ul>
 <li>동일한 벡터를 내적하면? 벡터 크기를 제곱한 값이 나왔다.</li>
-<li>그렇다면 동일한 벡터를 외적하면? 그 결과는 항상 영벡터가 나온다.
-<ul>
-<li>$\vec{a} \times \vec{a} = (a_ya_z - a_za_y, a_za_x - a_xa_z, a_xa_y - a_ya_x) = (0, 0, 0)$</li>
-</ul>
-</li>
+<li>동일한 벡터를 외적하면? 그 결과는 항상 영벡터가 나온다.
+$$\vec{a} \times \vec{a} = (a_ya_z - a_za_y, a_za_x - a_xa_z, a_xa_y - a_ya_x) = (0, 0, 0)$$</li>
 <li>이것은 반대 방향의 벡터 $-\vec{a}$를 외적하는 경우에도 동일하다.
-<ul>
-<li>$\vec{a} \times -\vec{a} = (-a_ya_z + a_za_y, -a_za_x + a_xa_z, -a_xa_y + a_ya_x) = (0, 0, 0)$</li>
-</ul>
-</li>
+$$\vec{a} \times -\vec{a} = (-a_ya_z + a_za_y, -a_za_x + a_xa_z, -a_xa_y + a_ya_x) = (0, 0, 0)$$</li>
 <li>평행하지만 크기가 다른 벡터 $k \cdot \vec{a}$를 사용해도 마찬가지이다.
-<ul>
-<li>$\vec{a} \times (k \cdot \vec{a}) = (ka_ya_z - ka_za_y, ka_za_x - ka_xa_z, ka_xa_y - ka_ya_x) = (0, 0, 0)$</li>
-</ul>
-</li>
-</ul>
-</li>
+$$\vec{a} \times (k \cdot \vec{a}) = (ka_ya_z - ka_za_y, ka_za_x - ka_xa_z, ka_xa_y - ka_ya_x) = (0, 0, 0)$$</li>
+<li>따라서, <mark style="background-color: lightblue"><strong>평행한 두벡터를 외적하면 항상 영벡터가 나온다</strong></mark>는 걸 알 수 있다.</li>
 </ul>
 <br />  
 <ul>
-<li>벡터 $\vec{b}$를 벡터 $\vec{a}$에 수평인 벡터 $\vec{b_{\parallel}}$와 수직인 벡터 $\vec{b_{\perp}}$로 분리하여, 그 둘의 덧셈으로 나타낼 수 있다.
-<ul>
-<li>$\vec{a} = \vec{b_{\parallel}} + \vec{b_{\perp}}$  <br /><br>
+<li>외적의 성질을 알아보기 위해서, 벡터 $\vec{b}$를 벡터 $\vec{a}$에 수평인 벡터 $\vec{b_{\parallel}}$와 수직인 벡터 $\vec{b_{\perp}}$로 분리하여 그 둘의 덧셈으로 나타내보자.
+$$\vec{b} = \vec{b_{\parallel}} + \vec{b_{\perp}}$$
 <img src="/post/game_math/images/11-02-parallelvertical.jpg"
 	
 	
@@ -522,27 +513,21 @@ $\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$</
 		alt="벡터를 수평 성분과 수직 성분으로 분리하기"
 	
 	
-></li>
+>
+<ul>
 <li>이것을 $\vec{a} \times \vec{b}$에 적용하면 다음과 같다.
-<ul>
-<li>$\vec{a} \times \vec{b} = \vec{a} \times (\vec{b_{\parallel}} + \vec{b_{\perp}})= \vec{a} \times \vec{b_{\parallel}} + \vec{a} \times \vec{b_{\perp}}$</li>
-</ul>
-</li>
+$$\vec{a} \times \vec{b} = \vec{a} \times (\vec{b_{\parallel}} + \vec{b_{\perp}})= \vec{a} \times \vec{b_{\parallel}} + \vec{a} \times \vec{b_{\perp}}$$</li>
 <li>여기서 $\vec{a} \times \vec{b_{\parallel}}$는 서로 평행해서 영벡터이므로 다음과 같아진다.
-<ul>
-<li>$\vec{a} \times \vec{b} = \vec{a} \times \vec{b_{\perp}}$</li>
-</ul>
-</li>
-<li>이처럼 외적은 <strong>상대방에 직교하는 벡터 성분만 사용</strong>되는 성질이 있다.</li>
+$$\vec{a} \times \vec{b} = \vec{a} \times \vec{b_{\perp}}$$</li>
+<li>이처럼 <strong>외적은 상대방에 <u>직교하는 벡터 성분만 사용</u>되는 성질</strong>이 있다.</li>
 </ul>
 </li>
 </ul>
 <br />  
 <ul>
-<li><strong>외적의 크기는 $\sin$함수에 비례하며, 두 벡터가 만드는 평행사변형의 넓이와 같다.</strong>
+<li>아래 그림을 보면, (1)과 같이 두 벡터의 사잇각이 크면 직교 성분 $\vec{b_{\perp}}$의 크기는 커지고, 반대로 (2)와 같이 사잇각이 작으면 $\vec{b_{\perp}}$의 크기는 작아진다.
 <ul>
-<li>아래 그림을 보면, (1)과 같이 두 벡터의 사잇각이 크면 직교 성분 $\vec{b_{\perp}}$의 크기는 커지고, 반대로 (2)와 같이 사잇각이 작으면 $\vec{b_{\perp}}$의 크기는 작아진다.</li>
-<li>따라서, 외적의 크기도 $\sin$함수에 비례할 것이다.  <br /><br>
+<li>직교성분인 $\vec{b_{\perp}}$의 크기는 $\sin$함수에 비례하므로, 외적의 크기도 $\sin$함수에 비례할 것이다.  <br /><br>
 <img src="/post/game_math/images/11-03-thetaDif.jpg"
 	
 	
@@ -553,17 +538,17 @@ $\vec{a} \times \vec{b} = (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)$</
 	
 	
 ></li>
-<li>이것을 수식으로 확인해보기 위해 $|\vec{a} \times \vec{b}|^2$, $(|\vec{a}||\vec{b}|)^2$, $(\vec{a} \cdot \vec{b})^2$를 구해보면 다음과 같은 관계를 도출할 수 있다. (풀이 생략)
-<ul>
-<li>$|\vec{a} \times \vec{b}|^2 = (|\vec{a}||\vec{b}|)^2 - (\vec{a} \cdot \vec{b})^2$ <br /><br>
-$ = (|\vec{a}||\vec{b}|)^2 - (|\vec{a}||\vec{b}|\cos\theta)^2$ <br /><br>
-$ = (|\vec{a}||\vec{b}|)^2 (1 - \cos^2\theta)$ <br /><br>
-$ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
-<li>$|\vec{a} \times \vec{b}| = |\vec{a}||\vec{b}| |\sin\theta|$</li>
-<li>이처럼 벡터 외적의 크기는 $\sin$함수에 비례하는 것을 알 수 있다.</li>
 </ul>
 </li>
-<li>또한 이것은 두 벡터가 만드는 평행사변형의 넓이와 같다. <br /><br>
+<li>이것을 수식으로 확인해보기 위해 세 가지 연산 $|\vec{a} \times \vec{b}|^2$, $(|\vec{a}||\vec{b}|)^2$, $(\vec{a} \cdot \vec{b})^2$를 전개해보면 다음과 같은 관계를 도출할 수 있다. (풀이 생략)
+$$|\vec{a} \times \vec{b}|^2 = (|\vec{a}||\vec{b}|)^2 - (\vec{a} \cdot \vec{b})^2$$
+$$ = (|\vec{a}||\vec{b}|)^2 - (|\vec{a}||\vec{b}|\cos\theta)^2$$
+$$ = (|\vec{a}||\vec{b}|)^2 (1 - \cos^2\theta)$$
+$$ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$$
+$$|\vec{a} \times \vec{b}| = |\vec{a}||\vec{b}| |\sin\theta|$$
+<ul>
+<li>이처럼 벡터 <mark style="background-color: lightblue"><strong>외적의 크기는 $\sin$함수에 비례</strong></mark>하는 것을 알 수 있다.</li>
+<li>또한 이것은 두 벡터가 만드는 <mark style="background-color: lightblue"><strong>평행사변형의 넓이</strong></mark>와 같다. <br /><br>
 <img src="/post/game_math/images/11-04-area.jpg"
 	
 	
@@ -588,7 +573,7 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 </thead>
 <tbody>
 <tr>
-<td><strong>판별성($0$이 된다)</strong></td>
+<td><strong>판별성($0$이 될 때)</strong></td>
 <td>직교성</td>
 <td>평행성</td>
 </tr>
@@ -599,20 +584,16 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 </tr>
 </tbody>
 </table></div>
-<br />  
-<h3 id="법선-벡터">법선 벡터</h3>
-<ul>
-<li><strong>벡터의 외적은 두 벡터에 직교하는 벡터를 생성한다.</strong>
+<p><br /><br /></p>
+<h2 id="법선-벡터">법선 벡터</h2>
 <ul>
 <li>두 벡터의 외적에다가 한 가지 벡터를 내적하면 어떻게 될까?
+$$\vec{a} \cdot (\vec{a} \times \vec{b}) = a_xa_yb_z - a_xa_zb_y + a_ya_zb_x - a_ya_xb_z + a_za_xb_y - a_za_yb_x = 0$$
+$$\vec{b} \cdot (\vec{a} \times \vec{b}) = b_xa_yb_z - b_xa_zb_y + b_ya_zb_x - b_ya_xb_z + b_za_xb_y - b_za_yb_x = 0$$</li>
+<li>그 결과는 늘 $0$이 되며, 이것은 <mark style="background-color: lightblue"><strong>외적 결과값이 두 벡터에 직교한다</strong></mark>는 의미가 된다.</li>
+<li>Chapter 3에서 말했듯이, 선형 독립 관계를 가지는 두 벡터의 선형 결합은 평면을 만든다. 그렇다면 벡터의 외적은 그 평면이 향하는 방향(직교)에 대한 벡터를 만드는 것이다.
 <ul>
-<li>$\vec{a} \cdot (\vec{a} \times \vec{b}) = a_xa_yb_z - a_xa_zb_y + a_ya_zb_x - a_ya_xb_z + a_za_xb_y - a_za_yb_x = 0$</li>
-<li>$\vec{b} \cdot (\vec{a} \times \vec{b}) = b_xa_yb_z - b_xa_zb_y + b_ya_zb_x - b_ya_xb_z + b_za_xb_y - b_za_yb_x = 0$</li>
-<li>그 결과는 늘 $0$이 되며 이것은 외적 결과값이 두 벡터에 직교한다는 의미가 된다.</li>
-</ul>
-</li>
-<li>Chapter 3에서 말했듯이, 선형 독립 관계를 가지는 두 벡터의 선형 결합은 평면을 만든다. 그렇다면 벡터의 외적은 그 평면이 향하는 방향(직교)에 대한 벡터를 만드는 것이다.</li>
-<li>이 벡터를 <strong>법선 벡터(Normal vector)</strong> 또는 <strong>노멀 벡터</strong>라고 한다.  <br /><br>
+<li>이 벡터를 <strong>법선 벡터</strong> 또는 <strong>노멀 벡터(Normal vector)</strong> 라고 한다.  <br /><br>
 <img src="/post/game_math/images/11-05-normalVector.jpg"
 	
 	
@@ -623,13 +604,13 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 	
 	
 ></li>
-<li>외적은 교환법칙이 성립하지 않는다. 따라서 연산의 순서를 바꾸면 반대방향의 법선 벡터가 생성된다.</li>
-<li>오른손 좌표계를 사용한다면, 오른손 법칙을. 왼손 좌표계를 사용한다면, 왼손 법칙을 사용해서 법선 벡터의 방향을 파악할 수 있다.</li>
 </ul>
 </li>
+<li>외적은 교환법칙이 성립하지 않는다. 따라서 <strong>연산의 순서를 바꾸면 반대방향의 법선 벡터</strong>가 생성된다.</li>
+<li><strong>오른손 좌표계를 사용한다면 오른손 법칙</strong>을, <strong>왼손 좌표계를 사용한다면 왼손 법칙</strong>을 사용해서 법선 벡터의 방향을 파악할 수 있다.</li>
 </ul>
-<br />  
-<h3 id="좌우-방향-판별">좌우 방향 판별</h3>
+<p><br /><br /></p>
+<h2 id="좌우-방향-판별">좌우 방향 판별</h2>
 <ul>
 <li>월드 공간의 $y$축 $\vec{y} = (0, 1, 0)$에 직교하는 평면에 캐릭터와 몬스터가 놓여 있다.
 <ul>
@@ -645,7 +626,7 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 	
 	
 ></li>
-<li>외적의 결과에 평면의 위쪽 방향을 나타내는 벡터 $\vec{y}$를 내적하면, 두 벡터의 방향이 같으면 양수가 나오고, 반대 방향이라면 음수가 나온다.</li>
+<li>외적의 결과에 평면의 위쪽 방향을 나타내는 벡터 $\vec{y}$를 내적하면, 두 벡터의 방향이 같으면 양수가 나오고 반대 방향이라면 음수가 나온다.</li>
 </ul>
 </li>
 </ul>
@@ -673,8 +654,7 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 </table></div>
 <br />  
 <ul>
-<li>이러한 성질은 외적이 $\sin$함수에 비례하는 성질을 가졌기 때문이다.
-<ul>
+<li>이러한 성질은 외적이 $\sin$함수에 비례하는 성질을 가졌기 때문이다.</li>
 <li>반면, 내적은 $\cos$함수에 비례하기 때문에 앞뒤 판별에 사용된다. <br /><br>
 <img src="/post/game_math/images/11-07-dotCrossArea.jpg"
 	
@@ -686,8 +666,6 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 	
 	
 ></li>
-</ul>
-</li>
 </ul>
 <div class="table-wrapper"><table>
 <thead>
@@ -705,11 +683,13 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 </tr>
 </tbody>
 </table></div>
-<p><br />  <br /></p>
+<p><br /><br /></p>
 <h2 id="벡터로부터-회전행렬-생성">벡터로부터 회전행렬 생성</h2>
 <ul>
 <li>Chapter 10에서는 오일러 각 방식을 사용해서 카메라의 회전을 지정하였다.</li>
-<li>외적을 사용하면 <strong>카메라의 시선 벡터</strong> 하나를 가지고 카메라를 구성하는 <strong>세 가지 로컬 축</strong>을 구할 수가 있다. <br /><br>
+<li>이번에는 외적을 사용해보자.
+<ul>
+<li>그러면 <u>카메라의 시선 벡터 하나를 가지고</u> 카메라를 구성하는 <u>세 가지 로컬 축</u>을 구할 수가 있다. <br /><br>
 <img src="/post/game_math/images/11-08-camLocalAxis.jpg"
 	
 	
@@ -719,37 +699,39 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 		alt="카메라의 세 가지 로컬 축 구하기"
 	
 	
->
-<ul>
-<li>로컬 $z$축
-<ul>
-<li>물체의 위치에서 카메라의 위치를 뺀 후 크기를 $1$로 정규화 시킨 시선 벡터이다.</li>
+></li>
 </ul>
 </li>
-<li>로컬 $x$축
-<ul>
-<li>월드 공간의 $y$축(업벡터라고 한다; Up vector)과 카메라의 로컬 $x$축을 외적한 후 정규화하면 얻을 수 있다.</li>
 </ul>
-</li>
-<li>로컬 $y$축
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>로컬 축</th>
+<th>구하는 법</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>로컬 $z$축</td>
+<td>물체의 위치에서 카메라의 위치를 뺀 후 크기를 $1$로 정규화 시킨 시선 벡터이다.</td>
+</tr>
+<tr>
+<td>로컬 $x$축</td>
+<td>월드 공간의 $y$축(Up vector: 업벡터라고 한다)과 카메라의 로컬 $x$축을 외적한 후 정규화하면 얻을 수 있다.</td>
+</tr>
+<tr>
+<td>로컬 $y$축</td>
+<td>로컬 $z$축과 로컬 $x$축을 외적하면 얻을 수 있다.</td>
+</tr>
+</tbody>
+</table></div>
 <ul>
-<li>로컬 $z$축과 로컬 $x$축을 외적하면 얻을 수 있다.</li>
-</ul>
-</li>
 <li>따라서 시선 벡터 $\vec{v}$와 업 벡터 $\vec{u}$로부터 다음과 같이 구할 수 있다.
-<ul>
-<li>$\vec{x} = \frac{\vec{v} \times \vec{u}}{|\vec{v} \times \vec{u}|}$</li>
-<li>$\vec{y} = \vec{x} \times \vec{z}$</li>
-<li>$\vec{z} = \frac{\vec{v}}{|\vec{v}|}$</li>
-</ul>
-</li>
-<li>그렇다면 카메라 트랜스폼의 회전 행렬 $R$은 로컬 벡터를 열벡터로 지정해서 다음과 같이 생성할 수 있다.
-<ul>
-<li>$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
-</ul>
-</li>
-</ul>
-</li>
+$$\vec{x} = \frac{\vec{v} \times \vec{u}}{|\vec{v} \times \vec{u}|}$$
+$$\vec{y} = \vec{x} \times \vec{z}$$
+$$\vec{z} = \frac{\vec{v}}{|\vec{v}|}$$</li>
+<li>그렇다면 카메라 트랜스폼의 회전 행렬 $R$은 로컬 벡터를 열벡터로 지정해서 다음과 같이 생성할 수 있겠다.
+$$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y &amp; 0 \\ x_z &amp; y_z &amp; z_z &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}$$</li>
 </ul>
 <br />  
 <ul>
@@ -845,14 +827,14 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><br />  <br /></p>
+</div><p><br /><br /></p>
 <h2 id="렌더링-계산량을-줄여주는-백페이스-컬링">렌더링 계산량을 줄여주는 백페이스 컬링</h2>
 <ul>
 <li><strong>백페이스 컬링(Backface culling)</strong>
 <ul>
-<li>카메라와 마주보지 않는 메시의 뒷면은 그리지 않고 건너뛰는 것이다. 덕분에 빠르게 렌더링할 수 있겠다.</li>
-<li>삼각형의 세 점을 지정하는 인덱스 버퍼에는 점의 순서가 나열되어있다. 외적을 사용해서 삼각형이 향하는 방향을 파악할 수 있다.</li>
-<li>이러한 삼각형의 방향과 카메라의 시선 방향을 내적해서 그 결과 값이 음수라면, 방향이 마주보고 있다는 것이므로 그린다.</li>
+<li>카메라와 마주보지 않는 <u>메시의 뒷면은 그리지 않고 건너뛰는 것</u>이다. 덕분에 빠르게 렌더링할 수 있겠다.</li>
+<li>삼각형의 세 점을 지정하는 인덱스 버퍼에는 점의 순서가 나열되어있다. <mark style="background-color: lightblue">외적을 사용해서 삼각형이 향하는 방향을 파악</mark>할 수 있다.</li>
+<li>이러한 <mark style="background-color: lightblue">삼각형의 방향과 카메라의 시선 방향을 내적해서 그 결과 값이 음수라면, 방향이 마주보고 있다는 것이므로 그린다.</mark></li>
 <li>나머지 경우에는 두 방향이 같은 방향을 바라보는 것이므로 그리지 않는다. <br /><br>
 <img src="/post/game_math/images/11-11-backfaceCulling.jpg"
 	
@@ -872,15 +854,9 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 <li>백페이스 컬링 구현 코드
 <ul>
 <li>삼각형의 면이 향하는 법선 벡터
-<ul>
-<li>$\vec{n} = \vec{P_0P_1} \times \vec{P_0P_2}$</li>
-</ul>
-</li>
+$$\vec{n} = \vec{P_0P_1} \times \vec{P_0P_2}$$</li>
 <li>뷰 공간에서 카메라가 바라보는 시선이 $-z$축이므로 $(0, 0, -1)$과 내적을 한다.
-<ul>
-<li>$(n_x, n_y, n_z) \cdot (0, 0, -1) &lt; 0$ 일 때만 그린다</li>
-</ul>
-</li>
+$$(n_x, n_y, n_z) \cdot (0, 0, -1) &lt; 0$$ 일 때만 그린다</li>
 </ul>
 </li>
 </ul>
@@ -950,7 +926,7 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><br />  <br /></p>
+</div><p><br /><br /></p>
 <h2 id="오일러-각의-문제를-해결하는-로드리게스-회전-공식">오일러 각의 문제를 해결하는 로드리게스 회전 공식</h2>
 <ul>
 <li>Chapter 10에서 본 것처럼, 오일러 각은 짐벌락 현상이 발생하고 회전 보간이 어렵다는 문제가 있었다.</li>
@@ -974,7 +950,7 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 	
 >
 <ul>
-<li>먼저 점 $P$의 좌표가 $P = (x, y, z, 1)$이라면 $\vec{u} = P - O$이므로 $\vec{u} = (x, y, z, 0)$라고 할 수 있겠다.</li>
+<li>먼저, 점 $P$의 좌표가 $P = (x, y, z, 1)$이라면 $\vec{u} = P - O$이므로 $\vec{u} = (x, y, z, 0)$라고 할 수 있겠다.</li>
 </ul>
 </li>
 </ul>
@@ -1009,34 +985,22 @@ $ = (|\vec{a}||\vec{b}|)^2 \sin^2\theta$</li>
 		alt="가로와 세로벡터의 계산"
 	
 	
->
-<ul>
+></li>
 <li>벡터 $\vec{O&rsquo;P&rsquo;}$의 가로 성분
-<ul>
-<li>$\cos\theta \cdot (\vec{u} - \vec{v})$</li>
-</ul>
-</li>
+$$\cos\theta \cdot (\vec{u} - \vec{v})$$</li>
 <li>벡터 $\vec{O&rsquo;P&rsquo;}$의 세로 성분
 <ul>
-<li>세로 성분과 같은 방향을 향하는 벡터를 $\vec{O&rsquo;Q}$라고 하자. 이것은 법선 벡터 $\hat{n}$와 벡터 $\vec{OP&rsquo;}$를 외적해서 얻을 수 있다.</li>
-<li>$\vec{O&rsquo;Q} = \hat{n} \times (\vec{u} - \vec{v})$</li>
-<li>여기에 $\sin\theta$를 곱하면 세로 성분에 대한 벡터를 얻을 수 있다.</li>
-<li>$\sin\theta \cdot (\hat{n} \times (\vec{u} - \vec{v}))$</li>
+<li>세로 성분과 같은 방향을 향하는 벡터를 $\vec{O&rsquo;Q}$라고 하자. 이것은 법선 벡터 $\hat{n}$와 벡터 $\vec{OP&rsquo;}$를 외적해서 얻을 수 있다.
+$$\vec{O&rsquo;Q} = \hat{n} \times (\vec{u} - \vec{v})$$</li>
+<li>여기에 $\sin\theta$를 곱하면 세로 성분에 대한 벡터를 얻을 수 있다.
+$$\sin\theta \cdot (\hat{n} \times (\vec{u} - \vec{v}))$$</li>
 </ul>
 </li>
 <li>따라서 다음과 같이 벡터 $\vec{O&rsquo;P&rsquo;}$를 계산할 수 있겠다.
-<ul>
-<li>$\vec{O&rsquo;P&rsquo;} = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times (\vec{u} - \vec{v}))$ <br /><br>
-$ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec{u} - \hat{n} \times \vec{v})$</li>
-</ul>
-</li>
+$$\vec{O&rsquo;P&rsquo;} = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times (\vec{u} - \vec{v}))$$
+$$ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec{u} - \hat{n} \times \vec{v})$$</li>
 <li>$\hat{n}$과 $\vec{v}$는 평행하므로 $\hat{n} \times \vec{v}$는 $0$이므로 다음과 같이 정리된다.
-<ul>
-<li>$\vec{O&rsquo;P&rsquo;} = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec{u})$</li>
-</ul>
-</li>
-</ul>
-</li>
+$$\vec{O&rsquo;P&rsquo;} = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec{u})$$</li>
 </ul>
 <br />  
 <ul>
@@ -1050,18 +1014,15 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 		alt="벡터 u&rsquo;구하기"
 	
 	
->
-<ul>
-<li>이것은 $\vec{O&rsquo;P&rsquo;}$에다가 $\vec{v}$를 더해서 얻을 수 있다.</li>
-<li>$\vec{u&rsquo;} = \vec{v} + \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec{u})$</li>
-</ul>
-</li>
+></li>
+<li>이것은 $\vec{O&rsquo;P&rsquo;}$에다가 $\vec{v}$를 더해서 얻을 수 있다.
+$$\vec{u&rsquo;} = \vec{v} + \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec{u})$$</li>
 </ul>
 <br />  
 <ul>
-<li>이제 $\vec{v}$를 $(\vec{u} \cdot \hat{n}) \cdot \hat{n}$로 치환하면 최종 수식이 유도된다.
+<li>이제 $\vec{v}$를 $(\vec{u} \cdot \hat{n}) \cdot \hat{n}$로 치환하면 <mark style="background-color: lightblue">최종 수식</mark>이 유도된다.
+$$\vec{u&rsquo;} = \cos\theta \cdot \vec{u} + (1- \cos\theta)(\vec{u} \cdot \hat{n})\cdot \hat{n} + \sin\theta \cdot (\hat{n} \times \vec{u})$$
 <ul>
-<li><mark style="background-color: lightblue">$\vec{u&rsquo;} = \cos\theta \cdot \vec{u} + (1- \cos\theta)(\vec{u} \cdot \hat{n})\cdot \hat{n} + \sin\theta \cdot (\hat{n} \times \vec{u})$ </mark></li>
 <li>이 공식은 프랑스 수학자 로드리게스가 1840년에 발표했으며, 그의 이름을 인용해서 로드리게스 회전 공식(Rodrigues&rsquo; rotation formula)이라고 한다.</li>
 </ul>
 </li>
@@ -1192,7 +1153,7 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 <li>로드리게스 회전 공식을 활용하면 오일러 각으로 구현하기 어려운 임의의 축에 대한 회전 변환을 수행할 수 있다.
 <ul>
 <li>하지만, 행렬로의 변환이 어려워서 지금까지 구축했던 렌더링 파이프라인에 연동하기가 까다롭다.</li>
-<li>그래서 게임 엔진에서는 동일한 기능을 제공하지만 간결하고, 행렬로 변환이 용이한 <strong>사원수</strong>(Chapter 16)를 사용한다.</li>
+<li>그래서 게임 엔진에서는 동일한 기능을 제공하지만 간결하고, <u>행렬로 변환이 용이한 사원수(Chapter 16)</u>를 사용한다.</li>
 </ul>
 </li>
 </ul>
@@ -1204,9 +1165,9 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 <li>벡터의 외적과 내적을 두 번 연속 사용 하는 연산이다.</li>
 <li>다음과 같은 경우의 수가 있다.</li>
 <li>(1) $\vec{u} \cdot (\vec{v} \cdot \vec{w})$ → 결과 값이 스칼라이므로 제외한다.</li>
-<li>(2) <mark style="background-color: lightblue">$\vec{u} \cdot (\vec{v} \times \vec{w})$ </mark></li>
+<li>(2) <mark style="background-color: lightblue">$\vec{u} \cdot (\vec{v} \times \vec{w})$</mark> → 스칼라 삼중곱</li>
 <li>(3) $\vec{u} \times (\vec{v} \cdot \vec{w})$ → 벡터와 스칼라는 외적할 수 없으므로 연산이 불가능해서 제외한다.</li>
-<li>(4) <mark style="background-color: lightblue">$\vec{u} \times (\vec{v} \times \vec{w})$ </mark></li>
+<li>(4) <mark style="background-color: lightblue">$\vec{u} \times (\vec{v} \times \vec{w})$</mark> → 벡터 삼중곱</li>
 </ul>
 </li>
 </ul>
@@ -1214,20 +1175,14 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 <h3 id="스칼라-삼중곱">스칼라 삼중곱</h3>
 <ul>
 <li><strong>스칼라 삼중곱(Scalar triple product)</strong>
-<ul>
-<li>(2) <mark style="background-color: lightblue">$\vec{u} \cdot (\vec{v} \times \vec{w})$ </mark></li>
-<li>왼쪽과 오른쪽 판별 방법과, 벡페이스 컬링에 사용했던 공식이 바로 스칼라 삼중곱이었다.
-<ul>
-<li>$(\vec{f} \times \vec{v}) \cdot \vec{y}$</li>
-<li>$-\hat{z} \cdot (\vec{P_0P_1} \times \vec{P_0P_2})$</li>
-</ul>
-</li>
-</ul>
-</li>
+$$\vec{u} \cdot (\vec{v} \times \vec{w})$$</li>
+<li><u>왼쪽과 오른쪽 판별 방법</u>과, <u>백페이스 컬링</u>에 사용했던 공식이 바로 스칼라 삼중곱이었다.
+$$(\vec{f} \times \vec{v}) \cdot \vec{y}$$
+$$-\hat{z} \cdot (\vec{P_0P_1} \times \vec{P_0P_2})$$</li>
 </ul>
 <br />  
 <ul>
-<li>스칼라 삼중곱의 <strong>절댓값</strong>은 세 벡터가 만드는 <strong>평행육면체(Parallelepiped)의 부피</strong>를 의미한다. <br /><br>
+<li><u>스칼라 삼중곱의 절댓값</u>은 세 벡터가 만드는 <u>평행육면체(Parallelepiped)의 부피</u>를 의미한다. <br /><br>
 <img src="/post/game_math/images/11-16-parallelepiped.jpg"
 	
 	
@@ -1241,15 +1196,9 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 <ul>
 <li>임의의 벡터 $\vec{u}$를 법선 벡터 $\vec{v} \times \vec{w}$에 투영한 벡터의 높이는 $|\vec{u}|\cos\theta$이다.</li>
 <li>여기에 평행사변형의 넓이 $|\vec{v} \times \vec{w}|$를 곱하면 육면체의 부피가 나온다.
-<ul>
-<li>$|\vec{u}||\vec{v} \times \vec{w}|\cos\theta$</li>
-</ul>
-</li>
+$$|\vec{u}||\vec{v} \times \vec{w}|\cos\theta$$</li>
 <li>이것은 스칼라 삼중곱이 만들어내는 값의 절댓값과 동일하다.
-<ul>
-<li>$|\vec{u} \cdot (\vec{v} \times \vec{w})| = |\vec{u}||\vec{v} \times \vec{w}|\cos\theta$</li>
-</ul>
-</li>
+$$|\vec{u} \cdot (\vec{v} \times \vec{w})| = |\vec{u}||\vec{v} \times \vec{w}|\cos\theta$$</li>
 </ul>
 </li>
 </ul>
@@ -1267,18 +1216,17 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 	
 >
 <ul>
-<li>따라서 다음과 같은 성질을 도출할 수 있다.</li>
-<li>$\vec{u} \cdot (\vec{v} \times \vec{w}) = \vec{v} \cdot (\vec{w} \times \vec{u}) = \vec{w} \cdot (\vec{u} \times \vec{v})$</li>
+<li>따라서 다음과 같은 성질을 도출할 수 있다.
+$$\vec{u} \cdot (\vec{v} \times \vec{w}) = \vec{v} \cdot (\vec{w} \times \vec{u}) = \vec{w} \cdot (\vec{u} \times \vec{v})$$</li>
 </ul>
 </li>
 </ul>
 <br />  
 <ul>
-<li>스칼라 삼중곱이 <strong>$0$이 아니면</strong> 세 백터는 모두 <strong>선형 독립의 관계</strong>를 가진다.
+<li><u>스칼라 삼중곱이 $0$이 아니면</u> 세 백터는 모두 <u>선형 독립의 관계</u>를 가진다.
 <ul>
 <li>Chapter 5에서 보았던 행렬식의 절댓값은 평행사변형의 넓이였다. 이것은 평면에서 평행사변형을 이루는 두 벡터가 서로 선형 독립의 관계를 가지는지 판단하는 수식이었다.</li>
-<li>외적으로 생성된 벡터의 크기는 평행사변형의 넓이와 같다.
-<ul>
+<li>외적으로 생성된 벡터의 크기는 평행사변형의 넓이와 같다.</li>
 <li>따라서 스칼라 삼중곱은 3차원 공간의 세 벡터가 모두 선형 독립의 관계를 가지는지 판단하는 판별식으로 생각할 수 있다.</li>
 </ul>
 </li>
@@ -1299,31 +1247,22 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 <br />  
 <h3 id="벡터-삼중곱">벡터 삼중곱</h3>
 <ul>
 <li><strong>벡터 삼중곱(Vector triple product)</strong>
-<ul>
-<li>(4) <mark style="background-color: lightblue">$\vec{u} \times (\vec{v} \times \vec{w})$ </mark></li>
-</ul>
-</li>
+$$\vec{u} \times (\vec{v} \times \vec{w})$$</li>
 </ul>
 <br />  
 <ul>
-<li><strong>삼중곱 전개(Triple product expansion)</strong> 또는 <strong>라그랑주 공식(Lagrange&rsquo;s formula)</strong>
+<li>벡터 삼중곱은 다음과 같은 성질을 지니는 데 이것을 <strong>삼중곱 전개(Triple product expansion)</strong> 또는 <strong>라그랑주 공식(Lagrange&rsquo;s formula)</strong> 이라고 한다.
+$$\vec{u} \times (\vec{v} \times \vec{w}) = (\vec{u} \cdot \vec{w}) \cdot \vec{v} - (\vec{u} \cdot \vec{v}) \cdot \vec{w}$$</li>
+<li>이것을 직접 확인해보면 다음과 같다. (풀이 생략)
+$$(\vec{u} \times (\vec{v} \times \vec{w}))_x = v_x(\vec{u} \cdot \vec{w}) - w_x(\vec{u} \cdot \vec{v})$$
+$$(\vec{u} \times (\vec{v} \times \vec{w}))_y = v_y(\vec{u} \cdot \vec{w}) - w_y(\vec{u} \cdot \vec{v})$$
+$$(\vec{u} \times (\vec{v} \times \vec{w}))_z = v_z(\vec{u} \cdot \vec{w}) - w_z(\vec{u} \cdot \vec{v})$$
 <ul>
-<li>벡터 삼중곱은 다음과 같은 성질을 지닌다.</li>
-<li><mark style="background-color: lightblue">$(\vec{u} \cdot \vec{w}) \cdot \vec{v} - (\vec{u} \cdot \vec{v}) \cdot \vec{w}$</mark></li>
-<li>이것을 직접 확인해보자. (풀이 간단 설명)
-<ul>
-<li>$(\vec{u} \times (\vec{v} \times \vec{w}))_x = v_x(\vec{u} \cdot \vec{w}) - w_x(\vec{u} \cdot \vec{v})$</li>
-<li>$(\vec{u} \times (\vec{v} \times \vec{w}))_y = v_y(\vec{u} \cdot \vec{w}) - w_y(\vec{u} \cdot \vec{v})$</li>
-<li>$(\vec{u} \times (\vec{v} \times \vec{w}))_z = v_z(\vec{u} \cdot \vec{w}) - w_z(\vec{u} \cdot \vec{v})$</li>
-</ul>
-</li>
-<li>이것은 $a\vec{v} + b\vec{w}$형태의 선형 결합식이므로, 벡터 삼중곱으로 만들어지는 벡터는 두 벡터$\vec{v}$, $\vec{w}$가 만드는 평면에 속한다. <br /><br>
+<li>이 식의 우변은 $a\vec{v} + b\vec{w}$형태의 선형 결합식이므로, 벡터 삼중곱으로 만들어지는 벡터는 <u>두 벡터 $\vec{v}$, $\vec{w}$가 만드는 평면에 속함</u>을 알 수 있다. <br /><br>
 <img src="/post/game_math/images/11-19-vectorTripleProduct.jpg"
 	
 	
@@ -1339,9 +1278,8 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 </ul>
 <br />  
 <ul>
-<li>이것은 2차원에서 동일 평면에 있는 직교 벡터를 구하는 데도 유용하게 쓸 수 있다.
-<ul>
-<li>$(\vec{u} \times \vec{v}) \times \vec{u}$ <br /><br>
+<li>벡터 삼중곱은 2차원에서 <u>동일 평면에 있는 직교 벡터</u>를 구하는 데도 유용하게 쓸 수 있다.
+$$(\vec{u} \times \vec{v}) \times \vec{u}$$
 <img src="/post/game_math/images/11-20-2dVectorTripleProduct.jpg"
 	
 	
@@ -1353,9 +1291,7 @@ $ = \cos\theta \cdot (\vec{u} - \vec{v}) + \sin\theta \cdot (\hat{n} \times \vec
 	
 ></li>
 </ul>
-</li>
-</ul>
-<p><br />  <br /></p>
+<p><br /><br /></p>
 
 </section>
 

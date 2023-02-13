@@ -415,7 +415,7 @@ if (!doNotTrack) {
 <ul>
 <li>Chapter 8에서 살펴본 것처럼, 주어진 세 점으로 두 벡터를 생성해서 평면 상의 모든 점을 생성할 수 있다.</li>
 <li>하지만 3차원 공간의 평면은 앞면과 뒷면이 존재하기 때문에 이를 구분할 수 있어야 하겠다.</li>
-<li>따라서 <strong>평면이 바라보는 방향을 알려주는 법선 벡터</strong>와 <strong>평면 상에 위치한 한 점</strong>을 제공하는 방법을 사용한다. 이 때 <strong>법선 벡터는 크기를 1로 정규화</strong>한다. <br /><br>
+<li>따라서 <u><strong>평면이 바라보는 방향을 알려주는 법선 벡터</strong></u>와 <u><strong>평면 상에 위치한 한 점</strong></u>을 제공하는 방법을 사용한다. 이 때 <strong>법선 벡터는 크기를 1로 정규화</strong>한다. <br /><br>
 <img src="/post/game_math/images/13-01-plane.jpg"
 	
 	
@@ -431,8 +431,8 @@ if (!doNotTrack) {
 <li>
 <p>법선벡터와 평면 위의 두 점을 지나는 벡터는 <strong>서로 직교</strong>하기 때문에 <mark style="background-color: lightblue">두 벡터의 내적은 $0$</mark>이 된다.</p>
 <ul>
-<li>따라서 법선벡터 $\hat{n} = (a, b, c)$와 점 $P_0 = (x_0, y_0, z_0)$에서 $P = (x, y, z)$로 향하는 벡터를 내적하면 다음과 같다.</li>
-<li>$$ \hat{n} \cdot (P - P_0) = (a, b, c) \cdot (x - x_0, y - y_0, z - z_0) = 0 $$
+<li>따라서 법선벡터 $\hat{n} = (a, b, c)$와 점 $P_0 = (x_0, y_0, z_0)$에서 $P = (x, y, z)$로 향하는 벡터를 내적하면 다음과 같다.
+$$ \hat{n} \cdot (P - P_0) = (a, b, c) \cdot (x - x_0, y - y_0, z - z_0) = 0 $$
 $$ = ax + by + cz - (ax_0 + by_0 + cz_0) = 0 $$</li>
 <li>여기서 법선벡터 $\hat{n} = (a, b, c)$와 점 $P_0 = (x_0, y_0, z_0)$은 사전에 주어진 값이므로 $- (ax_0 + by_0 + cz_0)$는 미리 계산할 수 있는 상수 값이다. 이것을 간단히 $d$로 치환하면 다음과 같다.</li>
 </ul>
@@ -440,19 +440,15 @@ $$ = ax + by + cz - (ax_0 + by_0 + cz_0) = 0 $$</li>
 </ul>
 <br />  
 <ul>
-<li><strong>평면의 방정식(The equation of plane)</strong>
-<ul>
-<li><mark style="background-color: lightblue">$ ax + by + cz + d = 0 $</mark></li>
-</ul>
-</li>
+<li><mark style="background-color: lightblue"><strong>평면의 방정식(The equation of plane)</strong></mark>
+$$ ax + by + cz + d = 0 $$</li>
 </ul>
 <br />  
 <ul>
 <li>여기서 $d$의 의미를 찾아보자.
-<ul>
-<li>$$d = -(ax_0 + by_0 + cz_0)$$
+$$d = -(ax_0 + by_0 + cz_0)$$
 $$ d = -\hat{n} \cdot (x_0, y_0, z_0)$$
-$$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
+$$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$
 <img src="/post/game_math/images/13-02-dot.jpg"
 	
 	
@@ -465,15 +461,19 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 ></li>
 <li>그렇다면 $\hat{n} \cdot \vec{p}$는 무엇을 의미할까?
 <ul>
-<li>Chapter 7에서 배운 벡터 내적의 $\cos$공식을 떠올려보자.</li>
-<li>$\hat{n} \cdot \vec{p} = | \hat{n} | | \vec{p} | \cos\theta$</li>
-<li>법선 벡터의 크기는 $1$이므로 다음과 같이 정리된다.</li>
-<li>$\hat{n} \cdot \vec{p} = | \vec{p} | \cos\theta$</li>
-<li>따라서 $\hat{n} \cdot \vec{p}$이란 $\vec{p}$벡터를 법선 벡터 $\hat{n}$에 투영한 벡터의 크기를 의미한다.</li>
-<li>즉, <strong>원점에서 평면까지의 최단 거리</strong>인 것이다.</li>
+<li>Chapter 7에서 배운 벡터 내적의 $\cos$공식을 떠올려보자.
+$$\hat{n} \cdot \vec{p} = | \hat{n} | | \vec{p} | \cos\theta$$</li>
+<li>법선 벡터의 크기는 $1$이므로 다음과 같이 정리된다.
+$$\hat{n} \cdot \vec{p} = | \vec{p} | \cos\theta$$</li>
+<li>따라서 $\hat{n} \cdot \vec{p}$이란 $\vec{p}$벡터를 법선 벡터 $\hat{n}$에 투영한 벡터의 크기를 의미한다.
+<ul>
+<li>즉, <u>원점에서 평면까지의 최단 거리</u>인 것이다.</li>
 </ul>
 </li>
-<li>$d$의 값은 마이너스를 붙인 $-\hat{n} \cdot \vec{p}$이므로 원점으로부터 평면의 최단 거리에 음의 부호를 설정한다.</li>
+</ul>
+</li>
+<li>$d$의 값은 마이너스를 붙인 $-\hat{n} \cdot \vec{p}$이므로 원점으로부터 평면의 최단 거리에 <u>음의 부호를 설정</u>한다.
+<ul>
 <li>그래서 $d$는 <mark style="background-color: lightblue">최단 거리</mark>와 <mark style="background-color: lightblue">방향</mark>이라는 두 가지 정보를 담고 있다.</li>
 </ul>
 </li>
@@ -482,23 +482,23 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 <ul>
 <li><strong>$d$의 부호</strong>
 <ul>
-<li>$d$의 값이 <strong>양수</strong>이다.
+<li>$d$의 값이 <u><strong>양수</strong></u>이다.
 <ul>
 <li>평면이 바라보는 방향은 원점을 향한다.</li>
-<li>즉, 원점은 평면의 <strong>바깥</strong>에 있다.</li>
+<li>즉, 원점은 평면의 <u><strong>바깥</strong></u>에 있다.</li>
 </ul>
 </li>
-<li>$d$의 값이 <strong>음수</strong>이다.
+<li>$d$의 값이 <u><strong>음수</strong></u>이다.
 <ul>
 <li>평면이 바라보는 방향은 원점에서 멀어지는 방향을 가진다.</li>
-<li>즉, 원점은 평면의 <strong>안쪽</strong>에 있다.</li>
+<li>즉, 원점은 평면의 <u><strong>안쪽</strong></u>에 있다.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><strong>$d$의 절댓값</strong>
 <ul>
-<li>평면에서 원점까지의 <strong>최단 거리</strong>.</li>
+<li>평면에서 원점까지의 <u><strong>최단 거리</strong></u>.</li>
 </ul>
 </li>
 <li><strong>$d$의 값이 $0$</strong> 이다.
@@ -553,18 +553,18 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 <ul>
 <li>크기가 $1$이 아닌 주어진 법선 벡터를 구성하는 세 계수 $(a, b, c)$를 <strong>정규화</strong>해서 $(a&rsquo;, b&rsquo;, c&rsquo;)$를 만들어 보자.
 <ul>
-<li>이것은 법선 벡터의 크기로 나누면 구할 수 있다.</li>
-<li>$$ (a&rsquo;, b&rsquo;, c&rsquo;) = \frac{(a, b, c)}{\sqrt{a^2 + b^2 + c^2}} $$</li>
+<li>이것은 법선 벡터의 크기로 나누면 구할 수 있다.
+$$ (a&rsquo;, b&rsquo;, c&rsquo;) = \frac{(a, b, c)}{\sqrt{a^2 + b^2 + c^2}} $$</li>
 </ul>
 </li>
 <li>$d$를 정규화한 $d&rsquo;$를 만들어 보자.
+$$ d = -\hat{n} \cdot \vec{p} = - |\hat{n}||\vec{p}|\cos\theta $$
+$$ d&rsquo; = -|\vec{p}|\cos\theta $$
 <ul>
-<li>$$ d = -\hat{n} \cdot \vec{p} = - |\hat{n}||\vec{p}|\cos\theta $$</li>
-<li>$$ d&rsquo; = -|\vec{p}|\cos\theta $$</li>
-<li>따라서 다음과 같은 관계가 나온다.</li>
-<li>$$ d&rsquo; = \frac{d}{|\vec{n}|} $$</li>
-<li>즉, $d$의 경우에도 동일하게 법선 벡터의 크기로 나누면 되는 것이다.</li>
-<li>$$ \frac{ax + by + cz + d}{\sqrt{a^2 + b^2 + c^2}} = 0 $$</li>
+<li>따라서 다음과 같은 관계가 나온다.
+$$ d&rsquo; = \frac{d}{|\vec{n}|} $$</li>
+<li>즉, $d$의 경우에도 동일하게 법선 벡터의 크기로 나누면 되는 것이다.
+$$ \frac{ax + by + cz + d}{\sqrt{a^2 + b^2 + c^2}} = 0 $$</li>
 </ul>
 </li>
 </ul>
@@ -583,8 +583,8 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 	
 	
 ></li>
-<li>평면의 방정식을 정규화한 값과 내적을 활용해 구할 수 있겠다.</li>
-<li>$$ \frac{ | ax_1 + by_1 + c | }{ \sqrt{a^2 + b^2 } } $$</li>
+<li>평면의 방정식을 정규화한 값과 내적을 활용해 구할 수 있겠다.
+$$ \frac{ | ax_1 + by_1 + c | }{ \sqrt{a^2 + b^2 } } $$</li>
 </ul>
 </li>
 </ul>
@@ -610,37 +610,22 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 >
 <ul>
 <li>절두체 <strong>상단</strong> 평면의 방정식
-<ul>
-<li>$$ \cos\frac{\theta}{2}y + \sin\theta\frac{\theta}{2}z = 0 $$</li>
-</ul>
-</li>
+$$ \cos\frac{\theta}{2}y + \sin\theta\frac{\theta}{2}z = 0 $$</li>
 <li>절두체 <strong>하단</strong> 평면의 방정식
-<ul>
-<li>$$ -\cos\frac{\theta}{2}y + \sin\theta\frac{\theta}{2}z = 0 $$</li>
-</ul>
-</li>
+$$ -\cos\frac{\theta}{2}y + \sin\theta\frac{\theta}{2}z = 0 $$</li>
 <li>절두체 <strong>좌측</strong> 평면의 방정식
-<ul>
-<li>$$ \cos\frac{\theta}{2}x + \sin\theta\frac{\theta}{2}z = 0 $$</li>
-</ul>
-</li>
+$$ \cos\frac{\theta}{2}x + \sin\theta\frac{\theta}{2}z = 0 $$</li>
 <li>절두체 <strong>우측</strong> 평면의 방정식
-<ul>
-<li>$$ -\cos\frac{\theta}{2}x + \sin\theta\frac{\theta}{2}z = 0 $$</li>
-</ul>
-</li>
+$$ -\cos\frac{\theta}{2}x + \sin\theta\frac{\theta}{2}z = 0 $$</li>
 </ul>
 </li>
 <li><strong>근평면</strong>의 경우, 원점으로부터의 거리는 $n$이므로, 평면의 방정식의 $d$의 값은 $n$이 된다. 그리고 법선 벡터의 값은 $(0, 0, 1)$이 된다.
-<ul>
-<li>$$(0, 0, 1) \cdot (x, y, z) - (0, 0, 1) \cdot (0, 0, -n) = 0 $$</li>
-<li>$$ \therefore z + n = 0 $$</li>
-</ul>
-</li>
+$$(0, 0, 1) \cdot (x, y, z) - (0, 0, 1) \cdot (0, 0, -n) = 0 $$
+$$ \therefore z + n = 0 $$</li>
 <li><strong>원평면</strong>의 경우에는 거리가 $f$가 되며, 법선 벡터의 값은 $(0, 0, -1)$이 된다.
+$$(0, 0, -1) \cdot (x, y, z) - (0, 0, 1) \cdot (0, 0, f) = 0 $$
+$$ \therefore -z -f = 0 $$
 <ul>
-<li>$$(0, 0, -1) \cdot (x, y, z) - (0, 0, 1) \cdot (0, 0, f) = 0 $$</li>
-<li>$$ \therefore -z -f = 0 $$</li>
 <li>이 때, <strong>함부로 수식을 옮기면 안 된다.</strong> 만약 $0 = z + f$와 같이 옮긴다면, 평면의 방향은 원평면의 반대 방향인 원점을 향한다. 따라서 $-z -f = 0 $와 $0 = z + f$는 <strong>서로 다른 평면</strong>이다.</li>
 </ul>
 </li>
@@ -650,30 +635,30 @@ $$ d = -\hat{n} \cdot \vec{OP_0} = -\hat{n} \cdot \vec{p}$$ <br />
 <ul>
 <li><strong>원근 투영 행렬</strong>을 사용해서 절두체 컬링을 좀 더 간편하게 구현할 수 있다.
 <ul>
-<li>뷰 공간의 점이 NDC좌표까지 변환됐을 때, NDC좌표를 구성하는 $x$, $y$, $z$ 세 축의 값이 $[-1, 1]$ 범위에 있다면 해당 점은 절두체 영역 안 쪽에 있다는 것을 의미한다.</li>
-<li>$$ -1 \leq n_x \leq 1 $$
+<li>뷰 공간의 점이 NDC좌표까지 변환됐을 때, NDC좌표를 구성하는 $x$, $y$, $z$ 세 축의 값이 $[-1, 1]$ 범위에 있다면 해당 점은 절두체 영역 안 쪽에 있다는 것을 의미한다.
+$$ -1 \leq n_x \leq 1 $$
 $$ -1 \leq n_y \leq 1 $$
 $$ -1 \leq n_z \leq 1 $$</li>
-<li>이 때 NDC좌표는 클립 좌표의 마지막 차원 $w$로 나눈 결과값이므로 다음과 같다.</li>
-<li>$$ -1 \leq \frac{x}{w} \leq 1 $$
+<li>이 때 NDC좌표는 클립 좌표의 마지막 차원 $w$로 나눈 결과값이므로 다음과 같다.
+$$ -1 \leq \frac{x}{w} \leq 1 $$
 $$ -1 \leq \frac{y}{w} \leq 1 $$
-$$ -1 \leq \frac{z}{w} \leq 1 $$</li>
-<li>$$ -w \leq x \leq w $$
+$$ -1 \leq \frac{z}{w} \leq 1 $$
+$$ -w \leq x \leq w $$
 $$ -w \leq y \leq w $$
 $$ -w \leq z \leq w $$</li>
 </ul>
 </li>
 <li>여기서 $x$, $y$, $z$란?
+$$ P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; \frac{n + f}{n - f} &amp; \frac{2nf}{n - f} \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \\ 1  \end{bmatrix} = \begin{bmatrix} x \\ y \\ z \\ w \end{bmatrix} $$
 <ul>
-<li>$$ P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; \frac{n + f}{n - f} &amp; \frac{2nf}{n - f} \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \\ 1  \end{bmatrix} = \begin{bmatrix} x \\ y \\ z \\ w \end{bmatrix} $$</li>
-<li>이것은 원근 투영 행렬의 4개의 행벡터와 $\vec{v}$의 내적으로 바꿔 쓸 수 있다.</li>
-<li>$$ \begin{bmatrix} P_{row1} \cdot \vec{v} \\ P_{row2} \cdot \vec{v} \\ P_{row3} \cdot \vec{v} \\ P_{row4} \cdot \vec{v} \end{bmatrix} = \begin{bmatrix} x \\ y \\ z \\ w \end{bmatrix} $$</li>
-<li>이것을 부등식에 치환하면 다음과 같다.</li>
-<li>$$ -P_{row4} \cdot \vec{v} \leq P_{row1} \cdot \vec{v} \leq P_{row4} \cdot \vec{v} $$
+<li>이것은 원근 투영 행렬의 4개의 행벡터와 $\vec{v}$의 내적으로 바꿔 쓸 수 있다.
+$$ \begin{bmatrix} P_{row1} \cdot \vec{v} \\ P_{row2} \cdot \vec{v} \\ P_{row3} \cdot \vec{v} \\ P_{row4} \cdot \vec{v} \end{bmatrix} = \begin{bmatrix} x \\ y \\ z \\ w \end{bmatrix} $$</li>
+<li>이것을 부등식에 치환하면 다음과 같다.
+$$ -P_{row4} \cdot \vec{v} \leq P_{row1} \cdot \vec{v} \leq P_{row4} \cdot \vec{v} $$
 $$ -P_{row4} \cdot \vec{v} \leq P_{row2} \cdot \vec{v} \leq P_{row4} \cdot \vec{v} $$
 $$ -P_{row4} \cdot \vec{v} \leq P_{row3} \cdot \vec{v} \leq P_{row4} \cdot \vec{v} $$</li>
-<li>이것을 분리해 6개의 부등식으로 표현할 수 있겠다.</li>
-<li>$$ (P_{row4} + P_{row1} \cdot \vec{v}) \geq 0 $$
+<li>이것을 분리해 6개의 부등식으로 표현할 수 있겠다.
+$$ (P_{row4} + P_{row1} \cdot \vec{v}) \geq 0 $$
 $$ (P_{row4} - P_{row1} \cdot \vec{v}) \geq 0 $$
 $$ (P_{row4} + P_{row2} \cdot \vec{v}) \geq 0 $$
 $$ (P_{row4} - P_{row2} \cdot \vec{v}) \geq 0 $$
@@ -683,12 +668,12 @@ $$ (P_{row4} - P_{row3} \cdot \vec{v}) \geq 0 $$</li>
 </ul>
 </li>
 <li>여기서 행벡터가 $P_{rown} = (a, b, c, d)$라고 하고, 뷰 공간의 점이 $\vec{v} = (x, y, z, 1)$라고 할 때 내적의 결과는 다음과 같다.
+$$ ax + by + cz + d \geq 0 $$
 <ul>
-<li>$$ ax + by + cz + d \geq 0 $$</li>
-<li>하지만 법선벡터 $(a, b, c)$의 크기가 $1$이 아니므로, 정규화 해야 한다.</li>
-<li>$$ \frac{ ax + by + cz + d }{ \sqrt{ a^2 + b^2 + c^2 } } = 0 $$</li>
-<li>이 결과는 모두 절두체 내부를 향할 것이다. 따라서 <strong>외부에 있는지를 검출</strong>하기 위해서는 <strong>부호를 반전시켜 주어야</strong> 한다.</li>
-<li>$$ - ( \frac{ ax + by + cz + d }{ \sqrt{ a^2 + b^2 + c^2 } } ) &gt; 0 $$</li>
+<li>하지만 법선벡터 $(a, b, c)$의 크기가 $1$이 아니므로, 정규화 해야 한다.
+$$ \frac{ ax + by + cz + d }{ \sqrt{ a^2 + b^2 + c^2 } } = 0 $$</li>
+<li>이 결과는 모두 절두체 내부를 향할 것이다. 따라서 <strong>외부에 있는지를 검출</strong>하기 위해서는 <strong>부호를 반전시켜 주어야</strong> 한다.
+$$ - ( \frac{ ax + by + cz + d }{ \sqrt{ a^2 + b^2 + c^2 } } ) &gt; 0 $$</li>
 </ul>
 </li>
 </ul>

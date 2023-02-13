@@ -2,9 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-원근 투영 변환의 원리 투시 원근법(Perspective projection drawing)
-시선을 한 점에 고정시키고, 고정된 점으로부터 화폭까지 곧게 뻗은 실을 활용해서 그림을 그려나가는 것이다. 원근 투영 변환(Perspective projection transformation)
-투시 원근법의 원리를 적용하기 위해서 공간의 모든 점이 한 점을 향해 모이는 형태로 변환하는 것이다. 즉, $x$, $y$, $z$축이 모두 직교하는 정육면체 형태를 가진 뷰 공간을 카메라의 한 점으로 모이는 사각뿔 형태를 가진 공간으로 변환하는 작업이다.'>
+원근 투영 변환의 원리 투시 원근법(Perspective projection drawing) 시선을 한 점에 고정시키고, 고정된 점으로부터 화폭까지 곧게 뻗은 실을 활용해서 그림을 그려나가는 것이다. 원근 투영 변환(Perspective projection transformation) 투시 원근법의 원리를 적용하기 위해서 공간의 모든 점이 한 점을 향해 모이는 형태로 변환하는 것이다. 즉, $x$, $y$, $z$축이 모두 직교하는 정육면체 형태를 가진 뷰 공간을 카메라의 한 점으로 모이는 사각뿔 형태를 가진 공간으로 변환하는 작업이다.'>
 <title>[Game Math] Chapter 12. 원근 투영: 화면에 현실감을 부여하는 변환</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-12/'>
@@ -12,17 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 12. 원근 투영: 화면에 현실감을 부여하는 변환'>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-원근 투영 변환의 원리 투시 원근법(Perspective projection drawing)
-시선을 한 점에 고정시키고, 고정된 점으로부터 화폭까지 곧게 뻗은 실을 활용해서 그림을 그려나가는 것이다. 원근 투영 변환(Perspective projection transformation)
-투시 원근법의 원리를 적용하기 위해서 공간의 모든 점이 한 점을 향해 모이는 형태로 변환하는 것이다. 즉, $x$, $y$, $z$축이 모두 직교하는 정육면체 형태를 가진 뷰 공간을 카메라의 한 점으로 모이는 사각뿔 형태를 가진 공간으로 변환하는 작업이다.'>
+원근 투영 변환의 원리 투시 원근법(Perspective projection drawing) 시선을 한 점에 고정시키고, 고정된 점으로부터 화폭까지 곧게 뻗은 실을 활용해서 그림을 그려나가는 것이다. 원근 투영 변환(Perspective projection transformation) 투시 원근법의 원리를 적용하기 위해서 공간의 모든 점이 한 점을 향해 모이는 형태로 변환하는 것이다. 즉, $x$, $y$, $z$축이 모두 직교하는 정육면체 형태를 가진 뷰 공간을 카메라의 한 점으로 모이는 사각뿔 형태를 가진 공간으로 변환하는 작업이다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-12/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2022-04-29T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-04-29T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Game Math] Chapter 12. 원근 투영: 화면에 현실감을 부여하는 변환">
 <meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-원근 투영 변환의 원리 투시 원근법(Perspective projection drawing)
-시선을 한 점에 고정시키고, 고정된 점으로부터 화폭까지 곧게 뻗은 실을 활용해서 그림을 그려나가는 것이다. 원근 투영 변환(Perspective projection transformation)
-투시 원근법의 원리를 적용하기 위해서 공간의 모든 점이 한 점을 향해 모이는 형태로 변환하는 것이다. 즉, $x$, $y$, $z$축이 모두 직교하는 정육면체 형태를 가진 뷰 공간을 카메라의 한 점으로 모이는 사각뿔 형태를 가진 공간으로 변환하는 작업이다.">
+원근 투영 변환의 원리 투시 원근법(Perspective projection drawing) 시선을 한 점에 고정시키고, 고정된 점으로부터 화폭까지 곧게 뻗은 실을 활용해서 그림을 그려나가는 것이다. 원근 투영 변환(Perspective projection transformation) 투시 원근법의 원리를 적용하기 위해서 공간의 모든 점이 한 점을 향해 모이는 형태로 변환하는 것이다. 즉, $x$, $y$, $z$축이 모두 직교하는 정육면체 형태를 가진 뷰 공간을 카메라의 한 점으로 모이는 사각뿔 형태를 가진 공간으로 변환하는 작업이다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -400,40 +394,30 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="원근-투영-변환의-원리">원근 투영 변환의 원리</h2>
 <ul>
-<li>
-<p><strong>투시 원근법(Perspective projection drawing)</strong></p>
+<li><strong>투시 원근법(Perspective projection drawing)</strong>
 <ul>
 <li>시선을 한 점에 고정시키고, 고정된 점으로부터 화폭까지 곧게 뻗은 실을 활용해서 그림을 그려나가는 것이다.</li>
 </ul>
 </li>
-<li>
-<p><strong>원근 투영 변환(Perspective projection transformation)</strong></p>
+<li><strong>원근 투영 변환(Perspective projection transformation)</strong>
 <ul>
 <li>투시 원근법의 원리를 적용하기 위해서 공간의 모든 점이 한 점을 향해 모이는 형태로 변환하는 것이다.</li>
 <li>즉, $x$, $y$, $z$축이 모두 직교하는 정육면체 형태를 가진 뷰 공간을 카메라의 한 점으로 모이는 사각뿔 형태를 가진 공간으로 변환하는 작업이다.</li>
 </ul>
 </li>
-<li>
-<p><strong>화각(Field of view)</strong></p>
+<li><strong>화각(Field of view)</strong>
 <ul>
 <li>카메라를 통해서 이미지를 담을 수 있는 각을 말한다.</li>
 <li>카메라에 화각을 설정하면 좌우와 위아래가 균등한 사각뿔 영역이 만들어진다.</li>
 </ul>
 </li>
-<li>
-<p><strong>투영 평면(Projection plane)</strong></p>
+<li><strong>투영 평면(Projection plane)</strong>
 <ul>
 <li>3차원 공간을 원근 투영 변환한 후에는 그것을 2차원의 모니터 평면에 담아내야 한다. 이를 위해서 모든 물체의 상이 맺히는 가상의 평면을 생성해야 하는데 이것을 투영 평면이라고 한다.</li>
 </ul>
 </li>
-<li>
-<p><strong>초점 거리(Focal length)</strong></p>
-<ul>
-<li>카메라로부터 투영 평면까지의 거리이다.</li>
-</ul>
-</li>
-</ul>
-<p><img src="/post/game_math/images/12-01-fov.jpg"
+<li><strong>초점 거리(Focal length)</strong> <br />
+<img src="/post/game_math/images/12-01-fov.jpg"
 	
 	
 	
@@ -442,23 +426,24 @@ if (!doNotTrack) {
 		alt="카메라의 화각, 투영 평면, 초점거리"
 	
 	
-></p>
+>
+<ul>
+<li>카메라로부터 투영 평면까지의 거리이다.</li>
+</ul>
+</li>
+</ul>
 <br />  
 <ul>
-<li>
-<p><strong>NDC(Normalized device coordinate)</strong></p>
+<li><strong>NDC(Normalized device coordinate)</strong>
 <ul>
-<li>원근 투영 변환을 위해서는 먼저 투영 평면의 위치를 지정해야 한다. 일반적으로 투영 평면의 위치는 계산의 편의를 위해서 <mark style="background-color: lightblue">위 아래의 크기가 각각 $1$</mark>이 되는 지점으로 결정한다. 따라서 다음과 같이 좌우와 상하가 $[-1, 1]$의 범위를 가지는 정사각형의 모습을 띤다.</li>
+<li>원근 투영 변환을 위해서는 먼저 투영 평면의 위치를 지정해야 한다. 일반적으로 투영 평면의 위치는 계산의 편의를 위해서 <mark style="background-color: lightblue">위 아래의 크기가 각각 $1$</mark>이 되는 지점으로 결정한다. 따라서 좌우와 상하가 $[-1, 1]$의 범위를 가지는 정사각형의 모습을 띤다.</li>
 <li>이 정사각형 영역은 2차원 평면의 좌표 시스템을 가지는데 이를 NDC라고 한다.</li>
 <li>NDC는 가운데 중점을 원점으로 설정한다.</li>
 </ul>
 </li>
-<li>
-<p>NDC가 언제나 일정한 값을 가진다면, 화각에 따라 초점 거리가 달라질 수밖에 없다.</p>
+<li>NDC가 언제나 일정한 값을 가진다면, 화각에 따라 초점 거리가 달라질 수밖에 없다.
 <ul>
-<li>화각이 커질 수록 초점 거리는 가까워지고, 화각이 작아질 수록 초점 거리는 멀어지겠다.</li>
-<li>$$\tan(\frac{\theta}{2}) = \frac{1}{d}$$ <br /><br>
-<mark style="background-color: lightblue">$ d = \frac{1}{\tan(\frac{\theta}{2})} $ </mark> <br /><br>
+<li><u>화각이 커질 수록 초점 거리는 가까워지고</u>, <u>화각이 작아질 수록 초점 거리는 멀어지겠다</u>. <br />
 <img src="/post/game_math/images/12-02-d.jpg"
 	
 	
@@ -468,7 +453,9 @@ if (!doNotTrack) {
 		alt="초점 거리 구하기"
 	
 	
-></li>
+>
+$$\tan(\frac{\theta}{2}) = \frac{1}{d}$$
+$$ d = \frac{1}{\tan(\frac{\theta}{2})}$$</li>
 </ul>
 </li>
 </ul>
@@ -476,18 +463,20 @@ if (!doNotTrack) {
 <ul>
 <li><strong>사영 공간(Projective space)</strong>
 <ul>
-<li>지금까지의 공간 변환은 $x$, $y$, $z$축이 모두 직교하고 정육면체 형태의 3차원 공간이었다. 하지만 원근 투영 변환을 거치면 <strong>사각뿔</strong> 형태로 바뀌게 된다. 이것을 사영 공간이라고 한다.</li>
+<li>지금까지의 공간 변환은 $x$, $y$, $z$축이 모두 직교하고 정육면체 형태의 3차원 공간이었다. 하지만 원근 투영 변환을 거치면 <u>사각뿔</u> 형태로 바뀌게 된다. 이것을 사영 공간이라고 한다.</li>
 <li>$x$, $y$축은 여전히 직교하므로 유클리드 공간과 동일한 성질을 가진다.</li>
 <li>하지만 $z$축은 독립적으로 행동하지 않고 $x$, $y$축에 모두 영향을 준다. 이것이 초점 거리에 따라 투영 평면의 면적이 달라지는 이유이기도 하겠다.</li>
 </ul>
 </li>
+</ul>
+<br />
+<ul>
 <li>그렇다면 원근 투영 변환에 대응하는 행렬은 어떻게 설계할 수 있을까?
 <ul>
-<li>$x$축을 배제하고 $y$, $z$축으로 공간을 설정하고 투영 평면에 상이 맺히는 과정을 생각해보자.
-<ul>
-<li>뷰공간의 점 $P_{view}$가 투영 평면에 투영된 점을 $P_{ndc}$라고 한다면 좌표는 다음과 같다.</li>
-<li>$P_{view} = (0, v_y, v_z)$ <br /><br>
-$P_{ndc} = (0, n_y)$</li>
+<li>$x$축을 배제하고 $y$, $z$축으로 공간을 설정하고 투영 평면에 상이 맺히는 과정을 생각해보자.</li>
+<li>뷰공간의 점 $P_{view}$가 투영 평면에 투영된 점을 $P_{ndc}$라고 한다면 좌표는 다음과 같다.
+$$P_{view} = (0, v_y, v_z)$$
+$$P_{ndc} = (0, n_y)$$</li>
 <li>두 점의 관계를 닮은꼴 삼각형 두개로 알아보면 다음과 같은 비가 성립된다. <br /><br>
 <img src="/post/game_math/images/12-03-projectiveSpace.jpg"
 	
@@ -498,19 +487,14 @@ $P_{ndc} = (0, n_y)$</li>
 		alt="두 개의 닮은꼴 삼각형"
 	
 	
-></li>
-<li>$n_y : d = v_y : -v_z$</li>
-<li>$n_y = \frac{d \cdot v_y}{-v_z}$</li>
+>
+$$n_y : d = v_y : -v_z$$
+$$n_y = \frac{d \cdot v_y}{-v_z}$$</li>
+<li>카메라의 좌우 상하 시야각은 동일하므로 NDC의 $x$값 또한 $y$값을 $0$으로 고정한 후 $x$, $z$축의 평면을 사용하는 방식으로 구할 수 있겠다.</li>
+<li>따라서 초점 거리와 뷰 좌표로부터 $P_{ndc}$를 구할 수 있다.
+$$P_{ndc} = (n_x, n_y) = (\frac{d \cdot v_x}{-v_z}, \frac{d \cdot v_y}{-v_z}) = -\frac{d}{v_z}(v_x, v_y)$$</li>
 </ul>
 </li>
-<li>카메라의 좌우 상하 시야각은 동일하므로 NDC의 $x$값 또한 $y$값을 $0$으로 고정한 후 $x$, $z$축의 평면을 사용하는 방식으로 구할 수 있다.</li>
-<li>따라서 초점 거리와 뷰 좌표로부터 $P_{ndc}$를 구할 수 있다.</li>
-<li>$$P_{ndc} = (n_x, n_y) = (\frac{d \cdot v_x}{-v_z}, \frac{d \cdot v_y}{-v_z}) = -\frac{d}{v_z}(v_x, v_y)$$</li>
-</ul>
-</li>
-</ul>
-<br />  
-<ul>
 <li>이제 NDC좌표를 계산했으니, 이 좌표를 모니터 해상도 만큼 가로 세로로 늘려주면 최종 스크린 좌표가 완성된다.
 <ul>
 <li>근데 가로 세로 해상도가 다르기 때문에 늘리면 물체가 찌그러지겠다.</li>
@@ -526,33 +510,27 @@ $P_{ndc} = (0, n_y)$</li>
 	
 ></li>
 <li>예를 들어, $800 \times 600$해상도에서 세로 크기를 기준으로 잡은 종횡비는 $1.3333$이다. 이 종횡비를 $a$라고 하자.</li>
-<li>그러면 좌우로 찌그러트리기 위해서 $x$축에 종횡비의 역수 $\frac{1}{a}$를 곱하면 되겠다.</li>
-<li>$$P_{ndc} = -\frac{d}{v_z}(\frac{v_x}{a}, v_y)$$</li>
+<li>그러면 좌우로 찌그러트리기 위해서 $x$축에 종횡비의 역수 $\frac{1}{a}$를 곱하면 되겠다.
+$$P_{ndc} = -\frac{d}{v_z}(\frac{v_x}{a}, v_y)$$</li>
+</ul>
+</li>
+<li>이렇게 최종 NDC값을 계산하는 원근 투영 행렬 $P$를 다음과 같이 설계할 수 있겠다.
+$$P_{ndc} = P \cdot \vec{v} = \begin{bmatrix} \frac{1}{a} \cdot \frac{d}{-v_z} &amp; 0 \\ 0 &amp; \frac{d}{-v_z} \end{bmatrix} \begin{bmatrix} v_x \\ v_y \end{bmatrix}$$</li>
+<li>하지만 한 가지 아쉽다. 변환할 점의 $z$값이 행렬에 사용되다보니 변환할 점마다 항상 행렬을 새롭게 생성해야 한다. Chapter 5에서 본것처럼 미리 곱해둔 행렬을 계속 사용한다면 굉장히 연산량을 줄일 수 있겠다.
+<ul>
+<li>이건 어떨까? $-\vec{v_z}$값을 행렬에서 제거하고 대신 행렬의 결괏값에서 $-\vec{v_z}$를 나누어 주는 거다.
+$$P_{ndc} = P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 \\ 0 &amp; d &amp; 0 \\ 0 &amp; 0 &amp; -1 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \end{bmatrix} = \begin{bmatrix} \frac{d}{a} \cdot v_x \\ d \cdot v_y \\ -v_z\end{bmatrix}$$</li>
 </ul>
 </li>
 </ul>
 <br />  
 <ul>
-<li>이렇게 최종 NDC값을 계산하는 원근 투영 행렬 $P$를 다음과 같이 설계할 수 있겠다.
-<ul>
-<li>$$P_{ndc} = P \cdot \vec{v} = \begin{bmatrix} \frac{1}{a} \cdot \frac{d}{-v_z} &amp; 0 \\ 0 &amp; \frac{d}{-v_z} \end{bmatrix} \begin{bmatrix} v_x \\ v_y \end{bmatrix}$$</li>
-</ul>
-</li>
-<li>하지만 한 가지 아쉽다. 변환할 점의 $z$값이 행렬에 사용되다보니 변환할 점마다 항상 행렬을 새롭게 생성해야 한다. Chapter 5에서 본것처럼 미리 곱해둔 행렬을 계속 사용한다면 굉장히 연산량을 줄일 수 있겠다.
-<ul>
-<li>이건 어떨까? $-\vec{v_z}$값을 행렬에서 제거하고 대신 행렬의 결괏값에서 $-\vec{v_z}$를 나누어 주는 거다.</li>
-<li>$$P_{ndc} = P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 \\ 0 &amp; d &amp; 0 \\ 0 &amp; 0 &amp; -1 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \end{bmatrix} = \begin{bmatrix} \frac{d}{a} \cdot v_x \\ d \cdot v_y \\ -v_z\end{bmatrix}$$</li>
-</ul>
-</li>
 <li><strong>클립 좌표(Clip coordinate)</strong>
 <ul>
-<li>이렇게 <mark style="background-color: lightblue"> 원근 투영 행렬 $P$로 변환되는 좌표계</mark>를 클립 좌표라고 부르며 다음과 같이 계산한다.</li>
-<li>$$P_{clip} = (\frac{d}{a} \cdot v_x , d \cdot v_y , -v_z)$$</li>
-</ul>
-</li>
+<li>이렇게 <mark style="background-color: lightblue"> 원근 투영 행렬 $P$로 변환되는 좌표계</mark>를 클립 좌표라고 부르며 다음과 같이 계산한다.
+$$P_{clip} = (\frac{d}{a} \cdot v_x , d \cdot v_y , -v_z)$$</li>
 <li>이 클립좌표를 <mark style="background-color: lightblue">세 번째 값인 $-v_z$로 나누면</mark> <strong>NDC좌표</strong>를 얻을 수 있다.
-<ul>
-<li>$$P_{ndc} = (\frac{d \cdot v_x}{-v_z \cdot a}, \frac{d \cdot v_y}{-v_z}, 1)$$</li>
+$$P_{ndc} = (\frac{d \cdot v_x}{-v_z \cdot a}, \frac{d \cdot v_y}{-v_z}, 1)$$</li>
 </ul>
 </li>
 </ul>
@@ -569,11 +547,10 @@ $P_{ndc} = (0, n_y)$</li>
 </ul>
 <br />  
 <ul>
-<li>
-<p>3차원의 사영 공간에서 평행하게 점을 이동시키면?</p>
+<li>3차원의 사영 공간에서 평행하게 점을 이동시키면?
 <ul>
-<li>카메라에 멀어질 수록 투영된 좌푯값이 투영 평면의 원점에 가까워지고, 카메라에 가까워질수록 커진다.</li>
-<li>즉, <strong>사영 공간의 점</strong>과 <strong>투영된 점의</strong> 좌표는 <strong>반비례 관계</strong>이다. <br /><br>
+<li>카메라에 멀어질 수록 투영된 좌푯값이 투영 평면의 원점에 가까워지고, 카메라에 가까워질수록 멀어진다.</li>
+<li>즉, <u><strong>사영 공간의 점</strong>과 <strong>투영된 점의</strong> 좌표는 <strong>반비례 관계</strong></u>이다. <br /><br>
 <img src="/post/game_math/images/12-05-parellelMovement.jpg"
 	
 	
@@ -584,24 +561,25 @@ $P_{ndc} = (0, n_y)$</li>
 	
 	
 ></li>
-<li>사영 공간의 점을 $(x&rsquo;, y&rsquo;, z&rsquo;)$라고 하고, 해당 점이 투영된 NDC좌표를 $(x, y)$라고 하자. 그러면 NDC 좌푯값은 마지막 차원값 $z&rsquo;$에 반비례로 영향을 받으므로 다음과 같은 관계가 성립한다.</li>
-<li>$$ x = \frac{x&rsquo;}{z&rsquo;}, y = \frac{y&rsquo;}{z&rsquo;}$$
-<br /></li>
+<li>사영 공간의 점을 $(x&rsquo;, y&rsquo;, z&rsquo;)$라고 하고, 해당 점이 투영된 NDC좌표를 $(x, y)$라고 하자. 그러면 NDC 좌푯값은 마지막 차원값 $z&rsquo;$에 반비례로 영향을 받으므로 다음과 같은 관계가 성립한다.
+$$x = \frac{x&rsquo;}{z&rsquo;}$$
+$$y = \frac{y&rsquo;}{z&rsquo;}$$</li>
 </ul>
 </li>
-<li>
-<p>사영 공간의 좌표로 직선의 방정식을 표현해보자. 위의 $x$, $y$를 직선의 방정식 $y = ax + b$에 대입해보자.</p>
+<li>사영 공간의 좌표로 직선의 방정식을 표현해보자. 위의 $x$, $y$를 직선의 방정식 $y = ax + b$에 대입해보자.
+$$\frac{y&rsquo;}{z&rsquo;} = a\frac{x&rsquo;}{z&rsquo;} + b$$
+$$ y&rsquo; = ax&rsquo; + bz&rsquo;$$
 <ul>
-<li>$$\frac{y&rsquo;}{z&rsquo;} = a\frac{x&rsquo;}{z&rsquo;} + b$$</li>
-<li>$$ y&rsquo; = ax&rsquo; + bz&rsquo;$$</li>
 <li>위와 같이 세 미지수의 차수가 모두 1차식으로 동일한 방정식이 만들어진다. 이렇게 미지수에 대한 차수가 동일한 방정식을 동차 방정식이라고 한다.</li>
 <li>그래서 사영 공간이 사용하는 좌표계는 동차좌표계라고 부른다.</li>
 </ul>
 </li>
-<li>
-<p><strong>NDC의 원점 $(0, 0)$</strong></p>
+</ul>
+<br />  
 <ul>
-<li>카메라로 멀어질수록 투영된 NDC 좌푯값은 원점 $(0, 0)$에 가까워진다.</li>
+<li><strong>NDC의 원점 $(0, 0)$</strong>
+<ul>
+<li><u>카메라로 멀어질수록 투영된 NDC 좌푯값은 원점 $(0, 0)$에 가까워진다.</u></li>
 <li>이런 NDC의 원점은 회화의 투시 원근 기법에서 사용하는 <strong>소실점(Vanishing point)</strong> 에 해당한다.</li>
 </ul>
 </li>
@@ -928,7 +906,7 @@ $P_{ndc} = (0, n_y)$</li>
 <ul>
 <li><strong>깊이(Depth) 값</strong>의 필요성
 <ul>
-<li>우리에게 보이는 화면은 결국 2차원 평면이므로 가장 카메라에서 멀리 있는 나중에 그린 물체가 앞에 보일 수 밖에 없다.</li>
+<li>우리에게 보이는 화면은 결국 2차원 평면이므로 가장 카메라에서 멀리 있는, 나중에 그린 물체가 앞에 보일 수 밖에 없다.</li>
 <li>이 문제를 해결하기 위해서는 <strong>카메라로부터 물체가 얼마나 떨어졌는지</strong>에 대한 깊이 값이 필요하다.</li>
 <li>깊이 값을 추가하면 2차원 평면이었던 NDC영역이 3차원으로 확장된다. 여기서 깊이값의 범위는 동일하게 $[-1, 1]$ 이다.</li>
 </ul>
@@ -936,11 +914,10 @@ $P_{ndc} = (0, n_y)$</li>
 </ul>
 <br />  
 <ul>
-<li>
-<p><strong>절두체(Frustum)</strong></p>
+<li><strong>절두체(Frustum)</strong>
 <ul>
-<li>카메라에 가장 가까이 있는, 깊이 값이 $-1$인 평면을 <strong>근평면(Near plane)</strong> 이라고 한다.</li>
-<li>반대로 가장 멀리에 있는, 깊이 값이 $1$인 평면을 <strong>원평면(Far plane)</strong> 이라고 한다.</li>
+<li>카메라에 가장 가까이 있는, <u>깊이 값이 $-1$인 평면을 <strong>근평면(Near plane)</strong></u> 이라고 한다.</li>
+<li>반대로 가장 멀리에 있는, <u>깊이 값이 $1$인 평면을 <strong>원평면(Far plane)</strong></u> 이라고 한다.</li>
 <li>사영 공간을 근평면과 원평면으로 잘라서 만들어진 부분을 절두체라고 한다. <br /><br>
 <img src="/post/game_math/images/12-06-frustum.jpg"
 	
@@ -952,10 +929,7 @@ $P_{ndc} = (0, n_y)$</li>
 	
 	
 ></li>
-</ul>
-</li>
-<li>
-<p>절두체로 생성되는 3차원의 NDC영역의 범위는 다음과 같다. NDC 깊이 값은 멀어질수록 증가하기 때문에 <strong>왼손좌표계</strong>를 사용한다. <br /><br>
+<li>절두체로 생성되는 3차원의 NDC영역의 범위는 다음과 같다. NDC 깊이 값은 멀어질수록 증가하기 때문에 <strong>왼손좌표계</strong>를 사용한다. <br /><br>
 <img src="/post/game_math/images/12-07-3dNdc.jpg"
 	
 	
@@ -965,17 +939,18 @@ $P_{ndc} = (0, n_y)$</li>
 		alt="3차원으로 확장한 NDC의 범위"
 	
 	
-></p>
+></li>
+</ul>
 </li>
 </ul>
 <br />  
 <ul>
 <li>원근 투영 행렬에 깊이 값을 넣기 위해 3행을 4행으로 옮기고 3행을 깊이값을 구하는 용도로 변경하자.
 <ul>
-<li>뷰 공간의 점이 $\vec{v} = (v_x, v_y, v_z, 1)$일 때 다음과 같이 구할 수 있다.</li>
-<li>$$ P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ ? &amp; ? &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{d}{a} \cdot v_x \\ d \cdot v_y \\ ? \\ -v_z\end{bmatrix}$$</li>
-<li>여기서 깊이 값은 뷰 좌표계의 $x$, $y$축과 직교하므로 영향을 받지 않는다. 그러므로 3행의 앞의 두 요소는 $0$으로 설정할 수 있겠다.</li>
-<li>$$ P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{d}{a} \cdot v_x \\ d \cdot v_y \\ ? \\ -v_z\end{bmatrix}$$</li>
+<li>뷰 공간의 점이 $\vec{v} = (v_x, v_y, v_z, 1)$일 때 다음과 같이 구할 수 있다.
+$$ P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ ? &amp; ? &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{d}{a} \cdot v_x \\ d \cdot v_y \\ ? \\ -v_z\end{bmatrix}$$</li>
+<li>여기서 깊이 값은 뷰 좌표계의 $x$, $y$축과 직교하므로 영향을 받지 않는다. 그러므로 3행의 앞의 두 요소는 $0$으로 설정할 수 있겠다.
+$$ P \cdot \vec{v} = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} v_x \\ v_y \\ v_z \\ 1 \end{bmatrix} = \begin{bmatrix} \frac{d}{a} \cdot v_x \\ d \cdot v_y \\ ? \\ -v_z\end{bmatrix}$$</li>
 </ul>
 </li>
 </ul>
@@ -995,32 +970,29 @@ $P_{ndc} = (0, n_y)$</li>
 	
 	
 ></li>
+</ul>
+</li>
 <li>근평면의 경우
 <ul>
 <li>뷰 공간의 좌표는 $(0, 0, -n, 1)$이 된다.</li>
 <li>근평면은 깊이 값의 시작부분이므로 NDC좌표의 $(0, 0, -1)$에 대응한다.</li>
-<li>따라서 다음과 같이 만들어진다.</li>
-<li>$$ P_1 = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ -n \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ ? \\ n \end{bmatrix}$$</li>
-<li>클립 좌표의 경우 세번째 원소를 마지막 네번째 원소로 나눈 값이 NDC의 세번째 원소인 $-1$이 되므로, $?$는 $-n$이 된다.</li>
-<li>$$ P_1 = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ -n \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ -n \\ n \end{bmatrix}$$</li>
+<li>따라서 다음과 같이 만들어진다.
+$$ P_1 = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ -n \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ ? \\ n \end{bmatrix}$$</li>
+<li>클립 좌표의 경우 세번째 원소를 마지막 네번째 원소로 나눈 값이 NDC의 세번째 원소인 $-1$이 되므로, $?$는 $-n$이 된다.<br>
+$$ P_1 = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ -n \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ -n \\ n \end{bmatrix}$$</li>
 </ul>
 </li>
 <li>원평면의 경우
 <ul>
-<li>동일한 방식으로 다음과 같이 구할 수 있겠다.</li>
-<li>$$ P_2 = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ -f \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ f \\ f \end{bmatrix}$$</li>
-</ul>
-</li>
+<li>동일한 방식으로 다음과 같이 구할 수 있겠다.
+$$ P_2 = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; ? &amp; ? \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} \begin{bmatrix} 0 \\ 0 \\ -f \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ f \\ f \end{bmatrix}$$</li>
 </ul>
 </li>
 </ul>
 <br />  
 <ul>
-<li>여기서 두행렬의 3행과 뷰 공간의 점을 내적한 후 수식을 정리하면 다음과 같이 최종 원근 투영 행렬을 구할 수 있다. <br />
-<ul>
-<li>$$ P = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; \frac{n + f}{n - f} &amp; \frac{2nf}{n - f} \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} $$</li>
-</ul>
-</li>
+<li>여기서 두행렬의 3행과 뷰 공간의 점을 내적한 후 수식을 정리하면 다음과 같이 최종 원근 투영 행렬을 구할 수 있다.<br>
+$$ P = \begin{bmatrix} \frac{d}{a} &amp; 0 &amp; 0 &amp; 0\\ 0 &amp; d &amp; 0 &amp; 0\\ 0 &amp; 0 &amp; \frac{n + f}{n - f} &amp; \frac{2nf}{n - f} \\ 0 &amp; 0 &amp; -1 &amp; 0 \end{bmatrix} $$</li>
 </ul>
 <br />  
 <ul>
@@ -1280,7 +1252,7 @@ $P_{ndc} = (0, n_y)$</li>
 ></li>
 <li>이것은 변환 과정에서 사영 공간의 마지막 요소인 <mark style="background-color: lightblue">$-v_z$로 나눴기 때문</mark>이다. 이런 <mark style="background-color: lightblue">반비례 관계</mark>때문에 이런 문제가 발생하였다.</li>
 <li>따라서 NDC에서의 무게중심좌표가 아니라 투영 전 사영 공간의 무게중심좌표를 써야 한다.</li>
-<li>만약 <strong>NDC에서의 무게중심좌표를 가지고 투영 전 사영 공간의 무게중심좌표를 알아낼 수 있다면</strong> 좋을 것이다.</li>
+<li>만약 <u>NDC에서의 무게중심좌표를 가지고 투영 전 사영 공간의 무게중심좌표를 알아낼 수 있다면</u> 좋을 것이다.</li>
 </ul>
 </li>
 </ul>
@@ -1301,38 +1273,20 @@ $P_{ndc} = (0, n_y)$</li>
 	
 ></li>
 <li>$x$축에 위치한 세 수 중에서 가운데 위치한 $4$의 무게중심좌표 $a$는 다음 식에 의해 구할 수 있으며 $a = 0.5$가 된다.
-<ul>
-<li>$ 4 = a \cdot 2 + (1-a) \cdot 6 $</li>
-</ul>
-</li>
+$$ 4 = a \cdot 2 + (1-a) \cdot 6 $$</li>
 <li>그리고 $y$축에서 가운데 위치한 $-\frac{1}{4}$의 경우 다음과 같으며 $a = 0.25$가 된다.
-<ul>
-<li>$ -\frac{1}{4} = a \cdot - \frac{1}{2} + (1 - a) \cdot -\frac{1}{6}$</li>
-</ul>
-</li>
+$$ -\frac{1}{4} = a \cdot - \frac{1}{2} + (1 - a) \cdot -\frac{1}{6}$$</li>
 <li>이 둘을 다음과 같이 나타내 보자.
-<ul>
-<li>$$ x&rsquo; = t_1 \cdot x_1 + t_2 \cdot x_2 (t_1 + t_2 = 1) $$</li>
-<li>$$ y&rsquo; = q_1 \cdot y_1 + q_2 \cdot y_2 (q_1 + q_2 = 1) $$</li>
-</ul>
-</li>
+$$ x&rsquo; = t_1 \cdot x_1 + t_2 \cdot x_2 (t_1 + t_2 = 1) $$
+$$ y&rsquo; = q_1 \cdot y_1 + q_2 \cdot y_2 (q_1 + q_2 = 1) $$</li>
 <li>$x&rsquo;$, $y&rsquo;$는 서로 반비례 관계이므로 $y$값을 $\frac{1}{x}$로 나타낼 수 있다.
-<ul>
-<li>$$ \frac{1}{x&rsquo;} = q_1 \cdot \frac{1}{x_1} + q_2 \cdot \frac{1}{x_2} $$</li>
-<li>$$ x&rsquo; = \frac{1}{ q_1 \cdot \frac{1}{x_1} + q_2 \cdot \frac{1}{x_2} }$$</li>
-</ul>
-</li>
+$$ \frac{1}{x&rsquo;} = q_1 \cdot \frac{1}{x_1} + q_2 \cdot \frac{1}{x_2} $$
+$$ x&rsquo; = \frac{1}{ q_1 \cdot \frac{1}{x_1} + q_2 \cdot \frac{1}{x_2} }$$</li>
 <li>이 식을 다시 변환해보자.
-<ul>
-<li>$$ q_1 \cdot \frac{x&rsquo;}{x_1} + q_2 \cdot \frac{x&rsquo;}{x_2} = 1 = t_1 + t_2 $$</li>
-</ul>
-</li>
+$$ q_1 \cdot \frac{x&rsquo;}{x_1} + q_2 \cdot \frac{x&rsquo;}{x_2} = 1 = t_1 + t_2 $$</li>
 <li>따라서 다음 식을 도출할 수 있다.
-<ul>
-<li>$$ t_1 = \frac{x&rsquo;}{x_1}q_1 $$</li>
-<li>$$ t_2 = \frac{x&rsquo;}{x_2}q_2 $$</li>
-</ul>
-</li>
+$$ t_1 = \frac{x&rsquo;}{x_1}q_1 $$
+$$ t_2 = \frac{x&rsquo;}{x_2}q_2 $$</li>
 </ul>
 </li>
 </ul>
@@ -1341,9 +1295,9 @@ $P_{ndc} = (0, n_y)$</li>
 <li>위의 식이 올바르게 적용되는지 확인해보자.
 <ul>
 <li>$y$축에서 $q_1 = \frac{1}{4}, q_2 = \frac{3}{4}$ 이다.</li>
-<li>$x$축에서 $x_1 = 2, x_2 = 6, x&rsquo; = 4$이다.</li>
-<li>$t_1 = \frac{x&rsquo;}{x_1}q_1 = \frac{4}{2} \cdot \frac{1}{4} = 0.5$</li>
-<li>$t_2 = \frac{x&rsquo;}{x_2}q_2 = \frac{4}{6} \cdot \frac{3}{4} = 0.5$</li>
+<li>$x$축에서 $x_1 = 2, x_2 = 6, x&rsquo; = 4$이다.
+$$t_1 = \frac{x&rsquo;}{x_1}q_1 = \frac{4}{2} \cdot \frac{1}{4} = 0.5$$
+$$t_2 = \frac{x&rsquo;}{x_2}q_2 = \frac{4}{6} \cdot \frac{3}{4} = 0.5$$</li>
 <li>따라서 $t_1$, $t_2$가 $0.5$임을 알 수 있다.</li>
 </ul>
 </li>
@@ -1351,13 +1305,10 @@ $P_{ndc} = (0, n_y)$</li>
 <br />  
 <ul>
 <li>두 점이 아닌 삼각형의 세 점으로 확장하고, $x$를 $-z$로 치환하면 <mark style="background-color: lightblue">최종 투영 보정 보간식</mark>을 얻을 수 있다.
-<ul>
-<li>$$ z&rsquo; = \frac{1}{ q_1 \cdot \frac{1}{z_1} + q_2 \cdot \frac{1}{z_2} + q_3 \cdot \frac{1}{z_3}}$$</li>
-<li>$$ t_1 = \frac{z&rsquo;}{z_1}q_1 $$</li>
-<li>$$ t_2 = \frac{z&rsquo;}{z_2}q_2 $$</li>
-<li>$$ t_3 = \frac{z&rsquo;}{z_3}q_3 $$</li>
-</ul>
-</li>
+$$ z&rsquo; = \frac{1}{ q_1 \cdot \frac{1}{z_1} + q_2 \cdot \frac{1}{z_2} + q_3 \cdot \frac{1}{z_3}}$$
+$$ t_1 = \frac{z&rsquo;}{z_1}q_1 $$
+$$ t_2 = \frac{z&rsquo;}{z_2}q_2 $$
+$$ t_3 = \frac{z&rsquo;}{z_3}q_3 $$</li>
 </ul>
 <br />  
 <ul>
@@ -1472,16 +1423,16 @@ $P_{ndc} = (0, n_y)$</li>
 <ul>
 <li>이전에 깊이 값을 구해서 멀리 떨어진 물체를 먼저 그렸다. 하지만 물체가 겹쳐 있다면 어떻게 할 것인가?</li>
 <li>근본적인 해결방법은 게임 오브젝트 단위가 아니라, 삼각형의 픽셀단위로 깊이를 비교하고, 가까운 곳에 있는 픽셀만 그리는 것이다.</li>
-<li>화면의 픽셀마다 깊이 값을 별도로 보관하는 <strong>깊이 버퍼(Depth buffer)</strong> 를 사용하면 되겠다.</li>
-<li><strong>현재 깊이 값을 깊이 버퍼에 저장된 값과 비교</strong>해서 <strong>현재 깊이 값이 작은 경우에만 픽셀을 찍도록</strong> 하면 된다. 이 작업을 깊이 테스팅이라고 한다.</li>
+<li>화면의 픽셀마다 깊이 값을 별도로 보관하는 <u><strong>깊이 버퍼(Depth buffer)</strong></u> 를 사용하면 되겠다.</li>
+<li><u><strong>현재 깊이 값을 깊이 버퍼에 저장된 값과 비교</strong>해서 <strong>현재 깊이 값이 작은 경우에만 픽셀을 찍도록</strong></u> 하면 된다. 이 작업을 깊이 테스팅이라고 한다.</li>
 </ul>
 </li>
 </ul>
 <br />  
 <ul>
-<li>삼각형을 구성하는 세 점의 깊이 값 $z_1$, $z_2$, $z_3$(범위: $[-1, 1]$)으로부터 각 픽셀의 무게중심좌표 $q_1$, $q_2$, $q_3$(범위: $[0, 1]$)을 사용해서 픽셀의 깊이 값을 구할 수 있겠다.
+<li>삼각형을 구성하는 세 점의 깊이 값 $z_1$, $z_2$, $z_3$ (범위: $[-1, 1]$)으로부터 각 픽셀의 무게중심좌표 $q_1$, $q_2$, $q_3$ (범위: $[0, 1]$)을 사용해서 픽셀의 깊이 값을 구할 수 있겠다.
+$$ z&rsquo; = q_1 \cdot z_1 + q_2 \cdot z_2 + q_3 \cdot z_3$$
 <ul>
-<li>$$ z&rsquo; = q_1 \cdot z_1 + q_2 \cdot z_2 + q_3 \cdot z_3$$</li>
 <li>$z&rsquo;$ 값의 범위는 $[-1, 1]$이 된다.</li>
 </ul>
 </li>
@@ -1593,8 +1544,8 @@ $P_{ndc} = (0, n_y)$</li>
 	
 	
 ></li>
-<li>따라서 이를 해결하기 위해 이전에 다뤘던 원근 보정 매핑 방식을 이용해서 뷰 공간의 깊이 값을 활용할 수 있겠다.</li>
-<li>$$ z&rsquo; = \frac{1}{ q_1 \cdot \frac{1}{z_1} + q_2 \cdot \frac{1}{z_2} + q_3 \cdot \frac{1}{z_3}}$$</li>
+<li>따라서 이를 해결하기 위해 이전에 다뤘던 원근 보정 매핑 방식을 이용해서 뷰 공간의 깊이 값을 활용할 수 있겠다.
+$$ z&rsquo; = \frac{1}{ q_1 \cdot \frac{1}{z_1} + q_2 \cdot \frac{1}{z_2} + q_3 \cdot \frac{1}{z_3}}$$</li>
 </ul>
 </li>
 </ul>
@@ -1603,8 +1554,8 @@ $P_{ndc} = (0, n_y)$</li>
 <li>다음은 깊이 값을 $[0, 1]$범위로 바꾸어서 그 값에 따라 흑백 이미지로 출력하는 예제이다.
 <ul>
 <li>뷰 공간에서 절두체가 가지는 깊이의 범위는 원평면에서 근평면을 뺀 $f-n$이다.</li>
-<li>따라서 이때 사용할 깊이값은 다음과 같다.</li>
-<li>$$c_{depth} = \frac{z&rsquo; - n}{f - n}$$</li>
+<li>따라서 이때 사용할 깊이값은 다음과 같다.
+$$c_{depth} = \frac{z&rsquo; - n}{f - n}$$</li>
 </ul>
 </li>
 </ul>

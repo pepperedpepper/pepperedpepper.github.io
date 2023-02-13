@@ -2,8 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-바운딩 볼륨 절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. 따라서 이 문제를 해결하기 위해서 게임 오브젝트의 위치를 대상으로 하지 않고, 메시가 차지하는 영역을 감안해 절두체 컬링을 해야한다. 바운딩 볼륨(Bounding volume)
-메시가 차지하는 영역을 효과적으로 관리하기 위해 구(Sphere)나 박스(Box)같은 원시 도형(Primitive shape)을 사용한다. 이렇게 원시 도형으로 설정한 공간 데이터를 바운딩 볼륨이라고 한다. 구 바운딩 볼륨의 판정 바운딩 볼륨에서 가장 손쉽게 사용되는 것은 구(Sphere) 다.'>
+바운딩 볼륨 절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. 따라서 이 문제를 해결하기 위해서 게임 오브젝트의 위치를 대상으로 하지 않고, 메시가 차지하는 영역을 감안해 절두체 컬링을 해야한다. 바운딩 볼륨(Bounding volume) 메시가 차지하는 영역을 효과적으로 관리하기 위해 구(Sphere)나 박스(Box)같은 원시 도형(Primitive shape)을 사용한다. 이렇게 원시 도형으로 설정한 공간 데이터를 바운딩 볼륨이라고 한다. 구 바운딩 볼륨의 판정 바운딩 볼륨에서 가장 손쉽게 사용되는 것은 구(Sphere) 다.'>
 <title>[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (2) </title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-13-2/'>
@@ -11,15 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (2) '>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-바운딩 볼륨 절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. 따라서 이 문제를 해결하기 위해서 게임 오브젝트의 위치를 대상으로 하지 않고, 메시가 차지하는 영역을 감안해 절두체 컬링을 해야한다. 바운딩 볼륨(Bounding volume)
-메시가 차지하는 영역을 효과적으로 관리하기 위해 구(Sphere)나 박스(Box)같은 원시 도형(Primitive shape)을 사용한다. 이렇게 원시 도형으로 설정한 공간 데이터를 바운딩 볼륨이라고 한다. 구 바운딩 볼륨의 판정 바운딩 볼륨에서 가장 손쉽게 사용되는 것은 구(Sphere) 다.'>
+바운딩 볼륨 절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. 따라서 이 문제를 해결하기 위해서 게임 오브젝트의 위치를 대상으로 하지 않고, 메시가 차지하는 영역을 감안해 절두체 컬링을 해야한다. 바운딩 볼륨(Bounding volume) 메시가 차지하는 영역을 효과적으로 관리하기 위해 구(Sphere)나 박스(Box)같은 원시 도형(Primitive shape)을 사용한다. 이렇게 원시 도형으로 설정한 공간 데이터를 바운딩 볼륨이라고 한다. 구 바운딩 볼륨의 판정 바운딩 볼륨에서 가장 손쉽게 사용되는 것은 구(Sphere) 다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-13-2/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2022-05-01T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-05-01T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (2) ">
 <meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
-바운딩 볼륨 절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. 따라서 이 문제를 해결하기 위해서 게임 오브젝트의 위치를 대상으로 하지 않고, 메시가 차지하는 영역을 감안해 절두체 컬링을 해야한다. 바운딩 볼륨(Bounding volume)
-메시가 차지하는 영역을 효과적으로 관리하기 위해 구(Sphere)나 박스(Box)같은 원시 도형(Primitive shape)을 사용한다. 이렇게 원시 도형으로 설정한 공간 데이터를 바운딩 볼륨이라고 한다. 구 바운딩 볼륨의 판정 바운딩 볼륨에서 가장 손쉽게 사용되는 것은 구(Sphere) 다.">
+바운딩 볼륨 절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. 따라서 이 문제를 해결하기 위해서 게임 오브젝트의 위치를 대상으로 하지 않고, 메시가 차지하는 영역을 감안해 절두체 컬링을 해야한다. 바운딩 볼륨(Bounding volume) 메시가 차지하는 영역을 효과적으로 관리하기 위해 구(Sphere)나 박스(Box)같은 원시 도형(Primitive shape)을 사용한다. 이렇게 원시 도형으로 설정한 공간 데이터를 바운딩 볼륨이라고 한다. 구 바운딩 볼륨의 판정 바운딩 볼륨에서 가장 손쉽게 사용되는 것은 구(Sphere) 다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -399,8 +396,7 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="바운딩-볼륨">바운딩 볼륨</h2>
 <ul>
-<li>
-<p>절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. <br /><br>
+<li>절두체 컬링에서 게임 오브젝트가 절두체 영역에 걸쳐 있다면 그려줘야한다. <br /><br>
 <img src="/post/game_math/images/13-06-clipping.jpg"
 	
 	
@@ -410,13 +406,15 @@ if (!doNotTrack) {
 		alt="절두체 컬링 고려사항"
 	
 	
-></p>
+>
 <ul>
 <li>따라서 이 문제를 해결하기 위해서 게임 오브젝트의 위치를 대상으로 하지 않고, 메시가 차지하는 영역을 감안해 절두체 컬링을 해야한다.</li>
 </ul>
 </li>
-<li>
-<p><strong>바운딩 볼륨(Bounding volume)</strong></p>
+</ul>
+<br />
+<ul>
+<li><strong>바운딩 볼륨(Bounding volume)</strong>
 <ul>
 <li>메시가 차지하는 영역을 효과적으로 관리하기 위해 구(Sphere)나 박스(Box)같은 원시 도형(Primitive shape)을 사용한다. 이렇게 원시 도형으로 설정한 공간 데이터를 바운딩 볼륨이라고 한다. <br /><br>
 <img src="/post/game_math/images/13-07-boundingVolume.jpg"
@@ -571,26 +569,34 @@ if (!doNotTrack) {
 </div>
 </div><br />  
 <ul>
-<li>그렇다면 구를 이용해서 어떻게 절두체 컬링을 할 수 있을까?
+<li>그렇다면 <mark style="background-color: lightblue">구를 이용해서 어떻게 절두체 컬링</mark>을 할 수 있을까?
 <ul>
-<li>앞서 보았던 평면의 방정식의 법선 벡터 $(a, b, c)$와 구의 중점 좌표의 내적값에 $d$값을 더한 값인 <mark style="background-color: lightblue">$p + d$가 양수이면</mark>
-<ul>
-<li>구는 평면의 <strong>바깥쪽</strong>에 위치한다.</li>
-</ul>
-</li>
-<li>거리에 해당하는 <mark style="background-color: lightblue">$|p + d|$가 반지름 $r$보다 작거나 같다면</mark>
-<ul>
-<li>구는 절두체 평면과 <strong>겹쳐져</strong> 있다.</li>
-</ul>
-</li>
-<li><mark style="background-color: lightblue">나머지 경우</mark>라면
-<ul>
-<li>구는 절두체 <strong>안에</strong> 있다.</li>
+<li>앞서 보았던 평면의 방정식의 법선 벡터 $(a, b, c)$와 구의 중점 좌표의 내적값인 $p$에 $d$값을 더한 값인 $p + d$을 가지고 판단해보자.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$p + d \gt r$</td>
+<td>$p + d$가 양수이면 구는 평면의 <u>바깥쪽</u>에 위치한다.<br />심지어 $r$보다 크면, 겹치지도 않았다. 완전히 바깥이다.</td>
+</tr>
+<tr>
+<td>$|p + d| \leq r$</td>
+<td>구는 절두체 평면과 <u>겹쳐져</u> 있다.</td>
+</tr>
+<tr>
+<td>나머지</td>
+<td>구는 절두체 <u>안에</u> 있다.</td>
+</tr>
+</tbody>
+</table></div>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -642,16 +648,13 @@ if (!doNotTrack) {
 <li>절두체 컬링에 사용하는 구 바운딩 볼륨은 로컬 좌표를 기준으로 생성된 데이터다.
 <ul>
 <li>하지만 우리는 절두체 컬링을 뷰 공간에서 진행하기 때문에 변환이 필요하겠다.</li>
-<li><strong>로컬 공간</strong>의 바운딩 볼륨 정보로 바로 절두체 컬링을 진행할 순 없을까?</li>
+<li><u><strong>로컬 공간</strong>의 바운딩 볼륨 정보로 바로 절두체 컬링</u>을 진행할 순 없을까?</li>
 </ul>
 </li>
 <li>클립 좌표는 다음과 같이 만들어진다.
-<ul>
-<li>$\vec{v_{clip}} = (P) \cdot \vec{v_{view}}$</li>
-<li>만약 $\vec{v_{view}}$대신 $\vec{v_{local}}$을 사용한다면? 다음과 같이 모델링 행렬과 뷰 행렬을 사용할 수 있다.</li>
-<li><mark style="background-color: lightblue">$\vec{v_{clip}} = (PVM) \cdot \vec{v_{local}}$</mark></li>
-</ul>
-</li>
+$$\vec{v_{clip}} = (P) \cdot \vec{v_{view}}$$</li>
+<li>만약 $\vec{v_{view}}$대신 $\vec{v_{local}}$을 사용한다면? 다음과 같이 모델링 행렬과 뷰 행렬을 사용할 수 있다.
+$$\vec{v_{clip}} = (PVM) \cdot \vec{v_{local}}$$</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -812,14 +815,12 @@ if (!doNotTrack) {
 </div><br />  
 <h3 id="aabb와의-판정">AABB와의 판정</h3>
 <ul>
-<li>
-<p>구 영역 대신 <strong>박스(Box)</strong> 영역을 사용해서 좀 더 정교한 절두체 컬링 작업을 수행해보자.</p>
+<li>구 영역 대신 <strong>박스(Box)</strong> 영역을 사용해서 좀 더 정교한 절두체 컬링 작업을 수행해보자.
 <ul>
 <li>구 바운딩 볼륨에 비해 계산량은 많지만, 좀 더 정교하게 절두체 컬링을 할 수 있어서 보편적으로 게임 엔진에서 활용된다.</li>
 </ul>
 </li>
-<li>
-<p><strong>AABB(Axis aligned bounding box)</strong></p>
+<li><strong>AABB(Axis aligned bounding box)</strong>
 <ul>
 <li>박스 영역을 생성할 때, 기저 축에 평행한 박스 영역이 형성되는데 이것을 AABB라고 한다.</li>
 </ul>
@@ -915,26 +916,42 @@ if (!doNotTrack) {
 		alt="법선 벡터 부호에 따른 AABB의 비교 판정"
 	
 	
->
-<ul>
+></li>
 <li>(a) 평면의 법선 벡터의 모든 요소가 <strong>양수</strong>인 상황, AABB 영역이 평면의 바깥에 위치해 있다.
 <ul>
-<li>AABB영역의 <strong>최솟값</strong>이 평면과 가장 가깝다.</li>
+<li>AABB영역의 <u><strong>최솟값</strong>이 평면과 가장 가깝다.</u></li>
 </ul>
 </li>
 <li>(b) 평면의 법선 벡터의 모든 요소가 <strong>음수</strong>인 상황, AABB 영역이 평면의 안쪽에 위치해 있다.
 <ul>
-<li>AABB영역의 <strong>최댓값</strong>이 평면과 가장 까깝다.</li>
+<li>AABB영역의 <u><strong>최댓값</strong>이 평면과 가장 까깝다.</u></li>
 </ul>
 </li>
-<li>AABB 영역과 법선 벡터의 $x$, $y$, $z$축은 서로 직교하고 있으므로 각 축의 데이터는. 독립적으로 동작한다.
+<li>AABB 영역과 법선 벡터의 $x$, $y$, $z$축은 서로 직교하고 있으므로 각 축의 데이터는 독립적으로 동작한다.
 <ul>
-<li>따라서, 각 법선 벡터의 요소가 양수인 경우에는 최솟값을, 음수인 경우에는 최댓값을 사용하는. 것으로 <strong>평면에서 가장 가까운 AABB의 점</strong>을 구할 수 있다.</li>
+<li>따라서, 각 법선 벡터의 요소가 양수인 경우에는 최솟값을, 음수인 경우에는 최댓값을 사용하는 것으로 <strong>평면에서 가장 가까운 AABB의 점</strong>을 구할 수 있다.</li>
 </ul>
 </li>
-<li>이 가장 가까운 점과 평면과의 $p + d$가 <mark style="background-color: lightblue">양수라면 바깥</mark>에 있는 것이겠다.</li>
-<li>그렇다면 겹치는 경우에는? <br /><br>
-<img src="/post/game_math/images/13-10-intersect.jpg"
+</ul>
+<br /> 
+<ul>
+<li>평면에서 가장 가까운 AABB의 좌표와 평면과의 차이를 측정했을 때, 그 값이</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>양수</td>
+<td>AABB영역이 평면의 <u>바깥쪽</u>에 있다.</td>
+</tr>
+<tr>
+<td>음수</td>
+<td>AABB영역이 평면의 <u>안쪽</u>에 있다.<br /><br />이때, <u>정반대의 점으로 다시 테스트</u>를 진행했는데 <u>양수라면, 서로 교차</u>하는 것이다.<br /><img src="/post/game_math/images/13-10-intersect.jpg"
 	
 	
 	
@@ -943,12 +960,10 @@ if (!doNotTrack) {
 		alt="AABB영역과 평면이 교차하는 경우"
 	
 	
-></li>
-<li>위 그림과 같이 가장 가까운 점과 평면과의 $p + d$가 <mark style="background-color: lightblue">음수라면,</mark></li>
-<li><mark style="background-color: lightblue">정반대의 점으로 다시 테스트</mark>를 진행해서, <mark style="background-color: lightblue">양수라면 교차</mark>하는 것이다.</li>
-</ul>
-</li>
-</ul>
+></td>
+</tr>
+</tbody>
+</table></div>
 <br />  
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1189,13 +1204,14 @@ if (!doNotTrack) {
 <ul>
 <li>원근 투영 행렬을 곱해 생성된 클립 좌표계의 $w$값은 뷰 공간에서의 깊이 값을 의미한다.</li>
 <li>따라서 카메라 정면의 위치한 점은 $w$값이 $0$보다 크고, 카메라 뒤에 있는 점의 $w$값은 $0$보다 작으며, 카메라 초점에 위치한 점의 $w$값은 $0$이 된다.</li>
-<li>올바르게 보이려면 카메라 뒤쪽에 있는, 음의 $w$ 영역에 걸쳐 있는 삼각형을 파악하고 잘라내야 한다. 이것을 삼각형 클리핑이라고 한다.</li>
+<li>올바르게 보이려면 <u>카메라 뒤쪽</u>에 있는, <u>음의 $w$ 영역에 걸쳐 있는 삼각형을 파악하고 잘라내야</u> 한다. 이것을 삼각형 클리핑이라고 한다.</li>
 </ul>
 </li>
 </ul>
 <br />  
 <ul>
-<li>이 상황을 위에서 내려다 보자. <strong>점 하나</strong>가 카메라 뒤에 있는 경우이다.  <br /><br>
+<li>이 상황을 위에서 내려다 보자.</li>
+<li><strong>점 하나</strong>가 카메라 뒤에 있는 경우이다.  <br /><br>
 <img src="/post/game_math/images/13-12-oneDot.jpg"
 	
 	
@@ -1207,11 +1223,11 @@ if (!doNotTrack) {
 	
 >
 <ul>
-<li>Chapter 6에서 보았던 것을 사용해서 점 $P_{c1}$의 좌표는 다음과 같이 구할 수 있겠다.</li>
-<li>$$ P_{c1} = P_1 \cdot (1- t_1) + P_2 \cdot t_1 $$</li>
-<li>점 $P_{c1}$은 $w = 0$인 직선에 위치하므로 점 $P_1$, $P_2$의 $w$값을 각각 $w_1$, $w_2$라고 표기하면 다음의 수식이 성립한다.</li>
-<li>$$ w_1 (1 - t_1) + w_2t_1 = 0 $$</li>
-<li>$$ t_1 = \frac{w_1}{w_1 - w_2} $$</li>
+<li>Chapter 6에서 보았던 것을 사용해서 점 $P_{c1}$의 좌표는 다음과 같이 구할 수 있겠다.
+$$ P_{c1} = P_1 \cdot (1- t_1) + P_2 \cdot t_1 $$</li>
+<li>점 $P_{c1}$은 $w = 0$인 직선에 위치하므로 점 $P_1$, $P_2$의 $w$값을 각각 $w_1$, $w_2$라고 표기하면 다음의 수식이 성립한다.
+$$ w_1 (1 - t_1) + w_2t_1 = 0 $$
+$$ t_1 = \frac{w_1}{w_1 - w_2} $$</li>
 <li>이 영역은 사각형이므로 두 개의 삼각형으로 분할해야 한다.
 <ul>
 <li>방향이 동일하도록 정점의 순서도 자르기 전의 삼각형의 순서와 동일해야 한다.</li>
@@ -1264,20 +1280,20 @@ if (!doNotTrack) {
 ></li>
 <li>절두체의 오른쪽 평면은 NDC좌표의 x값이 언제나 $1$인 평면이다. 따라서 이것을 클립 좌표계로 표현하면 $\frac{x}{w} = 1$이며, 이는 $w = x$를 의미한다.
 <ul>
-<li>따라서 다음과 같은 식을 사용해서 잘라내는 영역을 파악할 수 있겠다.</li>
-<li>$$ \frac{x}{w} &gt; 1 $$</li>
-<li>$$ \therefore x &gt; w $$</li>
+<li>따라서 다음과 같은 식을 사용해서 잘라내는 영역을 파악할 수 있겠다.
+$$ \frac{x}{w} &gt; 1 $$
+$$ \therefore x &gt; w $$</li>
 </ul>
 </li>
 <li>잘라낼 평면 상에 위치한 점의 좌표를 계산하는 방법도 변경된다.
 <ul>
-<li>점 $P_1$, $P_2$의 $x$값을 각각 $x_1$, $x_2$로 지정하고, 잘라내는 점의 $x$값을 $x_{c1}$이라고 할 때 $x_{c1}$을 구하는 수식은 다음과 같다.</li>
-<li>$$ x_{c1} = x_1(1 - t_1) + x_2 t_1 $$</li>
-<li>이것은 $w$값에 대해서도 동일하게 성립된다.</li>
-<li>$$ w_{c1} = w_1(1- t_1) + w_2t_1 $$</li>
-<li>오른쪽 절두체 평면에서는 $x$, $w$값이 동일하므로 다음과 같이 구할 수 있다.</li>
-<li>$$ x_1(1 - t_1) + x_2 t_1 = w_1(1- t_1) + w_2t_1  $$</li>
-<li>$$ t_1 = \frac{(w_1 - x_1)}{(w_1 - x_1) - (w_2 - x_2)} $$</li>
+<li>점 $P_1$, $P_2$의 $x$값을 각각 $x_1$, $x_2$로 지정하고, 잘라내는 점의 $x$값을 $x_{c1}$이라고 할 때 $x_{c1}$을 구하는 수식은 다음과 같다.
+$$ x_{c1} = x_1(1 - t_1) + x_2 t_1 $$</li>
+<li>이것은 $w$값에 대해서도 동일하게 성립된다.
+$$ w_{c1} = w_1(1- t_1) + w_2t_1 $$</li>
+<li>오른쪽 절두체 평면에서는 $x$, $w$값이 동일하므로 다음과 같이 구할 수 있다.
+$$ x_1(1 - t_1) + x_2 t_1 = w_1(1- t_1) + w_2t_1  $$
+$$ t_1 = \frac{(w_1 - x_1)}{(w_1 - x_1) - (w_2 - x_2)} $$</li>
 </ul>
 </li>
 </ul>
