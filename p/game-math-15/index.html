@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
+자연지수함수 무리수 e 스위스 수학자 야코프 베르누이(Jakob Bernouli)는 아래 수식으로 복리 수익을 연구하고 있었다. $$y = (1&#43; \frac{1}{x})^x$$ 그러다가 굉장히 큰 값을 $x$에 대입할 수록 결괏값이 특정 상수 $2.7182818&amp;hellip;$에 근접한다는 사실을 알아냈다. 이 수를 무리수 $e$라고 부른다. 무리수 $e$를 극한(Limit)과 무한대($\infty$)의 개념을 사용해서 다음과 같이 표현할 수 있다. $$e = \lim_{x \to \infty} (1&#43; \frac{1}{x})^x$$ 수렴한다(Converge) 극한의 결괏값이 특정 값에 한없이 가까워지면 이를 어떤 값에 수렴한다고 표현한다.'>
+<title>[Game Math] Chapter 15. 오일러 공식: 허수로 표현하는 회전 변환</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-15/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 15. 오일러 공식: 허수로 표현하는 회전 변환'>
+<meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
+자연지수함수 무리수 e 스위스 수학자 야코프 베르누이(Jakob Bernouli)는 아래 수식으로 복리 수익을 연구하고 있었다. $$y = (1&#43; \frac{1}{x})^x$$ 그러다가 굉장히 큰 값을 $x$에 대입할 수록 결괏값이 특정 상수 $2.7182818&amp;hellip;$에 근접한다는 사실을 알아냈다. 이 수를 무리수 $e$라고 부른다. 무리수 $e$를 극한(Limit)과 무한대($\infty$)의 개념을 사용해서 다음과 같이 표현할 수 있다. $$e = \lim_{x \to \infty} (1&#43; \frac{1}{x})^x$$ 수렴한다(Converge) 극한의 결괏값이 특정 값에 한없이 가까워지면 이를 어떤 값에 수렴한다고 표현한다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-15/'>
+<meta property='og:site_name' content='Peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2023-02-01T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2023-02-01T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Game Math] Chapter 15. 오일러 공식: 허수로 표현하는 회전 변환">
+<meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
+자연지수함수 무리수 e 스위스 수학자 야코프 베르누이(Jakob Bernouli)는 아래 수식으로 복리 수익을 연구하고 있었다. $$y = (1&#43; \frac{1}{x})^x$$ 그러다가 굉장히 큰 값을 $x$에 대입할 수록 결괏값이 특정 상수 $2.7182818&amp;hellip;$에 근접한다는 사실을 알아냈다. 이 수를 무리수 $e$라고 부른다. 무리수 $e$를 극한(Limit)과 무한대($\infty$)의 개념을 사용해서 다음과 같이 표현할 수 있다. $$e = \lim_{x \to \infty} (1&#43; \frac{1}{x})^x$$ 수렴한다(Converge) 극한의 결괏값이 특정 값에 한없이 가까워지면 이를 어떤 값에 수렴한다고 표현한다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-T9HM88PYN8', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#자연지수함수">자연지수함수</a>
+      <ul>
+        <li><a href="#무리수-e">무리수 e</a></li>
+        <li><a href="#자연지수함수-1">자연지수함수</a></li>
+      </ul>
+    </li>
+    <li><a href="#미분">미분</a>
+      <ul>
+        <li><a href="#도함수">도함수</a></li>
+        <li><a href="#자연지수함수의-도함수">자연지수함수의 도함수</a></li>
+        <li><a href="#sin함수와-cos함수의-도함수">sin함수와 cos함수의 도함수</a></li>
+      </ul>
+    </li>
+    <li><a href="#급수">급수</a>
+      <ul>
+        <li><a href="#등비수열">등비수열</a></li>
+        <li><a href="#급수-1">급수</a></li>
+        <li><a href="#매클로린-급수">매클로린 급수</a></li>
+      </ul>
+    </li>
+    <li><a href="#오일러-공식">오일러 공식</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/game-math/" >
+                Game Math
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/game-math-15/">[Game Math] Chapter 15. 오일러 공식: 허수로 표현하는 회전 변환</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 01, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    9 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/107025224"  target="_blank" rel="noopener"
+    >이득우의 게임 수학</a> 책을 읽고 공부한 노트입니다.</p>
+</div>
+<hr>
+<p><br /><br /></p>
+<h2 id="자연지수함수">자연지수함수</h2>
+<h3 id="무리수-e">무리수 e</h3>
+<ul>
+<li>스위스 수학자 야코프 베르누이(Jakob Bernouli)는 아래 수식으로 복리 수익을 연구하고 있었다.
+$$y = (1+ \frac{1}{x})^x$$
+<ul>
+<li>그러다가 굉장히 큰 값을 $x$에 대입할 수록 결괏값이 특정 상수 $2.7182818&hellip;$에 근접한다는 사실을 알아냈다.</li>
+<li>이 수를 무리수 $e$라고 부른다. <br />
+<img src="/post/game_math/images/15-01-e.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="무리수 e"
+	
+	
+></li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>무리수 $e$를 극한(Limit)과 무한대($\infty$)의 개념을 사용해서 다음과 같이 표현할 수 있다.
+$$e = \lim_{x \to \infty} (1+ \frac{1}{x})^x$$</li>
+<li><strong>수렴한다(Converge)</strong>
+<ul>
+<li>극한의 결괏값이 특정 값에 한없이 가까워지면 이를 어떤 값에 수렴한다고 표현한다.</li>
+</ul>
+</li>
+<li><strong>발산한다(Diverge)</strong>
+<ul>
+<li>극한의 결괏값이 무한대로 증가하거나 여러 값을들 오고가면 발산한다고 표현한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="자연지수함수-1">자연지수함수</h3>
+<ul>
+<li><strong>거듭제곱(Exponentiation)</strong>
+$$3^5 = 3 \cdot 3 \cdot 3 \cdot 3 \cdot 3$$
+<ul>
+<li>같은 수를 여러번 곱하는 작업이다.</li>
+</ul>
+</li>
+<li><strong>지수(Exponent)</strong>
+<ul>
+<li>곱하는 횟수</li>
+<li>위 예시에서 $5$</li>
+</ul>
+</li>
+<li><strong>밑(Base)</strong>
+<ul>
+<li>곱하는 수</li>
+<li>위 예시에서 $3$</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>지수법칙(Law of exponents)</strong>
+$$ a^m \cdot a^n = a^{m+n} $$
+$$ (a^m)^n = a^{m \cdot n} $$
+$$ a^0 = 1 $$</li>
+</ul>
+<br />
+<ul>
+<li><strong>지수함수(Exponential function)</strong>
+$$ f(x) = a^x $$
+<ul>
+<li>지수 법칙에 따라 지수함수의 $x$가 $0$이면, 출력은 항상 $0$이다. 따라서 이 함수는 늘 좌표 $(0, 1)$을 지난다.</li>
+</ul>
+</li>
+<li><strong>자연지수함수(Natural exponential function)</strong>
+$$ f(x) = e^x $$
+<ul>
+<li><u>밑이 무리수 $e$인 지수함수</u>이다.</li>
+<li>언제나 $(0, 1)$을 지나며, 아래 그래프와 같이 $x$가 커질 수록 급격히 증가하는 형태이다. <br />
+<img src="/post/game_math/images/15-02-ex.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="자연지수함수"
+	
+	
+></li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="미분">미분</h2>
+<ul>
+<li><strong>미분(Differentiation)</strong>
+<ul>
+<li><u>미분 가능한 함수</u>를 대상으로, <u>특정 지점에서의 접선의 기울기</u>를 측정하는 작업이다.</li>
+<li>여기서 살펴볼 자연지수함수, $\sin$함수, $\cos$함수 모두 미분 가능한 함수이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>할선(Secant line)</strong>
+<ul>
+<li>곡선과 직선이 두 점에서 만날 때의 직선.</li>
+<li>어떤 미분 가능한 함수가 주어졌을 때, $x$가 $a$일 때와 $b$일 때 대응 되는 두 좌표를 연결하면 할선이 생긴다. <br />
+<img src="/post/game_math/images/15-03-secantLine.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="할선"
+	
+	
+></li>
+<li>이때 할선의 기울기는 다음과 같이 구할 수 있다.
+$$ m = \frac{f(b) - f(a)}{b - a} $$</li>
+<li>여기서 $a$는 고정하고, $b$를 $a$쪽으로 서서히 이동시켜보자.</li>
+<li>$b$가 $a$에 한없이 가까워지면, 마치 $a$ 지점에서의 기울기처럼 보일 것이다.</li>
+</ul>
+</li>
+<li><strong>접선(Tangent line)</strong>
+<ul>
+<li>곡선과 직선이 한 점에서 만날 때의 직선. <br />
+<img src="/post/game_math/images/15-04-tangentLine.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="접선"
+	
+	
+></li>
+<li>이렇게 한없이 가까워지는 개념을 사용해서 특정 지점에서의 기울기를 나타내는 접선을 만들 수 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>극한의 개념을 사용해서 기울기 $m$을 구하면 다음과 같다.
+$$ m = \lim_{b \to a} \frac{f(b) - f(a)}{b - a} $$
+<ul>
+<li>여기서 $b$는 $a$에다가 한없이 작은 값인 $h$를 더한 것과 같다. 따라서 아래와 같이 바꿔볼 수 있겠다.</li>
+</ul>
+</li>
+<li><strong>미분 계수(Differential coefficient)</strong>
+$$ m = \lim_{h \to 0} \frac{f(a + h) - f(a)}{h} $$
+<ul>
+<li><u>주어진 값에 대한 접선의 기울기</u>이다.</li>
+<li>위 식은 $a$에서의 미분 계수라고 볼 수 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="도함수">도함수</h3>
+<ul>
+<li><mark style="background-color: lightblue"><strong>도함수(Derivative)</strong></mark>
+$$ f&rsquo;(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$
+<ul>
+<li><u>임의의 수 $x$에 대한 미분 계수를 구할 수 있도록 일반화한 함수</u>이다.</li>
+<li>보통 <u>미분</u>이라고 부르며 $f&rsquo;(x)$로 표현한다.</li>
+<li>이 식을 가지고, 자연지수함수, $\sin$함수, $\cos$함수에 대한 도함수를 계산할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>상수함수
+$$ f(x) = c $$
+<ul>
+<li>정의역과 무관하게 항상 일정한 값을 가지는 함수이다. <br />
+<img src="/post/game_math/images/15-05-yc.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="상수함수"
+	
+	
+></li>
+<li>도함수 계산식에 대입하면, 그 결과값은 언제나 $0$이 된다. 이것은 상수함수의 모든 $x$에 대한 접선의 기울기가 $0$이라는 것을 뜻한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>극한의 여섯 가지 성질
+<ul>
+<li>(1) 두 함수 합의 극한값 = 각 극한값의 합
+$$ \lim_{x \to a} [f(x) + g(x)] = \lim_{x \to a}f(x) + \lim_{x \to a}g(x) $$</li>
+<li>(2) 상수와 함수 곱의 극한값 = 함수 극한값과 상수의 곱
+$$ \lim_{x \to a} cf(x) = c \lim_{x \to a} f(x) $$</li>
+<li>(3) 두 함수 곱의 극한값 = 각 극한값의 곱
+$$ \lim_{x \to a} [f(x) \cdot g(x)] = \lim_{x \to a} f(x) \cdot \lim_{x \to a} g(x) $$</li>
+<li>(4) 두 함수 나눗셈의 극한값 = 각 극한값의 나눗셈 (단, 분모의 극한값은 $0$이 아니어야 함)
+$$ \lim_{x \to a} [\frac{f(x)}{g(x)}] = \frac{\lim_{x \to a}f(x)}{\lim_{x \to a}g(x)} $$</li>
+<li>(5) 함수를 거듭제곱한 극한값 = 극한값을 거듭제곱한 값
+$$ \lim_{x \to a} [f(x)]^n = [\lim_{x \to a} f(x)]^n $$</li>
+<li>(6) 조임 정리(Squeeze theorem)
+<ul>
+<li>세 함수의 대소관계에서 양 끝의 극한값이 같다면, 가운데 극한값도 같다.</li>
+<li>$ g(x) \leq f(x) \leq h(x) $에서 $\lim_{x \to a} g(x) = \lim_{x \to a} h(x) = L$이면, $\lim_{x \to a} f(x) = L$이 성립한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>이제 거듭제곱 함수 $f(x) = x^n$의 도함수를 구해보자. (풀이 생략)
+$$ f&rsquo;(x) = n \cdot x^{n-1} $$</li>
+</ul>
+<br />
+<h3 id="자연지수함수의-도함수">자연지수함수의 도함수</h3>
+<ul>
+<li>이전에 보았듯, 무리수 $e$는 극한과 무한대 개념을 사용해 다음과 같은 식으로 나타낼 수 있었다.
+$$e = \lim_{x \to \infty} (1 + \frac{1}{x})^x$$
+<ul>
+<li>여기서 $x$를 $\frac{1}{h}$로 바꾸면 다음과 같다. $\frac{1}{h}$가 한없이 커지면 $h$는 $0$에 수렴한다.
+$$e = \lim_{h \to 0} (1 + h)^{\frac{1}{h}}$$</li>
+<li>이것을 정리하면 다음과 같은 수식을 얻을 수 있다. (풀이 생략)
+$$ \frac{\lim_{h \to 0}(e^h - 1)}{\lim_{h \to 0} h} = 1 $$</li>
+<li>이것은 아래에서 도함수를 구할 때 요긴히 쓰인다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>이전에 봤던 도함수의 계산식은 다음과 같았다.
+$$ f&rsquo;(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h} $$
+<ul>
+<li>여기에 자연지수함수 $f(x) = e^x$를 대입하면 다음과 같이 <mark style="background-color: lightblue">자연지수함수의 도함수</mark>를 얻을 수 있다. (풀이 생략)
+$$ f&rsquo;(x) = e^x $$</li>
+<li>이것은 <u>원함수와 동일</u>하다.</li>
+<li>함수를 미분했는데 결과가 동일하다면, 그 함수는 몇번을 미분해도 결과는 언제나 원함수와 동일할 것이다. 그래서 자연지수함수는 <u>무한번 미분이 가능</u>하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="sin함수와-cos함수의-도함수">sin함수와 cos함수의 도함수</h3>
+<ul>
+<li>다음과 같은 극한식이 존재한다. (풀이 생략)
+$$ \lim_{h \to 0} \frac{\sin h}{h} = 1 $$
+$$ \lim_{h \to 0} \frac{\cos h - 1}{h} = 1 $$
+<ul>
+<li>이것은 아래에서 도함수를 구할 때 요긴히 쓰인다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><mark style="background-color: lightblue">$\sin$ 함수의 도함수</mark>
+<ul>
+<li>이전에 봤던 도함수 계산식에 $f(x) = \sin x$를 대입해서 구한다. (풀이 생략)
+$$ f&rsquo;(x) = \cos x $$</li>
+</ul>
+</li>
+<li><mark style="background-color: lightblue">$\cos$ 함수의 도함수</mark>
+<ul>
+<li>이전에 봤던 도함수 계산식에 $f(x) = \cos x$를 대입해서 구한다. (풀이 생략)
+$$ f&rsquo;(x) = - \sin x $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>$\sin$ 함수를 여러번 미분하면 어떻게 될까?
+$$ f(x) = \sin x $$
+$$ f&rsquo;(x) = \cos x $$
+$$ f&rsquo;&rsquo;(x) = - \sin x $$
+$$ f&rsquo;&rsquo;&rsquo;(x) = - \cos x $$
+$$ f^{(4)}(x) = \sin x $$
+<ul>
+<li><u>네 번 미분했더니 원함수</u>로 돌아왔다.</li>
+<li>이것은 $\cos$함수도 마찬가지이다.</li>
+<li>따라서 자연지수함수와 동일하게 $\sin$함수와 $\cos$함수도 <u>무한번 미분이 가능</u>한 함수이다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="급수">급수</h2>
+<h3 id="등비수열">등비수열</h3>
+<ul>
+<li><strong>수열(Sequence)</strong>
+<ul>
+<li>규칙에 따라 순서에 맞게 수를 나열한 것이다.</li>
+</ul>
+</li>
+<li><strong>등비수열(Geometric sequence)</strong>
+$$ \frac{1}{2}, \frac{1}{4}, \frac{1}{8}, \frac{1}{16}, \frac{1}{32}, &hellip; $$
+<ul>
+<li>일정한 비(Ratio)로 증가하는 수열이다.</li>
+<li>이때 사용되는 비를 <strong>공비(Common ratio)</strong> 라고 하며, 위 예제에서는 연속된 두 항이 $\frac{1}{2}$배씩 증가하므로 $\frac{1}{2}$가 공비이겠다.</li>
+<li>첫번째 값을 초항(First term)이라고 하며 $a$로 표기한다. 공비는 $r$로, $n$번째 항은 $a_n$으로 표기한다.
+$$ a_n = a \cdot r^{n-1} $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="급수-1">급수</h3>
+<ul>
+<li><strong>급수(Series)</strong>
+$$\sum_{k=0}^n a_k = a_0 + a_1 + a_2 + a_3 + &hellip; + a_n$$
+<ul>
+<li><u>수열의 모든 값을 더한 것</u>이다.</li>
+</ul>
+</li>
+<li><strong>기하급수(Geometrix series)</strong>
+$$ \sum_{k=0}^{\infty} a \cdot r^k $$
+<ul>
+<li><u>등비수열의 급수</u>를 기하급수라고 한다.</li>
+<li>조건에 따라 무한대로 계속 증가하거나, 특정 수로 수렴하는 성질이 있다. 이것을 어떻게 파악할 수 있을까?</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>등비수열의 초항을 $a$, 공비를 $r$이라고 했을 때, $n$개의 유한한 등비급수를 $s_n$으로 표현하면 다음 식이 성립한다.
+$$ s_n = a + ar + ar^2 + ar^3 + &hellip; + ar^{n-1} $$
+<ul>
+<li>양변에 공비 $r$를 곱하면 다음과 같다.
+$$ r s_n = ar + ar^2 + ar^3 + &hellip; + ar^n $$</li>
+<li>위 두식을 빼면 다음 식이 나온다.
+$$ s_n - rs_n = a - ar^n $$</li>
+<li>이것을 정리하면 다음 식이 유도된다.
+$$ s_n = \frac{a(1 - r^n)}{1 - r} $$</li>
+<li>기하급수는 무한 개의 요소를 가지므로, $n$에 극한을 설정하고 이를 전개하면 다음과 같다.
+$$ \lim_{n \to \infty} s_n = \lim_{n \to \infty} \frac{a(1 - r^n)}{1 - r} $$
+$$ = \frac{a}{1-r} - \frac{a}{1-r} \cdot \lim_{n \to \infty} r^n $$</li>
+<li>이 식을 바탕으로 해서 $r$의 값에 따라 기하급수 값이 발산하는지 수렴하는지 판단해볼 수 있다.
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$r = 1 $</td>
+<td>발산한다.<br />$s_n = a + a + a + a + &hellip;$</td>
+</tr>
+<tr>
+<td>$|r| \gt 1 $</td>
+<td>발산한다.<br />공비 $r$을 곱할 수록 크기가 커지므로 $\lim_{n \to \infty} r^n$의 극한값이 발산한다.</td>
+</tr>
+<tr>
+<td>$|r| \lt 1 $</td>
+<td><mark style="background-color: lightblue">수렴한다.</mark><br />공비 $r$을 곱할 수록 크기가 작아지므로 극한값이 $0$으로 수렴한다.</td>
+</tr>
+<tr>
+<td>$ r = -1 $</td>
+<td>$\lim_{n \to \infty} r^n$의 값이 규칙적으로 $1$과 $-1$을 오고간다.<br />이러한 현상을 진동한다(Oscillate)고 표현하며, 발산으로 취급된다.</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>멱급수(Power series)</strong>
+$$ \sum_{n=0}^{\infty} a_n \cdot r^n = a_1 + a_2r + a_3r^2 + a_4r^3 + &hellip; $$
+<ul>
+<li><u>항마다 계수가 다른 급수</u>이다.</li>
+</ul>
+</li>
+<li><strong>비판정법(Ratio test)</strong>
+<ul>
+<li>멱급수가 수렴하는지 발산하는지 판단하기 위해서, <u>항비의 극한을 통해 판정</u>하는 방법이다.
+$$ L = \lim_{n \to \infty} |\frac{a_{n+1}}{a_n}| $$</li>
+<li>$L$의 값은 다음과 같은 경우가 존재한다.
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>조건</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$L = 1$</td>
+<td>급수는 수렴할 수도, 발산할 수도 있다.</td>
+</tr>
+<tr>
+<td>$L \gt 1$</td>
+<td>급수는 발산한다.</td>
+</tr>
+<tr>
+<td>$L \lt 1$</td>
+<td>급수는 수렴한다.</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>멱급수가 수렴하기 위해 $r$이 가져야 할 범위를 수렴구간이라고 한다.</li>
+<li>범위의 절반인 $1$의 값을 수렴반지름(Radius of convergence)이라고 한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>앞의 기하 급수 예제를 멱급수의 관점에서 다시 살펴보자.
+<ul>
+<li>기하 급수는 모든 계수의 값이 동일한 멱급수라고 볼 수 있다.
+$$ \sum_{n=0}^{\infty} a \cdot r^n $$</li>
+<li>이것을 비판정법에 적용하면 결괏값은 $n$과 무관하게 $|r|$이 나온다.
+$$ L = \lim_{n \to \infty} |\frac{a \cdot r^{n+1}}{a \cdot r^n}| = |r|$$</li>
+<li>급수가 수렴하려면  $L \lt 1$ 조건을 만족해야 하는데, 이경우  $|r| \lt 1$ 와 같으므로 이전에 우리가 보았던 조건과 동일한 결과가 나왔음을 알 수 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="매클로린-급수">매클로린 급수</h3>
+<ul>
+<li><strong>매클로린 급수(Maclaurin series)</strong> 또는 <strong>테일러 급수(Taylor series)</strong>
+$$ f(x) = a_1 + a_2x + a_3x^2 + a_4x^3 + a_5^4 + &hellip; $$
+$$ f(x) = \frac{f(0)}{0!} + \frac{f&rsquo;(0)}{1!}x + \frac{f&rsquo;&rsquo;(0)}{2!}x^2 + \frac{f&rsquo;&rsquo;&rsquo;(0)}{3!}x^3 + &hellip; $$
+<ul>
+<li>무한정 미분이 가능한 함수를 $n$번 미분한 도함수에 $0$을 대입한 형태로 일반화 시켜서, 멱급수 형태로 나타낸 것이다.</li>
+<li>매클로린 급수는 무한급수이므로, 무한 미분 가능한 함수만 이 수식을 만족하게 된다.</li>
+</ul>
+</li>
+</ul>
+<p>$$ a_n = \frac{f^{(n)}(0)}{n!} $$</p>
+<br />
+<ul>
+<li>자연지수함수 $ f(x) = e^x $를 매클로린 급수 형식으로 전개해보자.
+$$ f(x) = 1 + x + \frac{1}{2!}x^2 + \frac{1}{3!}x^3 + \frac{1}{4!}x^4 + &hellip; $$
+$$ = \sum_{n = 0}^{\infty} \frac{x^n}{n!} $$
+<ul>
+<li>이 급수가 수렴하는지 알기 위해 비판정법을 진행해보면, $L$은 $0$이 된다. (풀이 생략)</li>
+<li>$L \lt 1$이므로 이 급수는 언제나 수렴하고, 자연지수함수의 매클로린 급수는 유효하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>$\sin$함수 $ f(x) = \sin x $를 매클로린 급수 형식으로 전개해보자.
+$$ f(x) = 0 + x - 0 - \frac{1}{3!}x^3 + 0 + \frac{1}{5!}x^5 - 0 - \frac{1}{7!}x^7 + &hellip; $$
+$$ = \sum_{n = 0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!} $$
+<ul>
+<li>이 급수가 수렴하는지 알기 위해 비판정법을 진행해보면, $L$은 $0$이 된다. (풀이 생략) 따라서 유효하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>$\cos$함수 $ f(x) = \cos x $를 매클로린 급수 형식으로 전개해보자.
+$$ f(x) = 0 - x - \frac{1}{2!}x^2 + 0 + \frac{1}{4!}x^4 - 0 - \frac{1}{6!}x^6 + &hellip;$$
+$$ = \sum_{n = 0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!} $$
+<ul>
+<li>이 급수가 수렴하는지 알기 위해 비판정법을 진행해보면, $L$은 $0$이 된다. (풀이 생략) 따라서 유효하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>매클로린 급수는 컴퓨터에서 복잡한 근사값을 구할 때 유용하게 사용된다.
+<ul>
+<li>예를 들어서 $\sin$ 함수 값을 구해야 한다면?</li>
+<li>$x$에 급수 항을 추가함에 따라 $\sin x$의 값과 매우 가까워질 것이다.</li>
+<li>따라서 각 급수항에 계승으로 나눈 상수를 미리 계산해두면 컴퓨터로 매우 빠르게 $\sin x$를 구할 수 있다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="오일러-공식">오일러 공식</h2>
+<ul>
+<li>자연지수함수의 매클로린 급수
+$$ e^x = 1 + x + \frac{1}{2!}x^2 + \frac{1}{3!}x^3 + \frac{1}{4!}x^4 + &hellip; $$</li>
+<li>$\sin$함수의 매클로린 급수
+$$ \sin x = 0 + x - 0 - \frac{1}{3!}x^3 + 0 + \frac{1}{5!}x^5 - 0 - \frac{1}{7!}x^7 + &hellip; $$</li>
+<li>$\cos$함수의 매클로린 급수
+$$ \cos x = 0 - x - \frac{1}{2!}x^2 + 0 + \frac{1}{4!}x^4 - 0 - \frac{1}{6!}x^6 + &hellip;$$</li>
+</ul>
+<br />
+<ul>
+<li>여기서 $\sin$ 함수와 $\cos$ 함수의 두 급수를 더해보자.
+$$ \cos x + \sin x = 1 + x - \frac{1}{2!}x^2 - \frac{1}{3!}x^3 + \frac{1}{4!}x^4 + \frac{1}{5!}x^5 - \frac{1}{6!}x^6 - \frac{1}{7!}x^7 + &hellip; $$</li>
+<li>자연지수함수의 급수에 허수 단위 $i$를 넣어보자.
+$$ e^{ix} = 1 + ix - \frac{1}{2!}x^2 - \frac{i}{3!}x^3 + \frac{1}{4!}x^4 + \frac{i}{5!}x^5 - \frac{1}{6!}x^6 - \frac{i}{7!}x^7 + &hellip; $$</li>
+<li>위 두 식의 차이는 짝수 항에 $i$가 붙어 있다는 것 뿐이다.</li>
+<li>$ \cos x + \sin x$에서 짝수항은 $\sin$ 함수가 담당하므로, $\sin$함수에 $i$를 곱하면 두 식이 똑같아 진다.
+$$ e^{ix} = \cos x + i \sin x $$</li>
+<li>여기에 $x$대신 각 $\theta$를 대입해 보면, <mark style="background-color: lightblue">오일러 공식</mark>이 유도된다.
+$$ e^{i\theta} = \cos\theta + i \sin\theta $$</li>
+</ul>
+<br />
+<ul>
+<li>Chapter 14에서 $\cos\theta + i \sin\theta$는 복소평면에서 회전 변환을 담당하는 단위 복소수를 의미했다.
+<ul>
+<li>따라서 $e^{i\theta}$는 복소평면에서의 회전변환을 의미함을 알 수 있다.</li>
+</ul>
+</li>
+<li>이로써, 2차원 평면의 회전을 나타내는 방법이 하나 더 추가 되었다. 지금까지 행렬과 복소수를 사용해 표현했던 회전 변환은 <u>오일러 공식을 사용해서 $e^{i\theta}$라는 자연지수함수로 더욱 간단하게 표현</u>할 수 있게 되었다.
+$$ e^{i\theta} = (\cos\theta, \sin\theta) = \begin{bmatrix} \cos\theta &amp; -\sin\theta \\ \sin\theta &amp; \cos\theta \end{bmatrix}$$
+<ul>
+<li>예를 들어, 각 $\alpha$, $\beta$의 회전변환은 오일러 공식에 의해 $e^{\alpha i}$, $e^{\beta i}$로 표현할 수 있다. 이 둘을 곱하면 $e^{(\alpha + \beta)i}$가 된다. 회전변환이 굉장히 단순화되었다.</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/game-math/">Game Math</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/game-math-14/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 14. 복소수: 2차원 평면의 수</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-13-2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (2) </h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-13-1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (1)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-12/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 12. 원근 투영: 화면에 현실감을 부여하는 변환</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-11/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 11. 외적: 3차원 공간의 분석과 응용</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 Peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -6,7 +6,15 @@
         <description>Recent content in Categories on Peppered pepper</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 09 Jan 2023 01:00:00 +0900</lastBuildDate><atom:link href="https://pepperedpepper.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 01 Feb 2023 01:00:00 +0900</lastBuildDate><atom:link href="https://pepperedpepper.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Game Math</title>
+        <link>https://pepperedpepper.github.io/categories/game-math/</link>
+        <pubDate>Wed, 01 Feb 2023 01:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/categories/game-math/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>C&#43;&#43;</title>
         <link>https://pepperedpepper.github.io/categories/c&#43;&#43;/</link>
         <pubDate>Mon, 09 Jan 2023 01:00:00 +0900</pubDate>
@@ -36,14 +44,6 @@
         <pubDate>Wed, 27 Jul 2022 01:00:00 +0900</pubDate>
         
         <guid>https://pepperedpepper.github.io/categories/os/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Game Math</title>
-        <link>https://pepperedpepper.github.io/categories/game-math/</link>
-        <pubDate>Mon, 02 May 2022 01:00:00 +0900</pubDate>
-        
-        <guid>https://pepperedpepper.github.io/categories/game-math/</guid>
         <description></description>
         </item>
         <item>
