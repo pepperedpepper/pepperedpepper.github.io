@@ -355,14 +355,175 @@ $$ \vec{v&amp;rsquo;} = q_{\alpha} \cdot \vec{v} \cdot q_{\alpha}^* $$
 $$ \vec{v&amp;rsquo;&amp;rsquo;} = q_{\beta} \cdot \vec{v&amp;rsquo;} \cdot q_{\beta}^* $$&lt;/li&gt;
 &lt;li&gt;두 번째 식에 첫 번째 식을 대입하면 다음과 같이 전개된다. (풀이 생략)
 $$ \vec{v&amp;rsquo;&amp;rsquo;} = q_{\beta} \cdot (q_{\alpha} \cdot \vec{v} \cdot q_{\alpha}^* ) \cdot q_{\beta}^*  $$
-$$ q_{(\alpha + \beta)} \cdot \vec{v} \cdot q_{(\alpha + \beta)}^* $$
+$$ = q_{(\alpha + \beta)} \cdot \vec{v} \cdot q_{(\alpha + \beta)}^* $$
 &lt;ul&gt;
 &lt;li&gt;따라서 &lt;u&gt;두 차례 회전 사원수를 곱한 값&lt;/u&gt;은 &lt;u&gt;두 각을 합한 회전 사원수의 값&lt;/u&gt;과 동일함을 알 수 있다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p&gt;( 추가 내용 작성 중 &amp;hellip; )&lt;/p&gt;
+&lt;h2 id=&#34;사원수-변환&#34;&gt;사원수 변환&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;사원수를 구성하는 요소 값은 직관적이지 않다. 이것을 오일러 각이나 회전 변환행렬 방식으로 변경할 수 있다면 유용하겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;h3 id=&#34;오일러-각에서-사원수로의-변환&#34;&gt;오일러 각에서 사원수로의 변환&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;오일러 각에서 회전은 기저 축인 $x$, $y$, $z$가 회전축의 역할을 수행한다&lt;/li&gt;
+&lt;li&gt;예를 들어, 3차원 공간에서 $x$축을 중심으로 각 $\theta$만큼 회전시키는 데 사용하는 회전 사원수 $q$는 다음과 같을 것이다.
+$$ q = (\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\vec{x}) = \cos\frac{\theta}{2} + \sin\frac{\theta}{2}i $$&lt;/li&gt;
+&lt;li&gt;그러므로, 오일러 각을 구성하는 롤, 피치, 요 회전에 대응하는 각 사원수는 다음과 같이 표기할 수 있겠다.
+$$ q_{roll} = \cos\frac{\theta_{roll}}{2} + \sin\frac{\theta_{roll}}{2}k $$
+$$ q_{pitch} = \cos\frac{\theta_{pitch}}{2} + \sin\frac{\theta_{pitch}}{2}i $$
+$$ q_{yaw} = \cos\frac{\theta_{yaw}}{2} + \sin\frac{\theta_{yaw}}{2}j $$&lt;/li&gt;
+&lt;li&gt;Chapter 10에서는 오일러 각의 회전 순서를 롤 → 피치 → 요 순으로 적용했었다.&lt;/li&gt;
+&lt;li&gt;동일한 순서에 맞춰서 위 사원수들을 곱하면, 오일러 각에 대응하는 사원수가 만들어지겠다.
+$$ q_{yaw} \cdot q_{pitch} \cdot q_{roll} $$
+$$ = \cos\frac{\theta_{roll}}{2}\cos\frac{\theta_{pitch}}{2}\cos\frac{\theta_{yaw}}{2} + \sin\frac{\theta_{roll}}{2}\sin\frac{\theta_{pitch}}{2}\sin\frac{\theta_{yaw}}{2} + $$
+$$ (\cos\frac{\theta_{roll}}{2}\sin\frac{\theta_{pitch}}{2}\cos\frac{\theta_{yaw}}{2} + \sin\frac{\theta_{roll}}{2}\cos\frac{\theta_{pitch}}{2}\sin\frac{\theta_{yaw}}{2})i +  $$
+$$ (\cos\frac{\theta_{roll}}{2}\cos\frac{\theta_{pitch}}{2}\sin\frac{\theta_{yaw}}{2} - \sin\frac{\theta_{roll}}{2}\sin\frac{\theta_{pitch}}{2}\cos\frac{\theta_{yaw}}{2})j +  $$
+$$ (\sin\frac{\theta_{roll}}{2}\cos\frac{\theta_{pitch}}{2}\cos\frac{\theta_{yaw}}{2} + \cos\frac{\theta_{roll}}{2}\sin\frac{\theta_{pitch}}{2}\sin\frac{\theta_{yaw}}{2})k +  $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;h3 id=&#34;사원수에서-오일러-각으로의-변환&#34;&gt;사원수에서 오일러 각으로의 변환&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;반대로 사원수를 오일러 각으로 변환해보자.&lt;/li&gt;
+&lt;li&gt;위의 식에서 실수부를 $w$, 허수부의 값을 $x$, $y$, $z$로 치환한다. 요, 롤, 피치의 절반각은 $y$, $r$, $p$로 표기하고, 이들의 $\sin$값을 $sy$, $sr$, $sp$로 지정하고, $\cos$값을 $cy$, $cr$, $cp$로 지정하자.
+$$ w = cr \cdot cp \cdot cy + sr \cdot sp \cdot sy $$
+$$ x = cr \cdot sp \cdot cy + sr \cdot cp \cdot sy $$
+$$ y = cr \cdot cp \cdot sy - sr \cdot sp \cdot cy $$
+$$ z = sr \cdot cp \cdot cy - cr \cdot sp \cdot sy $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;롤 회전 값&lt;/strong&gt;을 구해보자.&lt;/li&gt;
+&lt;li&gt;$2(wz + xy)$라는 값을 구해보면 다음과 같은 결과가 나온다. (풀이 생략)
+$$ 2(wz + xy) = \sin\theta_{roll} \cdot \cos\theta_{pitch} $$&lt;/li&gt;
+&lt;li&gt;이번에는 $1 - 2(z^2 + x^2)$를 구해보면 다음과 같은 결과가 나온다.
+$$ 1 - 2(z^2 + x^2) = \cos\theta_{roll} \cdot \cos\theta_{pitch} $$&lt;/li&gt;
+&lt;li&gt;여기서 $\sin\theta_{roll} \cdot \cos\theta_{pitch}$을 $\cos\theta_{roll} \cdot \cos\theta_{pitch}$로 나누면 $\tan\theta_{roll}$을 구할 수 있다.
+$$ \frac{\sin\theta_{roll} \cdot \cos\theta_{pitch}}{\cos\theta_{roll} \cdot \cos\theta_{pitch}} = \tan\theta_{roll} = \frac{2(wz + xy)}{(1 - 2(z^2 + x^2)}$$&lt;/li&gt;
+&lt;li&gt;이제 $\arctan$ 함수로 롤 회전 값을 구할 수 있겠다.
+$$ \theta_{roll} = atan2(2(wz + xy), 1 - 2(z^2 + x^2)) $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;피치 회전 값&lt;/strong&gt;을 구해보자.&lt;/li&gt;
+&lt;li&gt;$wx - yx$라는 값을 구해보면 다음과 같은 결과가 나온다.
+$$ wx - yx = \sin\frac{\theta_{pitch}}{2} \cdot \cos\frac{\theta_{pitch}}{2} $$
+$$ = \frac{1}{2}\sin\theta_{pitch} $$&lt;/li&gt;
+&lt;li&gt;이제 $\arcsin$ 함수로 피치 회전 값을 구할 수 있겠다.
+$$ \theta_{pitch} = asin(2(wx - yz)) $$&lt;/li&gt;
+&lt;li&gt;주의할 점은, Chapter 4에서 보았듯이 $\arcsin$ 함수는 정의역이 $[-1, 1]$ 범위로 제한되어 있으므로 &lt;strong&gt;$wx - yz$의 값이 $[-0.5, 0.5]$ 범위를 벗어나지 않는지 확인&lt;/strong&gt;하는 것이 필요하다.
+&lt;ul&gt;
+&lt;li&gt;만약 &lt;strong&gt;벗어난다면, 범위 내 가장 가까운 값으로 설정&lt;/strong&gt;해야 한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;요 회전 값&lt;/strong&gt;을 구해보자.&lt;/li&gt;
+&lt;li&gt;롤 회전처럼, 요 회전의 $\tan$ 함수 값을 구한 후 $\arctan$ 함수를 사용해서 구한다.
+$$ \theta_{yaw} = atan2(2(wy + xz), 1 - 2(x^2 + y^2)) $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;h3 id=&#34;사원수에서-회전-변환행렬로의-변환&#34;&gt;사원수에서 회전 변환행렬로의 변환&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;회전 변환행렬은 로컬 축으로 구성되어 있다. 따라서 사원수를 사용해서 회전되는 세 로컬 축을 구하면 되겠다.&lt;/li&gt;
+&lt;li&gt;이전에 보았던 사원수의 회전 공식은 다음과 같다.
+$$ \vec{v} + 2w(\vec{r} \times \vec{v}) + 2(\vec{r} \times (\vec{r} \times \vec{v})) $$
+&lt;ul&gt;
+&lt;li&gt;여기서 $\vec{r}$은 $(x, y, z)$가 될 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;$x$축 기저벡터 $(1, 0, 0)$&lt;/strong&gt; 을 사원수로 회전시켜보자.
+$$ x_{local} = (1, 0, 0) + w(0, 2z, -2y) + (x, y, z) \times (0, 2z, -2y)) $$
+$$ = (1 - 2(y^2 +z^2), 2(xy + zw), 2(xz - yw)) $$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$y$축 기저벡터 $(0, 1, 0)$&lt;/strong&gt; 을 사원수로 회전시켜보자.
+$$ y_{local} = (2(xy - zw), 1 - 2(x^2 + z^2), 2(yz + xw)) $$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$z$축 기저벡터 $(0, 0, 1)$&lt;/strong&gt; 을 사원수로 회전시켜보자.
+$$ x_{local} = (2(zw + yw), w(yz - xw), 1 - w(x^2 + y^2)) $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;이제 구한 로컬 축을 꽂아 넣으면 회전 변환행렬을 만들 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$ \begin{bmatrix} 1 - 2(y^2 +z^2) &amp;amp; 2(xy - zw) &amp;amp; 2(zw + yw) \\ 2(xy + zw) &amp;amp; 1 - 2(x^2 + z^2) &amp;amp;  w(yz - xw) \\ 2(xz - yw) &amp;amp; 2(yz + xw) &amp;amp; 1 - w(x^2 + y^2) \end{bmatrix}$$&lt;/p&gt;
+&lt;br /&gt;
+&lt;h3 id=&#34;회전변환행렬에서-사원수로의-변환&#34;&gt;회전변환행렬에서 사원수로의 변환&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;트레이스(Trace)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;정방행렬의 대각 성분을 모두 더한 값을 말한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;위 행렬에서 트레이스 $t$를 구해보자. &lt;br /&gt;
+&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/16-02-trace.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;트레이스&#34;
+	
+	
+&gt;
+$$ t = 3 - 4(x^2 + y^2 + z^2) $$&lt;/li&gt;
+&lt;li&gt;여기에 1을 더하면 제곱근을 씌울 수가 있겠다.
+$$ t + 1 = 4 - 4(x^2 + y^2 + z^2)$$&lt;/li&gt;
+&lt;li&gt;회전 사원수는 크기가 $1$이므로, $x^2 + y^2 + z^2$의 값은 $1 - w^2$가 된다.
+$$ t + 1 = 4 - 4(1 - w^2) = 4w^2$$&lt;/li&gt;
+&lt;li&gt;이제 제곱근을 씌우자.
+$$ \sqrt{t + 1} = 2w $$&lt;/li&gt;
+&lt;li&gt;따라서 사원수의 &lt;strong&gt;$w$값&lt;/strong&gt;은 다음과 같이 구할 수가 있다.
+$$ w = \frac{\sqrt{t + 1}}{2} $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;이제 $w$값을 이용해서 나머지 $x$, $y$, $z$값을 구해보자.&lt;/li&gt;
+&lt;li&gt;회전 변환행렬을 살펴보면, &lt;strong&gt;대각 방향으로 대칭된 요소를 서로 빼면 두 사원수 요소의 곱으로 정리&lt;/strong&gt;된다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$xw$값&lt;/strong&gt;은 다음과 같이 구할 수 있겠다. &lt;br /&gt;
+&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/16-03-xw.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;xw값 구하기&#34;
+	
+	
+&gt;
+$$ 2yz + 2xw - 2yz + 2xw = 4xw $$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$yw$값&lt;/strong&gt;은 다음과 같이 구할 수 있겠다. &lt;br /&gt;
+&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/16-04-yw.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;yw값 구하기&#34;
+	
+	
+&gt;
+$$ 2xy + 2zw - 2xy + 2zw = 4zw $$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$zw$값&lt;/strong&gt;은 다음과 같이 구할 수 있겠다. &lt;br /&gt;
+&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/16-05-zw.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;zw값 구하기&#34;
+	
+	
+&gt;
+$$ 2xy + 2zw - 2xy + 2zw = 4zw $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;(추가 내용 작성 중&amp;hellip;)&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
 </description>
         </item>
