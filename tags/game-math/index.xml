@@ -6,7 +6,367 @@
         <description>Recent content in Game Math on Peppered pepper</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 01 Feb 2023 01:00:00 +0900</lastBuildDate><atom:link href="https://pepperedpepper.github.io/tags/game-math/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 02 Feb 2023 01:00:00 +0900</lastBuildDate><atom:link href="https://pepperedpepper.github.io/tags/game-math/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>[Game Math] Chapter 16. 사원수: 4차원 수로 설계한 3차원 회전</title>
+        <link>https://pepperedpepper.github.io/p/game-math-16/</link>
+        <pubDate>Thu, 02 Feb 2023 01:00:00 +0900</pubDate>
+        
+        <guid>https://pepperedpepper.github.io/p/game-math-16/</guid>
+        <description>&lt;div style=&#34;text-align: right&#34;&gt; 
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.yes24.com/Product/Goods/107025224&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;이득우의 게임 수학&lt;/a&gt; 책을 읽고 공부한 노트입니다.&lt;/p&gt;
+&lt;/div&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;사원수-대수&#34;&gt;사원수 대수&lt;/h2&gt;
+&lt;h3 id=&#34;사원수를-구성하는-세-허수&#34;&gt;사원수를 구성하는 세 허수&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;사원수
+&lt;ul&gt;
+&lt;li&gt;집합 기호는 $\mathbb{H}$다.&lt;/li&gt;
+&lt;li&gt;하나의 실수부와, 세 개의 허수부로 구성된다.&lt;/li&gt;
+&lt;li&gt;복소수의 $a + bi$형태처럼 사원수도 실수부와 허수부를 덧셈으로 묶고 실수를 사용해 허수부의 계수를 지정한다.
+$$ q = a + bi + cj + dk $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;세 개의 허수부 $i$, $j$, $k$
+&lt;ul&gt;
+&lt;li&gt;복소수의 허수 단위 $i$와 같은 성질을 가진다.
+$$ i^2 = j^2 = k^2 = -1 $$&lt;/li&gt;
+&lt;li&gt;두 허수의 곱은 나머지 하나의 허수에 대응 되는데, Chapter 10에서 본 회전 순환 순서와 유사하게 $i$ → $j$ → $k$ → $i$ 순서로 대응된다.
+$$ ij = k $$
+$$ jk = i $$
+$$ ki = j $$
+$$ ijk = jki = kij = -1 $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;h3 id=&#34;사원수의-구조&#34;&gt;사원수의 구조&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사원수의 &lt;u&gt;덧셈&lt;/u&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;실수부와 허수부끼리 더한다.
+$$ q_1 + q_2 = (a_1 + a_2) + (b_1 + b_2)i + (c_1 + c_2)j + (d_1 + d_2)k $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사원수 덧셈 연산의 성질&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;연산의 성질&lt;/th&gt;
+&lt;th&gt;수식&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;덧셈에 대해 닫혀 있음&lt;/td&gt;
+&lt;td&gt;O&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;덧셈에 대한 결합법칙이 성립함&lt;/td&gt;
+&lt;td&gt;$ q_1 + (q_2 + q_3) = (q_1 + q_2) + q_3 $&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;덧셈에 대한 교환법칙이 성립함&lt;/td&gt;
+&lt;td&gt;$q_1 + q_2 = q_2 + q_1$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;덧셈에 대한 항등원의 존재함&lt;/td&gt;
+&lt;td&gt;$0$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;덧셈에 대한 역원이 존재함&lt;/td&gt;
+&lt;td&gt;$-(a + bi + cj + dk)$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;사원수의 &lt;u&gt;곱셈&lt;/u&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;해밀턴 곱(Hamiton product)으로 불린다.&lt;/li&gt;
+&lt;li&gt;모든 요소를 교차해서 곱한다.
+$$ q_1 \cdot q_2 = (a_1a_2 - b_1b_2 - c_1c_2 - d_1d_2) $$
+$$ + (a_1b_2 + a_2b_1 + c_1d_2 - d_1c_2)i $$
+$$ + (a_1c_2 + a_2c_1 + b_2d_1 - b_1d_2)j $$
+$$ + (a_1d_2 + a_2d_1 + b_1c_2 - c_1b_2)k $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;사원수 곱셈 연산의 성질&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;연산의 성질&lt;/th&gt;
+&lt;th&gt;수식&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;곱셈에 대해 닫혀 있음&lt;/td&gt;
+&lt;td&gt;O&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;곱셈에 대한 결합법칙이 성립함&lt;/td&gt;
+&lt;td&gt;$ q_1 \cdot (q_2 \cdot q_3) = (q_1 \cdot q_2) \cdot q_3 $&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;곱셈에 대한 교환법칙이 성립함&lt;/td&gt;
+&lt;td&gt;X&lt;br /&gt;&lt;u&gt;곱셈에서 순서가 중요&lt;/u&gt;하다.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;곱셈에 대한 항등원의 존재함&lt;/td&gt;
+&lt;td&gt;$1$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;곱셈에 대한 역원이 존재함&lt;/td&gt;
+&lt;td&gt;켤레를 활용해 계산한다.&lt;br /&gt;$$q^{-1} = \frac{1}{q} = \frac{q^*}{qq^*} = \frac{q^*}{|q^2|}$$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;덧셈과 곱셈에 대한 분배법칙이 성립함&lt;/td&gt;
+&lt;td&gt;$q_1 \cdot (q_2 + q_3) = q_1 \cdot q_2 + q_1 \cdot q_3 $&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;유사체(Skew field)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;사원수 처럼, 체의 구조에서 교환법칙이 성립하지 않는 구조를 말한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;사원수의 크기&lt;/strong&gt;
+$$ |q| = \sqrt{a^2 + b^2 + c^2 + d^2} $$
+&lt;ul&gt;
+&lt;li&gt;복소수와 똑같이, 노름(Norm)이라고 부른다.&lt;/li&gt;
+&lt;li&gt;각 계수를 제곱한 값을 더하고 제곱근을 취해 계산한다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;단위 사원수(Unit quaternion)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;크기가 1인 사원수이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;켤레 사원수&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;세 허수부의 계수에 음수를 적용한 사원수이다.
+$$ q^* = a - (bi + cj + dk) $$&lt;/li&gt;
+&lt;li&gt;켤레 사원수의 곱의 성질은 켤레 복소수와 동일하다.
+$$ (q^*)^* = q $$
+$$ (q_1q_2)^* = q_2^*q_1^* $$
+$$ qq^* = q^*q = a^2 + b^2 + c^2 + d^2 = |q|^2 $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;사원수와-백터&#34;&gt;사원수와 백터&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;2개의 요소를 사용하는 복소수는 2개의 수 집합이 직교하는 2차원 복소평면으로 시각화할 수 있었다.&lt;/li&gt;
+&lt;li&gt;그렇기에 4개의 요소를 사용하는 사원수는 4개의 수 집합이 직교하는 4차원 공간으로 시각화가 가능하겠다.&lt;/li&gt;
+&lt;li&gt;하지만 4차원은 우리의 인지를 넘어서기에, 이를 1차원과 3차원으로 분리해서 생각하는 것이 효과적이겠다.&lt;/li&gt;
+&lt;li&gt;따라서 사원수는 허수부를 하나로 묶고, 실수부를 별도로 관리하는 방법을 사용한다.
+&lt;ul&gt;
+&lt;li&gt;세 허수부의 계수를 3차원 벡터로 묶고, 나머지 실수부를 별도로 관리하면 되겠다.
+$$ q = w + xi + yj + zk = (w, \vec{v}) $$&lt;/li&gt;
+&lt;li&gt;실수부 $w$를 스칼라부, 허수부 $\vec{v}$를 벡터부라고도 부른다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;벡터의 내적과 외적을 사용하면 사원수의 곱셈이 더 깔끔하게 정리가 된다.
+$$ q_1 \cdot q_2 = (w_1w_2 - (\vec{v_1} \cdot \vec{v_2}), w_1\vec{v_2} + w_2\vec{v_1} + \vec{v_1} \times \vec{v_2}) $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;순허수 사원수(Pure imaginary quaternion)&lt;/strong&gt;&lt;/mark&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;실수부가 $0$이고, 세 허수로만 구성된 수&lt;/strong&gt;이다.&lt;/li&gt;
+&lt;li&gt;우리가 다루는 &lt;u&gt;3차원 벡터 공간&lt;/u&gt;에 대응되는 개념이다.
+$$ xi + yj + zk = (0, \vec{v}) $$&lt;/li&gt;
+&lt;li&gt;순허수 사원수의 곱셈은 더 간단하다.
+$$ q_1 \cdot q_2 = (-\vec{v_1} \cdot \vec{v_2}, \vec{v_1} \times \vec{v_2}) $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;h2 id=&#34;사원수-회전&#34;&gt;사원수 회전&lt;/h2&gt;
+&lt;h3 id=&#34;사원수와-오일러-공식&#34;&gt;사원수와 오일러 공식&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Chapter 15에서 보았듯, 크기가 $1$이고 제곱한 수가 $-1$이 되는 허수 $i$와 같은 수가 있다면, 그것을 사용해 오일러 공식을 만족하게 할 수 있었다.
+$$ e^{i\theta} = \cos\theta + i \sin\theta = (\cos\theta, \sin\theta)$$
+&lt;ul&gt;
+&lt;li&gt;사원수에서도 이런 수가 있다면 좋겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;크기가 $1$인 순허수 사원수&lt;/strong&gt;를 고려해보자.&lt;br&gt;
+$$ q = (0, \vec{n}) $$
+&lt;ul&gt;
+&lt;li&gt;크기가 $1$이므로 다음과 같아서,
+$$ \sqrt{0 + |\vec{n}|^2} = 1$$&lt;/li&gt;
+&lt;li&gt;$\vec{n}$의 크기도 $1$이 된다.
+$$ |\vec{n}| = \vec{n} \cdot \vec{n} = 1 $$&lt;/li&gt;
+&lt;li&gt;크기가 $1$인 순허수 사원수를 제곱해보자.
+$$ q^2 = q \cdot q = (-\vec{n} \cdot \vec{n}, \vec{n} \times \vec{n}) $$&lt;/li&gt;
+&lt;li&gt;위에서 보았듯 $\vec{n} \cdot \vec{n}$가 $1$이고, 평행한 벡터의 외적은 영벡터가 되므로 다음과 같아진다.
+$$ q^2 = (1, \vec{0}) $$&lt;/li&gt;
+&lt;li&gt;따라서, 크기가 $1$인 순허수 사원수는 크기가 $1$이고, 제곱하면 $-1$이 된다. 이것을 오일러 공식에 $i$대신 넣으면 되겠다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;mark style=&#34;background-color: lightblue&#34;&gt;&lt;strong&gt;회전 사원수(Rotation quaternion)&lt;/strong&gt;&lt;/mark&gt;
+$$ e^{\vec{n}\theta} = \cos\theta + \sin\theta \cdot \vec{n} = (\cos\theta, \sin\theta \cdot \vec{n})$$
+&lt;ul&gt;
+&lt;li&gt;4차원 공간에서 회전축 $\vec{n}$을 중심으로 회전 변환을 하는 사원수이다.&lt;/li&gt;
+&lt;li&gt;즉, 회전축 $\vec{n}$을 중심으로 $\theta$만큼 회전시키는 사원수라고 볼 수 있다.&lt;/li&gt;
+&lt;li&gt;회전 사원수는 언제나 단위 사원수이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;회전 사원수의 켤레 사원수&lt;/strong&gt;
+$$ q^* = (\cos\theta, -\sin\theta \cdot \vec{n}) $$
+&lt;ul&gt;
+&lt;li&gt;이것은 다음 식과 같으므로, &lt;u&gt;반대 방향의 회전&lt;/u&gt;을 의미한다.
+$$ q^* = (\cos(-\theta), \sin(-\theta) \cdot \vec{n}) $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;h3 id=&#34;회전-사원수를-이용한-3차원-공간에서의-회전&#34;&gt;회전 사원수를 이용한 3차원 공간에서의 회전&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;사원수를 사용해서 3차원 공간에서 벡터를 회전시키려고 한다.
+&lt;ul&gt;
+&lt;li&gt;그 결과 또한 3차원 공간 상에 있어야 하므로, 결과가 순허수 사원수여야 할 것이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;하지만 막상 회전 사원수 $q$를 순허수 사원수 $\vec{v}$에 곱해보면, 그 결과가 순허수 사원수가 아니다.&lt;br&gt;
+$$ \vec{v&amp;rsquo;} = q \cdot \vec{v} $$
+$$ = (\cos\theta, \sin\theta \cdot \vec{n}) \cdot (0, \vec{v}) $$
+$$ = (-\sin\theta(\vec{n} \cdot \vec{v}), \cos\theta\vec{v} + \sin\theta(\vec{n} \times \vec{v})) $$
+&lt;ul&gt;
+&lt;li&gt;참고로, 회전 사원수 $q$를 왼쪽에 배치해야 한다. (순서가 중요하다.)&lt;/li&gt;
+&lt;li&gt;실수부가 $-\sin\theta(\vec{n} \cdot \vec{v})$ 라서 회전의 결과는 4차원에 존재하겠다.&lt;/li&gt;
+&lt;li&gt;사원수 곱의 결과가 항상 순허수 사원수가 되는 특별한 수식을 발견해보자.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;회전 시킬 벡터 $\vec{v}$를 수직과 수평 성분으로 나누자.
+$$\vec{v} = \vec{v_{\parallel}} + \vec{v_{\perp}}$$&lt;/li&gt;
+&lt;li&gt;이 벡터를 $\vec{n}$을 기준으로 각 $\theta$만큼 회전시킨 벡터는 어떻게 표현할 수 있을까? &lt;br /&gt;
+&lt;img src=&#34;https://pepperedpepper.github.io/post/game_math/images/16-01-rotation.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;3차원 공간에서의 회전&#34;
+	
+	
+&gt;
+&lt;ul&gt;
+&lt;li&gt;수직인 성분만 회전되고, 수평인 성분은 그대로 두면 된다.
+$$\vec{v&amp;rsquo;} = \vec{v_{\parallel}} + q \cdot \vec{v_{\perp}}$$&lt;/li&gt;
+&lt;li&gt;여기에 회전 사원수 $q$를 자연지수함수로 표현하면 다음과 같다.
+$$\vec{v&amp;rsquo;} = \vec{v_{\parallel}} + e^{\vec{n}\theta}  \cdot \vec{v_{\perp}}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;(우변의 두번째 항) 회전 사원수와 직교하는 벡터의 곱의 경우&lt;/strong&gt;
+$$e^{\vec{n}\theta}  \cdot \vec{v_{\perp}} = (0, \cos\theta\vec{v_{\perp}} + \sin\theta(\vec{n} \times \vec{v_{\parallel}}))$$
+&lt;ul&gt;
+&lt;li&gt;실수부가 $0$인 순허수 사원수가 되므로 3차원 공간의 벡터에 대응된다.&lt;/li&gt;
+&lt;li&gt;여기에 연산순서를 바꾼 후, 회전각에 $-\theta$를 대입하면 똑같은 결과가 나온다.
+$$ \vec{v_{\perp}} \cdot e^{\vec{n}\theta} = (0, \cos\theta\vec{v_{\perp}} - \sin\theta(\vec{n} \times \vec{v_{\parallel}}))$$
+$$ \vec{v_{\perp}} \cdot e^{\vec{n}(-\theta)} = (0, \cos\theta\vec{v_{\perp}} + \sin\theta(\vec{n} \times \vec{v_{\parallel}}))$$&lt;/li&gt;
+&lt;li&gt;따라서 직교하는 벡터의 다음과 같은 성질을 도출할 수 있다.
+$$ e^{\vec{n}\theta}  \cdot \vec{v_{\perp}} = \vec{v_{\perp}} \cdot e^{\vec{n}(-\theta)} $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;(수식에는 없었지만) 회전 사원수와 평행한 벡터의 곱의 경우&lt;/strong&gt;&lt;br&gt;
+$$ e^{\vec{n}\theta} \cdot \vec{v_{\parallel}} = (-\sin\theta(\vec{n}\cdot \vec{v_{\parallel}}, \cos\theta\vec{v_{\parallel}})$$
+&lt;ul&gt;
+&lt;li&gt;사원수의 곱에서는 외적 계산 부분이 있었기 때문에 교환법칙이 성립하지 않았다. 그런데 이 경우 외적이 사라져서 교환법칙이 성립하게 된다.
+$$ e^{\vec{n}\theta} \cdot \vec{v_{\parallel}} = \vec{v_{\parallel}} \cdot e^{\vec{n}\theta} $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;이러한 평행, 수식 벡터의 성질을 이용해서 이전에 보았던 회전을 전개하면 다음과 같이 풀어진다. (풀이 생략)
+$$\vec{v&amp;rsquo;} = \vec{v_{\parallel}} + e^{\vec{n}\theta}  \cdot \vec{v_{\perp}}$$
+$$ = e^{\vec{n}(\frac{\theta}{2})} \cdot \vec{v} \cdot e^{\vec{n}(- \frac{\theta}{2})}$$
+&lt;ul&gt;
+&lt;li&gt;자연지수함수를 다시 사원수의 형태로 바꿔보자.&lt;/li&gt;
+&lt;li&gt;이번에는 &lt;u&gt;&lt;strong&gt;회전 사원수 $q$를 $\theta$가 아닌 $\frac{\theta}{2}$만큼 회전하는 것으로 정의&lt;/strong&gt;&lt;/u&gt;하자.
+$$ q = (\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\vec{n}) = e^{\vec{n}(\frac{\theta}{2})}$$&lt;/li&gt;
+&lt;li&gt;반대방향으로 회전하는 사원수는 켤레 사원수 이므로, 다음과 같이 &lt;u&gt;&lt;strong&gt;최종 정리&lt;/strong&gt;&lt;/u&gt;된다.
+$$ e^{\vec{n}(\frac{\theta}{2})} \cdot \vec{v} \cdot e^{\vec{n}(- \frac{\theta}{2})} = q \cdot \vec{v} \cdot q^*$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;$q$를 간단히 다음과 같이 표현하자.
+$$ q = (\cos\frac{\theta}{2}, \sin\frac{\theta}{2}\vec{n}) = (w, \vec{r})$$&lt;/li&gt;
+&lt;li&gt;그리고 위의 식을 &lt;u&gt;내적과 외적의 형태로 전개&lt;/u&gt;해보자. (풀이 생략)
+$$ \vec{v&amp;rsquo;} = q \cdot \vec{v} \cdot q^* = (w, \vec{r}) \cdot (0, \vec{v}) \cdot (w, \vec{r})$$
+$$ = (-(\vec{r} \cdot \vec{v})w - (w\vec{v} + \vec{r} \times \vec{v}) \cdot (-\vec{r}), $$
+$$  -(\vec{r} \cdot \vec{v}) \cdot -\vec{r} + w(w\vec{v} + \vec{r} \times \vec{v}) + (w\vec{v} + \vec{r} \times \vec{v}) \times -\vec{r}) $$&lt;/li&gt;
+&lt;li&gt;실수부를 전개하면 $0$이 나온다. 따라서 &lt;u&gt;항상 3차원 공간의 벡터에 대응된다&lt;/u&gt;고 볼 수 있다.
+$$ -(\vec{r} \cdot \vec{v})w - (w\vec{v} + \vec{r} \times \vec{v}) \cdot (-\vec{r}) = 0 $$&lt;/li&gt;
+&lt;li&gt;허수부를 전개하면 다음과 같다.
+$$ -(\vec{r} \cdot \vec{v}) \cdot -\vec{r} + w(w\vec{v} + \vec{r} \times \vec{v}) + (w\vec{v} + \vec{r} \times \vec{v}) \times -\vec{r}) $$
+$$ = \vec{v} + 2w(\vec{r} \times \vec{v}) + 2(\vec{r} \times (\vec{r} \times \vec{v})) $$
+&lt;ul&gt;
+&lt;li&gt;여기서 &lt;u&gt;&lt;strong&gt;$2(\vec{r} \times \vec{v})$를 $\vec{t}$로 치환하면 다음과 같이 간단하게 정리&lt;/strong&gt;&lt;/u&gt;된다.
+$$ \vec{v&amp;rsquo;} = \vec{v} + w\vec{t} + \vec{r} \times \vec{t} $$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br /&gt;
+&lt;ul&gt;
+&lt;li&gt;만약 &lt;strong&gt;연속해서 다른 각도로 두 번 회전 하면&lt;/strong&gt; 어떻게 될까?&lt;/li&gt;
+&lt;li&gt;첫 번째 각의 크기를 $2\alpha$, 두 번째 각의 크기를 $2\beta$로 하면, 연속으로 회전 변환하는 식은 다음과 같을 것이다.
+$$ \vec{v&amp;rsquo;} = q_{\alpha} \cdot \vec{v} \cdot q_{\alpha}^* $$
+$$ \vec{v&amp;rsquo;&amp;rsquo;} = q_{\beta} \cdot \vec{v&amp;rsquo;} \cdot q_{\beta}^* $$&lt;/li&gt;
+&lt;li&gt;두 번째 식에 첫 번째 식을 대입하면 다음과 같이 전개된다. (풀이 생략)
+$$ \vec{v&amp;rsquo;&amp;rsquo;} = q_{\beta} \cdot (q_{\alpha} \cdot \vec{v} \cdot q_{\alpha}^* ) \cdot q_{\beta}^*  $$
+$$ q_{(\alpha + \beta)} \cdot \vec{v} \cdot q_{(\alpha + \beta)}^* $$
+&lt;ul&gt;
+&lt;li&gt;따라서 &lt;u&gt;두 차례 회전 사원수를 곱한 값&lt;/u&gt;은 &lt;u&gt;두 각을 합한 회전 사원수의 값&lt;/u&gt;과 동일함을 알 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p&gt;( 추가 내용 작성 중 &amp;hellip; )&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>[Game Math] Chapter 15. 오일러 공식: 허수로 표현하는 회전 변환</title>
         <link>https://pepperedpepper.github.io/p/game-math-15/</link>
         <pubDate>Wed, 01 Feb 2023 01:00:00 +0900</pubDate>
@@ -671,7 +1031,7 @@ $$ |(a, b)| = |(a, -b)| = \sqrt{a^2 + b^2} $$
 &lt;li&gt;임의의 복소수를 $c$라고 하면 켤레 복소수는 $c^*$나 $\bar{c}$로 표시한다.
 $$ c = a + bi = (a, b) $$
 $$ c^* = a - bi = (a, -b) $$&lt;/li&gt;
-&lt;li&gt;켤레 복소수는 다음과 같은 성질이 있다.
+&lt;li&gt;켤레 복소수의 곱은 다음과 같은 성질이 있다.
 $$ (c^*)^* = c $$
 $$ c^*c = c^* $$
 $$ (c_1c_2)^* = c_2^*c_1^* $$&lt;/li&gt;
