@@ -675,6 +675,7 @@ if (!doNotTrack) {
 </span><span class="lnt">161
 </span><span class="lnt">162
 </span><span class="lnt">163
+</span><span class="lnt">164
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
@@ -765,6 +766,7 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="k">nullptr</span> <span class="o">||</span> <span class="n">root</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">==</span> <span class="n">data</span><span class="p">)</span> <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&gt;</span> <span class="n">data</span><span class="p">)</span>                <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">left</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">data</span><span class="p">)</span>                <span class="k">return</span> <span class="n">search</span><span class="p">(</span><span class="n">root</span><span class="o">-&gt;</span><span class="n">right</span><span class="p">,</span> <span class="n">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span>  <span class="k">nullptr</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="kt">void</span> <span class="nf">printTree</span><span class="p">(</span><span class="n">Node</span> <span class="o">*</span><span class="n">root</span><span class="p">,</span> <span class="n">string</span> <span class="n">indent</span> <span class="o">=</span> <span class="s">&#34;&#34;</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">last</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span> 

@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
+스켈레탈 애니메이션 스켈레탈 애니메이션(Skeletal animation) 가상의 뼈대인 본(Bone) 을 캐릭터 메시에 심은 후, 이 본의 움직임에 맞춰서 캐릭터 메시를 변형시켜 애니메이션을 구현하는 방식이다. 본의 정보를 메시에 추가하면, 메시는 본이 있는 메시(스킨드 메시: Skinned mesh) 와 본이 없는 메시로 나뉘게 된다. 본은 다음과 같은 정보들이 필요하다. (1) 본을 식별할 고유한 이름 정보 (2) 본의 트랜스폼 정보 (크기, 회전, 이동이 가능하므로, 트랜스폼이 필요하다) (3) 본의 처음 배치 정보 : 바인드 포즈(Bindpose) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 enum class MeshType : UINT32 { Normal = 0, Skinned }; class Bone { private: std::size_t _Hash = 0; std::string _Name; Transform _Transform; Transform _Bindpose; }; 리깅(Rigging) 본과 정점을 연결하는 작업이다.'>
+<title>[Game Math] Chapter 17. 캐릭터: 게임에 생기를 불어넣는 기술</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-17/'>
+
+<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 17. 캐릭터: 게임에 생기를 불어넣는 기술'>
+<meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
+스켈레탈 애니메이션 스켈레탈 애니메이션(Skeletal animation) 가상의 뼈대인 본(Bone) 을 캐릭터 메시에 심은 후, 이 본의 움직임에 맞춰서 캐릭터 메시를 변형시켜 애니메이션을 구현하는 방식이다. 본의 정보를 메시에 추가하면, 메시는 본이 있는 메시(스킨드 메시: Skinned mesh) 와 본이 없는 메시로 나뉘게 된다. 본은 다음과 같은 정보들이 필요하다. (1) 본을 식별할 고유한 이름 정보 (2) 본의 트랜스폼 정보 (크기, 회전, 이동이 가능하므로, 트랜스폼이 필요하다) (3) 본의 처음 배치 정보 : 바인드 포즈(Bindpose) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 enum class MeshType : UINT32 { Normal = 0, Skinned }; class Bone { private: std::size_t _Hash = 0; std::string _Name; Transform _Transform; Transform _Bindpose; }; 리깅(Rigging) 본과 정점을 연결하는 작업이다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/game-math-17/'>
+<meta property='og:site_name' content='Peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Game Math' /><meta property='article:published_time' content='2023-02-03T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2023-02-03T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Game Math] Chapter 17. 캐릭터: 게임에 생기를 불어넣는 기술">
+<meta name="twitter:description" content="이득우의 게임 수학 책을 읽고 공부한 노트입니다.
+스켈레탈 애니메이션 스켈레탈 애니메이션(Skeletal animation) 가상의 뼈대인 본(Bone) 을 캐릭터 메시에 심은 후, 이 본의 움직임에 맞춰서 캐릭터 메시를 변형시켜 애니메이션을 구현하는 방식이다. 본의 정보를 메시에 추가하면, 메시는 본이 있는 메시(스킨드 메시: Skinned mesh) 와 본이 없는 메시로 나뉘게 된다. 본은 다음과 같은 정보들이 필요하다. (1) 본을 식별할 고유한 이름 정보 (2) 본의 트랜스폼 정보 (크기, 회전, 이동이 가능하므로, 트랜스폼이 필요하다) (3) 본의 처음 배치 정보 : 바인드 포즈(Bindpose) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 enum class MeshType : UINT32 { Normal = 0, Skinned }; class Bone { private: std::size_t _Hash = 0; std::string _Name; Transform _Transform; Transform _Bindpose; }; 리깅(Rigging) 본과 정점을 연결하는 작업이다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-T9HM88PYN8', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#스켈레탈-애니메이션">스켈레탈 애니메이션</a></li>
+    <li><a href="#트랜스폼-계층-구조">트랜스폼 계층 구조</a>
+      <ul>
+        <li><a href="#트랜스폼-계층-구조의-변환">트랜스폼 계층 구조의 변환</a></li>
+        <li><a href="#1-로컬-트랜스폼으로부터-월드-트랜스폼의-계산">(1) 로컬 트랜스폼으로부터 월드 트랜스폼의 계산</a></li>
+        <li><a href="#2-월드-트랜스폼으로부터-로컬-트랜스폼의-계산">(2) 월드 트랜스폼으로부터 로컬 트랜스폼의 계산</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/game-math/" >
+                Game Math
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/game-math-17/">[Game Math] Chapter 17. 캐릭터: 게임에 생기를 불어넣는 기술</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 03, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    10 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/107025224"  target="_blank" rel="noopener"
+    >이득우의 게임 수학</a> 책을 읽고 공부한 노트입니다.</p>
+</div>
+<hr>
+<p><br /><br /></p>
+<h2 id="스켈레탈-애니메이션">스켈레탈 애니메이션</h2>
+<ul>
+<li><strong>스켈레탈 애니메이션(Skeletal animation)</strong>
+<ul>
+<li>가상의 뼈대인 <strong>본(Bone)</strong> 을 캐릭터 메시에 심은 후, 이 본의 움직임에 맞춰서 캐릭터 메시를 변형시켜 애니메이션을 구현하는 방식이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>본의 정보를 메시에 추가하면, 메시는 <strong>본이 있는 메시(스킨드 메시: Skinned mesh)</strong> 와 <strong>본이 없는 메시</strong>로 나뉘게 된다.</li>
+<li>본은 다음과 같은 정보들이 필요하다.
+<ul>
+<li>(1) <strong>본을 식별할 고유한 이름 정보</strong></li>
+<li>(2) <strong>본의 트랜스폼 정보</strong> (크기, 회전, 이동이 가능하므로, 트랜스폼이 필요하다)</li>
+<li>(3) <strong>본의 처음 배치 정보 : 바인드 포즈(Bindpose)</strong></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">enum</span> <span class="k">class</span> <span class="nc">MeshType</span> <span class="o">:</span> <span class="n">UINT32</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Normal</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Skinned</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Bone</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">size_t</span> <span class="n">_Hash</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">_Name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span> <span class="n">_Transform</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span> <span class="n">_Bindpose</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li><strong>리깅(Rigging)</strong>
+<ul>
+<li>본과 정점을 연결하는 작업이다.</li>
+<li>즉, <strong>하나의 정점에 어떤 본들이 얼마나 영향을 미치는지</strong> 기록하는 것이다.</li>
+<li>여기서 한 정점에 영향을 주는 본들의 연결 정보를 <strong>웨이트(Weight)</strong> 라고 한다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Weight</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">Bones</span><span class="p">;</span> <span class="c1">// 어떤 본들이 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span> <span class="n">Values</span><span class="p">;</span>      <span class="c1">// 얼마나 영향을 주는지 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>
+<p>Chapter 8에서 보았던 메시 정보를 스킨드 메시로 확장하고 리깅 정보를 추가하면 다음과 같이 되겠다. <br />
+<img src="/post/game_math/images/17-01-mesh.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="스킨드 메시 구조"
+	
+	
+></p>
+</li>
+<li>
+<p>정점 버퍼</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>순서</th>
+<th>좌표</th>
+<th>UV 좌표</th>
+<th>연결된 본의 수</th>
+<th>연결 정보</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>(-0.5, -0.5, 0.5)</td>
+<td>(0.125, 0.75)</td>
+<td>1</td>
+<td>Left, 1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>(-0.5, 0.5, 0.5)</td>
+<td>(0.125, 0.875)</td>
+<td>1</td>
+<td>Left, 1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>(0.5, 0.5, 0.5)</td>
+<td>(0.25, 0.75)</td>
+<td>1</td>
+<td>Right, 1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>(0.5, -0.5, 0.5)</td>
+<td>(0.25, 0.875)</td>
+<td>1</td>
+<td>Right, 1</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>
+<p>인덱스 버퍼</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>순서</th>
+<th>삼각형</th>
+<th>정점 순서</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>5</td>
+<td>1</td>
+<td>3</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+<li>
+<p>본 목록</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>이름</th>
+<th>좌표</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Left</td>
+<td>(-0.5, 0, 0.5)</td>
+</tr>
+<tr>
+<td>Right</td>
+<td>(0.5, 0, 0.5)</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">GameEngine</span><span class="o">::</span><span class="n">LoadResources</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 사각 메시
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 스킨드 메시로 설정한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">quadMesh</span><span class="p">.</span><span class="n">SetMeshType</span><span class="p">(</span><span class="n">MeshType</span><span class="o">::</span><span class="n">Skinned</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">bones</span> <span class="o">=</span> <span class="n">quadMesh</span><span class="p">.</span><span class="n">GetBones</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">connectedBones</span> <span class="o">=</span> <span class="n">quadMesh</span><span class="p">.</span><span class="n">GetConnectedBones</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">auto</span><span class="o">&amp;</span> <span class="n">weights</span> <span class="o">=</span> <span class="n">quadMesh</span><span class="p">.</span><span class="n">GetWeights</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 본 정보를 설정한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">bones</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s">&#34;left&#34;</span><span class="p">,</span> <span class="n">Bone</span><span class="p">(</span><span class="s">&#34;left&#34;</span><span class="p">,</span> <span class="n">Transform</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="o">-</span><span class="mf">1.f</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">)</span> <span class="o">*</span> <span class="n">halfSize</span><span class="p">))},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span><span class="s">&#34;right&#34;</span><span class="p">,</span> <span class="n">Bone</span><span class="p">(</span><span class="s">&#34;right&#34;</span><span class="p">,</span> <span class="n">Transform</span><span class="p">(</span><span class="n">Vector3</span><span class="p">(</span><span class="mf">1.f</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">)</span> <span class="o">*</span> <span class="n">halfSize</span><span class="p">))}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 4개의 정점은 본이 각각 1개씩 연결되어 있다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">connectedBones</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 정점마다의 본 이름과 가중치를 설정한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">weights</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="p">{</span><span class="s">&#34;left&#34;</span><span class="p">},</span> <span class="p">{</span><span class="mf">1.f</span><span class="p">}</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="p">{</span><span class="s">&#34;left&#34;</span><span class="p">},</span> <span class="p">{</span><span class="mf">1.f</span><span class="p">}</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="p">{</span><span class="s">&#34;right&#34;</span><span class="p">},</span> <span class="p">{</span><span class="mf">1.f</span><span class="p">}</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span> <span class="p">{</span><span class="s">&#34;right&#34;</span><span class="p">},</span> <span class="p">{</span><span class="mf">1.f</span><span class="p">}</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>게임 엔진은 애니메이션을 시간에 따라 변환된 값을 얻기 위해 <strong>키프레임(Keyframe) 데이터</strong>를 사용한다.
+<ul>
+<li>주요 지점에 점을 찍어서 값을 지정하면, 나머지 값들은 보간을 통해 끊기지 않는 데이터를 제공한다.</li>
+</ul>
+</li>
+<li>게임 로직과 본의 움직임 중 어떤 것을 먼저 처리해야 할까?
+<ul>
+<li>게임 로직 결과에 맞는 적절한 애니메이션을 렌더링하기 위해서는</li>
+<li><strong>(1) 게임 로직이 완료된 후</strong> (<code>Update3D</code>)</li>
+<li><strong>(2) 애니메이션 로직으로 본의 위치를 설정하고</strong> (<code>LateUpdate3D</code>)</li>
+<li><strong>(3) 렌더링 해야할 것이다.</strong> (<code>Render3D</code>)</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>애니메이션 로직을 구현하면 다음과 같다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 애니메이션 로직 : 본의 위치를 설정
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">SoftRenderer</span><span class="o">::</span><span class="n">LateUpdate3D</span><span class="p">(</span><span class="kt">float</span> <span class="n">InDeltaSeconds</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">GameEngine</span><span class="o">&amp;</span> <span class="n">g</span> <span class="o">=</span> <span class="n">Get3DGameEngine</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">float</span> <span class="n">duration</span> <span class="o">=</span> <span class="mf">3.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="kt">float</span> <span class="n">elapsedTime</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 애니메이션을 위한 커브 생성
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 시간에 따라 [0, 1]범위의 사인 파형을 생성하고 본을 움직이는 데 사용한다.  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// (키프레임 데이터를 대체하기 위해 간단하게 sin 곡선을 사용했다.)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl">    <span class="c1">// elapsedTime은 시간에 따라 0~3의 값이 나온다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">elapsedTime</span> <span class="o">=</span> <span class="n">Math</span><span class="o">::</span><span class="n">Clamp</span><span class="p">(</span><span class="n">elapsedTime</span> <span class="o">+</span> <span class="n">InDeltaSeconds</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">elapsedTime</span> <span class="o">==</span> <span class="n">duration</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">elapsedTime</span> <span class="o">=</span> <span class="mf">0.f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 0~360 사이의 값으로 대응시킨다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">sinParam</span> <span class="o">=</span> <span class="n">elapsedTime</span> <span class="o">/</span> <span class="n">duration</span> <span class="o">*</span> <span class="n">Math</span><span class="o">::</span><span class="n">TwoPI</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// -1~1 사이의 sin 결과 값을 0~1 사이의 값으로 대응시킨다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">float</span> <span class="n">sinWave</span> <span class="o">=</span> <span class="p">(</span><span class="n">sinf</span><span class="p">(</span><span class="n">sinParam</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.f</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.5f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 스킨드 메시가 아니면 종료한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">GameObject</span><span class="o">&amp;</span> <span class="n">goPlayer</span> <span class="o">=</span> <span class="n">g</span><span class="p">.</span><span class="n">GetGameObject</span><span class="p">(</span><span class="n">PlayerGo</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Mesh</span><span class="o">&amp;</span> <span class="n">m</span> <span class="o">=</span> <span class="n">g</span><span class="p">.</span><span class="n">GetMesh</span><span class="p">(</span><span class="n">goPlayer</span><span class="p">.</span><span class="n">GetMeshKey</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">m</span><span class="p">.</span><span class="n">IsSkinnedMesh</span><span class="p">())</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">leftBoneName</span><span class="p">(</span><span class="s">&#34;left&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">rightBoneName</span><span class="p">(</span><span class="s">&#34;right&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span><span class="o">&amp;</span> <span class="n">leftBoneTransform</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">GetBone</span><span class="p">(</span><span class="n">leftBoneName</span><span class="p">).</span><span class="n">GetTransform</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span><span class="o">&amp;</span> <span class="n">rightBoneTransform</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">GetBone</span><span class="p">(</span><span class="n">rightBoneName</span><span class="p">).</span><span class="n">GetTransform</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 기준 위치에서 추가로 움직인 본의 위치를 계산한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Vector3</span> <span class="n">deltaLeftPosition</span> <span class="o">=</span> <span class="n">Vector3</span><span class="o">::</span><span class="n">UnitX</span> <span class="o">*</span> <span class="o">-</span><span class="n">sinWave</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Vector3</span> <span class="n">deltaRightPosition</span> <span class="o">=</span> <span class="n">Vector3</span><span class="o">::</span><span class="n">UnitX</span> <span class="o">*</span> <span class="n">sinWave</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 본의 바인드 포즈(최초 위치)를 기준으로 변경된 위치를 더해서 최종 위치를 계산한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">leftBonePosition</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">GetBindPose</span><span class="p">(</span><span class="n">leftBoneName</span><span class="p">).</span><span class="n">GetPosition</span><span class="p">()</span> <span class="o">+</span> <span class="n">deltaLeftPosition</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rightBonePosition</span> <span class="o">=</span> <span class="n">m</span><span class="p">.</span><span class="n">GetBindPose</span><span class="p">(</span><span class="n">rightBoneName</span><span class="p">).</span><span class="n">GetPosition</span><span class="p">()</span> <span class="o">+</span> <span class="n">deltaRightPosition</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 최종 위치를 설정한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">leftBoneTransform</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="n">leftBonePosition</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">rightBoneTransform</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="n">rightBonePosition</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>정점 버퍼의 데이터를 행렬로 곱하기 전에, 본의 움직임을 반영해서 최종 위치를 계산해야 하겠다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 메시를 그리는 함수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">SoftRenderer</span><span class="o">::</span><span class="n">DrawMesh3D</span><span class="p">(</span><span class="k">const</span> <span class="n">Mesh</span><span class="o">&amp;</span> <span class="n">InMesh</span><span class="p">,</span> <span class="k">const</span> <span class="n">Matrix4x4</span><span class="o">&amp;</span> <span class="n">InMatrix</span><span class="p">,</span> <span class="k">const</span> <span class="n">LinearColor</span><span class="o">&amp;</span> <span class="n">InColor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">vertexCount</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetVertices</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">indexCount</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetIndices</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">triangleCount</span> <span class="o">=</span> <span class="n">indexCount</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vertex3D</span><span class="o">&gt;</span> <span class="n">vertices</span><span class="p">(</span><span class="n">vertexCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">indice</span><span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">GetIndices</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">vi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">vi</span> <span class="o">&lt;</span> <span class="n">vertexCount</span><span class="p">;</span> <span class="o">++</span><span class="n">vi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">Position</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">GetVertices</span><span class="p">()[</span><span class="n">vi</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 정점 변환 전에, 본의 움직임을 반영한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">IsSkinnedMesh</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Vector4</span> <span class="n">totalPosition</span> <span class="o">=</span> <span class="n">Vector4</span><span class="o">::</span><span class="n">Zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Weight</span> <span class="n">w</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetWeights</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// 메시에 연결된 본의 개수에 따라 반복
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">wi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">wi</span> <span class="o">&lt;</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetConnectedBones</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span> <span class="o">++</span><span class="n">wi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">boneName</span> <span class="o">=</span> <span class="n">w</span><span class="p">.</span><span class="n">Bones</span><span class="p">[</span><span class="n">wi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">HasBone</span><span class="p">(</span><span class="n">boneName</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="k">const</span> <span class="n">Transform</span><span class="o">&amp;</span> <span class="n">boneTransform</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetBone</span><span class="p">(</span><span class="n">boneName</span><span class="p">).</span><span class="n">GetTransform</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 본 - 바인드포즈 = 바인드 포즈로부터의 상대적 위치 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Vector3</span> <span class="n">deltaPosition</span> <span class="o">=</span> <span class="n">boneTransform</span><span class="p">.</span><span class="n">GetPosition</span><span class="p">()</span> <span class="o">-</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetBindPose</span><span class="p">(</span><span class="n">boneName</span><span class="p">).</span><span class="n">GetPosition</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 상대적 위치에 웨이트 값을 적용시킨다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">totalDeltaPosition</span> <span class="o">+=</span> <span class="n">deltaPosition</span> <span class="o">*</span> <span class="n">w</span><span class="p">.</span><span class="n">Values</span><span class="p">[</span><span class="n">wi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 정점 위치에 반영한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">Position</span> <span class="o">+=</span> <span class="n">Vector4</span><span class="p">(</span><span class="n">totalDeltaPosition</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">HasColor</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">Color</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetColors</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">HasUV</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">UV</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetUVs</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 정점 변환 진행
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">VertexShader3D</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">InMatrix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 삼각형 별로 그리기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ....
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br /><br /></p>
+<h2 id="트랜스폼-계층-구조">트랜스폼 계층 구조</h2>
+<ul>
+<li>일반적으로 캐릭터를 구성하는 본은 <strong>부모-자식 관계</strong>의 계층 구조가 형성되어 있다. 그래서 부모가 움직이면 자식들도 움직이게 된다.</li>
+<li>부모가 없는 최상단의 트랜스폼을 <strong>루트(Root) 트랜스폼</strong>이라고 한다.</li>
+<li>이런 계층 구조에 따라서 트랜스폼 데이터는 다음과 같이 나뉠 수 있다.
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>이름</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>로컬(local) 트랜스폼</strong><br /><strong>상대(relative) 트랜스폼</strong></td>
+<td>부모로부터 상대적인 트랜스폼</td>
+</tr>
+<tr>
+<td><strong>월드(world) 트랜스폼</strong><br /><strong>절대(absolute) 트랜스폼</strong></td>
+<td>(계층 구조와 상관없이)<br />자신이 속한 공간에서의 트랜스폼</td>
+</tr>
+</tbody>
+</table></div>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TransformComponent</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">SetRoot</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TransformComponent</span><span class="o">&amp;</span> <span class="n">GetRoot</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="nf">SetParent</span><span class="p">(</span><span class="n">TransformComponent</span><span class="o">&amp;</span> <span class="n">InTransform</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 부모와 자식 목록을 보관한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">TransformComponent</span><span class="o">*</span> <span class="n">_ParentPtr</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">TransformComponent</span><span class="o">*&gt;</span> <span class="n">_ChildrenPtr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 매번 월드 트랜스폼을 로컬 트랜스폼으로 계산해 주기 보다는 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 두 가지 트랜스폼을 모두 보관해 놓으면 좋겠다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Transform</span> <span class="n">_LocalTransform</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span> <span class="n">_WorldTransform</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<h3 id="트랜스폼-계층-구조의-변환">트랜스폼 계층 구조의 변환</h3>
+<ul>
+<li>부모나 자식의 트랜스폼 값이 변경되면 관련된 트랜스폼 값들을 조정해줘야 할 것이다. 사례를 통해 어떤 연산이 필요한지 알아보자.</li>
+</ul>
+<br />
+<ul>
+<li>사례 1. <strong>부모의 월드 트랜스폼 변경 시</strong> <br />
+<img src="/post/game_math/images/17-02-parentWorld.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="부모의 월드 트랜스폼 변경 시"
+	
+	
+></li>
+<li>사례 2. <strong>나의 로컬 트랜스폼 변경 시</strong> <br />
+<img src="/post/game_math/images/17-03-myLocal.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="나의 로컬 트랜스폼 변경 시"
+	
+	
+></li>
+<li>사례 3. <strong>나의 월드 트랜스폼 변경 시</strong> <br />
+<img src="/post/game_math/images/17-04-myWorld.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="나의 월드 트랜스폼 변경 시"
+	
+	
+></li>
+<li>사례 4. <strong>새로운 부모 설정 시</strong> <br />
+<img src="/post/game_math/images/17-05-newParent.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="새로운 부모 설정 시"
+	
+	
+></li>
+</ul>
+<br />
+<ul>
+<li>위와 같은 사례들을 통해 다음과 같은 두 가지 기능이 필요함을 알 수 있다.
+<ul>
+<li>(1) 부모의 월드 트랜스폼 정보, 나의 로컬 트랜스폼 정보 → 나의 월드 트랜스폼 계산</li>
+<li>(2) 부모의 월드 트랜스폼 정보, 나의 월드 트랜스폼 정보 → 나의 로컬 트랜스폼 계산</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="1-로컬-트랜스폼으로부터-월드-트랜스폼의-계산">(1) 로컬 트랜스폼으로부터 월드 트랜스폼의 계산</h3>
+<ul>
+<li>내 월드 트랜스폼의 <u>크기</u>
+<ul>
+<li>부모 월드 트랜스폼의 크기 $\vec{s}$와 내 로컬 트랜스폼의 크기 $\vec{s&rsquo;}$를 곱하면 된다.
+$$\vec{s&rsquo;_{world}} = \vec{s} * \vec{s&rsquo;}$$</li>
+</ul>
+</li>
+<li>내 월드 트랜스폼의 <u>회전</u>
+<ul>
+<li>부모 월드 회전 사원수 $q$와 나의 로컬 회전 사원수 $q&rsquo;$을 곱하면 된다.
+$$q&rsquo;_{world} = q&rsquo; * q $$</li>
+</ul>
+</li>
+<li>내 월드 트랜스폼의 <u>이동</u>
+<ul>
+<li>내 월드 트랜스폼의 모델링 행렬은 다음과 같을 것이다.
+$$M_{world} = M_{parnet} \cdot M_{local}$$
+$$ M_{world} = \begin{bmatrix} x_xs_x &amp; y_xs_y &amp; z_xs_z &amp; t_x \\ x_ys_z &amp; y_ys_y &amp; z_ys_z &amp; t_y \\ x_zs_x &amp; y_zs_y &amp; z_zs_z &amp; t_y \\ s_zs_x &amp; y_zs_y &amp; z_zs_z &amp; t_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix}  \cdot \begin{bmatrix} x&rsquo;_xs&rsquo;_x &amp; y&rsquo;_xs&rsquo;_y &amp; z&rsquo;_xs&rsquo;_z &amp; t&rsquo;_x \\ x&rsquo;_ys&rsquo;_z &amp; y_ys&rsquo;_y &amp; z&rsquo;_ys&rsquo;_z &amp; t&rsquo;_y \\ x&rsquo;_zs&rsquo;_x &amp; y&rsquo;_zs&rsquo;_y &amp; z&rsquo;_zs&rsquo;_z &amp; t&rsquo;_y \\ s&rsquo;_zs&rsquo;_x &amp; y&rsquo;_zs&rsquo;_y &amp; z&rsquo;_zs&rsquo;_z &amp; t&rsquo;_z \\ 0 &amp; 0 &amp; 0 &amp; 1 \end{bmatrix} $$</li>
+<li>이것의 4열만 월드 이동 값이므로 4열만 내적과 곱셈으로 정리하자.
+$$ \vec{t_{world}} = (\begin{bmatrix} x_x &amp; y_x &amp; z_x \\ s_y &amp; y_y &amp; z_y \\ x_z &amp; y_z &amp; z_z \end{bmatrix} \begin{bmatrix} t&rsquo;_x \\ t&rsquo;_y \\ t&rsquo;_z \end{bmatrix} ) * \vec{s} + \vec{t} $$
+$$ = (q \cdot \vec{t&rsquo;} ) * \vec{s} + \vec{t} $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 로컬 트랜스폼 -&gt; 월드 트랜스폼
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">FORCEINLINE</span> <span class="k">constexpr</span> <span class="n">Transform</span> <span class="n">Transform</span><span class="o">::</span><span class="n">LocalToWorld</span><span class="p">(</span><span class="k">const</span> <span class="n">Transform</span><span class="o">&amp;</span> <span class="n">InParentWorldTransform</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 크기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetScale</span><span class="p">(</span><span class="n">InParentWorldTransform</span><span class="p">.</span><span class="n">GetScale</span><span class="p">()</span> <span class="o">*</span> <span class="n">GetScale</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 회전
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetRotation</span><span class="p">(</span><span class="n">InParentWorldTransform</span><span class="p">.</span><span class="n">GetRotation</span><span class="p">()</span> <span class="o">*</span> <span class="n">GetRotation</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이동 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="n">InParentWorldTransform</span><span class="p">.</span><span class="n">GetPosition</span><span class="p">()</span> <span class="o">+</span> <span class="n">InParentWorldTransform</span><span class="p">.</span><span class="n">GetRotation</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">InParentWorldTransform</span><span class="p">.</span><span class="n">GetScale</span><span class="p">()</span> <span class="o">*</span> <span class="n">GetPosition</span><span class="p">()));</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<h3 id="2-월드-트랜스폼으로부터-로컬-트랜스폼의-계산">(2) 월드 트랜스폼으로부터 로컬 트랜스폼의 계산</h3>
+<ul>
+<li>먼저 부모의 월드 트랜스폼을 중심으로 나의 월드 트랜스폼을 해석해야 한다.
+<ul>
+<li>이것은 Chapter 10에서 월드 공간에서 카메라 공간으로 중심을 바꾼 것과 유사하다.</li>
+<li>따라서 <u>부모의 월드 트랜스폼에 역변환</u>을 한 후에 <u>나의 월드 트랜스폼을 곱하면</u> 나의 로컬 트랜스폼이 만들어질 것이다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li><strong>부모의 월드 트랜스폼을 역변환</strong>해보자.</li>
+<li>부모의 월드 트랜스폼의 <u>크기</u>의 역변환
+$$ \vec{s^{-1}} = (\frac{1}{s_x}, \frac{1}{s_y}, \frac{1}{s_z}) $$</li>
+<li>부모의 월드 트랜스폼의 <u>회전</u>의 역변환
+<ul>
+<li>켤레 사원 수 $ q^* $가 된다.</li>
+</ul>
+</li>
+<li>부모의 월드 트랜스폼의 <u>이동</u>의 역변환
+<ul>
+<li>부모 월드 트랜스폼의 모델링 행렬의 역행렬은 다음과 같을 것이다.
+$$ M^{-1} = (TRS)^{-1} = S^{-1}R^{-1}T^{-1} $$</li>
+<li>이것을 정리하면 다음과 같다.
+$$ \vec{t^{-1}} = (\begin{bmatrix} x_x &amp; x_y &amp; x_z \\ y_x &amp; y_y &amp; y_z \\ z_x &amp; z_y &amp; z_z \end{bmatrix} \begin{bmatrix} -t_x \\ -t_y \\ -t_z \end{bmatrix} ) * \vec{s^{-1}} $$
+$$ = (q^* \cdot -\vec{t} ) * \vec{s^{-1}} $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">FORCEINLINE</span> <span class="k">constexpr</span> <span class="n">Transform</span> <span class="n">Transform</span><span class="o">::</span><span class="n">Inverse</span><span class="p">()</span> <span class="k">const</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Vector3</span> <span class="n">reciprocalScale</span> <span class="o">=</span> <span class="n">Vector3</span><span class="o">::</span><span class="n">Zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 크기 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 트랜스폼 크기 값에 0이 있을 수도 있으므로
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 이럴 때는 안전하게 역수로 구성된 벡터를 사용한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">Math</span><span class="o">::</span><span class="n">EqualsInTolerance</span><span class="p">(</span><span class="n">Scale</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">))</span> <span class="n">reciprocalScale</span><span class="p">.</span><span class="n">X</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">Scale</span><span class="p">.</span><span class="n">X</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">Math</span><span class="o">::</span><span class="n">EqualsInTolerance</span><span class="p">(</span><span class="n">Scale</span><span class="p">.</span><span class="n">Y</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">))</span> <span class="n">reciprocalScale</span><span class="p">.</span><span class="n">Y</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">Scale</span><span class="p">.</span><span class="n">Y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">Math</span><span class="o">::</span><span class="n">EqualsInTolerance</span><span class="p">(</span><span class="n">Scale</span><span class="p">.</span><span class="n">Z</span><span class="p">,</span> <span class="mf">0.f</span><span class="p">))</span> <span class="n">reciprocalScale</span><span class="p">.</span><span class="n">Z</span> <span class="o">=</span> <span class="mf">1.f</span> <span class="o">/</span> <span class="n">Scale</span><span class="p">.</span><span class="n">Z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span><span class="p">.</span><span class="n">SetScale</span><span class="p">(</span><span class="n">reciprocalScale</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 회전 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetRotation</span><span class="p">(</span><span class="n">Rotation</span><span class="p">.</span><span class="n">Inverse</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이동 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">GetScale</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">GetRotation</span><span class="p">()</span> <span class="o">*</span> <span class="o">-</span><span class="n">Position</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>이제 <strong>역변환을 구한 것에 나의 월드 트랜스폼을 곱하면</strong> 나의 로컬 트랜스폼이 만들어진다.
+$$ M_{local} = M_{parent}^{-1} \cdot M_{world} $$</li>
+<li>내 로컬 트랜스폼의 <u>크기</u>
+<ul>
+<li>부모 월드 트랜스폼의 크기 역변환 $\vec{s^{-1}}$와 내 월드 트랜스폼의 크기 $\vec{s&rsquo;}$를 곱하면 된다.
+$$\vec{s&rsquo;_{local}} = \vec{s^{-1}} * \vec{s&rsquo;}$$</li>
+</ul>
+</li>
+<li>내 로컬 트랜스폼의 <u>회전</u>
+<ul>
+<li>내 월드 회전 사원수 $q&rsquo;$와 부모의 월드 회전 사원수 역변환 $q^*$을 곱하면 된다.<br>
+$$q&rsquo;_{local} = q^* * q&rsquo; $$</li>
+</ul>
+</li>
+<li>내 월드 트랜스폼의 <u>이동</u>
+<ul>
+<li>이전 식을 참고해서 구하면 다음과 같다.
+$$ \vec{t&rsquo;_{local}} = (q^* \cdot \vec{t&rsquo;}) * \vec{s^{-1}} + \vec{t^{-1}} $$</li>
+</ul>
+</li>
+</ul>
+<br />
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 월드 트랜스폼 -&gt; 로컬 트랜스폼
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">FORCEINLINE</span> <span class="k">constexpr</span> <span class="n">Transform</span> <span class="n">Transform</span><span class="o">::</span><span class="n">WorldToLocal</span><span class="p">(</span><span class="k">const</span> <span class="n">Transform</span><span class="o">&amp;</span> <span class="n">InParentWorldTransform</span><span class="p">)</span> <span class="k">const</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 부모 트랜스폼의 역변환 구하기 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Transform</span> <span class="n">invParent</span> <span class="o">=</span> <span class="n">InParentWorldTransform</span><span class="p">.</span><span class="n">Inverse</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Transform</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 크기 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetScale</span><span class="p">(</span><span class="n">invParent</span><span class="p">.</span><span class="n">GetScale</span><span class="p">()</span> <span class="o">*</span> <span class="n">GetScale</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 회전 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetRotation</span><span class="p">(</span><span class="n">invParent</span><span class="p">.</span><span class="n">GetRotation</span><span class="p">()</span> <span class="o">*</span> <span class="n">GetRotation</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이동 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">result</span><span class="p">.</span><span class="n">SetPosition</span><span class="p">(</span><span class="n">invParent</span><span class="p">.</span><span class="n">GetPosition</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="n">invParent</span><span class="p">.</span><span class="n">GetRotation</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="n">invParent</span><span class="p">.</span><span class="n">GetScale</span><span class="p">()</span> <span class="o">*</span> <span class="n">GetPosition</span><span class="p">())));</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>다음은 캐릭터의 바인드 포즈 트랜스폼을 사용해서 애니메이션으로 움직인 본의 변화량을 반영해 최종 정점 위치를 계산하는 코드이다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 메시를 그리는 함수
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">SoftRenderer</span><span class="o">::</span><span class="n">DrawMesh3D</span><span class="p">(</span><span class="k">const</span> <span class="n">Mesh</span><span class="o">&amp;</span> <span class="n">InMesh</span><span class="p">,</span> <span class="k">const</span> <span class="n">Matrix4x4</span><span class="o">&amp;</span> <span class="n">InMatrix</span><span class="p">,</span> <span class="k">const</span> <span class="n">LinearColor</span><span class="o">&amp;</span> <span class="n">InColor</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">vertexCount</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetVertices</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">indexCount</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetIndices</span><span class="p">().</span><span class="n">size</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">size_t</span> <span class="n">triangleCount</span> <span class="o">=</span> <span class="n">indexCount</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">Vertex3D</span><span class="o">&gt;</span> <span class="n">vertices</span><span class="p">(</span><span class="n">vertexCount</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">size_t</span><span class="o">&gt;</span> <span class="n">indice</span><span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">GetIndices</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">vi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">vi</span> <span class="o">&lt;</span> <span class="n">vertexCount</span><span class="p">;</span> <span class="o">++</span><span class="n">vi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">Position</span> <span class="o">=</span> <span class="n">Vector4</span><span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">GetVertices</span><span class="p">()[</span><span class="n">vi</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 정점 변환 전에, 본의 움직임을 반영한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">IsSkinnedMesh</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Vector4</span> <span class="n">totalPosition</span> <span class="o">=</span> <span class="n">Vector4</span><span class="o">::</span><span class="n">Zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">Weight</span> <span class="n">w</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetWeights</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">            <span class="c1">// 해당 정점에 연결된 본의 개수에 따라 반복한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">wi</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">wi</span> <span class="o">&lt;</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetConnectedBones</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span> <span class="o">++</span><span class="n">wi</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">boneName</span> <span class="o">=</span> <span class="n">w</span><span class="p">.</span><span class="n">Bones</span><span class="p">[</span><span class="n">wi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">HasBone</span><span class="p">(</span><span class="n">boneName</span><span class="p">)</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="k">const</span> <span class="n">Bone</span><span class="o">&amp;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetBone</span><span class="p">(</span><span class="n">boneName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="k">const</span> <span class="n">Transform</span><span class="o">&amp;</span> <span class="n">t</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">GetTransform</span><span class="p">().</span><span class="n">GetWorldTransform</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="k">const</span> <span class="n">Transform</span><span class="o">&amp;</span> <span class="n">bindPose</span> <span class="o">=</span> <span class="n">b</span><span class="p">.</span><span class="n">GetBindPose</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 바인드 포즈를 중심으로 본의 로컬 트랜스폼을 계산한다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Transform</span> <span class="n">boneLocal</span> <span class="o">=</span> <span class="n">t</span><span class="p">.</span><span class="n">WorldToLocal</span><span class="p">(</span><span class="n">bindPose</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 바인드 포즈를 중심으로 정점의 로컬 좌표를 얻는다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Vector3</span> <span class="n">localPosition</span> <span class="o">=</span> <span class="n">bindPose</span><span class="p">.</span><span class="n">WorldToLocalVector</span><span class="p">(</span><span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">Position</span><span class="p">.</span><span class="n">ToVector3</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 본의 로컬 트랜스폼 행렬 * 정점의 로컬 좌표 = 바인드포즈에서 변화된 좌표 계산
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Vector3</span> <span class="n">skinnedLocalPosition</span> <span class="o">=</span> <span class="n">boneLocal</span><span class="p">.</span><span class="n">GetMatrix</span><span class="p">()</span> <span class="o">*</span> <span class="n">localPosition</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 바인드 포즈의 행렬 * 바인드포즈에서 변화된 좌표 = 모델링 공간으로 되돌리기 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Vector3</span> <span class="n">skinnedWorldPosition</span> <span class="o">=</span> <span class="n">bindPose</span><span class="p">.</span><span class="n">GetMatrix</span><span class="p">()</span> <span class="o">*</span> <span class="n">skinnedLocalPosition</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 가중치를 반영한 후, 최종 위치에 누적시킨다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">totalPosition</span> <span class="o">+=</span> <span class="n">Vector4</span><span class="p">(</span><span class="n">skinnedWorldPosition</span><span class="p">,</span> <span class="nb">true</span><span class="p">)</span> <span class="o">*</span> <span class="n">w</span><span class="p">.</span><span class="n">Values</span><span class="p">[</span><span class="n">wi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 정점 위치에 반영한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">Position</span> <span class="o">=</span> <span class="n">totalPosition</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">HasColor</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">Color</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetColors</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">InMesh</span><span class="p">.</span><span class="n">HasUV</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">vertices</span><span class="p">[</span><span class="n">vi</span><span class="p">].</span><span class="n">UV</span> <span class="o">=</span> <span class="n">InMesh</span><span class="p">.</span><span class="n">GetUVs</span><span class="p">()[</span><span class="n">vi</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 정점 변환 진행
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">VertexShader3D</span><span class="p">(</span><span class="n">vertices</span><span class="p">,</span> <span class="n">InMatrix</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 삼각형 별로 그리기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/game-math/">Game Math</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/game-math-16/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 16. 사원수: 4차원 수로 설계한 3차원 회전</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-15/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 15. 오일러 공식: 허수로 표현하는 회전 변환</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-14/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 14. 복소수: 2차원 평면의 수</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-13-2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (2) </h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/game-math-13-1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Game Math] Chapter 13. 절두체: 최적화된 3차원 공간 (1)</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 Peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
