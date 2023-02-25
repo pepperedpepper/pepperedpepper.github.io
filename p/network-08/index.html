@@ -2,7 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
-랜 카드에서의 데이터 전달과 처리 OSI 모델과 하는 일 계층 설명 물리 계층 데이터를 전기 신호로 변환한다 데이터 링크 계층 LAN에서 데이터를 송수신한다 네트워크 계층 다른 네트워크에 있는 목적지에 데이터를 전달한다 전송 계층 목적지에 데이터를 정확하게 전달한다 응용 계층 애플리케이션 등에서 사용하는 데이터를 송수신하는데 필요하다 살펴볼 네트워크의 구성 192.168.1.10 컴퓨터 → 스위치A → 라우터A 172.16.0.1 → 172.16.0.2 라우터B → 스위치B → 웹 서버 192.'>
+랜 카드에서의 데이터 전달과 처리 OSI 모델과 하는 일 계층 설명 물리 계층 데이터를 전기 신호로 변환한다 데이터 링크 계층 LAN에서 데이터를 송수신한다 네트워크 계층 다른 네트워크에 있는 목적지에 데이터를 전달한다 전송 계층 목적지에 데이터를 정확하게 전달한다 응용 계층 애플리케이션 등에서 사용하는 데이터를 송수신하는데 필요하다 살펴볼 예시 네트워크의 구성 192.168.1.10 컴퓨터 → 스위치A → 라우터A 172.16.0.1 → 172.16.0.2 라우터B → 스위치B → 웹 서버 192.'>
 <title>[Network] Chapter 8. 네트워크의 전체 흐름 살펴보기</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/network-08/'>
@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Network] Chapter 8. 네트워크의 전체 흐름 살펴보기'>
 <meta property='og:description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
-랜 카드에서의 데이터 전달과 처리 OSI 모델과 하는 일 계층 설명 물리 계층 데이터를 전기 신호로 변환한다 데이터 링크 계층 LAN에서 데이터를 송수신한다 네트워크 계층 다른 네트워크에 있는 목적지에 데이터를 전달한다 전송 계층 목적지에 데이터를 정확하게 전달한다 응용 계층 애플리케이션 등에서 사용하는 데이터를 송수신하는데 필요하다 살펴볼 네트워크의 구성 192.168.1.10 컴퓨터 → 스위치A → 라우터A 172.16.0.1 → 172.16.0.2 라우터B → 스위치B → 웹 서버 192.'>
+랜 카드에서의 데이터 전달과 처리 OSI 모델과 하는 일 계층 설명 물리 계층 데이터를 전기 신호로 변환한다 데이터 링크 계층 LAN에서 데이터를 송수신한다 네트워크 계층 다른 네트워크에 있는 목적지에 데이터를 전달한다 전송 계층 목적지에 데이터를 정확하게 전달한다 응용 계층 애플리케이션 등에서 사용하는 데이터를 송수신하는데 필요하다 살펴볼 예시 네트워크의 구성 192.168.1.10 컴퓨터 → 스위치A → 라우터A 172.16.0.1 → 172.16.0.2 라우터B → 스위치B → 웹 서버 192.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/network-08/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-26T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-26T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Network] Chapter 8. 네트워크의 전체 흐름 살펴보기">
 <meta name="twitter:description" content="모두의 네트워크 책을 읽고 공부한 노트입니다.
-랜 카드에서의 데이터 전달과 처리 OSI 모델과 하는 일 계층 설명 물리 계층 데이터를 전기 신호로 변환한다 데이터 링크 계층 LAN에서 데이터를 송수신한다 네트워크 계층 다른 네트워크에 있는 목적지에 데이터를 전달한다 전송 계층 목적지에 데이터를 정확하게 전달한다 응용 계층 애플리케이션 등에서 사용하는 데이터를 송수신하는데 필요하다 살펴볼 네트워크의 구성 192.168.1.10 컴퓨터 → 스위치A → 라우터A 172.16.0.1 → 172.16.0.2 라우터B → 스위치B → 웹 서버 192.">
+랜 카드에서의 데이터 전달과 처리 OSI 모델과 하는 일 계층 설명 물리 계층 데이터를 전기 신호로 변환한다 데이터 링크 계층 LAN에서 데이터를 송수신한다 네트워크 계층 다른 네트워크에 있는 목적지에 데이터를 전달한다 전송 계층 목적지에 데이터를 정확하게 전달한다 응용 계층 애플리케이션 등에서 사용하는 데이터를 송수신하는데 필요하다 살펴볼 예시 네트워크의 구성 192.168.1.10 컴퓨터 → 스위치A → 라우터A 172.16.0.1 → 172.16.0.2 라우터B → 스위치B → 웹 서버 192.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -303,6 +303,7 @@ if (!doNotTrack) {
             <nav id="TableOfContents">
   <ul>
     <li><a href="#랜-카드에서의-데이터-전달과-처리">랜 카드에서의 데이터 전달과 처리</a></li>
+    <li><a href="#컴퓨터의-데이터가-전기-신호로-변환되는-과정">컴퓨터의 데이터가 전기 신호로 변환되는 과정</a></li>
     <li><a href="#스위치와-라우터에서의-데이터-전달과-처리">스위치와 라우터에서의 데이터 전달과 처리</a>
       <ul>
         <li><a href="#스위치">스위치</a></li>
@@ -397,8 +398,7 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="랜-카드에서의-데이터-전달과-처리">랜 카드에서의 데이터 전달과 처리</h2>
 <ul>
-<li>OSI 모델과 하는 일</li>
-</ul>
+<li>OSI 모델과 하는 일
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -429,9 +429,11 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table></div>
+</li>
+</ul>
 <br />
 <ul>
-<li>살펴볼 네트워크의 구성
+<li>살펴볼 예시 네트워크의 구성
 <ul>
 <li><code>192.168.1.10</code> 컴퓨터 → 스위치A</li>
 <li>→ 라우터A <code>172.16.0.1</code> → <code>172.16.0.2</code> 라우터B</li>
@@ -439,18 +441,17 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<br />
+<p><br /><br /></p>
+<h2 id="컴퓨터의-데이터가-전기-신호로-변환되는-과정">컴퓨터의 데이터가 전기 신호로 변환되는 과정</h2>
 <ul>
-<li>
-<p>응용 계층</p>
+<li>응용 계층
 <ul>
 <li>3-way handshake가 완료되어 연결이 확립되었다고 가정한다.</li>
 <li>컴퓨터에서 웹 브라우저를 이용해서 웹 서버의 웹 사이트에 접속하기 위해 요청을 보낸다.</li>
 <li>웹 서버에 있는 html 데이터를 얻어야 하므로 <code>GET /index.html HTTP/1.1 ~1</code>과 같은 HTTP 메시지를 보낸다.</li>
 </ul>
 </li>
-<li>
-<p>전송 계층</p>
+<li>전송 계층
 <ul>
 <li>TCP 헤더가 붙는다. 이것이 붙은 데이터를 세그먼트라고 한다.</li>
 <li>여기에는 출발지 포트 번호와 목적지 포트 번호가 들어 있다.</li>
@@ -458,22 +459,19 @@ if (!doNotTrack) {
 <li>목적지 포트번호는 HTTP이므로 80번 포트가 된다.</li>
 </ul>
 </li>
-<li>
-<p>네트워크 계층</p>
+<li>네트워크 계층
 <ul>
 <li>IP 헤더가 붙는다. 이것이 붙은 데이터를 IP 패킷이라고 한다.</li>
 <li>여기에는 출발지 IP 주소와 목적지 IP 주소가 붙는다.</li>
 </ul>
 </li>
-<li>
-<p>데이터 링크 계층</p>
+<li>데이터 링크 계층
 <ul>
 <li>이더넷 헤더가 붙는다. 이것이 붙은 데이터를 이더넷 프레임이라고 한다.</li>
 <li>여기에는 출발지 MAC 주소와 목적지 MAC 주소가 붙는다.</li>
 </ul>
 </li>
-<li>
-<p>물리 계층</p>
+<li>물리 계층
 <ul>
 <li>전기신호로 변환하여 네트워크로 전송한다.</li>
 <li>전기신호로 변환하는 장비는 랜 카드이다.</li>
@@ -504,36 +502,31 @@ if (!doNotTrack) {
 </ul>
 </li>
 </ul>
-<p>(같은 과정 생략&hellip;)</p>
+<p>(반대로 라우터에서 스위치로 가는 과정은 생략)</p>
 <p><br /><br /></p>
 <h2 id="웹-서버에서의-데이터-전달과-처리">웹 서버에서의 데이터 전달과 처리</h2>
 <ul>
-<li>
-<p>물리 계층</p>
+<li>물리 계층
 <ul>
 <li>스위치B로부터 전기 신호로 변환된 데이터가 전달된다.</li>
 </ul>
 </li>
-<li>
-<p>데이터 링크 계층</p>
+<li>데이터 링크 계층
 <ul>
 <li>목적지 MAC 주소와 자신의 MAC 주소를 비교한다. 주소가 같으면 이더넷 헤더와 트레일러를 분리하고 네트워크 계층에 전달한다.</li>
 </ul>
 </li>
-<li>
-<p>네트워크 계층</p>
+<li>네트워크 계층
 <ul>
 <li>목적지 IP 주소와 자신의 IP 주소를 비교한다. 주소가 같으면 IP 헤더를 분리하고 전송 계층에 전달한다.</li>
 </ul>
 </li>
-<li>
-<p>전송 계층</p>
+<li>전송 계층
 <ul>
 <li>목적지 포트 번호를 확인해서 어떤 애플리케이션으로 전달해야 되는지 판단하고, TCP 헤더를 분리해서 응용 계층에 전달한다.</li>
 </ul>
 </li>
-<li>
-<p>응용 계층</p>
+<li>응용 계층
 <ul>
 <li>웹 서버의 응용 계층에 <code>GET /index.html HTTP/1.1 ~1</code> HTTP 메시지가 전달된다.</li>
 </ul>

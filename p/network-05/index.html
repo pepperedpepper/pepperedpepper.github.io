@@ -2,7 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
-네트워크 계층의 역할 데이터 링크 계층에서는 이더넷 규칙을 기반으로 헤서 같은 네트워크에 있는 컴퓨터로 데이터를 전송할 수 있다면, 네트워크 계층에서는 서로 다른 네트워크에 있는 목적지로 데이터를 전송할 수 있다. 라우터(Router) 서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 어떤 경로로 가는 것이 좋은지(라우팅; routing) 를 알려주는 기능을 한다. 라우팅 테이블(routing table)이 있어서 경로 정보를 등록하고 관리한다. 가정이나 소규모 기업 용도로 만든 라우터를 인터넷 공유기라고 한다.'>
+네트워크 계층의 역할 네트워크 계층 데이터 링크 계층에서는 이더넷 규칙을 기반으로 해서 같은 네트워크에 있는 컴퓨터로만 데이터를 전송할 수 있었다. 서로 다른 네트워크에 있는 목적지로 데이터를 전송하려면 네트워크 계층이 필요하다. 라우터를 통해 경로를 설정해서 패킷을 전송한다. 라우터(Router) 서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 어떤 경로로 가는 것이 좋은지(라우팅: routing) 를 알려주는 기능을 한다. 참고로 레이어 3 스위치라는 장비도 라우팅을 할 수 있다.'>
 <title>[Network] Chapter 5. 네트워크 계층 : 목적지에 데이터 전달하기</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/network-05/'>
@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Network] Chapter 5. 네트워크 계층 : 목적지에 데이터 전달하기'>
 <meta property='og:description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
-네트워크 계층의 역할 데이터 링크 계층에서는 이더넷 규칙을 기반으로 헤서 같은 네트워크에 있는 컴퓨터로 데이터를 전송할 수 있다면, 네트워크 계층에서는 서로 다른 네트워크에 있는 목적지로 데이터를 전송할 수 있다. 라우터(Router) 서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 어떤 경로로 가는 것이 좋은지(라우팅; routing) 를 알려주는 기능을 한다. 라우팅 테이블(routing table)이 있어서 경로 정보를 등록하고 관리한다. 가정이나 소규모 기업 용도로 만든 라우터를 인터넷 공유기라고 한다.'>
+네트워크 계층의 역할 네트워크 계층 데이터 링크 계층에서는 이더넷 규칙을 기반으로 해서 같은 네트워크에 있는 컴퓨터로만 데이터를 전송할 수 있었다. 서로 다른 네트워크에 있는 목적지로 데이터를 전송하려면 네트워크 계층이 필요하다. 라우터를 통해 경로를 설정해서 패킷을 전송한다. 라우터(Router) 서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 어떤 경로로 가는 것이 좋은지(라우팅: routing) 를 알려주는 기능을 한다. 참고로 레이어 3 스위치라는 장비도 라우팅을 할 수 있다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/network-05/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-24T02:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-24T02:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Network] Chapter 5. 네트워크 계층 : 목적지에 데이터 전달하기">
 <meta name="twitter:description" content="모두의 네트워크 책을 읽고 공부한 노트입니다.
-네트워크 계층의 역할 데이터 링크 계층에서는 이더넷 규칙을 기반으로 헤서 같은 네트워크에 있는 컴퓨터로 데이터를 전송할 수 있다면, 네트워크 계층에서는 서로 다른 네트워크에 있는 목적지로 데이터를 전송할 수 있다. 라우터(Router) 서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 어떤 경로로 가는 것이 좋은지(라우팅; routing) 를 알려주는 기능을 한다. 라우팅 테이블(routing table)이 있어서 경로 정보를 등록하고 관리한다. 가정이나 소규모 기업 용도로 만든 라우터를 인터넷 공유기라고 한다.">
+네트워크 계층의 역할 네트워크 계층 데이터 링크 계층에서는 이더넷 규칙을 기반으로 해서 같은 네트워크에 있는 컴퓨터로만 데이터를 전송할 수 있었다. 서로 다른 네트워크에 있는 목적지로 데이터를 전송하려면 네트워크 계층이 필요하다. 라우터를 통해 경로를 설정해서 패킷을 전송한다. 라우터(Router) 서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 어떤 경로로 가는 것이 좋은지(라우팅: routing) 를 알려주는 기능을 한다. 참고로 레이어 3 스위치라는 장비도 라우팅을 할 수 있다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -303,9 +303,12 @@ if (!doNotTrack) {
             <nav id="TableOfContents">
   <ul>
     <li><a href="#네트워크-계층의-역할">네트워크 계층의 역할</a></li>
-    <li><a href="#ip-주소의-구조">IP 주소의 구조</a></li>
-    <li><a href="#ip-주소의-클래스-구조">IP 주소의 클래스 구조</a></li>
-    <li><a href="#네트워크-주소와-브로드캐스트-주소의-구조">네트워크 주소와 브로드캐스트 주소의 구조</a></li>
+    <li><a href="#ip-주소">IP 주소</a>
+      <ul>
+        <li><a href="#ip-주소의-클래스">IP 주소의 클래스</a></li>
+        <li><a href="#네트워크-주소와-브로드캐스트-주소의-구조">네트워크 주소와 브로드캐스트 주소의 구조</a></li>
+      </ul>
+    </li>
     <li><a href="#서브넷의-구조">서브넷의 구조</a></li>
     <li><a href="#라우터의-구조">라우터의 구조</a></li>
   </ul>
@@ -372,7 +375,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -395,29 +398,42 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="네트워크-계층의-역할">네트워크 계층의 역할</h2>
 <ul>
-<li>데이터 링크 계층에서는 이더넷 규칙을 기반으로 헤서 같은 네트워크에 있는 컴퓨터로 데이터를 전송할 수 있다면,</li>
-<li>네트워크 계층에서는 <mark style="background-color: lightblue">서로 다른 네트워크에</mark> 있는 목적지로 데이터를 전송할 수 있다.</li>
+<li>네트워크 계층
+<ul>
+<li>데이터 링크 계층에서는 이더넷 규칙을 기반으로 해서 같은 네트워크에 있는 컴퓨터로만 데이터를 전송할 수 있었다.</li>
+<li><mark style="background-color: lightblue">서로 다른 네트워크에</mark> 있는 목적지로 데이터를 전송하려면 네트워크 계층이 필요하다.</li>
+<li>라우터를 통해 경로를 설정해서 패킷을 전송한다.</li>
+</ul>
+</li>
 </ul>
 <br />
 <ul>
 <li><mark style="background-color: lightblue"><strong>라우터(Router)</strong></mark>
 <ul>
-<li>서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 <strong>어떤 경로로 가는 것이 좋은지(라우팅; routing)</strong> 를 알려주는 기능을 한다.</li>
-<li>라우팅 테이블(routing table)이 있어서 경로 정보를 등록하고 관리한다.</li>
+<li>서로 다른 네트워크를 연결해주는 장치로, 데이터의 목적지가 정해지면 해당 목적지까지 <strong>어떤 경로로 가는 것이 좋은지(라우팅: routing)</strong> 를 알려주는 기능을 한다.
+<ul>
+<li>참고로 레이어 3 스위치라는 장비도 라우팅을 할 수 있다.</li>
+</ul>
+</li>
+<li><strong>라우팅 테이블(routing table)</strong> 이 있어서 경로 정보를 등록하고 관리한다.</li>
 <li>가정이나 소규모 기업 용도로 만든 라우터를 인터넷 공유기라고 한다.</li>
 </ul>
 </li>
 </ul>
 <br />
 <ul>
-<li>목적지의 주소를 아는 방법? <mark style="background-color: lightblue"><strong>IP(Internet Protocol) 주소</strong></mark>
+<li>네크워크를 식별할 수 있는 방법? <strong>IP(Internet Protocol) 주소</strong>
 <ul>
 <li>LAN에서는 MAC 주소만으로 통신할 수 있지만, 다른 네트워크에는 데이터를 보낼 수 없다.</li>
 <li>그래서 IP가 필요하다. IP는 어떤 네트워크의 어떤 컴퓨터인지를 구분할 수 있도록 하는 주소이다.</li>
 </ul>
 </li>
+<li>네트워크 계층에서는 캡슐화할 때 <mark style="background-color: lightblue"><strong>IP 헤더</strong></mark>를 붙인다.
+<ul>
+<li>IP 헤더가 추가되어 만들어진 것을 <mark style="background-color: lightblue"><strong>IP 패킷</strong></mark>이라고 한다.</li>
 </ul>
-<br />
+</li>
+</ul>
 <p><img src="/post/network/images/05-01-ipHeader.png"
 	
 	
@@ -430,78 +446,49 @@ if (!doNotTrack) {
 >
 <a class="link" href="https://support.huawei.com/enterprise/es/doc/EDOC1100112351/dd76ea1f/ipv4-packet-format"  target="_blank" rel="noopener"
     >Image Source</a></p>
-<ul>
-<li>네트워크 계층에서는 캡슐화할 때 <strong>IP 헤더</strong>를 붙인다.
-<ul>
-<li>IP 헤더가 추가되어 만들어진 것을 <strong>IP 패킷</strong>이라고 한다.</li>
-</ul>
-</li>
-</ul>
 <p><br /><br /></p>
-<h2 id="ip-주소의-구조">IP 주소의 구조</h2>
+<h2 id="ip-주소">IP 주소</h2>
 <ul>
-<li>
-<p>IP 주소는 인터넷 서비스 제공자(ISP)에게 받을 수 있다.</p>
-</li>
-<li>
-<p><strong>IPv4</strong>는 32bit로, <strong>IPv6</strong>는 64bit로 주소를 표현한다.</p>
-</li>
-<li>
-<p>IP 주소는 공인 IP 주소와 사설 IP 주소가 있다.</p>
+<li>IP 버전
 <ul>
-<li>ISP가 제공하는 <strong>공인 IP 주소는 라우더에만 할당</strong>하고, LAN 안의 컴퓨터들에게는 LAN의 네트워크 관리자가 자유롭게 사설 IP 주소를 할당하거나, 라우터의 DHCP(Dynamic Host Configuration Protocol)기능을 사용하여 주소를 자동으로 할당한다.</li>
-<li>이렇게 공인 IP 주소를 절약할 수 있다.</li>
+<li><strong>IPv4</strong> (32bit)</li>
+<li><strong>IPv6</strong> (128bit)</li>
 </ul>
 </li>
-<li>
-<p>IP 주소는 네트워크 ID와 호스트 ID로 나뉘어져 있다.</p>
+<li>IP 주소는 공인 IP 주소와 사설 IP 주소가 있다.
 <ul>
-<li><strong>네트워크 ID</strong>는 어떤 네트워크인지를 나타내고, <strong>호스트 ID</strong>는 해당 네트워크의 어떤 컴퓨터인지를 나타낸다.</li>
+<li>사용할 수 있는 주소의 수가 한정적이기 때문에, 인터넷에 직접 연결되는 컴퓨터나 라우터에는 공인 IP 주소를 할당하고, 회사나 가정의 랜에 있는 컴퓨터는 사설 IP 주소를 할당하는 정책을 사용한다.</li>
+<li>공인 IP 주소를 절약하는 방법은?</li>
+<li>ISP가 제공하는 공인 IP 주소는 라우터에만 할당하고, LAN 안의 컴퓨터들에게는 LAN의 네트워크 관리자가 자유롭게 사설 IP 주소를 할당하거나 라우터의 DHCP(Dynamic Host Configuration Protocol)기능을 사용하여 주소를 자동으로 할당한다.</li>
 </ul>
 </li>
 </ul>
-<p><br /><br /></p>
-<h2 id="ip-주소의-클래스-구조">IP 주소의 클래스 구조</h2>
+<br />
+<h3 id="ip-주소의-클래스">IP 주소의 클래스</h3>
 <ul>
-<li>IP 주소의 네트워크 ID의 크기는 클래스에 따라 달라진다.
+<li>IP 주소는 네트워크 ID와 호스트 ID로 나뉘어져 있다.
 <ul>
-<li>일반 네트워크에서는 A~C 클래스까지 사용할 수 있다.</li>
+<li><strong>네트워크 ID</strong>
+<ul>
+<li>어떤 네트워크인지를 나타낸다.</li>
+</ul>
+</li>
+<li><strong>호스트 ID</strong>
+<ul>
+<li>해당 네트워크의 어떤 컴퓨터인지를 나타낸다.</li>
 </ul>
 </li>
 </ul>
-<div class="table-wrapper"><table>
-<thead>
-<tr>
-<th>클래스 이름</th>
-<th>내용</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>A 클래스</td>
-<td>대규모 네트워크 주소</td>
-</tr>
-<tr>
-<td>B 클래스</td>
-<td>중형 네트워크 주소</td>
-</tr>
-<tr>
-<td>C 클래스</td>
-<td>소규모 네트워크 주소</td>
-</tr>
-<tr>
-<td>D 클래스</td>
-<td>멀티캐스트(multicast) 주소</td>
-</tr>
-<tr>
-<td>E 클래스</td>
-<td>연구 및 특수용도 주소</td>
-</tr>
-</tbody>
-</table></div>
-<ul>
+</li>
 <li>각 클래스의 주소 범위
-<img src="/post/network/images/05-02-ipClass.jpeg"
+<ul>
+<li>클래스에 따라 네트워크 ID의 크기가 달라진다.</li>
+<li>일반 네트워크에서는 A~C 클래스까지 사용할 수 있다.</li>
+<li>이것은 전체 범위이고 이 안에서 공인 IP 주소와 사설 IP 주소의 범위가 나뉜다.</li>
+</ul>
+</li>
+</ul>
+<p><img src="/post/network/images/05-02-ipClass.png"
 	
 	
 	
@@ -510,20 +497,63 @@ if (!doNotTrack) {
 		alt="클래스 주소 범위"
 	
 	
-></li>
-</ul>
-<p><br /><br /></p>
-<h2 id="네트워크-주소와-브로드캐스트-주소의-구조">네트워크 주소와 브로드캐스트 주소의 구조</h2>
+></p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>클래스 이름</th>
+<th>내용</th>
+<th>최상위 8비트</th>
+<th>주소 범위</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A 클래스</td>
+<td>대규모 네트워크 주소</td>
+<td><code>0xxx xxxx</code></td>
+<td><code>1.0.0.0 ~ 127.255.255.255</code></td>
+</tr>
+<tr>
+<td>B 클래스</td>
+<td>중형 네트워크 주소</td>
+<td><code>10xx xxxx</code></td>
+<td><code>128.0.0.0 ~ 191.255.255.255</code></td>
+</tr>
+<tr>
+<td>C 클래스</td>
+<td>소규모 네트워크 주소</td>
+<td><code>110x xxxx</code></td>
+<td><code>192.0.0.0 ~ 223.255.255.255</code></td>
+</tr>
+<tr>
+<td>D 클래스</td>
+<td>멀티캐스트(multicast) 주소</td>
+<td><code>1110 xxxx</code></td>
+<td><code>224.0.0.0 ~ 239.255.255.255</code></td>
+</tr>
+<tr>
+<td>E 클래스</td>
+<td>연구 및 특수용도 주소</td>
+<td><code>1111 xxxx</code></td>
+<td><code>240.0.0.0 ~ 247.255.255.255</code></td>
+</tr>
+</tbody>
+</table></div>
+<br />
+<h3 id="네트워크-주소와-브로드캐스트-주소의-구조">네트워크 주소와 브로드캐스트 주소의 구조</h3>
 <ul>
 <li>네트워크 주소와 브로드캐스트 주소는 특별한 주소로 컴퓨터나 라우터가 자신의 IP로 사용하면 안 되는 주소이다.</li>
 <li><strong>네트워크 주소</strong>
 <ul>
+<li><code>x.x.x.0</code></li>
 <li>호스트 ID가 <code>0</code>인 주소이다.</li>
 <li>네트워크 전체를 대표하는 주소이다.</li>
 </ul>
 </li>
 <li><strong>브로드캐스트 주소</strong>
 <ul>
+<li><code>x.x.x.255</code></li>
 <li>호스트 ID가 <code>255</code>인 주소이다.</li>
 <li>네트워크에 있는 컴퓨터나 장비 모두에게 한 번에 데이터를 전송하는 데 사용되는 전용 IP 주소이다.</li>
 </ul>
@@ -535,26 +565,24 @@ if (!doNotTrack) {
 <li><strong>서브넷팅(subneting)</strong>
 <ul>
 <li>대규모 네트워크를 작은 네트워크로 분할하는 것이다.</li>
-<li>분할된 네트워크를 <strong>서브넷(subnet)</strong> 이라고 한다.</li>
-<li>원래 호스트 ID로 사용하던 비트를 서브넷 ID로 바꾼다.</li>
+<li>이렇게 하면 더 많은 네트워크를 만들 수 있어서. IP 주소를 더 효과적으로 활용할 수 있다.</li>
+<li>분할된 네트워크를 서브넷(subnet) 이라고 한다.</li>
 </ul>
 </li>
-</ul>
-<br />
+<li>서브넷팅 방법
 <ul>
-<li>
-<p><strong>서브넷 마스크(subnet mask)</strong></p>
-<ul>
-<li>네트워크 ID와 호스트 ID를 식별하기 위한 값이다.</li>
+<li><u>기존의 호스트 ID로 사용하던 비트를 서브넷 ID로 바꾼다.</u></li>
+<li>따라서, 서브넷 ID의 비트수를 1씩 증가시키면 할당할 수 있는 네트워크 수가 2배씩 증가하고 호스트 수는 2배씩 감소한다.</li>
 </ul>
 </li>
-<li>
-<p>프리픽스(prefix) 표기법으로 나타낼 수도 있다.</p>
+<li>IP 주소를 서브넷팅하면 어디까지가 네트워크 ID이고, 어디부터가 호스트 ID인지 판단하기 어려워진다. 이럴 때 서브넷 마스크를 사용한다.</li>
+<li><strong>서브넷 마스크(subnet mask)</strong>
 <ul>
-<li>서브넷 마스크를 <code>/비트수</code>로 나타낸 것이다.</li>
+<li>네트워크 ID와 호스트 ID를 식별하기 위한 값으로, 네트워크 부분만 나타나게 한다.</li>
+<li><code>/비트수</code>로 표기할 수도 있다. (프리픽스 표기법: prefix)</li>
 </ul>
 </li>
-</ul>
+<li>각 클래스 별 기본 서브넷 마스크 (D, E클래스는 사용하지 않음)
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -581,8 +609,14 @@ if (!doNotTrack) {
 </tr>
 </tbody>
 </table></div>
+</li>
+</ul>
 <br />
-<p><img src="/post/network/images/05-03-subnetting.jpeg"
+<ul>
+<li>예시 : B 클래스에서 6 비트를 서브넷 ID로 사용한 경우</li>
+<li>서브넷 마스크는 <code>255.255.252.0</code>이고,</li>
+<li>프리픽스 표기법으로 하면 총 22비트가 네트워크를 나타내므로 <code>/22</code>가 된다. <br />
+<img src="/post/network/images/05-03-subnetting.jpeg"
 	
 	
 	
@@ -593,30 +627,25 @@ if (!doNotTrack) {
 	
 >
 <a class="link" href="http://egloos.zum.com/gt20051919/v/5002427"  target="_blank" rel="noopener"
-    >Image Source</a></p>
-<ul>
-<li>위와 같은 경우 서브넷 마스크는 <code>255.255.252.0</code>이고, 프리픽스 표기법으로 하면 <code>/22</code>이겠다.</li>
+    >Image Source</a></li>
 </ul>
 <p><br /><br /></p>
 <h2 id="라우터의-구조">라우터의 구조</h2>
 <ul>
-<li>라우터는 스위치, 허브와 달리 <strong>네트워크를 분리</strong>할 수 있다.</li>
-</ul>
-<br />
+<li>스위치, 허브와 달리 라우터는 <u>네트워크를 분리</u>할 수 있다.</li>
+<li>그렇다면 분리된 네트워크끼리는 어떻게 데이터를 전송할 수 있을까?
 <ul>
-<li>그렇다면 분리된 네트워크 끼리는 어떻게 데이터를 전송할 수 있을까?
-<ul>
-<li>라우터의 IP 주소인 <strong>기본 게이터웨이(default gateway)</strong> 를 설정한다. 이렇게 네트워크의 출입구를 지정하고 라우터로 일단 데이터를 전송한다.</li>
-<li>그러면 라우터가 라우팅을 한다. 즉, 현재 네트워크에서 다른 네트워크로 가는 최적의 경로를 찾아서 데이터를 전송한다.</li>
+<li>라우터의 IP 주소인 <strong>기본 게이트웨이(default gateway)</strong> 를 설정해서 네트워크의 출입구를 지정한다.</li>
+<li>그런다음 라우터로 일단 데이터를 전송한다.</li>
+<li>전송되면 라우터가 라우팅을 해서(현재 네트워크에서 다른 네트워크로 가는 최적의 경로를 찾아서) 데이터를 전송한다.</li>
 <li>경로 정보는 라우팅 테이블에 저장되어 있는데, 여기에 저장된 경로를 바탕으로 라우팅을 한다.</li>
-<li>라우터 간에 경로 정보를 교환하기 위한 프로토콜을 라우팅 프로토콜이라고 하며, 여기에는 RIP, OSPF, BGP 등이 있다.</li>
 </ul>
 </li>
 </ul>
 <br />
 <ul>
-<li>
-<p>정적 라우팅</p>
+<li>라우팅 테이블에 등록하는 방법</li>
+<li>정적 라우팅
 <ul>
 <li>관리자가 미리 라우팅 테이블에 경로를 수동으로 추가하는 방법이다.</li>
 <li>소규모 네트워크에서 사용된다.</li>
@@ -624,11 +653,16 @@ if (!doNotTrack) {
 <li>하지만, 동적으로 변영되지 않으므로, 장애가 발생하면 다른 경로로 우회할 수 없어서 관리자가 설정을 하나하나 변경해야 한다.</li>
 </ul>
 </li>
-<li>
-<p>동적 라우팅</p>
+<li>동적 라우팅
 <ul>
 <li>네트워크 변경을 자동으로 감지하여 라우팅 테이블을 업데이트하거나, 네트워크 장애가 발생했을 때 라우터끼지 정보를 교환해서 최적의 경로로 전환한다.</li>
 <li>대규모 네트워크에서 사용된다.</li>
+</ul>
+</li>
+<li>라우팅 프로토콜
+<ul>
+<li>라우터 간에 경로 정보를 교환하기 위한 프로토콜이다.</li>
+<li>RIP, OSPF, BGP 등이 있다.</li>
 </ul>
 </li>
 </ul>

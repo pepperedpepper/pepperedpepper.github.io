@@ -2,7 +2,7 @@
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
-데이터 링크 계층의 역할과 이더넷 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다. 충돌(collision) 컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다. 충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 CSMA/CD 라고 한다. 하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다.'>
+데이터 링크 계층의 역할과 이더넷 데이터 링크 계층 랜에서 네트워크 기기 간에 신호를 전송하고, 물리주소를 결정하는 계층이다. 신호를 전송하기 위해 가장 많이 사용되는 규칙이 이더넷이다. 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 허브와 달리, 데이터에 목적지 정보를 추가해서 목적지 이외의 컴퓨터는 데이터를 받더라도 무시하게 되어 있다. 이더넷은 충돌을 방지하기 위해 여러 컴퓨터가 동시에 데이터를 전송하면 시점을 늦춘다.'>
 <title>[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/network-04/'>
@@ -10,13 +10,13 @@
 <link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기'>
 <meta property='og:description' content='모두의 네트워크 책을 읽고 공부한 노트입니다.
-데이터 링크 계층의 역할과 이더넷 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다. 충돌(collision) 컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다. 충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 CSMA/CD 라고 한다. 하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다.'>
+데이터 링크 계층의 역할과 이더넷 데이터 링크 계층 랜에서 네트워크 기기 간에 신호를 전송하고, 물리주소를 결정하는 계층이다. 신호를 전송하기 위해 가장 많이 사용되는 규칙이 이더넷이다. 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 허브와 달리, 데이터에 목적지 정보를 추가해서 목적지 이외의 컴퓨터는 데이터를 받더라도 무시하게 되어 있다. 이더넷은 충돌을 방지하기 위해 여러 컴퓨터가 동시에 데이터를 전송하면 시점을 늦춘다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/network-04/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Network' /><meta property='article:published_time' content='2022-02-24T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-02-24T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Network] Chapter 4. 데이터 링크 계층 : LAN에서 데이터 전송하기">
 <meta name="twitter:description" content="모두의 네트워크 책을 읽고 공부한 노트입니다.
-데이터 링크 계층의 역할과 이더넷 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다. 충돌(collision) 컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다. 충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 CSMA/CD 라고 한다. 하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다.">
+데이터 링크 계층의 역할과 이더넷 데이터 링크 계층 랜에서 네트워크 기기 간에 신호를 전송하고, 물리주소를 결정하는 계층이다. 신호를 전송하기 위해 가장 많이 사용되는 규칙이 이더넷이다. 이더넷(Ethernet) 같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다. 허브와 달리, 데이터에 목적지 정보를 추가해서 목적지 이외의 컴퓨터는 데이터를 받더라도 무시하게 되어 있다. 이더넷은 충돌을 방지하기 위해 여러 컴퓨터가 동시에 데이터를 전송하면 시점을 늦춘다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -394,18 +394,43 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="데이터-링크-계층의-역할과-이더넷">데이터 링크 계층의 역할과 이더넷</h2>
 <ul>
+<li><strong>데이터 링크 계층</strong>
+<ul>
+<li><mark style="background-color: lightblue">랜에서 네트워크 기기 간에 신호를 전송</mark>하고, <mark style="background-color: lightblue">물리주소를 결정</mark>하는 계층이다.</li>
+<li>신호를 전송하기 위해 가장 많이 사용되는 규칙이 이더넷이다.</li>
+</ul>
+</li>
 <li><strong>이더넷(Ethernet)</strong>
 <ul>
 <li>같은 네트워크 안에서 컴퓨터 및 기타 장치를 네트워크에 연결하기 위해 개발된 통신 표준이다.</li>
-<li>데이터 링크 계층에서는 이더넷 규칙을 기반으로 데이터의 전송을 담당한다.</li>
+<li>허브와 달리, 데이터에 <u>목적지 정보</u>를 추가해서 목적지 이외의 컴퓨터는 데이터를 받더라도 무시하게 되어 있다.</li>
+<li>이더넷은 충돌을 방지하기 위해 여러 컴퓨터가 동시에 데이터를 전송하면 시점을 늦춘다. 이것을 CSMA/CD 라고 한다.
+<ul>
+<li>하지만 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>충돌(collision)</strong>
 <ul>
 <li>컴퓨터 여러 대가 동시에 데이터를 보내서 데이터들이 서로 부딪히는 것이다.</li>
-<li>충돌을 방지하기 위해 이더넷은 여러 컴퓨터가 동시에 데이터를 전송하면, 시점을 늦춰서 충돌을 방지한다. 이것을 <strong>CSMA/CD</strong> 라고 한다.
+</ul>
+</li>
+<li><strong>CSMA/CD</strong>
 <ul>
-<li>하지만 이것은 지금은 효율이 좋지 않아서 사용하지 않고, 스위치(switch)를 사용한다.</li>
+<li>Carrier Sense (CS)
+<ul>
+<li>데이터를 보내려고 하는 컴퓨터가 케이블에 신호가 흐르고 있는지 아닌지를 확인한다는 규칙이다.</li>
+</ul>
+</li>
+<li>Multiple Acess (MA)
+<ul>
+<li>케이블에 데이터가 흐르고 있지 않다면 데이터를 보내도 좋다는 규칙이다.</li>
+</ul>
+</li>
+<li>with Collision Detection (CD)
+<ul>
+<li>충돌이 발생하고 있는지를 확인한다는 규칙이다.</li>
 </ul>
 </li>
 </ul>
@@ -414,40 +439,83 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="mac-주소의-구조">MAC 주소의 구조</h2>
 <ul>
-<li><strong>MAC(Medium Access Control) 주소</strong>
+<li>데이터 링크 계층에서는 <mark style="background-color: lightblue"><strong>이더넷 헤더와 트레일러을 붙인다.</strong></mark>
 <ul>
-<li>랜 카드에 부여된 48bit의 숫자로 물리 주소라고도 부르며, 전 세계에서 유일한 번호이다.</li>
-<li>앞쪽 24bit는 랜 카드를 만든 제조사의 번호고, 뒤쪽 24bit는 제조사가 랜 카드에 붙인 일렬번호이다.</li>
+<li>이 두 가지가 추가된 데이터를 <mark style="background-color: lightblue"><strong>프레임</strong></mark>이라고 한다.</li>
 </ul>
 </li>
+<li><strong>이더넷 헤더(Ethernet Header)</strong> (총 14 bytes)
+<ul>
+<li>6 bytes
+<ul>
+<li>목적지의 MAC 주소</li>
 </ul>
-<br />
+</li>
+<li>6 bytes
 <ul>
-<li><strong>이더넷 헤더(Ethernet Header)</strong> 의 구성(총 14 bytes)
+<li>출발지의 MAC 주소</li>
+</ul>
+</li>
+<li>2 bytes
 <ul>
-<li>목적지의 MAC 주소(6 bytes)</li>
-<li>출발지의 MAC 주소(6 bytes)</li>
-<li>유형(2 bytes)
-<ul>
-<li>이더넷으로 전송되는 상위 계층 프로토콜 종류를 식별하는 16진수 번호이다.</li>
+<li>유형 (상위 계층 프로토콜 종류를 식별하는 16진수 번호)</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><strong>트레일러(Trailer)</strong>
 <ul>
-<li>FCS(Frame Check Sequence)라고도 하며, 데이터 전송 도중에 오류가 발생하는지 확인하는 용도로 사용한다.</li>
+<li>FCS(Frame Check Sequence)라고도 한다.</li>
+<li>데이터 전송 도중에 오류가 발생하는지 확인하는 용도로 사용한다.</li>
+</ul>
+</li>
+<li><strong>MAC(Medium Access Control) 주소</strong>
+<ul>
+<li>이더넷의 물리적인 주소로써, <u>네트워크에서 기기를 구분</u>하기 위해 사용하는 주소이다.</li>
+<li>랜 카드에 48bit의 숫자가 부여되어 있다.</li>
+<li>물리 주소라고도 부르며, 전 세계에서 유일한 번호이다.
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>위치</th>
+<th>의미</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>앞쪽 24bit</td>
+<td>랜 카드를 만든 제조사의 번호</td>
+</tr>
+<tr>
+<td>뒤쪽 24bit</td>
+<td>제조사가 랜 카드에 붙인 일렬번호</td>
+</tr>
+</tbody>
+</table></div>
+</li>
 </ul>
 </li>
 </ul>
 <br />
 <ul>
-<li>데이터 링크 계층에서는 <strong>이더넷 헤더</strong>와 <strong>트레일러</strong>을 붙여서 물리 계층으로 보내는 캡슐화가 일어난다.
+<li>보내는 측의 컴퓨터에서
 <ul>
-<li>이 두 가지가 추가된 데이터를 <strong>프레임</strong>이라고 한다.</li>
+<li>데이터 링크 계층에서 이더넷 헤더와 트레일러를 추가해서 프레임을 만든다. (캡슐화)</li>
 <li>그러면 물리 계층에서 이 프레임 비트열을 전기 신호로 변환해서 네트워크를 통해 전송한다.</li>
-<li>목적지의 MAC 주소가 자신의 MAC 주소와 다르면 데이터를 파기한다.</li>
-<li>만약에 동시에 컴퓨터 1, 2가 동일한 목적지인 컴퓨터 3으로 데이터를 전송하면 충돌을 방지하기 위해서 CSMA/CD 방식을 사용한다.</li>
+<li>허브는 연결된 모든 포트로 데이터를 전송한다.</li>
+<li>이때 연결된 각각의 컴퓨터는 목적지의 MAC 주소가 자신의 MAC 주소와 다르면 데이터를 파기한다.</li>
+<li>만약에 동시에 여러 대의 컴퓨터가 동일한 목적지로 데이터를 전송하면?
+<ul>
+<li>충돌을 방지하기 위해서 CSMA/CD 방식을 사용한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>받는 측의 컴퓨터에서
+<ul>
+<li>목적지의 MAC 주소가 자신의 MAC 주소와 같다면 데이터를 수신한다.</li>
+<li>물리 계층에서 전기 신호를 비트열로 변환하고,</li>
+<li>데이터 링크 계층에서 이더넷 헤더와 트레일러를 분리한다. (역캡슐화)</li>
 </ul>
 </li>
 </ul>
@@ -468,29 +536,49 @@ if (!doNotTrack) {
 <ul>
 <li><mark style="background-color: lightblue"><strong>스위치(switch)</strong></mark>
 <ul>
-<li>허브와 마찬가지로 여러 기기를 하나로 연결하는 장치이다. 다른 점은 원하는 목적지에만 신호를 보낸다는 것이다.</li>
-<li>내부에 <strong>MAC 주소 테이블</strong>을 가지고 있어서, 포트 번호와 거기에 연결되어 있는 컴퓨터의 MAC 주소가 등록되어 있다.</li>
+<li>레이어 2 스위치, 스위칭 허브라고도 불린다.</li>
+<li>허브와 마찬가지로 여러 기기를 하나로 연결하는 장치이다. 다른 점은 <u>원하는 목적지에만 신호를 보낸다</u>는 것이다.</li>
+</ul>
+</li>
+<li>그러기 위해서, 내부에 <strong>MAC 주소 테이블</strong>을 가지고 있다.
+<ul>
+<li>스위치의 포트 번호, 스위의 포트에 연결되어 있는 컴퓨터의 MAC 주소가 등록되어 있는 데이터베이스이다.</li>
 <li>처음에는 아무것도 등록되어 있지 않지만, 프레임이 전송되면 등록된다. (MAC 주소 학습 기능)</li>
-<li>처음에는 아무것도 등록되어 있지 않아서, 컴퓨터 1에서 컴퓨터 3으로 데이터를 전송해도 모든 컴퓨터 1~5에 데이터가 전송된다. 이것을 <strong>플러딩(flooding)</strong> 이라고 한다.</li>
-<li>이 후 등록되면 목적지인 컴퓨터 3에만 데이터가 전송된다. 이처럼 MAC 주소를 기준으로 목적지를 선택하는 것을 <strong>MAC 주소 필터링</strong>이라고 한다.</li>
+<li>처음에는 아무것도 등록되어 있지 않아서, 특정 컴퓨터 목적지로 데이터를 전송해도 모든 컴퓨터에 데이터가 전송된다. 이것을 <strong>플러딩(flooding)</strong> 이라고 한다.</li>
+<li>이 후 등록되면 목적지인 컴퓨터에만 데이터가 전송된다. 이처럼 MAC 주소를 기준으로 목적지를 선택하는 것을 <strong>MAC 주소 필터링</strong>이라고 한다.</li>
 </ul>
 </li>
 </ul>
 <p><br /><br /></p>
 <h2 id="데이터가-케이블에서-충돌하지-않는-구조">데이터가 케이블에서 충돌하지 않는 구조</h2>
 <ul>
-<li><strong>반이중 통식 방식</strong>
+<li>통신 방식
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>방식</th>
+<th>설명</th>
+<th>동시 전송 시</th>
+<th>예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>반이중 통식 방식</strong></td>
+<td>데이터 송신과 수신을 번갈아가면서 통신하는 방식</td>
+<td>충돌 발생 O</td>
+<td>허브</td>
+</tr>
+<tr>
+<td><strong>전이중 통식 방식</strong></td>
+<td>데이터 송수신을 동시에 통신하는 방식</td>
+<td>충돌 발생 X</td>
+<td>스위치</td>
+</tr>
+</tbody>
+</table></div>
 <ul>
-<li>데이터 송신과 수신을 번갈아가면서 통신하는 방식</li>
-<li>동시에 데이터를 전송하면 충돌이 발생한다.</li>
-<li>허브</li>
-</ul>
-</li>
-<li><strong>전이중 통식 방식</strong>
-<ul>
-<li>데이터 송수신을 동시에 통신하는 방식</li>
-<li>동시에 데이터를 전송해도 충돌이 발생하지 않는다.</li>
-<li>스위치</li>
+<li>스위치는 전이중 통신 방식을 사용하기 때문에 네트워크 업체 대부분이 허브 대신 스위치를 사용한다.</li>
 </ul>
 </li>
 </ul>
@@ -508,10 +596,11 @@ if (!doNotTrack) {
 <ul>
 <li><strong>ARP(Address Resolution Protocol)</strong>
 <ul>
-<li>네트워크 계층과 데이터 링크 계층 주소 사이의 변환을 담당하는 프로토콜이다.</li>
-<li>목적지 컴퓨터의 <strong>IP주소를 이용해서 MAC 주소를 찾는다.</strong></li>
-<li>출발지 컴퓨터가 목적지 컴퓨터의 MAC 주소를 모르면, 네트워크에 브로드캐스트 하고(ARP 요청)</li>
-<li>지정된 IP주소를 갖은 컴퓨터는 MAC 주소를 응답으로 보낸다.(ARP 응답)</li>
+<li>네트워크 계층과 데이터 링크 계층 주소 사이의 변환을 담당한다.</li>
+<li><u>목적지 컴퓨터의 <strong>IP주소를 이용해서 MAC 주소를 찾기</strong></u>위한 프로토콜이다.</li>
+<li>출발지 컴퓨터는 목적지 컴퓨터의 MAC 주소를 프레임에 담아야 한다.</li>
+<li>이걸 모르면, 네트워크에 브로드캐스트 한다.(ARP 요청)</li>
+<li>그러면 지정된 IP주소를 갖은 컴퓨터는 MAC 주소를 응답으로 보낸다.(ARP 응답)</li>
 <li>출발지 컴퓨터는 얻은 MAC 주소와 IP 주소의 매핑 정보를 메모리에 보관한다. (ARP 테이블)</li>
 <li>일정 시간이 지나면 ARP 캐시를 삭제하고 다시 ARP 요청을 한다.</li>
 </ul>
@@ -520,11 +609,29 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="이더넷의-종류와-특징">이더넷의 종류와 특징</h2>
 <ul>
-<li>이더넷 규격 예시: <code>10BASE5</code>, <code>10BASE-T</code>
+<li>이더넷은 케이블 종류나 통신 속도에 따라 다양한 규격으로 분류된다.</li>
+<li>규격 예시: <code>10BASE5</code>, <code>10BASE-T</code>
 <ul>
-<li><code>10</code>은 Mbps 단위인 통신 속도이다.</li>
-<li><code>BASE</code>는 BASEBAND라는 전송 방식을 나타낸다.</li>
-<li><code>5</code>는 동축케이블의 경우 케이블의 최대 길이를 나타낸 것이며, <code>_T</code>는 UTP 케이블의 경우 그 종류를 나타낸다.</li>
+<li><code>10</code>
+<ul>
+<li>Mbps 단위인 통신 속도이다.</li>
+</ul>
+</li>
+<li><code>BASE</code>
+<ul>
+<li>BASEBAND라는 전송 방식을 나타낸다.</li>
+</ul>
+</li>
+<li><code>5</code>
+<ul>
+<li>동축케이블의 경우 케이블의 최대 길이를 나타낸 것이다.</li>
+</ul>
+</li>
+<li><code>_T</code>
+<ul>
+<li>UTP 케이블의 경우 그 종류를 나타낸다.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
