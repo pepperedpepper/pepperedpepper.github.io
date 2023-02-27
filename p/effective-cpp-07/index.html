@@ -7,7 +7,7 @@ Item 41: 템플릿 프로그래밍의 천릿길도 암시적 인터페이스와 
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/effective-cpp-07/'>
 
-<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+<link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Effective C&#43;&#43;] Chapter 7. 템플릿과 일반화 프로그래밍'>
 <meta property='og:description' content='이펙티브 C&#43;&#43; 책을 읽고 공부한 노트입니다.
 Item 41: 템플릿 프로그래밍의 천릿길도 암시적 인터페이스와 컴파일 타임 다형성부터 클래스와 템플릿은 모두 인터페이스와 다형성을 제공한다. 하지만 세부적인 차이점이 있다. 클래스의 인터페이스와 다형성 클래스의 경우, 인터페이스가 명시적(explicit interface) 이어서 함수의 시그니처(함수 이름, 매개변수 타입, 반환 타입 등)를 중심으로 구성되어 있다. 그리고 다형성은 런타임(runtime polimorphism) 에 가상 함수를 통해 나타난다. 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 class Widget { public: Widget(); virtual ~Widget(); virtual std::size_t size() const; virtual void normalize(); void swap(Widget&amp;amp; other); }; void doProcessing(Widget&amp;amp; w) // w는 Widget 타입이므로 Widget 인터페이스를 지원해야 한다.'>

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/design-pattern-20/'>
 
-<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+<link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 행동 패턴 8. 메멘토 (Memento)'>
 <meta property='og:description' content='메멘토 (Memento) 객체의 구현 세부 사항을 공개하지 않으면서(캡슐화), 해당 객체의 이전 상태를 저장하고 복원할 수 있게 해준다. 개념적인 예시 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 // Originator class Originator { // 상태 private string _state; public Originator(string state) { this.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/design-pattern-20/'>

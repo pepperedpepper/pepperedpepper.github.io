@@ -7,7 +7,7 @@ Item 26: 변수 정의는 늦출 수 있는 데까지 늦추는 근성을 발휘
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/effective-cpp-05/'>
 
-<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+<link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Effective C&#43;&#43;] Chapter 5. 구현'>
 <meta property='og:description' content='이펙티브 C&#43;&#43; 책을 읽고 공부한 노트입니다.
 Item 26: 변수 정의는 늦출 수 있는 데까지 늦추는 근성을 발휘하자 변수의 정의는 꼭 필요해지기 전까지 늦춘다. 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 std::string encryptPassword(const std::string&amp;amp; password) { using namespace std; // 이 변수는 string encrypted; // 여기서 에러가 발생하면 전혀 쓰이지 않고, 괜히 생성자와 소멸자만 더 불린다. if (password.length() &amp;lt; MinimumPasswordLength) throw logic_error(&amp;#34;Password is too short&amp;#34;); // 따라서 실제로 쓰일 때까지 늦춰서, 이곳에 선언하는 게 좋겠다.'>

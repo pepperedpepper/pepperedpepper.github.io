@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/design-pattern-06/'>
 
-<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+<link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 구조 패턴 1. 데코레이터 (Decorator)'>
 <meta property='og:description' content='데코레이터 (Decorator) 동적으로 런타임에 객체에 추가적인 책임을 부여한다. 특징 기능을 확장하기 위한 서브 클래싱의 대안이다. 정적으로 기능을 늘릴 수 있는 상속과 달리, 데코레이터 패턴은 런타임에 객체의 행동이 확장되게 돕는다. 문제점 : 무지막지하게 늘어나는 서브 클래스 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 public abstract class Beverage { public abstract string GetDesc(); } public class Espresso : Beverage { public override string GetDesc() { return &amp;#34;샷 추가&amp;#34;; } } public class ChocolateCoffee : Beverage { public override string GetDesc() { return &amp;#34;초코 파우더 추가&amp;#34;; } } public class WhippedCreamChocolateCoffee : Beverage { public override string GetDesc() { return &amp;#34;휘핑과 초코파우더 추가&amp;#34;; } } // .'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/design-pattern-06/'>

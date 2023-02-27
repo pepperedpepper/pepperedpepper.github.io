@@ -7,7 +7,7 @@ Item 49: new 처리자의 동작 원리를 제대로 이해하자 new 처리자(
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/effective-cpp-08/'>
 
-<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+<link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Effective C&#43;&#43;] Chapter 8. new와 delete를 내 맘대로'>
 <meta property='og:description' content='이펙티브 C&#43;&#43; 책을 읽고 공부한 노트입니다.
 Item 49: new 처리자의 동작 원리를 제대로 이해하자 new 처리자(new handler) new로 메모리 할당이 제대로 되지 못하면 호출되는 에러 처리 함수이다. 사용자가 직접 지정할 수 있으며, 표준 라이브러리에 있는 set_new_handler 함수를 이용하면 된다. 1 2 3 4 5 6 7 8 9 10 11 12 // &amp;lt;new&amp;gt;에 선언되어 있는 함수들 namespace std { typedef void (*new_handler)(); // 매개변수와 반환값이 없는 함수에 대한 포인터이다. new_handler set_new_handler(new_handler p) throw(); // 매개변수 : 새롭게 설치할 new 처리자 // 반환값 : 새롭게 설치하기 전까지 사용하던 new 처리자 // throw() : 이 함수는 어떤 예외도 던지지 않을 것이라는 뜻이다.'>

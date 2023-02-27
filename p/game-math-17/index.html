@@ -7,7 +7,7 @@
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/game-math-17/'>
 
-<link rel="stylesheet" href="/scss/style.min.981cd182abaa5539fdbb9c949bb7d51622f587e9a20cd55f89372726eb568263.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+<link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Game Math] Chapter 17. 캐릭터: 게임에 생기를 불어넣는 기술'>
 <meta property='og:description' content='이득우의 게임 수학 책을 읽고 공부한 노트입니다.
 스켈레탈 애니메이션 스켈레탈 애니메이션(Skeletal animation) 가상의 뼈대인 본(Bone) 을 캐릭터 메시에 심은 후, 이 본의 움직임에 맞춰서 캐릭터 메시를 변형시켜 애니메이션을 구현하는 방식이다. 본의 정보를 메시에 추가하면, 메시는 본이 있는 메시(스킨드 메시: Skinned mesh) 와 본이 없는 메시로 나뉘게 된다. 본은 다음과 같은 정보들이 필요하다. (1) 본을 식별할 고유한 이름 정보 (2) 본의 트랜스폼 정보 (크기, 회전, 이동이 가능하므로, 트랜스폼이 필요하다) (3) 본의 처음 배치 정보 : 바인드 포즈(Bindpose) 1 2 3 4 5 6 7 8 9 10 11 12 13 14 enum class MeshType : UINT32 { Normal = 0, Skinned }; class Bone { private: std::size_t _Hash = 0; std::string _Name; Transform _Transform; Transform _Bindpose; }; 리깅(Rigging) 본과 정점을 연결하는 작업이다.'>
