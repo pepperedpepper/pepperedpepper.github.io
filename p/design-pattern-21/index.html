@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='커맨드 (Command) 클라이언트의 요구사항을 캡슐화해서 Command 객체로 만들어서, 이것을 실행하는 Invoker가 구체적인 요구사항을 모르도록 한다. 특징 Invoker가 Command를 몰라도 실행할 수 있다. 작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다. 요구사항을 큐에 저장하거나, 로그로 기록하거나, 작업을 취소시킬 수도 있다. 명칭 설명 비유 Invoker Command를 갖고서 요청을 시작한다. 웨이트리스 Receiver 실제 작업을 수행한다. 주방장 Command Receiver를 받아서 실행하는 Execute()가 있다. 주문서 개념적인 예시 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 // Command public interface Command { public string name { get; } public void Execute(); public void Undo(); } public class NoCommand : Command { public string name =&amp;gt; &amp;#34;NoCommand&amp;#34;; public NoCommand() { } public void Execute() { } public void Undo() { } } public class DoorCloseCommand : Command { public string name =&amp;gt; &amp;#34;DoorCloseCommand&amp;#34;; Door door; public DoorCloseCommand(Door door) { this.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='커맨드 패턴 메서드 호출을 실체화(객체화)한 것이다. 클라이언트의 요구사항을 객체로 만들어서 캡슐화한다. 이것을 실행하는 객체는 구체적인 요구사항을 모르고 실행한다. 특징 작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다. 요구사항을 큐에 저장하거나, 로그로 기록하거나, 작업을 취소시킬 수도 있다. 명칭 하는 일 비유 Invoker Command를 갖고서 요청을 시작한다. 웨이트리스 Command Receiver가 적절한 작업을 수행하도록 명령한다. 주문서 Receiver 실제 작업을 수행하는 액터이다. 주방장 게임에서의 예시 유저 입력을 받는 코드를 만들고 싶다. 1 2 3 4 5 6 7 8 void InputHandler::handleInput() { // 이렇게 하면 BUTTON_X는 무조건 jump()에만 연결된다.'>
 <title>[Design Pattern] 행동 패턴 8. 커맨드 (Command)</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/design-pattern-21/'>
 
 <link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 행동 패턴 8. 커맨드 (Command)'>
-<meta property='og:description' content='커맨드 (Command) 클라이언트의 요구사항을 캡슐화해서 Command 객체로 만들어서, 이것을 실행하는 Invoker가 구체적인 요구사항을 모르도록 한다. 특징 Invoker가 Command를 몰라도 실행할 수 있다. 작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다. 요구사항을 큐에 저장하거나, 로그로 기록하거나, 작업을 취소시킬 수도 있다. 명칭 설명 비유 Invoker Command를 갖고서 요청을 시작한다. 웨이트리스 Receiver 실제 작업을 수행한다. 주방장 Command Receiver를 받아서 실행하는 Execute()가 있다. 주문서 개념적인 예시 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 // Command public interface Command { public string name { get; } public void Execute(); public void Undo(); } public class NoCommand : Command { public string name =&amp;gt; &amp;#34;NoCommand&amp;#34;; public NoCommand() { } public void Execute() { } public void Undo() { } } public class DoorCloseCommand : Command { public string name =&amp;gt; &amp;#34;DoorCloseCommand&amp;#34;; Door door; public DoorCloseCommand(Door door) { this.'>
+<meta property='og:description' content='커맨드 패턴 메서드 호출을 실체화(객체화)한 것이다. 클라이언트의 요구사항을 객체로 만들어서 캡슐화한다. 이것을 실행하는 객체는 구체적인 요구사항을 모르고 실행한다. 특징 작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다. 요구사항을 큐에 저장하거나, 로그로 기록하거나, 작업을 취소시킬 수도 있다. 명칭 하는 일 비유 Invoker Command를 갖고서 요청을 시작한다. 웨이트리스 Command Receiver가 적절한 작업을 수행하도록 명령한다. 주문서 Receiver 실제 작업을 수행하는 액터이다. 주방장 게임에서의 예시 유저 입력을 받는 코드를 만들고 싶다. 1 2 3 4 5 6 7 8 void InputHandler::handleInput() { // 이렇게 하면 BUTTON_X는 무조건 jump()에만 연결된다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/design-pattern-21/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Design Pattern' /><meta property='article:published_time' content='2022-08-21T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-08-21T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Design Pattern] 행동 패턴 8. 커맨드 (Command)">
-<meta name="twitter:description" content="커맨드 (Command) 클라이언트의 요구사항을 캡슐화해서 Command 객체로 만들어서, 이것을 실행하는 Invoker가 구체적인 요구사항을 모르도록 한다. 특징 Invoker가 Command를 몰라도 실행할 수 있다. 작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다. 요구사항을 큐에 저장하거나, 로그로 기록하거나, 작업을 취소시킬 수도 있다. 명칭 설명 비유 Invoker Command를 갖고서 요청을 시작한다. 웨이트리스 Receiver 실제 작업을 수행한다. 주방장 Command Receiver를 받아서 실행하는 Execute()가 있다. 주문서 개념적인 예시 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 // Command public interface Command { public string name { get; } public void Execute(); public void Undo(); } public class NoCommand : Command { public string name =&amp;gt; &amp;#34;NoCommand&amp;#34;; public NoCommand() { } public void Execute() { } public void Undo() { } } public class DoorCloseCommand : Command { public string name =&amp;gt; &amp;#34;DoorCloseCommand&amp;#34;; Door door; public DoorCloseCommand(Door door) { this.">
+<meta name="twitter:description" content="커맨드 패턴 메서드 호출을 실체화(객체화)한 것이다. 클라이언트의 요구사항을 객체로 만들어서 캡슐화한다. 이것을 실행하는 객체는 구체적인 요구사항을 모르고 실행한다. 특징 작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다. 요구사항을 큐에 저장하거나, 로그로 기록하거나, 작업을 취소시킬 수도 있다. 명칭 하는 일 비유 Invoker Command를 갖고서 요청을 시작한다. 웨이트리스 Command Receiver가 적절한 작업을 수행하도록 명령한다. 주문서 Receiver 실제 작업을 수행하는 액터이다. 주방장 게임에서의 예시 유저 입력을 받는 코드를 만들고 싶다. 1 2 3 4 5 6 7 8 void InputHandler::handleInput() { // 이렇게 하면 BUTTON_X는 무조건 jump()에만 연결된다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -299,8 +299,12 @@ if (!doNotTrack) {
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#커맨드-command">커맨드 (Command)</a></li>
-    <li><a href="#개념적인-예시">개념적인 예시</a></li>
+    <li><a href="#커맨드-패턴">커맨드 패턴</a>
+      <ul>
+        <li><a href="#게임에서의-예시">게임에서의 예시</a></li>
+        <li><a href="#다른-예시들">다른 예시들</a></li>
+      </ul>
+    </li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav>
@@ -366,7 +370,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    5 minute read
+                    6 minute read
                 </time>
             </div>
         
@@ -383,7 +387,7 @@ if (!doNotTrack) {
     
     <hr>
 <p><br /><br /></p>
-<h2 id="커맨드-command">커맨드 (Command)</h2>
+<h2 id="커맨드-패턴">커맨드 패턴</h2>
 <p><img src="/post/design_pattern/images/21-command.png"
 	
 	
@@ -395,10 +399,15 @@ if (!doNotTrack) {
 	
 ></p>
 <ul>
-<li>클라이언트의 <strong>요구사항을 캡슐화</strong>해서 Command 객체로 만들어서, 이것을 실행하는 Invoker가 구체적인 요구사항을 모르도록 한다.</li>
+<li><strong>메서드 호출을 실체화(객체화)한 것</strong>이다.
+<ul>
+<li>클라이언트의 요구사항을 객체로 만들어서 캡슐화한다.</li>
+<li>이것을 실행하는 객체는 구체적인 요구사항을 모르고 실행한다.</li>
+</ul>
+</li>
 <li>특징
 <ul>
-<li>Invoker가 Command를 몰라도 실행할 수 있다. 작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다.</li>
+<li>작업을 호출하는 클래스와 작업을 수행하는 클래스를 분리했다.</li>
 <li>요구사항을 큐에 저장하거나, 로그로 기록하거나, 작업을 취소시킬 수도 있다.</li>
 </ul>
 </li>
@@ -407,7 +416,7 @@ if (!doNotTrack) {
 <thead>
 <tr>
 <th>명칭</th>
-<th>설명</th>
+<th>하는 일</th>
 <th>비유</th>
 </tr>
 </thead>
@@ -418,19 +427,196 @@ if (!doNotTrack) {
 <td>웨이트리스</td>
 </tr>
 <tr>
-<td>Receiver</td>
-<td>실제 작업을 수행한다.</td>
-<td>주방장</td>
+<td>Command</td>
+<td>Receiver가 적절한 작업을 수행하도록 명령한다.</td>
+<td>주문서</td>
 </tr>
 <tr>
-<td>Command</td>
-<td>Receiver를 받아서 실행하는 <code>Execute()</code>가 있다.</td>
-<td>주문서</td>
+<td>Receiver</td>
+<td>실제 작업을 수행하는 액터이다.</td>
+<td>주방장</td>
 </tr>
 </tbody>
 </table></div>
-<p><br /><br /></p>
-<h2 id="개념적인-예시">개념적인 예시</h2>
+<br />
+<h3 id="게임에서의-예시">게임에서의 예시</h3>
+<ul>
+<li>유저 입력을 받는 코드를 만들고 싶다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">InputHandler</span><span class="o">::</span><span class="n">handleInput</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이렇게 하면 BUTTON_X는 무조건 jump()에만 연결된다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 입력 키 변경을 자유롭게 하려면 어떻게 해야할까?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="n">isPressed</span><span class="p">(</span><span class="n">BUTTON_X</span><span class="p">))</span> <span class="n">jump</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// ...여러가지 입력 키와 동작들...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>커맨드 객체를 만든다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// jump()를 교체 가능한 객체로 만들어버리자. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Command</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="o">~</span><span class="n">Command</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">JumpCommand</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Command</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">execute</span><span class="p">()</span> <span class="p">{</span> <span class="n">jump</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">InputHandler</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Command</span><span class="o">*</span> <span class="n">buttonX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span> 
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">handleInput</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이렇게 하면 BUTTON_X를 눌렀을 때 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// buttonX에 연결된 동작이 수행된다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">isPressed</span><span class="p">(</span><span class="n">BUTTON_X</span><span class="p">))</span> <span class="n">buttonX</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>만약에 플레이어뿐만 아니라 다른 액터도 점프하게 하고 싶다면?</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Command</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="o">~</span><span class="n">Command</span><span class="p">()</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">execute</span><span class="p">(</span><span class="n">GameActor</span><span class="o">&amp;</span> <span class="n">actor</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">JumpCommand</span> <span class="o">:</span> <span class="k">public</span> <span class="n">Command</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 매개변수로 액터를 받는다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 그리고 그 액터가 점프하도록 한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">virtual</span> <span class="kt">void</span> <span class="n">execute</span><span class="p">(</span><span class="n">GameActor</span><span class="o">&amp;</span> <span class="n">actor</span><span class="p">)</span> <span class="p">{</span> <span class="n">actor</span><span class="p">.</span><span class="n">jump</span><span class="p">();</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">InputHandler</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Command</span><span class="o">*</span> <span class="n">buttonX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">Command</span><span class="o">*</span> <span class="n">handleInput</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 어떤 액터가 실행되어야 할지 모르므로, 함수 호출 시점을 지연하고 넘긴다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">isPressed</span><span class="p">(</span><span class="n">BUTTON_X</span><span class="p">))</span> <span class="n">buttonX</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">executeCommand</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">InputHandler</span> <span class="n">inputHandler</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GameActor</span> <span class="n">actor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 액터가 명령을 실행한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Command</span><span class="o">*</span> <span class="n">command</span> <span class="o">=</span> <span class="n">inputHandler</span><span class="p">.</span><span class="n">handleInput</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">command</span><span class="p">)</span> <span class="n">command</span><span class="o">-&gt;</span><span class="n">execute</span><span class="p">(</span><span class="n">actor</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<h3 id="다른-예시들">다른 예시들</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">  1
@@ -577,161 +763,151 @@ if (!doNotTrack) {
 </span><span class="lnt">142
 </span><span class="lnt">143
 </span><span class="lnt">144
-</span><span class="lnt">145
-</span><span class="lnt">146
-</span><span class="lnt">147
-</span><span class="lnt">148
-</span><span class="lnt">149
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="c1">// Command</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">interface</span> <span class="nc">Command</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">NoCommand</span> <span class="p">:</span> <span class="n">Command</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">=&gt;</span> <span class="s">&#34;NoCommand&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">NoCommand</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">=&gt;</span> <span class="s">&#34;NoCommand&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">NoCommand</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">DoorCloseCommand</span> <span class="p">:</span> <span class="n">Command</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">=&gt;</span> <span class="s">&#34;DoorCloseCommand&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">=&gt;</span> <span class="s">&#34;DoorCloseCommand&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">Door</span> <span class="n">door</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Door</span> <span class="n">door</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">DoorCloseCommand</span><span class="p">(</span><span class="n">Door</span> <span class="n">door</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">door</span> <span class="p">=</span> <span class="n">door</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">DoorCloseCommand</span><span class="p">(</span><span class="n">Door</span> <span class="n">door</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">door</span> <span class="p">=</span> <span class="n">door</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">door</span><span class="p">.</span><span class="n">Down</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">door</span><span class="p">.</span><span class="n">Up</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">door</span><span class="p">.</span><span class="n">Down</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">door</span><span class="p">.</span><span class="n">Up</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">DoorOpenCommand</span> <span class="p">:</span> <span class="n">Command</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">=&gt;</span> <span class="k">return</span> <span class="s">&#34;DoorOpenCommand&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="kt">string</span> <span class="n">name</span> <span class="p">=&gt;</span> <span class="k">return</span> <span class="s">&#34;DoorOpenCommand&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">Door</span> <span class="n">door</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Door</span> <span class="n">door</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">DoorOpenCommand</span><span class="p">(</span><span class="n">Door</span> <span class="n">door</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">door</span> <span class="p">=</span> <span class="n">door</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">DoorOpenCommand</span><span class="p">(</span><span class="n">Door</span> <span class="n">door</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">door</span> <span class="p">=</span> <span class="n">door</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">door</span><span class="p">.</span><span class="n">Up</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">door</span><span class="p">.</span><span class="n">Down</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">door</span><span class="p">.</span><span class="n">Up</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Undo</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">door</span><span class="p">.</span><span class="n">Down</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Receiver</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Door</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="kt">string</span> <span class="n">name</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">Door</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>   
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">Door</span><span class="p">(</span><span class="kt">string</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="n">name</span><span class="p">;</span>   
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Up</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name</span> <span class="p">+</span> <span class="s">&#34; Door up&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Down</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name</span> <span class="p">+</span> <span class="s">&#34; Door Down&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Up</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name</span> <span class="p">+</span> <span class="s">&#34; Door up&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Down</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">name</span> <span class="p">+</span> <span class="s">&#34; Door Down&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// Invoker</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">RemoteControl</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Command</span><span class="p">[]</span> <span class="n">onCommands</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Command</span><span class="p">[]</span> <span class="n">offCommands</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Command</span> <span class="n">unDoCommand</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="n">Command</span><span class="p">[]</span> <span class="n">onCommands</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="n">Command</span><span class="p">[]</span> <span class="n">offCommands</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="n">Command</span> <span class="n">unDoCommand</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">RemoteControl</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">RemoteControl</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">onCommands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Command</span><span class="p">[</span><span class="m">7</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">offCommands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Command</span><span class="p">[</span><span class="m">7</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">onCommands</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">onCommands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Command</span><span class="p">[</span><span class="m">7</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">        <span class="n">offCommands</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Command</span><span class="p">[</span><span class="m">7</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">=</span> <span class="m">0</span><span class="p">;</span> <span class="n">i</span> <span class="p">&lt;</span> <span class="n">onCommands</span><span class="p">.</span><span class="n">Length</span><span class="p">;</span> <span class="n">i</span><span class="p">++)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">onCommands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NoCommand</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="n">offCommands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NoCommand</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">unDoCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NoCommand</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="n">onCommands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NoCommand</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      <span class="n">offCommands</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NoCommand</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">SetCommand</span><span class="p">(</span><span class="kt">int</span> <span class="n">slot</span><span class="p">,</span> <span class="n">Command</span> <span class="n">onCommand</span><span class="p">,</span> <span class="n">Command</span> <span class="n">offCommand</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">onCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="p">=</span> <span class="n">onCommand</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="n">offCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="p">=</span> <span class="n">offCommand</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unDoCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NoCommand</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">OnButtonPressed</span><span class="p">(</span><span class="kt">int</span> <span class="n">slot</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">onCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">].</span><span class="n">Execute</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">unDoCommand</span> <span class="p">=</span> <span class="n">offCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">SetCommand</span><span class="p">(</span><span class="kt">int</span> <span class="n">slot</span><span class="p">,</span> <span class="n">Command</span> <span class="n">onCommand</span><span class="p">,</span> <span class="n">Command</span> <span class="n">offCommand</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">onCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="p">=</span> <span class="n">onCommand</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">offCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">]</span> <span class="p">=</span> <span class="n">offCommand</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">OffButtonPressed</span><span class="p">(</span><span class="kt">int</span> <span class="n">slot</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">offCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">].</span><span class="n">Execute</span><span class="p">();</span> 
-</span></span><span class="line"><span class="cl">        <span class="n">unDoCommand</span> <span class="p">=</span> <span class="n">onCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">];</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">OnButtonPressed</span><span class="p">(</span><span class="kt">int</span> <span class="n">slot</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">onCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">].</span><span class="n">Execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unDoCommand</span> <span class="p">=</span> <span class="n">offCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">UndoButtonPressed</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">unDoCommand</span><span class="p">.</span><span class="n">Undo</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">OffButtonPressed</span><span class="p">(</span><span class="kt">int</span> <span class="n">slot</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">offCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">].</span><span class="n">Execute</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">unDoCommand</span> <span class="p">=</span> <span class="n">onCommands</span><span class="p">[</span><span class="n">slot</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">UndoButtonPressed</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unDoCommand</span><span class="p">.</span><span class="n">Undo</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Program</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// 웨이트리스 </span>
-</span></span><span class="line"><span class="cl">        <span class="n">RemoteControl</span> <span class="n">remoteControl</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RemoteControl</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c1">// 주방장</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Door</span> <span class="n">door</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Door</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">RemoteControl</span> <span class="n">remoteControl</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RemoteControl</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Door</span> <span class="n">door</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Door</span><span class="p">(</span><span class="s">&#34;&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Command가 Receiver를 설정한다. </span>
+</span></span><span class="line"><span class="cl">    <span class="n">DoorOpenCommand</span> <span class="n">doorOpen</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DoorOpenCommand</span><span class="p">(</span><span class="n">door</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DoorCloseCommand</span> <span class="n">doorClose</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DoorCloseCommand</span><span class="p">(</span><span class="n">door</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 주문서 </span>
-</span></span><span class="line"><span class="cl">        <span class="n">DoorOpenCommand</span> <span class="n">doorOpen</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DoorOpenCommand</span><span class="p">(</span><span class="n">door</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="n">DoorCloseCommand</span> <span class="n">doorClose</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DoorCloseCommand</span><span class="p">(</span><span class="n">door</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 웨이트리스가 주문서를 받는다. </span>
-</span></span><span class="line"><span class="cl">        <span class="n">remoteControl</span><span class="p">.</span><span class="n">SetCommand</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">doorOpen</span><span class="p">,</span> <span class="n">doorClose</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="c1">// 주문서 실행 </span>
-</span></span><span class="line"><span class="cl">        <span class="n">remoteControl</span><span class="p">.</span><span class="n">OnButtonPressed</span><span class="p">(</span><span class="m">0</span><span class="p">);</span> <span class="c1">// Door up</span>
-</span></span><span class="line"><span class="cl">        <span class="n">remoteControl</span><span class="p">.</span><span class="n">UndoButtonPressed</span><span class="p">();</span> <span class="c1">// Door down</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// ...</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Invoker가 Command를 설정한다.  </span>
+</span></span><span class="line"><span class="cl">    <span class="n">remoteControl</span><span class="p">.</span><span class="n">SetCommand</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">doorOpen</span><span class="p">,</span> <span class="n">doorClose</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Command 실행 </span>
+</span></span><span class="line"><span class="cl">    <span class="n">remoteControl</span><span class="p">.</span><span class="n">OnButtonPressed</span><span class="p">(</span><span class="m">0</span><span class="p">);</span> <span class="c1">// Door up</span>
+</span></span><span class="line"><span class="cl">    <span class="n">remoteControl</span><span class="p">.</span><span class="n">UndoButtonPressed</span><span class="p">();</span> <span class="c1">// Door down</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -856,122 +1032,124 @@ if (!doNotTrack) {
 </span><span class="lnt">113
 </span><span class="lnt">114
 </span><span class="lnt">115
+</span><span class="lnt">116
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="c1">// 커맨드 : 주문서</span>
+<pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="c1">// Command</span>
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">interface</span> <span class="nc">ICommand</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="k">void</span> <span class="n">Execute</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 간단한 커맨드</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 간단한 Command</span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">SimpleCommand</span> <span class="p">:</span> <span class="n">ICommand</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">string</span> <span class="n">_payload</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="kt">string</span> <span class="n">_payload</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">SimpleCommand</span><span class="p">(</span><span class="kt">string</span> <span class="n">payload</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_payload</span> <span class="p">=</span> <span class="n">payload</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">SimpleCommand</span><span class="p">(</span><span class="kt">string</span> <span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_payload</span> <span class="p">=</span> <span class="n">payload</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;SimpleCommand: ({this._payload})&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;SimpleCommand: ({this._payload})&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 리시버를 담은 커맨드</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Receiver를 담은 Command</span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ComplexCommand</span> <span class="p">:</span> <span class="n">ICommand</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">Receiver</span> <span class="n">_receiver</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="n">Receiver</span> <span class="n">_receiver</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 리시버의 메서드를 호출하기 위해 필요한 필드들</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">string</span> <span class="n">_a</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="kt">string</span> <span class="n">_b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Receiver의 메서드를 호출하기 위해 필요한 필드들</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="kt">string</span> <span class="n">_a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="kt">string</span> <span class="n">_b</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 리시버를 받는다. </span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="n">ComplexCommand</span><span class="p">(</span><span class="n">Receiver</span> <span class="n">receiver</span><span class="p">,</span> <span class="kt">string</span> <span class="n">a</span><span class="p">,</span> <span class="kt">string</span> <span class="n">b</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_receiver</span> <span class="p">=</span> <span class="n">receiver</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_a</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_b</span> <span class="p">=</span> <span class="n">b</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Receiver를 받는다. </span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="n">ComplexCommand</span><span class="p">(</span><span class="n">Receiver</span> <span class="n">receiver</span><span class="p">,</span> <span class="kt">string</span> <span class="n">a</span><span class="p">,</span> <span class="kt">string</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_receiver</span> <span class="p">=</span> <span class="n">receiver</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_a</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_b</span> <span class="p">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 리시버의 메서드를 호출할 수 있다.</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;ComplexCommand: 리시버 호출로 동작한다.&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_receiver</span><span class="p">.</span><span class="n">DoSomething</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_a</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_receiver</span><span class="p">.</span><span class="n">DoSomethingElse</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_b</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Receiver의 메서드를 호출할 수 있다.</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">Execute</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;ComplexCommand: 리시버 호출로 동작한다.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_receiver</span><span class="p">.</span><span class="n">DoSomething</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_receiver</span><span class="p">.</span><span class="n">DoSomethingElse</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 리시버 : 주방장</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Receiver</span>
 </span></span><span class="line"><span class="cl"><span class="c1">// 중요한 비즈니스 로직을 갖고 있어서, 모든 요청사항들을 다룰 수 있다. </span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Receiver</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">DoSomething</span><span class="p">(</span><span class="kt">string</span> <span class="n">a</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Receiver: Working on ({a}.)&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">DoSomething</span><span class="p">(</span><span class="kt">string</span> <span class="n">a</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Receiver: Working on ({a}.)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">DoSomethingElse</span><span class="p">(</span><span class="kt">string</span> <span class="n">b</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Receiver: Also working on ({b}.)&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">DoSomethingElse</span><span class="p">(</span><span class="kt">string</span> <span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Receiver: Also working on ({b}.)&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// 인보커 : 웨이트리스 </span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Invoker </span>
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Invoker</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">ICommand</span> <span class="n">_onStart</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="n">ICommand</span> <span class="n">_onFinish</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="n">ICommand</span> <span class="n">_onStart</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="n">ICommand</span> <span class="n">_onFinish</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 커맨드를 받는다. </span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">SetOnStart</span><span class="p">(</span><span class="n">ICommand</span> <span class="n">command</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_onStart</span> <span class="p">=</span> <span class="n">command</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Command를 받는다. </span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">SetOnStart</span><span class="p">(</span><span class="n">ICommand</span> <span class="n">command</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_onStart</span> <span class="p">=</span> <span class="n">command</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">SetOnFinish</span><span class="p">(</span><span class="n">ICommand</span> <span class="n">command</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">_onFinish</span> <span class="p">=</span> <span class="n">command</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">SetOnFinish</span><span class="p">(</span><span class="n">ICommand</span> <span class="n">command</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="n">_onFinish</span> <span class="p">=</span> <span class="n">command</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="c1">// 인보커는 구체화된 커맨드나 구체화된 리시버를 모른다. </span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 그냥 커멘드를 실행시킬 뿐이다. </span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 그러면 커맨드에 따라서 그 안에 있는 리시버가 적절히 동작한다. </span>
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">void</span> <span class="n">DoSomethingImportant</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Invoker는 구체화된 Command나 구체화된 Receiver를 모른다. </span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 그냥 Command를 실행시킬 뿐이다. </span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 그러면 Command에 따라서 그 안에 있는 Receiver가 적절히 동작한다. </span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">void</span> <span class="n">DoSomethingImportant</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_onStart</span> <span class="k">is</span> <span class="n">ICommand</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_onStart</span> <span class="k">is</span> <span class="n">ICommand</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">_onStart</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_onFinish</span> <span class="k">is</span> <span class="n">ICommand</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">this</span><span class="p">.</span><span class="n">_onFinish</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">_onStart</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="n">_onFinish</span> <span class="k">is</span> <span class="n">ICommand</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">_onFinish</span><span class="p">.</span><span class="n">Execute</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Program</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// The client code can parameterize an invoker with any commands.</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">Invoker</span> <span class="n">invoker</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Invoker</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="n">Receiver</span> <span class="n">receiver</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Receiver</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        
-</span></span><span class="line"><span class="cl">        <span class="n">invoker</span><span class="p">.</span><span class="n">SetOnStart</span><span class="p">(</span><span class="k">new</span> <span class="n">SimpleCommand</span><span class="p">(</span><span class="s">&#34;Say Hi!&#34;</span><span class="p">));</span>
-</span></span><span class="line"><span class="cl">        <span class="n">invoker</span><span class="p">.</span><span class="n">SetOnFinish</span><span class="p">(</span><span class="k">new</span> <span class="n">ComplexCommand</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="s">&#34;Send email&#34;</span><span class="p">,</span> <span class="s">&#34;Save report&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Invoker</span> <span class="n">invoker</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Invoker</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Receiver</span> <span class="n">receiver</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Receiver</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// Invoker가 Command를 설정하고, Command가 Receiver를 설정한다. </span>
+</span></span><span class="line"><span class="cl">    <span class="n">invoker</span><span class="p">.</span><span class="n">SetOnStart</span><span class="p">(</span><span class="k">new</span> <span class="n">SimpleCommand</span><span class="p">(</span><span class="s">&#34;Say Hi!&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="n">invoker</span><span class="p">.</span><span class="n">SetOnFinish</span><span class="p">(</span><span class="k">new</span> <span class="n">ComplexCommand</span><span class="p">(</span><span class="n">receiver</span><span class="p">,</span> <span class="s">&#34;Send email&#34;</span><span class="p">,</span> <span class="s">&#34;Save report&#34;</span><span class="p">));</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="n">invoker</span><span class="p">.</span><span class="n">DoSomethingImportant</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// SimpleCommand: (Say Hi!)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// Receiver: Working on (Send email.)</span>
-</span></span><span class="line"><span class="cl">        <span class="c1">// Receiver: Also working on (Save report.)</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">invoker</span><span class="p">.</span><span class="n">DoSomethingImportant</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 출력: </span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// SimpleCommand: (Say Hi!)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Receiver: Working on (Send email.)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Receiver: Also working on (Save report.)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -980,6 +1158,10 @@ if (!doNotTrack) {
 <ul>
 <li><a class="link" href="https://refactoring.guru/ko/design-patterns"  target="_blank" rel="noopener"
     >https://refactoring.guru/ko/design-patterns</a></li>
+<li>로버트 나이스트롬, <a class="link" href="http://www.yes24.com/Product/Goods/27767709"  target="_blank" rel="noopener"
+    >게임 프로그래밍 패턴</a></li>
+<li>에릭 프리먼 &amp; 엘리자베스 롭슨, <a class="link" href="http://www.yes24.com/Product/Goods/108192370"  target="_blank" rel="noopener"
+    >헤드 퍼스트 디자인 패턴</a></li>
 </ul>
 <p><br /><br /></p>
 
