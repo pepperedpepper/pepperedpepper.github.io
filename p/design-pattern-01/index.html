@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='싱글톤 (Singleton) 객체의 인스턴스가 오직 한 개만 생성되는 패턴이다. 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 특징 전역적인 접근점을 제공하기 때문에 데이터를 공유하기 쉽다. 공유 자원에 동시 접근을 제한하기 위해 사용할 수 있다. 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 단일 책임 원칙 위반 : 한 번에 두 가지의 문제를 동시에 해결한다. 동기화 문제 해결방안 고전적인 싱글톤 구현 방법 1 2 3 4 5 6 7 8 9 10 11 12 public class Singleton { static Singleton instance = null; Singleton() { } public static Singleton GetInstance() { if (instance == null) instance = new Singleton(); // 게으른 초기화 return instance; } } 문제점 멀티 스레드 환경에서 동기화처리를 안 하면 문제가 발생할 수 있다.'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='싱글톤 패턴 객체의 인스턴스를 오직 한 개만 생성하고, 그 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 장점 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 심지어 전혀 사용되지 않는다면 아예 인스턴스를 생성하지 않을 수도 있다. 런타임에 초기화되므로, 프로그램이 실행된 다음에야 알 수 있는 정보들을 활용할 수 있다. 단점 싱글톤은 전역 변수이다. 전역적으로 접근하므로, 버그를 찾는다면 연관된 모든 것을 찾아봐야 할 것이다. 커플링을 조장한다. 멀티 스레딩 같은 동시성 프로그래밍에 알맞지 않다.'>
 <title>[Design Pattern] 행동 패턴 1. 싱글톤 (Singleton)</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/design-pattern-01/'>
 
 <link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
      crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 행동 패턴 1. 싱글톤 (Singleton)'>
-<meta property='og:description' content='싱글톤 (Singleton) 객체의 인스턴스가 오직 한 개만 생성되는 패턴이다. 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 특징 전역적인 접근점을 제공하기 때문에 데이터를 공유하기 쉽다. 공유 자원에 동시 접근을 제한하기 위해 사용할 수 있다. 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 단일 책임 원칙 위반 : 한 번에 두 가지의 문제를 동시에 해결한다. 동기화 문제 해결방안 고전적인 싱글톤 구현 방법 1 2 3 4 5 6 7 8 9 10 11 12 public class Singleton { static Singleton instance = null; Singleton() { } public static Singleton GetInstance() { if (instance == null) instance = new Singleton(); // 게으른 초기화 return instance; } } 문제점 멀티 스레드 환경에서 동기화처리를 안 하면 문제가 발생할 수 있다.'>
+<meta property='og:description' content='싱글톤 패턴 객체의 인스턴스를 오직 한 개만 생성하고, 그 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 장점 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 심지어 전혀 사용되지 않는다면 아예 인스턴스를 생성하지 않을 수도 있다. 런타임에 초기화되므로, 프로그램이 실행된 다음에야 알 수 있는 정보들을 활용할 수 있다. 단점 싱글톤은 전역 변수이다. 전역적으로 접근하므로, 버그를 찾는다면 연관된 모든 것을 찾아봐야 할 것이다. 커플링을 조장한다. 멀티 스레딩 같은 동시성 프로그래밍에 알맞지 않다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/design-pattern-01/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Design Pattern' /><meta property='article:published_time' content='2022-08-01T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2022-08-01T01:00:00&#43;09:00'/>
 <meta name="twitter:title" content="[Design Pattern] 행동 패턴 1. 싱글톤 (Singleton)">
-<meta name="twitter:description" content="싱글톤 (Singleton) 객체의 인스턴스가 오직 한 개만 생성되는 패턴이다. 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 특징 전역적인 접근점을 제공하기 때문에 데이터를 공유하기 쉽다. 공유 자원에 동시 접근을 제한하기 위해 사용할 수 있다. 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 단일 책임 원칙 위반 : 한 번에 두 가지의 문제를 동시에 해결한다. 동기화 문제 해결방안 고전적인 싱글톤 구현 방법 1 2 3 4 5 6 7 8 9 10 11 12 public class Singleton { static Singleton instance = null; Singleton() { } public static Singleton GetInstance() { if (instance == null) instance = new Singleton(); // 게으른 초기화 return instance; } } 문제점 멀티 스레드 환경에서 동기화처리를 안 하면 문제가 발생할 수 있다.">
+<meta name="twitter:description" content="싱글톤 패턴 객체의 인스턴스를 오직 한 개만 생성하고, 그 한 개의 인스턴스에 대한 전역적인 접근점을 제공한다. 장점 오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 심지어 전혀 사용되지 않는다면 아예 인스턴스를 생성하지 않을 수도 있다. 런타임에 초기화되므로, 프로그램이 실행된 다음에야 알 수 있는 정보들을 활용할 수 있다. 단점 싱글톤은 전역 변수이다. 전역적으로 접근하므로, 버그를 찾는다면 연관된 모든 것을 찾아봐야 할 것이다. 커플링을 조장한다. 멀티 스레딩 같은 동시성 프로그래밍에 알맞지 않다.">
     <link rel="shortcut icon" href="/favicon.ico" />
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
@@ -299,14 +299,16 @@ if (!doNotTrack) {
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ul>
-    <li><a href="#싱글톤-singleton">싱글톤 (Singleton)</a></li>
+    <li><a href="#싱글톤-패턴">싱글톤 패턴</a></li>
     <li><a href="#동기화-문제-해결방안">동기화 문제 해결방안</a>
       <ul>
         <li><a href="#인스턴스를-처음부터-만들어버린다">인스턴스를 처음부터 만들어버린다.</a></li>
         <li><a href="#dcl-double-checking-locking을-사용해서-동기화-한다">DCL (Double-Checking Locking)을 사용해서 동기화 한다.</a></li>
       </ul>
     </li>
-    <li><a href="#with-unity">with Unity</a></li>
+    <li><a href="#상속을-이용한-싱글톤-in-unity">상속을 이용한 싱글톤 (in Unity)</a></li>
+    <li><a href="#싱글톤의-대안">싱글톤의 대안</a></li>
+    <li><a href="#references">References</a></li>
   </ul>
 </nav>
         </div>
@@ -371,7 +373,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    3 minute read
+                    4 minute read
                 </time>
             </div>
         
@@ -388,7 +390,7 @@ if (!doNotTrack) {
     
     <hr>
 <p><br /><br /></p>
-<h2 id="싱글톤-singleton">싱글톤 (Singleton)</h2>
+<h2 id="싱글톤-패턴">싱글톤 패턴</h2>
 <p><img src="/post/design_pattern/images/01-singleton.png"
 	
 	
@@ -400,13 +402,21 @@ if (!doNotTrack) {
 	
 ></p>
 <ul>
-<li>객체의 인스턴스가 오직 한 개만 생성되는 패턴이다. <strong>한 개의 인스턴스에 대한 전역적인 접근점</strong>을 제공한다.</li>
-<li>특징
+<li>객체의 인스턴스를 오직 한 개만 생성하고, <strong>그 한 개의 인스턴스에 대한 전역적인 접근점</strong>을 제공한다.</li>
+<li>장점
 <ul>
-<li>전역적인 접근점을 제공하기 때문에 <strong>데이터를 공유</strong>하기 쉽다.</li>
-<li>공유 자원에 <strong>동시 접근을 제한</strong>하기 위해 사용할 수 있다.</li>
-<li>오직 하나의 인스턴스만 생성하기 때문에 <strong>메모리 낭비를 방지</strong>할 수 있다.</li>
-<li><code>단일 책임 원칙</code> 위반 : 한 번에 두 가지의 문제를 동시에 해결한다.</li>
+<li>오직 하나의 인스턴스만 생성하기 때문에 메모리 낭비를 방지할 수 있다. 심지어 전혀 사용되지 않는다면 아예 인스턴스를 생성하지 않을 수도 있다.</li>
+<li>런타임에 초기화되므로, 프로그램이 실행된 다음에야 알 수 있는 정보들을 활용할 수 있다.</li>
+</ul>
+</li>
+<li>단점
+<ul>
+<li>싱글톤은 전역 변수이다.</li>
+<li>전역적으로 접근하므로, 버그를 찾는다면 연관된 모든 것을 찾아봐야 할 것이다.</li>
+<li>커플링을 조장한다.</li>
+<li>멀티 스레딩 같은 동시성 프로그래밍에 알맞지 않다. 찾기 어려운 스레드 동기화 버그가 생기기 쉽다.</li>
+<li>단일 책임 원칙을 위반한다. 즉, 한 번에 두 가지의 문제를 동시에 해결한다.</li>
+<li>이런 문제들 때문에 왠만하면 싱글톤을 쓰지 않으려고 한다. (대안 참고)</li>
 </ul>
 </li>
 </ul>
@@ -433,22 +443,22 @@ if (!doNotTrack) {
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">Singleton</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">Singleton</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="n">Singleton</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">Singleton</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Singleton</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">  
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="n">Singleton</span> <span class="n">GetInstance</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">();</span> <span class="c1">// 게으른 초기화</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">static</span> <span class="n">Singleton</span> <span class="n">GetInstance</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Singleton</span><span class="p">();</span> <span class="c1">// 게으른 초기화</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>문제점
 <ul>
-<li>멀티 스레드 환경에서 동기화처리를 안 하면 문제가 발생할 수 있다. 두 개 이상의 스레드가 인스턴스를 획득하기 위해서 GetInstance() 메서드에 진입해서 경합을 벌이는 과정에서 서로 다른 두 개의 인스턴스가 만들어질 수 있다.</li>
+<li>멀티 스레드 환경에서 동기화 처리를 안 하면 문제가 발생할 수 있다. 두 개 이상의 스레드가 인스턴스를 획득하기 위해서 <code>GetInstance()</code> 메서드에 진입해서 경합을 벌이는 과정에서 서로 다른 두 개의 인스턴스가 만들어질 수 있다.</li>
 </ul>
 </li>
 </ul>
@@ -472,22 +482,21 @@ if (!doNotTrack) {
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SingletonEarly</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 이른 초기화. 인스턴스를 처음부터 만들어 버린다.</span>
-</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">SingletonEarly</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SingletonEarly</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이른 초기화. 인스턴스를 처음부터 만들어 버린다.</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="n">SingletonEarly</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SingletonEarly</span><span class="p">();</span>  
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">SingletonEarly</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SingletonEarly</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="n">SingletonEarly</span> <span class="n">GetInstance</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">static</span> <span class="n">SingletonEarly</span> <span class="n">GetInstance</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>단점: 인스턴스를 미리 만들어버리면 그 인스턴스가 자원을 많이 차지하는 경우에는 시스템 리소스가 쓸데없이 낭비될 가능성이 있다.</li>
 </ul>
-<hr>
 <br />
 <h3 id="dcl-double-checking-locking을-사용해서-동기화-한다">DCL (Double-Checking Locking)을 사용해서 동기화 한다.</h3>
 <ul>
@@ -527,26 +536,26 @@ if (!doNotTrack) {
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SingletonDCL</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// volatile 키워드:</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// instance 변수에 대한 액세스는 모두 캐시되지 않으며, 메모리에 있는 값을 직접 액세스한다. </span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 다른 스레드로 인해 값이 변경되지만 컴파일러가 이를 인식하지 못할 수 있기 때문에 volatile 키워드를 사용한다. </span>
-</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="n">volatile</span> <span class="n">SingletonDCL</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">readonly</span> <span class="kt">object</span> <span class="n">_lock</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">object</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// volatile 키워드:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// instance 변수에 대한 액세스는 모두 캐시되지 않으며, 메모리에 있는 값을 직접 액세스한다. </span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 다른 스레드로 인해 값이 변경되지만 컴파일러가 이를 인식하지 못할 수 있기 때문에 volatile 키워드를 사용한다. </span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="n">volatile</span> <span class="n">SingletonDCL</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">readonly</span> <span class="kt">object</span> <span class="n">_lock</span> <span class="p">=</span> <span class="k">new</span> <span class="kt">object</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">SingletonDCL</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SingletonDCL</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="n">SingletonDCL</span> <span class="n">GetInstance</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">static</span> <span class="n">SingletonDCL</span> <span class="n">GetInstance</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="c1">// instance가 생성되지 않았을 때만 동기화한다. </span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="c1">// instance가 생성되지 않았을 때만 동기화한다. </span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">lock</span> <span class="p">(</span><span class="n">_lock</span><span class="p">)</span> <span class="c1">// _lock이 다른 스레드에서 사용 중이면 사용이 끝날 때까지 기다린다. </span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SingletonDCL</span><span class="p">();</span> <span class="c1">// 다시 한번 null 인지 확인한다. </span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">lock</span> <span class="p">(</span><span class="n">_lock</span><span class="p">)</span> <span class="c1">// _lock이 다른 스레드에서 사용 중이면 사용이 끝날 때까지 기다린다. </span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SingletonDCL</span><span class="p">();</span> <span class="c1">// 다시 한번 null 인지 확인한다. </span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">instance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -577,20 +586,20 @@ if (!doNotTrack) {
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span> <span class="nc">SingletonLazy</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// Lazy&lt;T&gt;는 사용하기 전까지는 인스턴스를 미리 생성하지 않는다. 멀티 스레드에서도 안전하다. </span>
-</span></span><span class="line"><span class="cl">    <span class="k">static</span> <span class="k">readonly</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">SingletonLazy</span><span class="p">&gt;</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">SingletonLazy</span><span class="p">&gt;(()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">SingletonLazy</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// Lazy&lt;T&gt;는 사용하기 전까지는 인스턴스를 미리 생성하지 않는다. 멀티 스레드에서도 안전하다. </span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">readonly</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">SingletonLazy</span><span class="p">&gt;</span> <span class="n">instance</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Lazy</span><span class="p">&lt;</span><span class="n">SingletonLazy</span><span class="p">&gt;(()</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">SingletonLazy</span><span class="p">());</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">SingletonLazy</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">SingletonLazy</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="n">SingletonLazy</span> <span class="n">GetInstance</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">instance</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">static</span> <span class="n">SingletonLazy</span> <span class="n">GetInstance</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">instance</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><br /><br /></p>
-<h2 id="with-unity">with Unity</h2>
+<h2 id="상속을-이용한-싱글톤-in-unity">상속을 이용한 싱글톤 (in Unity)</h2>
 <ul>
 <li>싱글톤을 제네릭 클래스로 만든 후, 상속해서 사용한다.</li>
 </ul>
@@ -641,44 +650,129 @@ if (!doNotTrack) {
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">class</span>  <span class="nc">Singleton</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="p">:</span> <span class="n">MonoBehaviour</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">Component</span> 
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">private</span> <span class="k">static</span> <span class="n">T</span> <span class="n">_instance</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">private</span> <span class="k">static</span> <span class="n">T</span> <span class="n">_instance</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">static</span> <span class="n">T</span> <span class="n">Instance</span>
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">static</span> <span class="n">T</span> <span class="n">Instance</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">get</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">get</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">            <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="n">_instance</span> <span class="p">=</span> <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_instance</span> <span class="p">=</span> <span class="n">FindObjectOfType</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;();</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">                <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">GameObject</span> <span class="n">obj</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GameObject</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">obj</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="n">Name</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">                    <span class="n">_instance</span> <span class="p">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;();</span>
-</span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span>
-</span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">_instance</span> <span class="p">=</span> <span class="k">this</span> <span class="k">as</span> <span class="n">T</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="n">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="n">GameObject</span> <span class="n">obj</span> <span class="p">=</span> <span class="k">new</span> <span class="n">GameObject</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">          <span class="n">obj</span><span class="p">.</span><span class="n">name</span> <span class="p">=</span> <span class="k">typeof</span><span class="p">(</span><span class="n">T</span><span class="p">).</span><span class="n">Name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">          <span class="n">_instance</span> <span class="p">=</span> <span class="n">obj</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;();</span>
 </span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="k">else</span>
-</span></span><span class="line"><span class="cl">        <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">_instance</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">public</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">Awake</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">_instance</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">_instance</span> <span class="p">=</span> <span class="k">this</span> <span class="k">as</span> <span class="n">T</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="n">DontDestroyOnLoad</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Destroy</span><span class="p">(</span><span class="n">gameObject</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p><br /><br /></p>
+<h2 id="싱글톤의-대안">싱글톤의 대안</h2>
+<ul>
+<li>관리자 클래스가 꼭 필요한지 생각해보기
+<ul>
+<li>&lsquo;도우미&rsquo; 역할을 하는 관리자 클래스의 메서드를 원래 클래스로 옮겨서 관리자 클래스를 없앨 수 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>전역접근 없이 인스턴스를 한 개로 제한하는 방법들
+<ol>
+<li>정적 클래스를 사용한다.</li>
+<li>런타임에 인스턴스 개수를 검사한다. (아래 코드 참고)</li>
+</ol>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FileSystem</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="kt">bool</span> <span class="n">instantiated</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">FileSystem</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 만약 인스턴스를 또 만들려고 하면 코드가 중지된다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 단, 런타임에 인스턴스 개수를 확인한다는 단점이 있다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">assert</span><span class="p">(</span><span class="n">instantiated</span> <span class="o">==</span> <span class="nb">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="n">instantiated</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="o">~</span><span class="n">FileSystem</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">instantiated</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">FileSystem</span><span class="o">::</span><span class="n">instantiated</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>객체에 접근할 수 있게 만드는 방법들
+<ol>
+<li>객체를 매개변수로 넘겨줘서 접근할 수 있게 한다.</li>
+<li>상속을 이용해서 접근할 수 있게 한다.</li>
+<li>이미 전역인 객체에서 접근점을 제공한다.</li>
+<li>중개자 패턴을 사용해서 접근점을 제공한다.</li>
+</ol>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="references">References</h2>
+<ul>
+<li>로버트 나이스트롬, <a class="link" href="http://www.yes24.com/Product/Goods/27767709"  target="_blank" rel="noopener"
+    >게임 프로그래밍 패턴</a></li>
+</ul>
+<p><br /><br /></p>
 
 </section>
 
