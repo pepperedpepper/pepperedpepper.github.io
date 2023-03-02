@@ -739,7 +739,7 @@ $$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y
 <ul>
 <li>(1) 카메라의 위쪽방향이 월드 공간의 $y$축과 반대인 경우(<strong>뒤집힌 경우</strong>)
 <ul>
-<li>월드 공간 $y$축과 반대인 $(0, -1, 0)$을 사용해야 한다.  <br /><br>
+<li>월드 공간 $y$축과 반대인 $(0, -1, 0)$을 업벡터로 사용해야 한다.  <br /><br>
 <img src="/post/game_math/images/11-09-upsideDownCam.jpg"
 	
 	
@@ -754,7 +754,8 @@ $$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y
 </li>
 <li>(2) 카메라의 시선방향이 월드 공간의 $y$축과 <strong>평행</strong>한 경우
 <ul>
-<li>로컬 $z$축에 직교하는 로컬 $x$축의 값을 수동으로 지정해야 한다. <br /><br>
+<li>이때 업벡터를 월드 공간의 $y$축으로 지정해 버린다면, 로컬 $x$축을 구하기 위해 하는 $\vec{v} \times \vec{u}$에서 두 벡터는 서로 평행하므로 외적의 결과는 $0$이 된다.</li>
+<li>따라서 로컬 $z$축에 직교하는 로컬 $x$축의 값을 수동으로 지정해야 한다. <br /><br>
 <img src="/post/game_math/images/11-10-parallelCam.jpg"
 	
 	
@@ -802,15 +803,15 @@ $$R = \begin{bmatrix} x_x &amp; y_x &amp; z_x &amp; 0 \\ x_y &amp; y_y &amp; z_y
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 목표물의 위치로부터 카메라의 세 로컬 축을 구해서 트랜스폼에 반영한다. 
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="c1">// InUp은 카메라가 뒤집힌 경우에는 반대 방향의 월드 Y축이 전달되겠다. (1)
+</span></span><span class="line"><span class="cl"><span class="c1">// (1) InUp은 카메라가 뒤집힌 경우에는 반대 방향의 월드 Y축이 전달되겠다. 
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">CameraObject</span><span class="o">::</span><span class="n">SetLookAtRotation</span><span class="p">(</span><span class="k">const</span> <span class="n">Vector3</span><span class="o">&amp;</span> <span class="n">InTargetPosition</span><span class="p">,</span> <span class="k">const</span> <span class="n">Vector3</span><span class="o">&amp;</span> <span class="n">InUp</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="n">Vector3</span> <span class="n">localX</span><span class="p">,</span> <span class="n">localY</span><span class="p">,</span> <span class="n">localZ</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="n">localZ</span> <span class="o">=</span> <span class="p">(</span><span class="n">InTargetPosition</span> <span class="o">-</span> <span class="n">_Transform</span><span class="p">.</span><span class="n">GetPosition</span><span class="p">()).</span><span class="n">Normalize</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 시선 방향과 월드 Y축(0, 1, 0)이 평행한 경우 (2)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 단위 벡터 Z축의 y값이 1과 가까우면...
+</span></span><span class="line"><span class="cl">    <span class="c1">// (2) 단위 벡터 Z축의 y값이 1과 가깝다는 것은, 그 단위벡터와 월드의 y축(0, 1, 0)이 서로 거의 평행하다는 것이다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 즉, 시선 방향인 Z과 월드 Y축이 평행한 경우 외적 결과가 0이 나와버리므로, 임의로 X축을 만들어준다. 
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">Math</span><span class="o">::</span><span class="n">Abs</span><span class="p">(</span><span class="n">localZ</span><span class="p">.</span><span class="n">Y</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mf">1.f</span> <span class="o">-</span> <span class="n">SMALL_NUMBER</span><span class="p">))</span> 
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="n">localX</span> <span class="o">=</span> <span class="n">Vector3</span><span class="o">::</span><span class="n">UnitX</span><span class="p">;</span> <span class="c1">// 로컬 X 좌표 값을 임의로 지정.
