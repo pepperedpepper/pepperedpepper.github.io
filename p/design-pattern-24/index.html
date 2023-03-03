@@ -3,18 +3,18 @@
     <head><meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='게임 프로그래밍 패턴 책을 읽고 공부한 노트입니다.
 이중 버퍼 본질적으로 컴퓨터는 순차적으로 동작한다. 하지만 사용자 입장에서는 동시에 진행되는 것처럼 한 번에 모아서 봐야할 때가 있다. 게임 렌더링이 그렇다. 매 프레임이 완성되면 한 번에 짠하고 보여져야 한다. 이중 버퍼는 중간 과정을 보이지 않고 한 번에 완성된 화면을 보여주도록 도와준다. 프레임 버퍼(framebuffer: 메모리에 할당된 픽셀의 배열)를 두 개 준비한다. 하나의 버퍼에 있는 픽셀값이 화면에 출력되는 동안, 렌더링 코드는 다른 버퍼를 채운다. 그리고 다음 화면이 보여져야 할 때 버퍼를 교체에서 한 번에 완성된 화면을 출력한다.'>
-<title>[Design Pattern] 게임에서의 순서 패턴</title>
+<title>[Design Pattern] 게임 순서 : 이중 버퍼, 게임 루프, 업데이트 메서드</title>
 
 <link rel='canonical' href='https://pepperedpepper.github.io/p/design-pattern-24/'>
 
 <link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
-     crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 게임에서의 순서 패턴'>
+     crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 게임 순서 : 이중 버퍼, 게임 루프, 업데이트 메서드'>
 <meta property='og:description' content='게임 프로그래밍 패턴 책을 읽고 공부한 노트입니다.
 이중 버퍼 본질적으로 컴퓨터는 순차적으로 동작한다. 하지만 사용자 입장에서는 동시에 진행되는 것처럼 한 번에 모아서 봐야할 때가 있다. 게임 렌더링이 그렇다. 매 프레임이 완성되면 한 번에 짠하고 보여져야 한다. 이중 버퍼는 중간 과정을 보이지 않고 한 번에 완성된 화면을 보여주도록 도와준다. 프레임 버퍼(framebuffer: 메모리에 할당된 픽셀의 배열)를 두 개 준비한다. 하나의 버퍼에 있는 픽셀값이 화면에 출력되는 동안, 렌더링 코드는 다른 버퍼를 채운다. 그리고 다음 화면이 보여져야 할 때 버퍼를 교체에서 한 번에 완성된 화면을 출력한다.'>
 <meta property='og:url' content='https://pepperedpepper.github.io/p/design-pattern-24/'>
 <meta property='og:site_name' content='Peppered pepper'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Design Pattern' /><meta property='article:published_time' content='2023-02-06T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2023-02-06T01:00:00&#43;09:00'/>
-<meta name="twitter:title" content="[Design Pattern] 게임에서의 순서 패턴">
+<meta name="twitter:title" content="[Design Pattern] 게임 순서 : 이중 버퍼, 게임 루프, 업데이트 메서드">
 <meta name="twitter:description" content="게임 프로그래밍 패턴 책을 읽고 공부한 노트입니다.
 이중 버퍼 본질적으로 컴퓨터는 순차적으로 동작한다. 하지만 사용자 입장에서는 동시에 진행되는 것처럼 한 번에 모아서 봐야할 때가 있다. 게임 렌더링이 그렇다. 매 프레임이 완성되면 한 번에 짠하고 보여져야 한다. 이중 버퍼는 중간 과정을 보이지 않고 한 번에 완성된 화면을 보여주도록 도와준다. 프레임 버퍼(framebuffer: 메모리에 할당된 픽셀의 배열)를 두 개 준비한다. 하나의 버퍼에 있는 픽셀값이 화면에 출력되는 동안, 렌더링 코드는 다른 버퍼를 채운다. 그리고 다음 화면이 보여져야 할 때 버퍼를 교체에서 한 번에 완성된 화면을 출력한다.">
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -342,7 +342,7 @@ if (!doNotTrack) {
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/design-pattern-24/">[Design Pattern] 게임에서의 순서 패턴</a>
+            <a href="/p/design-pattern-24/">[Design Pattern] 게임 순서 : 이중 버퍼, 게임 루프, 업데이트 메서드</a>
         </h2>
     
         
@@ -1012,6 +1012,19 @@ if (!doNotTrack) {
             
                 
 <article class="">
+    <a href="/p/design-pattern-25/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 게임 행동 : 바이트 코드, 하위 클래스 샌드박스, 타입 객체</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/design-pattern-23/">
         
         
@@ -1057,19 +1070,6 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">[Design Pattern] 행동 패턴 8. 메멘토 (Memento)</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/design-pattern-19/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">[Design Pattern] 행동 패턴 7. 비지터 (Visitor)</h2>
         </div>
     </a>
 </article>
