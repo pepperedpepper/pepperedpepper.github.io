@@ -384,7 +384,7 @@ if (!doNotTrack) {
 
 
                 <time class="article-time--reading">
-                    7 minute read
+                    8 minute read
                 </time>
             </div>
         
@@ -423,6 +423,13 @@ if (!doNotTrack) {
 <li>실행할 수 있는 저수준 작업들을 <strong>명령어 집합</strong>으로 정의한다.</li>
 <li>그 명령어는 일련의 <strong>바이트로 인코딩된다.</strong></li>
 <li><strong>가상 머신</strong>은 중간 값들을 스택에 저장해나가면서 명령어들을 하나씩 실행한다.</li>
+</ul>
+</li>
+<li>언제 쓸까?
+<ul>
+<li>언어가 너무 저수준이라 만드는 데 손이 많이 가거나 오류가 생기기 쉽다.</li>
+<li>컴파일 시간이나 다른 빌드 환경 때문에 반복 개발하기가 너무 오래 걸린다.</li>
+<li>새로 만드려는 행동을 나머지 코드로부터 분리해서 보안에 신경쓰고 싶다.</li>
 </ul>
 </li>
 </ul>
@@ -809,6 +816,14 @@ if (!doNotTrack) {
 <li>그런다음 하위 클래스에서 샌드박스 메서드를 구현한다.</li>
 </ul>
 </li>
+<li>언제 쓸까?
+<ul>
+<li>클래스 하나에 하위 클래스가 많이 있다.</li>
+<li>상위 클래스는 하위 클래스가 필요로 하는 기능을 전부 제공할 수 있다.</li>
+<li>하위 클래스들의 행동 중에 겹치는 게 많아서 이들을 공유하게 만들고 싶다.</li>
+<li>하위 클래스들 사이의 커플링, 하위 클래스와 나머지 코드와의 커플링을 최소화하고 싶다.</li>
+</ul>
+</li>
 <li>주의사항
 <ul>
 <li>하위 클래스는 상위 클래스에 접근하는 모든 시스템과 커플링된다. 그래서 상위 클래스를 조금만 바꿔도 어딘가가 깨지기 쉽다. (fragile base class 문제)</li>
@@ -911,6 +926,12 @@ if (!doNotTrack) {
 <li>고유한 코드는 타입 사용 객체에 저장하고, 같은 타입끼리 공유하는 코드는 타입 객체에 저장한다.</li>
 <li>타입 사용 객체는 타입 객체를 참조한다.</li>
 <li>같은 타입 객체를 참조하는 타입 사용 객체는 같은 타입인 것처럼 동작한다.</li>
+</ul>
+</li>
+<li>언제 쓸까?
+<ul>
+<li>나중에 어떤 타입이 필요할지 알 수 없다. 새로운 몬스터가 등장하는 DLC(downloadable content)를 제공해야 할지도 모른다.</li>
+<li>컴파일이나 코드 변경 없이 새로운 타입을 추가하거나 타입을 변경하고 싶다.</li>
 </ul>
 </li>
 <li>주의사항
@@ -1228,6 +1249,19 @@ if (!doNotTrack) {
             
                 
 <article class="">
+    <a href="/p/design-pattern-26/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 게임 디커플링 : 컴포넌트, 이벤트 큐, 서비스 중개자</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/design-pattern-24/">
         
         
@@ -1273,19 +1307,6 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">[Design Pattern] 행동 패턴 8. 커맨드 (Command)</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/design-pattern-20/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">[Design Pattern] 행동 패턴 8. 메멘토 (Memento)</h2>
         </div>
     </a>
 </article>

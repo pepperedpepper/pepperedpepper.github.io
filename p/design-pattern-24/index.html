@@ -537,6 +537,13 @@ if (!doNotTrack) {
 </div>
 </div><br />
 <ul>
+<li>언제 쓸까?
+<ul>
+<li>순차적으로 변경해야 하는 상태가 있다.</li>
+<li>이 상태는 값을 변경하는 도중에도 기다리지 않고 바로 접근할 수 있어야 한다.</li>
+<li>바깥 코드에서는 작업 중인 상태에 접근할 수 없어야 한다.</li>
+</ul>
+</li>
 <li>주의사항
 <ul>
 <li>교체 연산 자체에 시간이 걸린다면 이중 버퍼 패턴은 아무런 도움이 되지 않는다.</li>
@@ -547,6 +554,7 @@ if (!doNotTrack) {
 <p><br /><br /></p>
 <h2 id="게임-루프">게임 루프</h2>
 <ul>
+<li>게임 루프 패턴은 어느 게임에서나 쓰인다.</li>
 <li>기본적으로 사용자 입력을 받을 때까지 멈춰 있는 다른 소프트웨어들과는 달리 <strong>게임 루프는 끊임없이 돌아간다.</strong></li>
 </ul>
 <div class="highlight"><div class="chroma">
@@ -568,6 +576,15 @@ if (!doNotTrack) {
 </span></span></code></pre></td></tr></table>
 </div>
 </div><br />
+<ul>
+<li>주의사항
+<ul>
+<li>최적화를 고려해 깐깐하게 만들어야 한다.</li>
+<li>그래픽 UI와 이벤트 루프가 있는 플랫폼에서 게임을 만든다면, 돌아가는 루프가 두 개인 셈이다. 따라서 이때에는 서로를 잘 맞춰야 하겠다.</li>
+</ul>
+</li>
+</ul>
+<br />
 <h3 id="게임-월드에서의-시간을-고려하자">게임 월드에서의 시간을 고려하자</h3>
 <ul>
 <li><strong>FPS(frames per second)</strong>
@@ -1012,6 +1029,19 @@ if (!doNotTrack) {
             
                 
 <article class="">
+    <a href="/p/design-pattern-26/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 게임 디커플링 : 컴포넌트, 이벤트 큐, 서비스 중개자</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
     <a href="/p/design-pattern-25/">
         
         
@@ -1057,19 +1087,6 @@ if (!doNotTrack) {
 
         <div class="article-details">
             <h2 class="article-title">[Design Pattern] 행동 패턴 8. 커맨드 (Command)</h2>
-        </div>
-    </a>
-</article>
-
-            
-                
-<article class="">
-    <a href="/p/design-pattern-20/">
-        
-        
-
-        <div class="article-details">
-            <h2 class="article-title">[Design Pattern] 행동 패턴 8. 메멘토 (Memento)</h2>
         </div>
     </a>
 </article>
