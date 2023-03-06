@@ -1,0 +1,2209 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='게임 프로그래밍 패턴 책을 읽고 공부한 노트입니다.
+데이터 지역성 CPU 속도 증가를 RAM이 따라가지 못하자 하드웨어 개발자들은 CPU 캐싱이라는 해결책을 내놓았다. CPU 안에는 캐시라는 작은 메모리가 있는데 이 메모리는 주메모리보다 훨씬 빠르게 CPU에 데이터를 전달할 수 있다. CPU가 RAM에서 데이터를 가져와야 할 경우 RAM은 연속되는 메모리 덩이를 캐시에 복사해 놓는다. 이것을 캐시. 라인(cache line)이라고 한다. 이후에 CPU가 필요한 데이터가 이 캐시 라인에 들어 있다면, RAM보다 훨씬 빠른 캐시로부터 데이터를 가져올 수 있게된다.'>
+<title>[Design Pattern] 게임 최적화 : 데이터 지역성, 더티 플래그, 오브젝트 풀, 공간 분할</title>
+
+<link rel='canonical' href='https://pepperedpepper.github.io/p/design-pattern-27/'>
+
+<link rel="stylesheet" href="/scss/style.min.99b58a5dec18f699377af93872501299bfcacc8f5b0c5238e8539568c9846486.css"><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5141155973718756"
+     crossorigin="anonymous"></script><meta property='og:title' content='[Design Pattern] 게임 최적화 : 데이터 지역성, 더티 플래그, 오브젝트 풀, 공간 분할'>
+<meta property='og:description' content='게임 프로그래밍 패턴 책을 읽고 공부한 노트입니다.
+데이터 지역성 CPU 속도 증가를 RAM이 따라가지 못하자 하드웨어 개발자들은 CPU 캐싱이라는 해결책을 내놓았다. CPU 안에는 캐시라는 작은 메모리가 있는데 이 메모리는 주메모리보다 훨씬 빠르게 CPU에 데이터를 전달할 수 있다. CPU가 RAM에서 데이터를 가져와야 할 경우 RAM은 연속되는 메모리 덩이를 캐시에 복사해 놓는다. 이것을 캐시. 라인(cache line)이라고 한다. 이후에 CPU가 필요한 데이터가 이 캐시 라인에 들어 있다면, RAM보다 훨씬 빠른 캐시로부터 데이터를 가져올 수 있게된다.'>
+<meta property='og:url' content='https://pepperedpepper.github.io/p/design-pattern-27/'>
+<meta property='og:site_name' content='Peppered pepper'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Design Pattern' /><meta property='article:published_time' content='2023-02-09T01:00:00&#43;09:00'/><meta property='article:modified_time' content='2023-02-09T01:00:00&#43;09:00'/>
+<meta name="twitter:title" content="[Design Pattern] 게임 최적화 : 데이터 지역성, 더티 플래그, 오브젝트 풀, 공간 분할">
+<meta name="twitter:description" content="게임 프로그래밍 패턴 책을 읽고 공부한 노트입니다.
+데이터 지역성 CPU 속도 증가를 RAM이 따라가지 못하자 하드웨어 개발자들은 CPU 캐싱이라는 해결책을 내놓았다. CPU 안에는 캐시라는 작은 메모리가 있는데 이 메모리는 주메모리보다 훨씬 빠르게 CPU에 데이터를 전달할 수 있다. CPU가 RAM에서 데이터를 가져와야 할 경우 RAM은 연속되는 메모리 덩이를 캐시에 복사해 놓는다. 이것을 캐시. 라인(cache line)이라고 한다. 이후에 CPU가 필요한 데이터가 이 캐시 라인에 들어 있다면, RAM보다 훨씬 빠른 캐시로부터 데이터를 가져올 수 있게된다.">
+    <link rel="shortcut icon" href="/favicon.ico" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-T9HM88PYN8"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-T9HM88PYN8', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            localStorage.setItem(colorSchemeKey, "dark");
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    <img src="/main.png" width="300" height="300" class="site-logo" loading="lazy" alt="Avatar">
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Peppered pepper</a></h1>
+            <h2 class="site-description">Keep moving forward.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/pepperedpepper'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:peropeq@gmail.com'
+                        target="_blank"
+                        title="Mail"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <rect x="3" y="5" width="18" height="14" rx="2" />
+  <polyline points="3 7 12 13 21 7" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/algorithm/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Algorithm</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/game-math/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Game Math</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/design-pattern/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Design Pattern</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c&#43;&#43;/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C&#43;&#43;</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/c-sharp/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>C-Sharp</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/os/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>OS</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/categories/network/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-folder" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+</svg>
+
+
+
+                
+                <span>Network</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#데이터-지역성">데이터 지역성</a>
+      <ul>
+        <li><a href="#코드-예제">코드 예제</a></li>
+        <li><a href="#디자인-결정에-고려할-사항들">디자인 결정에 고려할 사항들</a></li>
+      </ul>
+    </li>
+    <li><a href="#더티-플래그">더티 플래그</a>
+      <ul>
+        <li><a href="#코드-예제-1">코드 예제</a></li>
+        <li><a href="#디자인-결정에-고려할-사항들-1">디자인 결정에 고려할 사항들</a></li>
+      </ul>
+    </li>
+    <li><a href="#오브젝트-풀">오브젝트 풀</a>
+      <ul>
+        <li><a href="#코드-예제-2">코드 예제</a></li>
+        <li><a href="#디자인-결정에-고려할-사항들-2">디자인 결정에 고려할 사항들</a></li>
+      </ul>
+    </li>
+    <li><a href="#공간-분할">공간 분할</a>
+      <ul>
+        <li><a href="#코드-예제-3">코드 예제</a></li>
+        <li><a href="#디자인-결정에-고려할-사항들-3">디자인 결정에 고려할 사항들</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/design-pattern/" >
+                Design Pattern
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/design-pattern-27/">[Design Pattern] 게임 최적화 : 데이터 지역성, 더티 플래그, 오브젝트 풀, 공간 분할</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 09, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    16 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <div style="text-align: right"> 
+<p><a class="link" href="http://www.yes24.com/Product/Goods/27767709"  target="_blank" rel="noopener"
+    >게임 프로그래밍 패턴</a> 책을 읽고 공부한 노트입니다.</p>
+</div>
+<hr>
+<p><br /><br /></p>
+<h2 id="데이터-지역성">데이터 지역성</h2>
+<ul>
+<li>CPU 속도 증가를 RAM이 따라가지 못하자 하드웨어 개발자들은 <strong>CPU 캐싱</strong>이라는 해결책을 내놓았다.
+<ul>
+<li>CPU 안에는 캐시라는 작은 메모리가 있는데 이 메모리는 주메모리보다 훨씬 빠르게 CPU에 데이터를 전달할 수 있다.</li>
+<li>CPU가 RAM에서 데이터를 가져와야 할 경우 RAM은 연속되는 메모리 덩이를 캐시에 복사해 놓는다. 이것을 캐시. 라인(cache line)이라고 한다.</li>
+<li>이후에 CPU가 필요한 데이터가 이 캐시 라인에 들어 있다면, RAM보다 훨씬 빠른 캐시로부터 데이터를 가져올 수 있게된다.</li>
+<li>CPU가 찾는 데이터가 캐시에 있는 경우를 캐시 히트(cache hit)라고 하며, 없는 경우를 캐시 미스(cache miss)라고 한다. 이 캐시 미스를 최대한 줄여야 성능이 향상될 수 있겠다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>패턴의 의미
+<ul>
+<li><strong>데이터 지역성을 높일 수록(데이터를 처리하는 순서대로 연속된 메모리에 둘수록)</strong> 캐시 히트로 성능을 높일 수 있다.</li>
+</ul>
+</li>
+<li>언제 쓸까?
+<ul>
+<li><strong>성능에 문제</strong>가 발생했는데 그 이유가 캐시 미스 때문일 때 사용한다.</li>
+</ul>
+</li>
+<li>주의사항
+<ul>
+<li>객체지향 언어에서는 인터페이스를 사용해서 객체들을 디커플링한다. 하지만 이 과정에서 포인트를 쓰게 되므로 메모리를 여기 저기 뒤적거려야 되기 때문에 캐시 미스가 발생할 수 있다. 따라서 데이터 지역성을 위해서는 이런 <strong>추상화 기법을 조금은 희생해야</strong> 한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="코드-예제">코드 예제</h3>
+<ul>
+<li>아래의 게임 루프를 살펴보자.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 개체 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">GameEntity</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 컴포넌트를 포인터로 가지고 있다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">AIComponent</span><span class="o">*</span> <span class="n">ai</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">PhysicsComponent</span><span class="o">*</span> <span class="n">physics</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RenderComponent</span><span class="o">*</span> <span class="n">render</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GameEntity</span><span class="p">(</span><span class="n">AIComponent</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="n">PhysicsComponent</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="n">RenderComponent</span><span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">:</span> <span class="n">ai</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">physics</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">render</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">AIComponent</span><span class="o">*</span> <span class="nf">ai</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ai</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">PhysicsComponent</span><span class="o">*</span> <span class="nf">physics</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">physics</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">RenderComponent</span><span class="o">*</span> <span class="nf">render</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">render</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">World</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 개체들을 포인터로 가지고 있다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Entity</span><span class="o">*</span> <span class="n">entities</span><span class="p">[</span><span class="n">MAX_ENTITIES</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">numEntities</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 게임 루프 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="n">gameLoop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// AI를 처리한다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEntities</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">entities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">ai</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="c1">// 물리를 업데이트한다 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEntities</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">entities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">physics</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">              
+</span></span><span class="line"><span class="cl">      <span class="c1">// 화면에 그린다
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEntities</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">entities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>CPU 캐시를 알고나니 이 코드는 뭔가 잘못되었다.
+<ul>
+<li>개체 목록이 포인터로 되어있어서 배열의 각 개체에 접근할 때마다 포인터를 따라가며 캐시 미스가 난다.</li>
+<li>개체 안에 컴포넌트가 포인터로 되어있어서 접근할 때마다 또 캐시 미스가 난다.</li>
+<li>이 모든 과정이 반복된다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>각 개체 안에 있는 <strong>컴포넌트들을 배열로 관리</strong>하면 어떨까?
+<ul>
+<li>각 개체는 여전히 자기 컴포넌트 포인터를 들고 있다.</li>
+<li>하지만 게임 월드에서 컴포넌트 배열을 가지고 있고, 그 안에는 포인터가 아니라 객체들이 들어가게 하는 것이다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 객체들이 들어가는 배열을 마련한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">AIComponent</span><span class="o">*</span> <span class="n">aiComponents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">AIComponent</span><span class="p">[</span><span class="n">MAX_ENTITIES</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">PhysicsComponent</span><span class="o">*</span> <span class="n">physicsComponents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PhysicsComponent</span><span class="p">[</span><span class="n">MAX_ENTITIES</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">RenderComponent</span><span class="o">*</span> <span class="n">renderComponents</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RenderComponent</span><span class="p">[</span><span class="n">MAX_ENTITIES</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 그러면 이렇게 게임루프에서 해당 컴포넌트 객체에 바로 접근이 가능하다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">gameLoop</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEntities</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">aiComponents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEntities</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">physicsComponents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">          
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numEntities</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">renderComponents</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>이번에는 파티클 시스템을 살펴보자.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Partical</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">isActive</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ParticalSystem</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">MAX_PARTICLES</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">numParticles</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Particle</span> <span class="n">particles</span><span class="p">[</span><span class="n">MAX_PARTICLES</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ParticalSystem</span><span class="p">()</span> <span class="o">:</span> <span class="n">numParticles</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">update</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numParicles</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 플래그를 검사해서 활성화된 파티클만 업데이트한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">isActive</span><span class="p">())</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 만약 활성화 파티클이 적으면 어떻게 될까?
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 계속 건너뛰는 횟수가 많아질 것이며 그만큼 캐시 미스가 발생할 것이다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>따라서 <strong>활성여부를 플래그로 검사하는 게 아니라 활성화된 파티클만 맨 앞으로 모아두면</strong> 될 것이다.
+<ul>
+<li>그러면 더이상 아무것도 건너뛸 필요가 없으며,</li>
+<li>업데이트 코드에서 플래그를 검사할 필요도 없다.</li>
+</ul>
+</li>
+<li>매번 정렬할 필요 없이 다음과 같이 활성/비활성 시에 위치를 바꿔치기하면 된다.
+<ul>
+<li>복사 비용(<code>swap()</code>)이 포인터를 할당하는 것에 비해 무겁다고 느낄 수 있겠지만, 포인터 추적 비용까지 놓고 보면 직감이 틀릴 수도 있다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 파티클 활성화하기
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ParticleSystem</span><span class="o">::</span><span class="n">activateParticle</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 비활성 상태여야한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">assert</span><span class="p">(</span><span class="n">idx</span> <span class="o">&gt;=</span> <span class="n">numActive</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 비활성 파티클의 맨 앞에 있는 것과 바꿔치기한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">swap</span><span class="p">(</span><span class="n">particles</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">particles</span><span class="p">[</span><span class="n">numActive</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">numActive</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 파티클 비활성화하기 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">ParticleSystem</span><span class="o">::</span><span class="n">deactivateParticle</span><span class="p">(</span><span class="kt">int</span> <span class="n">idx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 활성 상태여야한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">assert</span><span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">numActive</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="n">numActive</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 활성 파티클의 맨 뒤에 있는 것과 바꿔치기한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">swap</span><span class="p">(</span><span class="n">particles</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span> <span class="n">particles</span><span class="p">[</span><span class="n">numActive</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>마지막으로 빈번한 코드와 한산한 코드 나누기 기법을 예제를 통해 살펴보자.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AIComponent</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Animation</span><span class="o">*</span> <span class="n">animation</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">energy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Vector</span> <span class="n">goalPos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 죽었을 때 아이템을 떨구기 위한 데이터들
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">LootType</span> <span class="n">drop</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">minDrops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">maxDrops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">chanceOfDrop</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">update</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 매 프레임 마다 애니메이션, 에너지 값, 목표 지점을 확인하고 변경한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 또한 죽었을 때 아이템을 떨어뜨리는 데이터들도 확인하고 변경한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>여기서 죽었을 때 관련한 데이터들은 죽었을 때 딱 한번만 사용되는 것이다.</li>
+<li>이런 데이터들이 많아져서 컴포넌트 크기가 늘어나면, 캐시 라인에 들어갈 컴포넌트 개수가 줄어들게 되고, 결국 캐시 미스가 발생할 것이다.</li>
+<li>해결책은 <strong>빈번한 코드와 한산한 코드를 나누는 것(hot/cold splitting)</strong> 이다.
+<ul>
+<li>데이터를 두 개로 분리해서 한곳에는 매 프레임마다 필요로 하는 빈번한 데이터와 상태를 두고,</li>
+<li>다른 곳에는 자주 사용하지 않는 한산한 데이터를 두는 것이다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 한산한 데이터들
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">LootDrop</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">friend</span> <span class="k">class</span> <span class="nc">AIComponet</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">LootType</span> <span class="n">drop</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">minDrops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">maxDrops</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">chanceOfDrop</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">AIComponent</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 빈번한 데이터들
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Animation</span><span class="o">*</span> <span class="n">animation</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">energy</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Vector</span> <span class="n">goalPos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 한산한 데이터들은 포인터로 가리키게 한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// AIComponent의 전체 크기가 줄어든다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">LootDrop</span><span class="o">*</span> <span class="n">loot</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<h3 id="디자인-결정에-고려할-사항들">디자인 결정에 고려할 사항들</h3>
+<ul>
+<li>다형성은 어떻게 할 것인가?
+<ul>
+<li>사용하지 않는다</li>
+<li>종류별로 다른 배열에 넣는다</li>
+<li>하나의 컬렉션에 포인터를 모아놓는다</li>
+</ul>
+</li>
+<li>게임 개체는 어떻게 정의할 것인가?
+<ul>
+<li>게임 개체 클래스가 자기 컴포넌트를 포인터로 들고 있을 때</li>
+<li>게임 개체 클래스가 컴포넌트를 ID로 들고 있을 때</li>
+<li>게임 개체가 단순히 ID일 때</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="더티-플래그">더티 플래그</h2>
+<ul>
+<li>게임에서 해적선이 바다에 떠 있는데 돚대에는 망대가 달려있고, 그 망대 위에는 해적이 서있다. 그리고 그 해적의 어깨위에는 앵무새가 앉아 있다.</li>
+<li>그 모든 객체들이 마음대로 움직인다고 생각해보자. 각각의 로컬 트랜스폼이 변했다.
+<ul>
+<li>이 객체들을 월드에 그리려면 로컬 트랜스폼을 월드 트랜스폼으로 계산해야 한다.</li>
+<li><strong>상위 객체가 움직이면 하위 객체들의 월드 트랜스폼값도 재귀적으로 전부 재계산</strong>해야 한다.</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>움직인 객체</th>
+<th>월드 트랜스폼 계산</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>배 로컬 트랜스폼 이동</td>
+<td>배 월드 트랜스폼 재계산<br />망대 월드 트랜스폼 재계산<br />해적 월드 트랜스폼 재계산<br />앵무새 월드 트랜스폼 재계산</td>
+</tr>
+<tr>
+<td>망대 로컬 트랜스폼 이동</td>
+<td>망대 월드 트랜스폼 재계산<br />해적 월드 트랜스폼 재계산<br />앵무새 월드 트랜스폼 재계산</td>
+</tr>
+<tr>
+<td>해적 로컬 트랜스폼 이동</td>
+<td>해적 월드 트랜스폼 재계산<br />앵무새 월드 트랜스폼 재계산</td>
+</tr>
+<tr>
+<td>앵무새 로컬 트랜스폼 이동</td>
+<td>앵무새 월드 트랜스폼 재계산</td>
+</tr>
+</tbody>
+</table></div>
+<br />
+<ul>
+<li>객체는 4개가 움직였지만 계산은 10번 해야한다.
+<ul>
+<li>특히 앵무새를 그리기 위해서 월드 트랜스폼을 4번이나 계산했다.</li>
+</ul>
+</li>
+<li>이런 계산을 렌더링마다 해줘서 월드 트랜스폼을 계산한다면 CPU 자원을 낭비하게 되겠다.</li>
+</ul>
+<br />
+<ul>
+<li>월드 트랜스폼 계산을 렌더링 직전에 한 번만 계산하면 어떨까?
+<ul>
+<li>객체에 플래그(flag)를 추가해서 로컬 트랜스폼이 바뀌면 플래그를 켠다.</li>
+<li>플래그가 켜졌다는 것은 월드 트랜스폼이 맞지 않음(dirty)을 나타낸다고 볼 수 있다.</li>
+<li>그리고 월드 트랜스폼 값이 필요할 때 그 플래그를 검사해서, 켜져 있으면 계산한 뒤 플래그를 끄는 것이다.</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>움직인 객체</th>
+<th>월드 트랜스폼 계산</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>배 로컬 트랜스폼 이동</td>
+<td></td>
+</tr>
+<tr>
+<td>망대 로컬 트랜스폼 이동</td>
+<td></td>
+</tr>
+<tr>
+<td>해적 로컬 트랜스폼 이동</td>
+<td></td>
+</tr>
+<tr>
+<td>앵무새 로컬 트랜스폼 이동</td>
+<td></td>
+</tr>
+<tr>
+<td>(렌더링 전)</td>
+<td>배 월드 트랜스폼 재계산<br />망대 월드 트랜스폼 재계산<br />해적 월드 트랜스폼 재계산<br />앵무새 월드 트랜스폼 재계산</td>
+</tr>
+</tbody>
+</table></div>
+<br />
+<ul>
+<li>더티 플래그
+<ul>
+<li><strong>계속해서 변경되는 기본 값(primary data)</strong> 과, 그 기본 값에 <strong>비싼 작업을 거쳐야 얻을 수 있는 파생 값(derived data)</strong> 이 있다.</li>
+<li>기본 값이 변경되면 더티 플래그를 켠다.</li>
+<li>그리고 파생 값이 필요할 때 더티 플래그를 검사한다.
+<ul>
+<li>켜져 있다면 계산한 뒤 더티 플래그를 끈다.</li>
+<li>꺼져 있다면 캐시해놓은 파생 값을 쓴다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>언제 쓸까?
+<ul>
+<li>기본 값이 파생 값보다 자주 변경되는데, 기본 값에서 파생 값을 계산하는 게 오래걸릴 때 사용한다.</li>
+</ul>
+</li>
+<li>주의사항
+<ul>
+<li>계산을 너무 오래 지연하면 나중에 계산할 때 화면 멈춤 현상이 생길 수도 있다. 또한 계산 전에 작업이 전부 날아갈 위험성도 있다.</li>
+<li>기본 값이 변경되었을 때 플래그 켜는 것을 한 곳에서라도 놓치면 버그가 생길 수 있다.</li>
+<li>이전 파생 값을 메모리에 저장해둬야 한다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="코드-예제-1">코드 예제</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Transform</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 아무런 이동, 회전, 크기 변화가 없는 단위행렬로 나타낸 기본 트랜스폼을 반환한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">static</span> <span class="n">Transform</span> <span class="n">origin</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 객체의 월드 트랜스폼을 계산한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 상위 노드를 따라서 로컬 트랜스폼 값을 전부 결합해서 계산한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Transform</span> <span class="nf">combine</span><span class="p">(</span><span class="n">Transform</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">GraphNode</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Transform</span> <span class="n">local</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Mesh</span><span class="o">*</span> <span class="n">mesh</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GraphNode</span><span class="o">*</span> <span class="n">children</span><span class="p">[</span><span class="n">MAX_CHILDREN</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">numChildren</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GraphNode</span><span class="p">(</span><span class="n">Mesh</span><span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">:</span> <span class="n">mesh</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">local</span><span class="p">(</span><span class="n">Transform</span><span class="o">::</span><span class="n">origin</span><span class="p">())</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>먼저, 매번 월드 트랜스폼을 계산하는 코드를 보자.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 렌더링한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="n">GraphNode</span><span class="o">::</span><span class="n">render</span><span class="p">(</span><span class="n">Transform</span> <span class="n">parentWorld</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 월드 트랜스폼을 계산한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Transform</span> <span class="n">world</span> <span class="o">=</span> <span class="n">local</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">parentWorld</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">mesh</span><span class="p">)</span> <span class="n">renderMesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">world</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 모든 하위 객체들을 재귀적으로 호출한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numChildren</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">children</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="n">world</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>이제 더티 플래그 패턴을 활용해보자.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">GraphNode</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Transform</span> <span class="n">world</span><span class="p">;</span> <span class="c1">// 월드 트랜스폼을 캐시한다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">bool</span> <span class="n">dirty</span><span class="p">;</span>      <span class="c1">// 더티 플래그 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  
+</span></span><span class="line"><span class="cl">  <span class="n">Transform</span> <span class="n">local</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Mesh</span><span class="o">*</span> <span class="n">mesh</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GraphNode</span><span class="o">*</span> <span class="n">children</span><span class="p">[</span><span class="n">MAX_CHILDREN</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">numChildren</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">GraphNode</span><span class="p">(</span><span class="n">Mesh</span><span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="o">:</span> <span class="n">mesh</span><span class="p">(</span><span class="n">m</span><span class="p">),</span> <span class="n">local</span><span class="p">(</span><span class="n">Transform</span><span class="o">::</span><span class="n">origin</span><span class="p">()),</span> <span class="n">dirty</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 로컬 트랜스폼을 변화시킨다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">setTransform</span><span class="p">(</span><span class="n">Transform</span> <span class="n">l</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">local</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dirty</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 더티 플래그가 켜진다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 렌더링한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">render</span><span class="p">(</span><span class="n">Transform</span> <span class="n">parentWorld</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">d</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dirty</span> <span class="o">|=</span> <span class="n">d</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 더티 플래그가 켜졌을 때만 월드 트랜스폼을 계산한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">world</span> <span class="o">=</span> <span class="n">local</span><span class="p">.</span><span class="n">combine</span><span class="p">(</span><span class="n">parentWorld</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">dirty</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">mesh</span><span class="p">)</span> <span class="n">renderMesh</span><span class="p">(</span><span class="n">mesh</span><span class="p">,</span> <span class="n">world</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="c1">// 모든 하위 객체들을 재귀적으로 호출한다.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 만약 상위 객체 중에 하나라도 d == true 였다면
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 그 하위 객체들은 모두 업데이트된다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">numChildren</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">children</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">-&gt;</span><span class="n">render</span><span class="p">(</span><span class="n">world</span><span class="p">,</span> <span class="n">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<h3 id="디자인-결정에-고려할-사항들-1">디자인 결정에 고려할 사항들</h3>
+<ul>
+<li>언제 계산하고 더티 플래그를 끌 것인가?
+<ul>
+<li>결과가 필요할 때</li>
+<li>미리 정해놓은 지점해야 할 때</li>
+<li>백그라운드로 처리할 때</li>
+</ul>
+</li>
+<li>더티 플래그는 값 변화를 얼마나 세밀하게 관리해야 하는가?
+<ul>
+<li>더 세밀하게 관리한다</li>
+<li>더 듬성듬성하게 관리한다</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="오브젝트-풀">오브젝트 풀</h2>
+<ul>
+<li>플레이어가 마법봉을 한 번 휘두르는 것만으로도 수백 개의 파티클이 생성될 수 있다.
+<ul>
+<li>파티클은 굉장히 빠르게 만들 수 있어야한다.</li>
+<li>또한 메모리 단편화가 생기면 안 된다.</li>
+<li>그렇다면 파티클 시스템은 어떻게 메모리를 관리해야 할까?</li>
+</ul>
+</li>
+<li>오브젝트 풀
+<ul>
+<li>재사용할 수 있는 객체들을 모아놓은 오브젝트 풀 클래스를 정의한다.</li>
+<li>풀은 초기화될 때 객체들을 미리 생성해 놓는다.</li>
+<li>새로운 객체가 필요할 때 풀에 요청해서 객체를 얻을 수 있다.</li>
+</ul>
+</li>
+<li>언제 쓸까?
+<ul>
+<li>객체를 빈번하게 생성/삭제해야 한다.</li>
+<li>객체들의 크기가 비슷하다.</li>
+<li>객체를 힙에 생성하기가 느리거나 메모리 단편화가 우려된다.</li>
+<li>데이터베이스 연결이나 네트워크 연결같이 접근 비용이 비싸면서 재사용 가능한 자원을 객체가 캡슐화하고 있다.</li>
+</ul>
+</li>
+<li>주의사항
+<ul>
+<li>오브젝트 풀에서 사용되지 않는 객체는 메모리 낭비와 다를 바 없다.</li>
+<li>한 번에 사용 가능한 객체 개수가 정해져 있다.</li>
+<li>객체를 위한 메모리 크기는 고정되어 있다.</li>
+<li>재사용되는 객체는 저절로 초기화되지 않는다.</li>
+<li>사용 중이지 않은 객체도 메모리에 남아 있다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="코드-예제-2">코드 예제</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Particle</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">framesLeft</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">xVel</span><span class="p">,</span> <span class="n">yVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Particle</span><span class="p">()</span> <span class="o">:</span> <span class="n">framesLeft</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">init</span><span class="p">(</span><span class="kt">double</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_xVel</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_yVel</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lifetime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">=</span> <span class="n">_x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">_y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">xVel</span> <span class="o">=</span> <span class="n">_xVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">yVel</span> <span class="o">=</span> <span class="n">_yVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">framesLeft</span> <span class="o">=</span> <span class="n">lifetime</span><span class="p">;</span>  
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">animate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">inUse</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">framesLeft</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">+=</span> <span class="n">xVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">+=</span> <span class="n">yVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">inUse</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">framesLeft</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ParticlePool</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">POOL_SIZE</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Particle</span> <span class="n">particles</span><span class="p">[</span><span class="n">POOL_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="n">create</span><span class="p">(</span><span class="kt">double</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_xVel</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_yVel</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lifetime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">POOL_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 아직 사용 중이지 않은 객체를 찾아서 초기화한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">inUse</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">init</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">_xVel</span><span class="p">,</span> <span class="n">_yVel</span><span class="p">,</span> <span class="n">lifetime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">animate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">POOL_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">animate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>아직 사용 중이지 않은 객체를 찾느라고 시간을 낭비하고 싶지 않다면?</li>
+<li><strong>빈칸 리스트(free list)</strong> 기법을 적용해보자.
+<ul>
+<li>파티클 객체 안에 사용 가능한 다음 파티클을 가리키는 포인터를 둔다.</li>
+<li>이 포인터를 이용하면 풀에서 사용 가능한 파티클이 묶여 있는 연결 리스트를 만들 수 있다.</li>
+<li>이렇게 하면 풀에다가 추가적으로 연결리스트를 만들어서 관리하지 않아도 된다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Particle</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">framesLeft</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">union</span> 
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 살아 있는 동안의 상태들
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">struct</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">double</span> <span class="n">xVel</span><span class="p">,</span> <span class="n">yVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">live</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이 파티클 다음에 사용 가능한 파티클 객체를 가리킨다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Particle</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="n">state</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Particle</span><span class="o">*</span> <span class="n">getNext</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">state</span><span class="p">.</span><span class="n">next</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">setNext</span><span class="p">(</span><span class="n">Particle</span><span class="o">*</span> <span class="n">next</span><span class="p">)</span> <span class="p">{</span> <span class="n">state</span><span class="p">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">animate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">inUse</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">    <span class="n">framesLeft</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">+=</span> <span class="n">xVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">+=</span> <span class="n">yVel</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 파티클이 죽으면 true를 반환해서
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 빈칸 리스트에 추가할 수 있도록 한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">framesLeft</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">ParticlePool</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Particle</span><span class="o">*</span> <span class="n">firstAvailable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">ParticlePool</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 처음 파티클부터 사용 가능하다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">firstAvailable</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">particles</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 모든 파티클은 그 다음 파티클을 가리킨다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">POOL_SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">setNext</span><span class="p">(</span><span class="o">&amp;</span><span class="n">particles</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 마지막 파티클에서 리스트를 종료한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">particles</span><span class="p">[</span><span class="n">POOL_SIZE</span> <span class="o">-</span> <span class="mi">1</span><span class="p">].</span><span class="n">setNext</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">create</span><span class="p">(</span><span class="kt">double</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_y</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_xVel</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_yVel</span><span class="p">,</span> <span class="kt">int</span> <span class="n">lifetime</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">assert</span><span class="p">(</span><span class="n">firstAvailable</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// firstAvailable이 얻은 파티클(newParticle)의 다음 객체를 가리키도록 해서 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 얻은 파티클을 빈칸 리스트에서 제외한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Particle</span><span class="o">*</span> <span class="n">newParticle</span> <span class="o">=</span> <span class="n">firstAvailable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">firstAvailable</span> <span class="o">=</span> <span class="n">newParticle</span><span class="o">-&gt;</span><span class="n">getNext</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">newParticle</span><span class="p">.</span><span class="n">init</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">,</span> <span class="n">_xVel</span><span class="p">,</span> <span class="n">_yVel</span><span class="p">,</span> <span class="n">lifetime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">animate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">POOL_SIZE</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 파티클이 죽으면 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">if</span> <span class="p">(</span><span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">animate</span><span class="p">()</span> <span class="o">==</span> <span class="nb">false</span><span class="p">)</span> <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="c1">// firstAvailable이 죽은 파티클을 가리키도록 해서
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// 죽은 파티클을 빈칸 리스트에 추가한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">setNext</span><span class="p">(</span><span class="n">firstAvailable</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="n">firstAvailable</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">particles</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<h3 id="디자인-결정에-고려할-사항들-2">디자인 결정에 고려할 사항들</h3>
+<ul>
+<li>풀이 객체와 커플링되는가?
+<ul>
+<li>객체가 풀과 커플링된다
+<ul>
+<li>객체를 풀을 통해서만 생성할 수 있도록 강제할 수 있다.</li>
+<li>객체 안에 사용 중 플래그나 함수를 추가해서 간단히 구현할 수 있다.</li>
+</ul>
+</li>
+<li>객체가 풀과 커플링되지 않는다
+<ul>
+<li>어떤 객체라도 풀에 넣을 수 있다.</li>
+<li>플래그 상태를 객체 외부에서 관리해야 한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>재사용되는 객체를 초기화할 때 어떤 점을 주의해야 하는가?
+<ul>
+<li>객체를 풀 안에서 초기화한다
+<ul>
+<li>풀은 객체를 완전히 캡슐화할 수 있으며, 풀 클래스는 객체가 초기화되는 방법과 결합된다.</li>
+</ul>
+</li>
+<li>객체를 풀 밖에서 초기화한다
+<ul>
+<li>풀의 인터페이스는 단순해지지만, 객체 생성이 실패할 때의 처리를 외부에서 챙겨야한다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><br /><br /></p>
+<h2 id="공간-분할">공간 분할</h2>
+<ul>
+<li>게임에서는 드넓은 공간 안에 다양한 위치 값을 가진 객체들이 존재한다. 예를 들어, 실시간 전략 게임을 만드는데 전장에 수백이 넘는 군인들이 뒤엉켜 싸우고 있다. 이때 전사들 주변에 적들이 어디에 있는지 알아야 한다면?
+<ul>
+<li>모든 객체의 거리값을 다 검사한다면 각 객체의 제곱만큼 검사해야한다.</li>
+<li>어떻게 효과적으로 검색할 수 있을까?</li>
+</ul>
+</li>
+</ul>
+<br />
+<ul>
+<li>공간 분할
+<ul>
+<li><strong>공간을 자료구조화하여서 같은 위치, 주변에 있는 객체를 빠르게 찾을 수 있게</strong> 한다.</li>
+<li>객체의 위치가 바뀌면 공간 자료구조도 업데이트해서 계속해서 객체를 찾을 수 있도록 한다.</li>
+</ul>
+</li>
+<li>언제 쓸까?
+<ul>
+<li>살아움직이는 게임 객체뿐만 아니라 지형을 저장하는 데 흔히 사용한다.</li>
+<li>위치 값을 빈번히 따져보는 과정이 성능에 영향을 줄 때 사용한다.</li>
+</ul>
+</li>
+<li>주의사항
+<ul>
+<li>객체가 많을 수록 의미가 있다.</li>
+<li>객체의 위치 변경이 잦다면 그때마다 자료구조를 재정리해야하기 때문에 이 패턴을 쓰는 의미가 있는지 먼저 확인할 필요가 있다.</li>
+<li>공간 분할 자료구조를 위한 추가적인 메모리가 필요하다.</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3 id="코드-예제-3">코드 예제</h3>
+<ul>
+<li>여러 가지 구현 방법이 있으나 여기서는 간단한 <strong>고정 격자(fixed grid)</strong> 방법을 알아보자.</li>
+<li>전체 맵을 정사각형 모양의 고정 크기 격자로 나눈 후, 그 안에 유닛을 연결리스트로 저장한다.</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 격자에 존재하는 객체이다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Unit</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">friend</span> <span class="k">class</span> <span class="nc">Grid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 자신이 속한 격자를 가리킨다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Grid</span><span class="o">*</span> <span class="n">grid</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 이전 유닛과 다음 유닛을 가리킨다. (이중 연결 리스트)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Unit</span><span class="o">*</span> <span class="n">prev</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">Unit</span><span class="o">*</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Unit</span><span class="p">(</span><span class="n">Grid</span><span class="o">*</span> <span class="n">g</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_y</span><span class="p">)</span> <span class="o">:</span> <span class="n">grid</span><span class="p">(</span><span class="n">g</span><span class="p">),</span> <span class="n">x</span><span class="p">(</span><span class="n">_x</span><span class="p">),</span> <span class="n">y</span><span class="p">(</span><span class="n">_y</span><span class="p">),</span> <span class="n">prev</span><span class="p">(</span><span class="nb">NULL</span><span class="p">),</span> <span class="n">next</span><span class="p">(</span><span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 새로 만든 유닛을 적당한 격자 칸에 넣는다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">grid</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 유닛이 움직이면 추가 작업이 필요하다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">move</span><span class="p">(</span><span class="kt">double</span> <span class="n">_x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">_y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid</span><span class="o">-&gt;</span><span class="n">move</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span> 
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Grid</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 격자의 모든 칸은 유닛의 포인터로 되어 있다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="n">Unit</span><span class="o">*</span> <span class="n">cells</span><span class="p">[</span><span class="n">NUM_CELLS</span><span class="p">][</span><span class="n">NUM_CELLS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">NUM_CELLS</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">static</span> <span class="k">const</span> <span class="kt">int</span> <span class="n">CELL_SIZE</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Grid</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="c1">// 격자를 모두 지운다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">NUM_CELLS</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">NUM_CELLS</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cells</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="n">Unit</span><span class="o">*</span> <span class="n">unit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 어느 칸에 들어갈지 결정한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">cellX</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">/</span> <span class="n">Grid</span><span class="o">::</span><span class="n">CELL_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">cellY</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">y</span> <span class="o">/</span> <span class="n">Grid</span><span class="o">::</span><span class="n">CELL_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 칸에 들어 있는 리스트의 맨 앞에 추가한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">unit</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="n">cellX</span><span class="p">][</span><span class="n">cellY</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">unit</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="c1">// 전투를 처리한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">void</span> <span class="nf">handleMelee</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">NUM_CELLS</span><span class="p">;</span> <span class="n">x</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">NUM_CELLS</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">handleCell</span><span class="p">(</span><span class="n">cells</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">handleCell</span><span class="p">(</span><span class="n">Unit</span><span class="o">*</span> <span class="n">unit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 포인터로 연결 리스트를 순회하면서 전투를 처리한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 결과적으로 해당 칸에 있는 유닛들만 검사하게 된다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="n">unit</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="n">Unit</span><span class="o">*</span> <span class="n">other</span> <span class="o">=</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="k">while</span><span class="p">(</span><span class="n">other</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 완전히 똑같은 위치마나 고려한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">==</span> <span class="n">other</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">&amp;&amp;</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">y</span> <span class="o">==</span> <span class="n">other</span><span class="o">-&gt;</span><span class="n">y</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">          <span class="n">handleAttack</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">      <span class="n">other</span> <span class="o">=</span> <span class="n">other</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="kt">void</span> <span class="nf">move</span><span class="p">(</span><span class="n">Unit</span><span class="o">*</span> <span class="n">unit</span><span class="p">,</span> <span class="kt">double</span> <span class="n">x</span><span class="p">,</span> <span class="kt">double</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 유닛이 어느 칸에 있었는지 확인한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">oldCellX</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">/</span> <span class="n">Grid</span><span class="o">::</span><span class="n">CELL_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">oldCellY</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">y</span> <span class="o">/</span> <span class="n">Grid</span><span class="o">::</span><span class="n">CELL_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 유닛이 어느 칸으로 가야하는지 확인한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">cellX</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">x</span> <span class="o">/</span> <span class="n">Grid</span><span class="o">::</span><span class="n">CELL_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">cellY</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">y</span> <span class="o">/</span> <span class="n">Grid</span><span class="o">::</span><span class="n">CELL_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">unit</span><span class="o">-&gt;</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unit</span><span class="o">-&gt;</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 칸이 바뀌지 않았다면 더 할 일이 없다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">oldCellX</span> <span class="o">==</span> <span class="n">cellX</span> <span class="o">&amp;&amp;</span> <span class="n">oldCellY</span> <span class="o">==</span> <span class="n">cellY</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이전 칸에 들어 있는 리스트에서 유닛을 제거한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">      <span class="n">unit</span><span class="o">-&gt;</span><span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 유닛이 칸에 들어 있는 리스트의 머리였다면, 머리를 바꿔준다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">cells</span><span class="p">[</span><span class="n">oldCellX</span><span class="p">][</span><span class="n">oldCellY</span><span class="p">]</span> <span class="o">==</span> <span class="n">unit</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">cells</span><span class="p">[</span><span class="n">oldCellX</span><span class="p">][</span><span class="n">oldCellY</span><span class="p">]</span> <span class="o">=</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 새로 들어갈 칸에 추가한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">add</span><span class="p">(</span><span class="n">unit</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<ul>
+<li>지금까지는 정확히 같은 위치에 있는 유닛끼리만 상호작용하도록 하였다.</li>
+<li>하지만 보통 게임에서는 <strong>범위(distance)</strong> 를 고려해야한다.
+<ul>
+<li>이럴 때는 위치가 똑같지 않아도 다음과 같이 조금 더 넓게 검사하도록 바꾸면 된다.</li>
+<li>범위는 여러 개의 칸에 겹쳐 있을 수도 있으므로, 주변 칸에 있는 유닛도 같이 비교해야할 것이다.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Grid</span><span class="o">::</span><span class="n">handleCell</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Unit</span><span class="o">*</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">cells</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="n">unit</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이 칸에 들어 있는 유닛들을 처리한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">handleUnit</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 이 칸과 인접한 주변의 8칸 중에서
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 좌측 4칸에 있는 유닛도 처리한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>                      <span class="n">handleUnit</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">cells</span><span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>                      <span class="n">handleUnit</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">cells</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>             <span class="n">handleUnit</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">cells</span><span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">NUM_CELLS</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="n">handleUnit</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">cells</span><span class="p">[</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">unit</span> <span class="o">=</span> <span class="n">unit</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">Grid</span><span class="o">::</span><span class="n">handleUnit</span><span class="p">(</span><span class="n">Unit</span><span class="o">*</span> <span class="n">unit</span><span class="p">,</span> <span class="n">Unit</span><span class="o">*</span> <span class="n">other</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="n">other</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 범위를 고려한다. 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">distance</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">ATTACK_DISTANCE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="n">handleAttack</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">other</span> <span class="o">=</span> <span class="n">other</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><br />
+<h3 id="디자인-결정에-고려할-사항들-3">디자인 결정에 고려할 사항들</h3>
+<ul>
+<li>공간을 계층적으로 나눌 것인가, 균등하게 나눌 것인가?</li>
+<li>객체 개수에 따라 분할 횟수가 달라지는가?
+<ul>
+<li>객체 개수에 성관없이 분할한다</li>
+<li>객체 개수에 따라 영역이 다르게 분할된다
+<ul>
+<li>이진 공간 분할(BSP)나 k-d 트리의 경우 양쪽에 같은 수의 객체가 들어 있도록 월드를 반씩 재귀적으로 쪼갠다.</li>
+</ul>
+</li>
+<li>영역 분할은 고정되어 있으나, 계층은 객체 개수에 따라 달라진다
+<ul>
+<li>쿼드트리는 객체 개수가 일정 수 이하가 될 때까지 $\frac{1}{4}$로 공간을 재귀적으로 나눈다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>객체를 공간 분할 자료구조에만 저장하는가?</li>
+</ul>
+<p><br /><br /></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/design-pattern/">Design Pattern</a>
+        
+    </section>
+
+
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/design-pattern-26/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 게임 디커플링 : 컴포넌트, 이벤트 큐, 서비스 중개자</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/design-pattern-25/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 게임 행동 : 바이트 코드, 하위 클래스 샌드박스, 타입 객체</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/design-pattern-24/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 게임 순서 : 이중 버퍼, 게임 루프, 업데이트 메서드</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/design-pattern-23/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 행동 패턴 10. 인터프리터 (Interpreter)</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/design-pattern-22/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">[Design Pattern] 행동 패턴 9. 이터레이터 (Iterator)</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="pepperedpepper/blog_comment"
+        issue-term="pathname"
+        
+        label="Comment"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2022 - 
+        
+        2023 Peppered pepper
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
